@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Recipies from './Recipies';
+import recipyService from '../services/recipies';
 
 
 const RecipiesView = () => {
@@ -8,9 +9,8 @@ const RecipiesView = () => {
 
     useEffect(() => {
         const fetchRecipies = async () => {
-            const response = await fetch('http://localhost:3001/api/recipies');
-            const data = await response.json();
-            setRecipies(data);
+            const response = await recipyService.getAll();
+            setRecipies(response);
             setLoading(false);
         }
         fetchRecipies();
