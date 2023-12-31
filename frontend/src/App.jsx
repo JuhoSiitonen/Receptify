@@ -8,6 +8,7 @@ function App() {
       <h1>Receptify!</h1>
       <Routes>
         <Route path="/" element={<Mainpage />} />
+        <Route path="/recipes" element={<h1>Recipes</h1>} />
       </Routes>
     </div>
   )
