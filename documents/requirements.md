@@ -20,7 +20,7 @@
 - The backend is an Express server with PostgreSQL database
 - The app has a Redis cache
 - The api is ???
-- The frontend state handling is done with ???
+- The frontend state handling is done with Redux
 - The application is containerized by with Docker
 - The app has a CICD pipeline with Github Actions
 - The app has unit testing with Jest and end to end testing with Cypress
