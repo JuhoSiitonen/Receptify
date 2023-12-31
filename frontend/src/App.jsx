@@ -1,8 +1,16 @@
 import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Mainpage from './components/Mainpage'
 import RecipiesView from './components/RecipiesView'
+import { getAllRecipies } from './reducers/recipyReducer';
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllRecipies())
+  }, [])
 
   return (
     <div>

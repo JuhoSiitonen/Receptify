@@ -13,7 +13,7 @@ const recipySlice = createSlice({
 
 export const { setRecipies } = recipySlice.actions
 
-export const fetchRecipies = () => {
+export const getAllRecipies = () => {
     return async dispatch => {
         const recipies = await recipyService.getAll()
         dispatch(setRecipies(recipies))
