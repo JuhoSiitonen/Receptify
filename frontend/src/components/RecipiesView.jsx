@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Recipies } from './Recipies';
+import Recipies from './Recipies';
 
 
 const RecipiesView = () => {
