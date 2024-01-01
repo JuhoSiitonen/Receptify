@@ -6,7 +6,20 @@ const recipies = [
       title: 'Test recipe',
       description: 'Test description',
       ingredients: 'Test ingredients',
-      instructions: 'Test instructions'
+      instructions: 'Test instructions',
+      category: 'Test category',
+      date: '2021-01-01T00:00:00.000Z',
+      user: 'Test user'
+  },
+  {
+      id: 2,
+      title: 'Test recipe 2',
+      description: 'Test description 2',
+      ingredients: 'Test ingredients 2',
+      instructions: 'Test instructions 2',
+      category: 'Test category 2',
+      date: '2021-01-02T00:00:00.000Z',
+      user: 'Test user 2'
   }
 ]
 
