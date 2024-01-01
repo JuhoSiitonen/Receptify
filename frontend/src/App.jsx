@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import Mainpage from './components/Mainpage'
 import RecipiesView from './components/RecipiesView'
 import { getAllRecipies } from './reducers/recipyReducer';
+import NavigationBar from './components/NavigationBar'
+import AddRecipe from './components/RecipiesView/AddRecipe'
 
 function App() {
   const dispatch = useDispatch()
@@ -14,10 +16,12 @@ function App() {
 
   return (
     <div>
+      <NavigationBar />
       <h1>Receptify!</h1>
       <Routes>
         <Route path="/" element={<Mainpage />} />
         <Route path="/recipes" element={<RecipiesView />} />
+        <Route path="/recipes/new" element={<AddRecipe />} />
       </Routes>
     </div>
   )
