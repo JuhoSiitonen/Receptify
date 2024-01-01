@@ -14,6 +14,7 @@
 - The app has privileged users, e.g maintenance which can delete posts, comments and users
 - Users can comment on recipies
 - User can get a form of printout of the shopping list, (also with any miscellaneous items the user wants)
+- User can search recipies by category
 
 ## Technical requirements
 - The app frontend is made with React

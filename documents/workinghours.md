@@ -5,3 +5,4 @@
 - 3h 31.12 : Basic setup of backend and frontend.
 
 ## Janurary 2024
+- 1h 1.1: Creating component structure and Redux basic setup.
