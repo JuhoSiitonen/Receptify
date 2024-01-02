@@ -6,3 +6,4 @@
 
 ## Janurary 2024
 - 1h 1.1: Creating component structure and Redux basic setup.
+- 1h 2.1: Added page for posting recipies.

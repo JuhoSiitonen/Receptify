@@ -6,3 +6,4 @@
 
 ## Janurary 2024
 - 1.1 : Creating component structure and Redux basic setup.
+- 2.1 : Page for posting recipies added along with Redux, Axios and backend support.
