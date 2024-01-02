@@ -5,13 +5,23 @@ const recipySlice = createSlice({
     name: 'recipies',
     initialState: [],
     reducers: {
+        addNewRecipy(state, action) {
+            state.push(action.payload)
+        },
         setRecipies(state, action) {
             return action.payload
         }
     },
 })
 
-export const { setRecipies } = recipySlice.actions
+export const { addNewRecipy, setRecipies  } = recipySlice.actions
+
+export const createRecipy = (recipy) => {
+    return async dispatch => {
+        const newRecipy = await recipyService.create(recipy)
+        dispatch(addNewRecipy(newRecipy))
+    }
+}
 
 export const getAllRecipies = () => {
     return async dispatch => {

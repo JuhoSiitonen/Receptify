@@ -27,4 +27,9 @@ recipyRouter.get("/", (request, response) => {
   return response.json(recipies);
 })
 
+recipyRouter.post("/", (request, response) => {
+  const recipy = request.body;
+  return response.json(recipy);
+})
+
 module.exports = recipyRouter;
