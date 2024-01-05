@@ -8,22 +8,18 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const { Sequelize } = require('sequelize')
 require('dotenv').config()
+const { DATABASE_URL } = require('./utils/config')
+const { connectToDatabase } = require('./utils/db')
 
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
-const sequelize = new Sequelize(process.env.DATABASE_URL)
+const sequelize = new Sequelize(DATABASE_URL)
 
 const testConnection = async () => {
-  try {
-    await sequelize.authenticate()
-    console.log('Connection has been established successfully.')
-    sequelize.close()
-  } catch (error) {
-    console.error('Unable to connect to the database:', error)
-  }
+  await connectToDatabase()
 }
 
 testConnection()
