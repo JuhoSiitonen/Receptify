@@ -1,12 +1,19 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const Ingredient = sequelize.define('Ingredient', {
+class Ingredient extends Model {}
+
+Ingredient.init({
   name: {
     type: DataTypes.TEXT,
     unique: true,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'ingredient'
 });
 
 module.exports = Ingredient;

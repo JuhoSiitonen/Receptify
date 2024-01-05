@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
-const User = require('./User');
-const Recipy = require('./Recipy');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const Comment = sequelize.define('Comment', {
+class Comment extends Model {}
+
+Comment.init({
   comment: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -16,9 +16,11 @@ const Comment = sequelize.define('Comment', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'comment'
 });
-
-Comment.belongsTo(User);
-Comment.belongsTo(Recipy);
 
 module.exports = Comment;

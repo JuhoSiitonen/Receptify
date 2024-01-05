@@ -1,8 +1,9 @@
-// models/User.js
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const User = sequelize.define('User', {
+class User extends Model {}
+
+User.init({
   username: {
     type: DataTypes.TEXT,
     unique: true,
@@ -24,6 +25,11 @@ const User = sequelize.define('User', {
     type: DataTypes.TIMESTAMP,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'user'
 });
 
 module.exports = User;

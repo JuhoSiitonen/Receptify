@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
-const User = require('./User');
-const Recipy = require('./Recipy');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const Rating = sequelize.define('Rating', {
+class Rating extends Model {}
+
+Rating.init({
   rating: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -12,9 +12,11 @@ const Rating = sequelize.define('Rating', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'rating'
 });
-
-Rating.belongsTo(User);
-Rating.belongsTo(Recipy);
 
 module.exports = Rating;

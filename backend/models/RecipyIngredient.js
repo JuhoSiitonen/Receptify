@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
-const Recipy = require('./Recipy');
-const Ingredient = require('./Ingredient');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const RecipyIngredient = sequelize.define('RecipyIngredient', {
+class RecipyIngredient extends Model {}
+
+RecipyIngredient.init({
   amount: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -12,9 +12,11 @@ const RecipyIngredient = sequelize.define('RecipyIngredient', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'recipy_ingredient'
 });
-
-RecipyIngredient.belongsTo(Recipy);
-RecipyIngredient.belongsTo(Ingredient);
 
 module.exports = RecipyIngredient;

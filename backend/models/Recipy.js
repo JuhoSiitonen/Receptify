@@ -1,9 +1,9 @@
-// models/Recipy.js
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
-const User = require('./User');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const Recipy = sequelize.define('Recipy', {
+class Recipy extends Model {}
+
+Recipy.init({
   title: {
     type: DataTypes.TEXT,
     allowNull: false,
@@ -24,8 +24,11 @@ const Recipy = sequelize.define('Recipy', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'recipy'
 });
-
-Recipy.belongsTo(User);
 
 module.exports = Recipy;

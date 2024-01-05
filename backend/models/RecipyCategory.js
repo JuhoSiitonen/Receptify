@@ -1,16 +1,18 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
-const Recipy = require('./Recipy');
-const Category = require('./Category');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const RecipyCategory = sequelize.define('RecipyCategory', {
+class RecipyCategory extends Model {}
+
+RecipyCategory.init({
   visible: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'recipy_category'
 });
-
-RecipyCategory.belongsTo(Recipy);
-RecipyCategory.belongsTo(Category);
 
 module.exports = RecipyCategory;

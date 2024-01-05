@@ -1,12 +1,19 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require(process.env.DATABASE_URL);
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('../utils/db');
 
-const Category = sequelize.define('Category', {
+class Category extends Model {}
+
+Category.init({
   name: {
     type: DataTypes.TEXT,
     unique: true,
     allowNull: false,
   },
+}, {
+    sequelize,
+    underscored: true,
+    timestamps: false,
+    modelName: 'category'
 });
 
 module.exports = Category;
