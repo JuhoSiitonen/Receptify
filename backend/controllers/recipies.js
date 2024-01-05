@@ -1,4 +1,5 @@
 const recipyRouter = require("express").Router();
+const { Recipy } = require("../models");
 
 const recipies = [
   {
@@ -30,6 +31,15 @@ recipyRouter.get("/", (request, response) => {
 recipyRouter.post("/", (request, response) => {
   const recipy = request.body;
   return response.json(recipy);
+})
+
+recipyRouter.get("/:id", async (request, response) => {
+  const recipy = await Recipy.findByPk(request.params.id);
+  if (recipy) {
+    return response.json(recipy);
+  } else {
+    return response.status(404).end();
+  }
 })
 
 module.exports = recipyRouter;

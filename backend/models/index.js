@@ -7,9 +7,8 @@ const RecipyCategory = require('./RecipyCategory');
 const RecipyIngredient = require('./RecipyIngredient');
 const Rating = require('./Rating');
 
-
-Recipy.belongsTo(User);
 User.hasMany(Recipy);
+Recipy.belongsTo(User);
 
 RecipyIngredient.belongsTo(Recipy);
 RecipyIngredient.belongsTo(Ingredient);

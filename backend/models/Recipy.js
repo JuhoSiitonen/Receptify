@@ -17,7 +17,7 @@ Recipy.init({
     allowNull: false,
   },
   date: {
-    type: DataTypes.TIMESTAMP,
+    type: DataTypes.DATE,
     allowNull: false,
   },
   visible: {
