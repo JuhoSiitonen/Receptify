@@ -8,9 +8,9 @@ const SingleRecipy = ({ recipy }) => {
             <p>{recipy.description}</p>
             <p>Ingredients:</p>
             <ul>
-              {recipy.RecipyIngredients.map(ingredient => (
+              {recipy.recipy_ingredients.map(ingredient => (
                 <li key={ingredient.id}>
-                  {ingredient.amount} of {ingredient.Ingredient.name}
+                  {ingredient.amount} of {ingredient.ingredient.name}
                 </li>
               ))}
             </ul>
