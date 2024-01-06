@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -27,6 +29,8 @@ const Login = () => {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <br></br>
+            <Link to="/signup">Sign Up</Link>
         </div>
     )
 }
