@@ -6,8 +6,7 @@ const AddRecipe = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [ingredients, setIngredients] = useState([])
-    const [ingredient, setIngredient] = useState('')
-    const [instructions, setInstructions] = useState('')
+    const [ingredient, setIngredient] = useState({ name: '', amount: '' });    const [instructions, setInstructions] = useState('')
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const user = useSelector(state => state.user)
@@ -15,9 +14,9 @@ const AddRecipe = () => {
     const dispatch = useDispatch()
 
     const addIncredient = () => {
-        setIngredients(ingredients.concat(ingredient))
-        setIngredient('')
-    }
+        setIngredients([...ingredients, ingredient]);
+        setIngredient({ name: '', amount: '' });
+    };
 
     const addCategory = () => {
         setCategories(categories.concat(category))
@@ -26,7 +25,7 @@ const AddRecipe = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(title, ingredients, instructions, categories);
+        console.log(title, ingredients, instructions, categories, user.userId);
         dispatch(createRecipy({
             title, 
             description, 
@@ -34,7 +33,7 @@ const AddRecipe = () => {
             visible: true,
             userId: user.id,
             ingredients, 
-            categories
+            categories: categories.map(category => ({ name: category }))
         }))
         setTitle('')
         setDescription('')
@@ -57,11 +56,18 @@ const AddRecipe = () => {
                 </div>
                 <div>
                     Ingredients:
-                    <input value={ingredient} onChange={({ target }) => setIngredient(target.value)} />
+                    <input value={ingredient.name} onChange={({ target }) => setIngredient({ ...ingredient, name: target.value })}
+                     placeholder="Ingredient name" />
+                    <input value={ingredient.amount} onChange={({ target }) => setIngredient({ ...ingredient, amount: target.value })}
+                     placeholder="Amount" />
                     <button onClick={addIncredient} type="button">add</button>
                 </div>
                 <div>
-                    {ingredients.map(ingredient => <li>{ingredient}</li>)}
+                {ingredients.map(ingredient => (
+                    <li key={`${ingredient.name}-${ingredient.amount}`}>
+                        {ingredient.amount} of {ingredient.name}
+                    </li>
+                ))}
                 </div>
                 <div>
                     Instructions:
