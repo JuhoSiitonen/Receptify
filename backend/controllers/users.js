@@ -9,7 +9,7 @@ userRouter.get("/", async (request, response) => {
 userRouter.post("/", async (request, response) => {
     const user = request.body;
     const newUser = await User.create(user);
-    return response.json(newUser);
+    return response.status(201).json(newUser);;
 })
 
 module.exports = userRouter;
