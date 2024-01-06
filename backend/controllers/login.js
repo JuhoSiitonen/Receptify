@@ -9,3 +9,5 @@ loginRouter.post('/', async (request, response) => {
     }
     return response.status(401).json({ error: 'invalid username or password' });
     });
+
+module.exports = loginRouter;

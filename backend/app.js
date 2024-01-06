@@ -5,6 +5,7 @@ const app = express()
 const cors = require('cors')
 const recipyRouter = require('./controllers/recipies')
 const userRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 require('dotenv').config()
@@ -22,6 +23,7 @@ testConnection()
 
 app.use('/api/recipies', recipyRouter)
 app.use('/api/users', userRouter)
+app.use('/api/login', loginRouter)
 
 
 app.use(middleware.unknownEndpoint)
