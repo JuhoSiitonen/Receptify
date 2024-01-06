@@ -34,6 +34,7 @@ export const logout = () => {
 
 export const signup = (credentials) => {
     return async dispatch => {
+        console.log(credentials)
         const user = await loginService.signup(credentials)
         dispatch(newUser(user))
     }

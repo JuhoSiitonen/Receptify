@@ -17,12 +17,11 @@ const SignUp = () => {
             return;
         }
         try {
-            const response = dispatch(signup(username, password));
+            const response = dispatch(signup({username, password}));
             console.log(response);
-            if (response.status === 201) {
-                const loginResponse = dispatch(login(username, password));
-                navigate('/');
-            }
+            const loginResponse = dispatch(login({username, password}));
+            navigate('/');
+            
         } catch (error) {
             console.log(error);
         }
