@@ -12,4 +12,4 @@ const signup = async newObject => {
     return response.data
   }
   
-  export default { login }
+  export default { signup }

@@ -17,9 +17,9 @@ const SignUp = () => {
             return;
         }
         try {
-            const response = dispatch(signup({username, password}));
+            const response = await dispatch(signup({username, password}));
             console.log(response);
-            const loginResponse = dispatch(login({username, password}));
+            const loginResponse = await dispatch(login({username, password}));
             navigate('/');
             
         } catch (error) {
