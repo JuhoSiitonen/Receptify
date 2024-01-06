@@ -4,6 +4,11 @@ const { sequelize } = require('../utils/db');
 class Comment extends Model {}
 
 Comment.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   comment: {
     type: DataTypes.TEXT,
     allowNull: false,

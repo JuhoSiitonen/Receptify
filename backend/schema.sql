@@ -2,9 +2,7 @@ CREATE TABLE recipies (
     id SERIAL PRIMARY KEY, 
 	title TEXT,
 	description TEXT,
-    ingredients INTEGER REFERENCES recipy_ingredients,
     instructions TEXT,
-    category INTEGER REFERENCES recipy_categories,
 	date TIMESTAMP,
     user INTEGER REFERENCES users,
     visible BOOLEAN

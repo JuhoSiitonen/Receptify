@@ -33,22 +33,26 @@ recipyRouter.post("/", async (req, res) => {
       instructions,
       date,
       visible,
-      UserId: userId, 
+      userId: user.id, 
     });
 
     for (const ingredientData of ingredients) {
       const { name, amount } = ingredientData;
+      console.log(name, amount)
 
       let ingredient = await Ingredient.findOne({ where: { name } });
       if (!ingredient) {
         ingredient = await Ingredient.create({ name });
       }
 
+      console.log(ingredient)
+      console.log(recipe.id)
+
       await RecipyIngredient.create({
         amount,
         visible: true,
         RecipyId: recipe.id, 
-        IngredientId: ingredient.id, 
+        ingredientId: ingredient.id, 
       });
     }
 
@@ -63,7 +67,7 @@ recipyRouter.post("/", async (req, res) => {
       await RecipyCategory.create({
         visible: true,
         RecipyId: recipe.id, 
-        CategoryId: category.id, 
+        categoryId: category.id, 
       });
     }
 

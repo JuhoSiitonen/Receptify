@@ -4,6 +4,11 @@ const { sequelize } = require('../utils/db');
 class Rating extends Model {}
 
 Rating.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   rating: {
     type: DataTypes.INTEGER,
     allowNull: false,

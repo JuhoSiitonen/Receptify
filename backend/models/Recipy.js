@@ -4,6 +4,11 @@ const { sequelize } = require('../utils/db');
 class Recipy extends Model {}
 
 Recipy.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   title: {
     type: DataTypes.TEXT,
     allowNull: false,
