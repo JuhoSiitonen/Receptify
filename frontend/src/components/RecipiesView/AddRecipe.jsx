@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createRecipy } from '../../reducers/recipyReducer'
 
@@ -10,6 +11,7 @@ const AddRecipe = () => {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const user = useSelector(state => state.user)
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -23,15 +25,15 @@ const AddRecipe = () => {
         setCategory('')
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(title, ingredients, instructions, categories, user.userId);
-        dispatch(createRecipy({
+        await dispatch(createRecipy({
             title, 
             description, 
             instructions,
+            date: new Date().toISOString(),
             visible: true,
-            userId: user.id,
+            userId: 1,
             ingredients, 
             categories: categories.map(category => ({ name: category }))
         }))
@@ -40,6 +42,7 @@ const AddRecipe = () => {
         setIngredients([])
         setInstructions('')
         setCategories('')
+        navigate('/recipes')
     }
 
     return (

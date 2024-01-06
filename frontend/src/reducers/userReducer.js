@@ -8,6 +8,7 @@ const userSlice = createSlice({
     initialState: null,
     reducers: {
         setUser(state, action) {
+            state.push(action.payload)
             return action.payload
         },
         removeUser(state, action) {
