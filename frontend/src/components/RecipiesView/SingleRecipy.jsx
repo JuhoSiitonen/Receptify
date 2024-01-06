@@ -1,13 +1,20 @@
 
 
 const SingleRecipy = ({ recipy }) => {
+    console.log(recipy)
     return (
         <div className="singleRecipy">
             <h2>{recipy.title}</h2>
             <p>{recipy.description}</p>
-            {recipy.ingredients.map(ingredient => <li>{ingredient}</li>)}
+            <p>Ingredients:</p>
+            <ul>
+              {recipy.RecipyIngredients.map(ingredient => (
+                <li key={ingredient.id}>
+                  {ingredient.amount} of {ingredient.Ingredient.name}
+                </li>
+              ))}
+            </ul>
             <p>{recipy.instructions}</p>
-            <p>{recipy.category.join(", ")}</p>
         </div>
     )
 }
