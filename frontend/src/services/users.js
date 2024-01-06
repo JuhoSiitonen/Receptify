@@ -5,5 +5,10 @@ const login = async newObject => {
     const response = await axios.post(baseUrl, newObject)
     return response.data
   } 
+
+const signup = async newObject => {
+    const response = await axios.post(baseUrl, newObject)
+    return response.data
+  }
   
-  export default { login }
+  export default { login, signup }

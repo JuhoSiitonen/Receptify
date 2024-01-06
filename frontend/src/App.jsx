@@ -7,6 +7,7 @@ import { getAllRecipies } from './reducers/recipyReducer';
 import NavigationBar from './components/NavigationBar'
 import AddRecipe from './components/RecipiesView/AddRecipe'
 import Login from './components/Login'
+import SignUp from './components/SignUp'
 
 function App() {
   const dispatch = useDispatch()
@@ -24,6 +25,7 @@ function App() {
         <Route path="/recipes" element={<RecipiesView />} />
         <Route path="/recipes/new" element={<AddRecipe />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </div>
   )
