@@ -51,7 +51,7 @@ recipyRouter.post("/", async (req, res) => {
       await RecipyIngredient.create({
         amount,
         visible: true,
-        RecipyId: recipe.id, 
+        recipyId: recipe.id, 
         ingredientId: ingredient.id, 
       });
     }
@@ -66,7 +66,7 @@ recipyRouter.post("/", async (req, res) => {
 
       await RecipyCategory.create({
         visible: true,
-        RecipyId: recipe.id, 
+        recipyId: recipe.id, 
         categoryId: category.id, 
       });
     }
