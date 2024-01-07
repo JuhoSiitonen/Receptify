@@ -7,7 +7,8 @@ const AddRecipe = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [ingredients, setIngredients] = useState([])
-    const [ingredient, setIngredient] = useState({ name: '', amount: '' });    const [instructions, setInstructions] = useState('')
+    const [ingredient, setIngredient] = useState({ name: '', amount: '' });
+    const [instructions, setInstructions] = useState('')
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const user = useSelector(state => state.user)
@@ -27,22 +28,27 @@ const AddRecipe = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(createRecipy({
-            title, 
-            description, 
-            instructions,
-            date: new Date().toISOString(),
-            visible: true,
-            userId: 1,
-            ingredients, 
-            categories: categories.map(category => ({ name: category }))
-        }))
-        setTitle('')
-        setDescription('')
-        setIngredients([])
-        setInstructions('')
-        setCategories('')
-        navigate('/recipes/new')
+        try {
+            const response = await dispatch(createRecipy({
+                title, 
+                description, 
+                instructions,
+                date: new Date().toISOString(),
+                visible: true,
+                userId: 1,
+                ingredients, 
+                categories: categories.map(category => ({ name: category }))
+            }))
+            setTitle('')
+            setDescription('')
+            setIngredients([])
+            setInstructions('')
+            setCategories([])
+            navigate('/recipes/new')
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
     return (
