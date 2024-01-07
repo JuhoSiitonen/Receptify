@@ -8,6 +8,7 @@ const NavigationBar = () => {
             <Link to="/recipes">Recipes  </Link>
             <Link to="/recipes/new">Add recipe  </Link>
             <Link to="/login">Login  </Link>
+            <Link to="/mypage">My page  </Link>
         </div>
     )
 }
