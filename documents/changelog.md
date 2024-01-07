@@ -24,3 +24,9 @@
     - Posting new recipies works through add recipies page, now in use with hardcoded user id, actual id will be implemented with authenticated login.
 - 7.1 :
     - Added endpoints for testing and healthchecks to backend.
+    - Fixed posting a new recipy, now the new recipy is returned from backend with the ingredients and categories which are in a connection table.
+    - Frontend navigates to recipy view after posting a new recipy and new recipy is immediately shown.
+    - Added component and page for users own recipies.
+- 8.1 :
+    - Added LoadingSpinner as a component to view as app is loading.
+    - Preliminary setup of userpage. Shows users own recipies. 
