@@ -44,7 +44,7 @@ const AddRecipe = () => {
             setIngredients([])
             setInstructions('')
             setCategories([])
-            navigate('/recipes/new')
+            navigate('/recipes')
         }
         catch (error) {
             console.log(error)

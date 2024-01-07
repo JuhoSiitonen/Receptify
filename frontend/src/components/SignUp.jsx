@@ -13,7 +13,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password !== password2) {
+        if (password !== password2 && password.length < 3) {
             return;
         }
         try {
