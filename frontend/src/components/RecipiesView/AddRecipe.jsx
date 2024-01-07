@@ -42,7 +42,7 @@ const AddRecipe = () => {
         setIngredients([])
         setInstructions('')
         setCategories('')
-        navigate('/recipes')
+        navigate('/recipes/new')
     }
 
     return (

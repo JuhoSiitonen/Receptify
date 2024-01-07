@@ -10,5 +10,6 @@
 - 1h 3.1: Added basic login page and more functionality to recipy post page.
 - 6h 5.1: Added Sequelize and models for it.
 - 8h 6.1: Working with Sequelize and frontend actions.
+- 1h 7.1: Implementing endpoints for healthcheck and testing.
 
-Total hours: 22h
+Total hours: 23h

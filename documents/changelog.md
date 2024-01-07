@@ -19,6 +19,8 @@
     - Sequelize models initialized with models/index.js file and synced at startup. 
     - GET works in frontend from database.
     - Added page for logging in and signing up, also preliminary Axios services and reducers in userReducer.js
-    - Logging in through separate loginService and signing up through userService
+    - Logging in through separate loginService and signing up through userService.
     - Logging in and signing up works in frontend! User information in Redux state. Signing up also logs user in and navigates to mainpage.
     - Posting new recipies works through add recipies page, now in use with hardcoded user id, actual id will be implemented with authenticated login.
+- 7.1 :
+    - Added endpoints for testing and healthchecks to backend.
