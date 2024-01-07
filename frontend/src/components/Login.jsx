@@ -11,7 +11,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        /dispatch(login({username, password}))
+        dispatch(login({username, password}))
         setUsername('')
         setPassword('')
     }
