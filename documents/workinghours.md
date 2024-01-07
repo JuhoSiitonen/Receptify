@@ -13,4 +13,4 @@
 - 4h 7.1: Implementing endpoints for healthcheck and testing, fixed posting new recipies.
 - 1h 8.1: LoadingSpinner added, userpage setup.
 
-Total hours: 267
+Total hours: 27h
