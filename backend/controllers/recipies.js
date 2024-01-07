@@ -71,7 +71,15 @@ recipyRouter.post("/", async (req, res) => {
       });
     }
 
-    return res.status(201).json(recipe);
+    const returnRecipy = await Recipy.findByPk(recipe.id,{
+      include: [
+        { model: User },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+      ],
+    });
+
+    return res.status(201).json(returnRecipy);
   } catch (error) {
     console.error('Error creating recipe:', error);
     return res.status(500).json({ error: 'Internal server error' });
