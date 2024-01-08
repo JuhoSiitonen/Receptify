@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const Notifications = () => {
     const [open, setOpen] = useState(false);
