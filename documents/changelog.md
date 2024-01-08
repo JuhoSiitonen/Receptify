@@ -30,3 +30,9 @@
 - 8.1 :
     - Added LoadingSpinner as a component to view as app is loading.
     - Preliminary setup of userpage. Shows users own recipies. 
+    - Logout functionality added, and user info stored in localstorage for now. Logout clears localstorage and navigates to login page. 
+    - Notification component added to show below navbar.
+    - Filter component added to recipy view. 
+    - Endpoint for getting and posting comments.
+    - Notification and filter reducers added with preliminary content. 
+
