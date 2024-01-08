@@ -10,6 +10,7 @@ import AddRecipe from './components/RecipiesView/AddRecipe'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserPage from './components/UserPage'
+import Notifications from './components/Notifications'
 
 function App() {
   const dispatch = useDispatch()
@@ -22,6 +23,7 @@ function App() {
   return (
     <div>
       <NavigationBar />
+      <Notifications />
       <h1>Receptify!</h1>
       <Routes>
         <Route path="/" element={<Mainpage />} />
