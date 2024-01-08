@@ -21,9 +21,20 @@ export const { setUser, removeUser } = userSlice.actions
 export const login = (credentials) => {
     return async dispatch => {
         const user = await loginService.login(credentials)
+        window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
         dispatch(setUser(user))
     }
 }
+
+export const isUserLogged = () => {
+    return (dispatch) => {
+      const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
+      if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON)
+        dispatch(setUser(user))
+      }
+    }
+  }
 
 export const logout = () => {
     return async dispatch => {
