@@ -6,6 +6,14 @@ userRouter.get("/", async (request, response) => {
   return response.json(users);
 })
 
+userRouter.get("/me", async (request, response) => {
+  const user = await User.findByPk(request.user.id);
+  if (!user) {
+    return response.status(404).json({ error: 'User not found' });
+  }
+  return response.json(user);
+})
+
 userRouter.post("/", async (request, response) => {
     const user = request.body;
     const newUser = await User.create(user);
