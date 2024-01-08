@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import Mainpage from './components/Mainpage'
 import RecipiesView from './components/RecipiesView'
 import { getAllRecipies } from './reducers/recipyReducer';
+import { isUserLogged, logout } from './reducers/userReducer'
 import NavigationBar from './components/NavigationBar'
 import AddRecipe from './components/RecipiesView/AddRecipe'
 import Login from './components/Login'
@@ -15,6 +16,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllRecipies())
+    dispatch(isUserLogged())
   }, [])
 
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<UserPage />} />
+        <Route path="/logout" element={<Login />} 
+        action={() => dispatch(logout())} />
       </Routes>
     </div>
   )

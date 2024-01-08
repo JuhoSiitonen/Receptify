@@ -38,6 +38,7 @@ export const isUserLogged = () => {
 
 export const logout = () => {
     return async dispatch => {
+        window.localStorage.removeItem('loggedAppUser')
         dispatch(removeUser())
     }
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { login } from '../reducers/userReducer'
 
@@ -8,12 +9,14 @@ const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(login({username, password}))
         setUsername('')
         setPassword('')
+        navigate('/recipes')
     }
 
     return (

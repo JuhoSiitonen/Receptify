@@ -1,18 +1,16 @@
 import { useSelector } from 'react-redux'
-import { useMemo } from 'react'
 import LoadingSpinner from '../LoadingSpinner'
 
 const UserPage = () => {
     const user = useSelector(state => state.user)
 
+    const recipies = useSelector(state => {
+        return state.recipies.filter(recipy => recipy.userId === user.id)
+    })
+
     if (user === null) {
         return <LoadingSpinner />;
       }
-
-    const memoizedUser = useMemo(() => user, [user]);
-    const recipies = useSelector(state => {
-        return state.recipies.filter(recipy => recipy.userId === memoizedUser.id)
-    })
     
     return (
         <div>
