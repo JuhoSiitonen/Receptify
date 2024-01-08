@@ -86,4 +86,20 @@ recipyRouter.post("/", async (req, res) => {
   }
 });
 
+recipyRouter.get("/:id/comments", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const comments = await Comment.findAll({
+      where: { recipyId: id },
+      include: [
+        { model: User },],});
+    return res.status(200).json(comments);
+
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = recipyRouter
