@@ -1,5 +1,5 @@
 const recipyRouter = require("express").Router();
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory } = require('../models');
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating } = require('../models');
 
 recipyRouter.get("/", async (req, res) => {
   try {
@@ -131,6 +131,24 @@ recipyRouter.post("/:id/comments", async (req, res) => {
   } catch (error) {
     console.error('Error creating comment:', error);
     return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+recipyRouter.get("/:id/rating", async (req, res) => {
+  try {
+    const ratings = await Rating.findAll({
+      attributes: [
+        [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating']
+      ],
+      where: { recipyId: id },
+    });
+
+    const averageRating = ratings.length > 0 ? ratings[0].dataValues.averageRating : null;
+
+    return averageRating;
+  } catch (error) {
+    console.error('Error calculating average rating for recipe:', error);
+    throw error;
   }
 });
 
