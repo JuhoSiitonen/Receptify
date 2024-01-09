@@ -18,10 +18,10 @@ const SingleRecipy = ({ recipy }) => {
             </ul>
             <p>{recipy.instructions}</p>
             <Togglable buttonLabel="Comment">
-              <Comment />
+              <Comment recipyId={recipy.id} />
             </Togglable>
             <Togglable buttonLabel="Rate">
-              <Rating />
+              <Rating  recipyId={recipy.id} />
             </Togglable>
         </div>
     )
