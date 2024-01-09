@@ -35,4 +35,12 @@
     - Filter component added to recipy view. 
     - Endpoint for getting and posting comments.
     - Notification and filter reducers added with preliminary content. 
+- 9.1 :
+    - Added endpoint for requesting average ratings for a recipy. 
+    - Components for commenting a recipy and rating a recipy.
+    - Component for making elements togglable by buttons.
+    - Services for adding comments and ratings.
+    - Get and Post works for ratings, get request for ratings sends the rating average. Had to re import sequelize in the recipyRouter module.
+    - Get and Post for ratings and comments implemented for frontend with separate reducers.
+
 

@@ -2,7 +2,7 @@
 
 ## Features
 - [ ] Users can log in
-- [ ] Users can post recipies
+- [x] Users can post recipies
 - [ ] Users can view recipies in a scrollable list
     - [x] Recipy view
     - [ ] Paginated scrolling
