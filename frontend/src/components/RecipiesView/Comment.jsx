@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { createComment } from '../../reducers/commentReducer'
 
-const Comment = () => { 
+const Comment = ({ recipyId }) => { 
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const commentObject = {
-            comment: e.target.comment.value,
+            content: e.target.comment.value,
             userId: user.id,
         }
         dispatch(createComment(recipyId, commentObject))
@@ -16,7 +17,7 @@ const Comment = () => {
     return ( 
         <div>
             <form onSubmit={handleSubmit}>
-                <input type="text" />
+                <input type="text" name="comment" />
                 <input type="submit" value="Submit" />
             </form>
         </div>
