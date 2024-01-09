@@ -1,5 +1,5 @@
 const recipyRouter = require("express").Router();
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating } = require('../models');
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment } = require('../models');
 
 recipyRouter.get("/", async (req, res) => {
   try {
@@ -118,7 +118,9 @@ recipyRouter.post("/:id/comments", async (req, res) => {
     }
 
     const comment = await Comment.create({
-      content,
+      comment: content,
+      date: new Date(),
+      visible: true,
       userId: user.id, 
       recipyId: recipe.id, 
     });
