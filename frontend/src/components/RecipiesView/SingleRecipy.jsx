@@ -1,4 +1,6 @@
-
+import Togglable from "../Togglable"
+import Comment from "./Comment"
+import Rating from "./Rating"
 
 const SingleRecipy = ({ recipy }) => {
     console.log(recipy)
@@ -15,6 +17,12 @@ const SingleRecipy = ({ recipy }) => {
               ))}
             </ul>
             <p>{recipy.instructions}</p>
+            <Togglable buttonLabel="Comment">
+              <Comment />
+            </Togglable>
+            <Togglable buttonLabel="Rate">
+              <Rating />
+            </Togglable>
         </div>
     )
 }
