@@ -11,6 +11,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserPage from './components/UserPage'
 import Notifications from './components/Notifications'
+import ChosenRecipy from './components/RecipiesView/ChosenRecipy'
 
 function App() {
   const dispatch = useDispatch()
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Mainpage />} />
         <Route path="/recipes" element={<RecipiesView />} />
         <Route path="/recipes/new" element={<AddRecipe />} />
+        <Route path="/recipes/:id" element={<ChosenRecipy />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<UserPage />} />
