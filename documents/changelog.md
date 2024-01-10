@@ -42,5 +42,7 @@
     - Services for adding comments and ratings.
     - Get and Post works for ratings, get request for ratings sends the rating average. Had to re import sequelize in the recipyRouter module.
     - Get and Post for ratings and comments implemented for frontend with separate reducers.
+- 10.1 :
+    - New components added for a single recipy view showing all comments and the rating average.
 
 

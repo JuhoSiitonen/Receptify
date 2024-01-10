@@ -13,5 +13,6 @@
 - 4h 7.1: Implementing endpoints for healthcheck and testing, fixed posting new recipies.
 - 5h 8.1: LoadingSpinner added, userpage setup, filter and notification reducers added and endpoints for comments.
 - 5h 9.1: Endpoint ratings and comments implemented in backend and frontend.
+- 1h 10.1: New page for viewing comments and rating average.
 
-Total hours: 35h
+Total hours: 36h
