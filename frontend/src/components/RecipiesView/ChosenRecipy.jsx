@@ -11,31 +11,24 @@ import { getAverage } from "../../reducers/ratingReducer"
 const ChosenRecipy = () => {
     const dispatch = useDispatch()
     const match = useMatch('/recipes/:id');
-    const recipyId = match?.params.id;
+    const recipyId = Number(match?.params.id);
+    const recipies = useSelector(state => state.recipies)
 
     useEffect(() => {
         dispatch(getAllComments(recipyId))
         dispatch(getAverage(recipyId))
     }, [])
 
-    const comments = useSelector(state => state.comments)
-    const ratingAverage = useSelector(state => state.ratingAverage)
-    
-    console.log(recipyId)
-    const recipy = useSelector(state => state.recipies.find(recipy => recipy.id === recipyId))
-    const recipies = useSelector(state => state.recipies)
-    console.log(recipies)
-    console.log(recipy)
-
-    if (!recipy) {
-        return <LoadingSpinner />
+    if (!recipies) {
+        return <LoadingSpinner />;
     }
+    
+    const recipy = recipies.find(recipy => recipy.id === recipyId);
 
     return (
-        <div>
+        <div> 
             <SingleRecipy recipy={recipy} />
-            <RatingAverage recipyId={ratingAverage} />
-            <AllComments recipyId={comments} />
+            <AllComments />
         </div>
     )
 }

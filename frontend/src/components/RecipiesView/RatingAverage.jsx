@@ -1,14 +1,16 @@
-import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const RatingAverage = ({ RatingAverage }) => {
+const RatingAverage = () => {
+    const ratingAverage = useSelector(state => state.rating)
+    console.log(ratingAverage)
 
-    if (!RatingAverage) {
+    if (!ratingAverage) {
         return <>No rating</>
     }
     return (
         <div>
             <h2>Rating</h2>
-            <p>{RatingAverage}</p>
+            <p>{ratingAverage}</p>
         </div>
     )
 }
