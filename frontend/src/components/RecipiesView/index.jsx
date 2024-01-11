@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Recipies from './Recipies';
 import Filter from '../Filter';
 
@@ -7,6 +7,10 @@ import Filter from '../Filter';
 const RecipiesView = () => {
     const recipies = useSelector(state => state.recipies)
     const [filteredRecipies, setFilteredRecipies] = useState(recipies);
+
+    useEffect(() => {
+        setFilteredRecipies(recipies);
+    }, [recipies]);
 
     const handleFilter = ({ option, value }) => {
         const filtered = recipies.filter((recipe) =>
