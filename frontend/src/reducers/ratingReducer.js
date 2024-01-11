@@ -32,6 +32,7 @@ export const getAverage = (id) => {
         try {
             const ratings = await ratingService.getRatingAverage(id)
             dispatch(setRating(ratings))
+            console.log(ratings)
         } catch (error) {
             console.log(error)
         }
