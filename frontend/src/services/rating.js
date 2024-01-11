@@ -1,9 +1,9 @@
 import axios from '../util/apiClient'
 const baseUrl = '/api/recipies'
 
-const getRatingAverage = (id) => {
-  const request = axios.get(`${baseUrl}/${id}/rating`)
-  return request.then((response) => response.data)
+const getRatingAverage = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}/rating`)
+  return response.data
 }
 
 const create = async (id, newObject) => {

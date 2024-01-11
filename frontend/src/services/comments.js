@@ -1,9 +1,9 @@
 import axios from '../util/apiClient'
 const baseUrl = '/api/recipies'
 
-const getAllComments = (id) => {
-  const request = axios.get(`${baseUrl}/${id}/comments`)
-  return request.then((response) => response.data)
+const getAllComments = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}/comments`)
+  return response.data
 }
 
 const create = async (id, newObject) => {
