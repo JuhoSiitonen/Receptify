@@ -1,19 +1,21 @@
 # Requirements of the app
 
 ## Features
-- [ ] Users can log in
+- [x] Users can sign in
+- [x] Users can log in
 - [x] Users can post recipies
 - [ ] Users can view recipies in a scrollable list
     - [x] Recipy view
     - [ ] Paginated scrolling
-- [ ] Users can like recipies and add them as favorites
+    - [x] User can view own recipies in a list
 - [ ] User can search for recipies
     - [ ] Filtering recipies by user
     - [ ] Filtering recipies by categories
     - [ ] Filtering recipies by incredients
-    - [ ] Filtering recipies by cooking time
+    - [ ] Filtering recipies by title
+    - [ ] Filtering recipies by cooking time¨
+    - [ ] Recipy sorting newest -> oldest and vice versa plus other sort orders
 - [ ] User can type in specific incredients and find recipies which match those (even partially)
-- [ ] User can follow other users recipy posts
 - [ ] User can compose a shopping list out of selected recipies
     - [ ] User can select to multiply chosen recipies incredient amounts on shopping list
     - [ ] Shopping list can be printed or sent to email
@@ -21,8 +23,12 @@
     - [ ] User can add miscellaneous items to list
 - [ ] The app has privileged users, e.g maintenance which can delete posts, comments and users
 - [ ] Users can comment on recipies
+- [ ] Users can like recipies and add them as favorites
+- [ ] User can follow other users recipy posts
 
 ## Technical requirements
+- Token based authentication for requests
+- Token validation expiry within certain amount of time
 - The app frontend is made with React
 - The backend is an Express server with PostgreSQL database
 - The app has a Redis cache
@@ -32,6 +38,7 @@
 - The app has a CICD pipeline with Github Actions
 - The app has unit testing with Jest and end to end testing with Cypress
 - The application is hosted in ???
+- Docker containers in deployment???
 - Other aspects???
 
 ## Architechture

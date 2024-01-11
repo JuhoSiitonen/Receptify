@@ -44,5 +44,10 @@
     - Get and Post for ratings and comments implemented for frontend with separate reducers.
 - 10.1 :
     - New components added for a single recipy view showing all comments and the rating average.
-
-
+- 11.1 :
+    - Refactoring to make component structure more cohesive, offloading stuff from SingleRecipy to elsewhere.
+    - Fixing the view for a single recipies comments and rating average, added try catch structure to reducers for debugging.
+    - First version of filter component with more than placeholders. The recipies can be filtered according to: username, ingredients, title and categories.
+    - Filtering only in frontend from the Redux state, later an endpoint for searching specific ingredients will be added.
+    - Filter function works for all specified filter options
+    
