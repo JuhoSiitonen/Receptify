@@ -50,4 +50,8 @@
     - First version of filter component with more than placeholders. The recipies can be filtered according to: username, ingredients, title and categories.
     - Filtering only in frontend from the Redux state, later an endpoint for searching specific ingredients will be added.
     - Filter function works for all specified filter options
-    
+    - Filter is reversed to default if the filter component is not visible
+- 12.1 :
+    - Added component for finding recipies based on available ingredients
+    - Endpoint ingredients added in backend
+    - Ednpoints for deleting and updating recipies added in backend

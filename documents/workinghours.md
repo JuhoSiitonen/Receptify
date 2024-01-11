@@ -15,5 +15,6 @@
 - 5h 9.1: Endpoint ratings and comments implemented in backend and frontend.
 - 1h 10.1: New page for viewing comments and rating average.
 - 4h 11.1: Refactoring and debugging.
+- 2h 12.1: Recipy finder
 
-Total hours: 40h
+Total hours: 42h
