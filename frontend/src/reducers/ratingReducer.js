@@ -18,15 +18,23 @@ export const { setRating, removeRating } = ratingSlice.actions
 
 export const createRating = (id, newObject) => {
     return async dispatch => {
-        const rating = await ratingService.create(id, newObject)
-        dispatch(setRating(rating))
+        try {
+            const rating = await ratingService.create(id, newObject)
+            dispatch(setRating(rating))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
 export const getAverage = (id) => {
     return async dispatch => {
-        const ratings = await ratingService.getRatingAverage(id)
-        dispatch(setRating(ratings))
+        try {
+            const ratings = await ratingService.getRatingAverage(id)
+            dispatch(setRating(ratings))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
