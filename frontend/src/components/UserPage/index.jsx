@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import LoadingSpinner from '../LoadingSpinner'
 
 const UserPage = () => {
@@ -17,7 +18,11 @@ const UserPage = () => {
             <h1>UserPage</h1>
             <h2>Your recipies:</h2>
             <ul>
-                {recipies.map(recipy => <li key={recipy.id}>{recipy.title}</li>)}
+                {recipies.map(recipy => 
+                <li key={recipy.id}>
+                    <Link to={`/recipes/${recipy.id}`}>{recipy.title}</Link>
+                    
+                </li>)}
             </ul>
         </div>
     )}

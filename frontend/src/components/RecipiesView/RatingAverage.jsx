@@ -10,7 +10,7 @@ const RatingAverage = () => {
     return (
         <div>
             <h2>Rating</h2>
-            <p>{ratingAverage.averageRating}</p>
+            <p>{Math.round(ratingAverage.averageRating*100)/100}</p>
         </div>
     )
 }

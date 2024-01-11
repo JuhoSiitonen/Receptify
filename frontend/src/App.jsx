@@ -34,8 +34,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<UserPage />} />
-        <Route path="/logout" element={<Login />} 
-        action={() => dispatch(logout())} />
+        <Route path="/logout" element={<Login />} />
       </Routes>
     </div>
   )
