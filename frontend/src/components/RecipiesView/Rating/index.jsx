@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { createRating } from '../../reducers/ratingReducer'
+import { createRating } from '../../../reducers/ratingReducer'
 
 const Rating = ({ recipyId }) => {
     const dispatch = useDispatch()

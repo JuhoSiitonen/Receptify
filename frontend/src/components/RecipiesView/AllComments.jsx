@@ -1,10 +1,12 @@
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-const AllComments = ({ recipyId }) => {
-    const comments = useSelector(state => state.recipies)
-        .find(recipy => recipy.id === recipyId)
-        .comments
+const AllComments = ({ comments }) => {
 
+
+    if (!comments) {
+        return <>No comments</>
+    }
     return (
         <div>
             <h2>Comments</h2>
