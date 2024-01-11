@@ -24,11 +24,12 @@ const ChosenRecipy = () => {
     }
     
     const recipy = recipies.find(recipy => recipy.id === recipyId);
+    const comments = useSelector(state => state.comment)
 
     return (
         <div> 
             <SingleRecipy recipy={recipy} />
-            <AllComments />
+            <AllComments comments={comments}/>
         </div>
     )
 }

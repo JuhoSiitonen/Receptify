@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 
 const AllComments = ({ comments }) => {
     console.log(comments)
@@ -10,7 +9,7 @@ const AllComments = ({ comments }) => {
         <div>
             <h2>Comments</h2>
             {comments.map(comment => (
-                <p key={comment.id}>{comment.comment}</p>
+                <p key={comment.id}>{comment.comment} - {comment.user.username}  {comment.date}</p>
             ))}
         </div>
     )
