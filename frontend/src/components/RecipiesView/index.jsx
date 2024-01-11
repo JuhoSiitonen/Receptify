@@ -1,15 +1,25 @@
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import Recipies from './Recipies';
+import Filter from '../Filter';
 
 
 const RecipiesView = () => {
     const recipies = useSelector(state => state.recipies)
+    const [filteredRecipies, setFilteredRecipies] = useState(recipies);
 
+    const handleFilter = ({ option, value }) => {
+        const filtered = recipies.filter((recipe) =>
+            recipe[option].toLowerCase().includes(value.toLowerCase())
+        );
 
+        setFilteredRecipies(filtered);
+    };
 
     return (
         <div>
-             <Recipies recipies={recipies} />
+            <Filter onFilter={handleFilter} />
+            <Recipies recipies={filteredRecipies} />
         </div>
     )
 }
