@@ -10,7 +10,7 @@ const RatingAverage = () => {
     return (
         <div>
             <h2>Rating</h2>
-            <p>{ratingAverage}</p>
+            <p>{ratingAverage.averageRating}</p>
         </div>
     )
 }
