@@ -22,9 +22,13 @@ const RecipiesView = () => {
         setFilteredRecipies(filtered);
     };
 
+    const handleCancel = () => {
+        setFilteredRecipies(recipies);
+    }
+
     return (
         <div>
-            <Togglable buttonLabel="Filter">
+            <Togglable buttonLabel="Filter" onCancel={handleCancel}>
                 <Filter onFilter={handleFilter} />
             </Togglable>
             <br></br>
