@@ -26,6 +26,7 @@ const NavigationBar = () => {
             <Link to="/">Mainpage  </Link>
             <Link to="/recipes">Recipes  </Link>
             <Link to="/recipes/new">Add recipe  </Link>
+            <Link to="/recipyfinder">Find recipes  </Link>
             <Link to="/mypage">My page  </Link>
             <Link to="/logout" onClick={handleLogout}>Logout </Link>
         </div>

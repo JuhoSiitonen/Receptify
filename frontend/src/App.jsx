@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { getAllRecipies } from './reducers/recipyReducer';
+import { isUserLogged } from './reducers/userReducer'
 import Mainpage from './components/Mainpage'
 import RecipiesView from './components/RecipiesView'
-import { getAllRecipies } from './reducers/recipyReducer';
-import { isUserLogged, logout } from './reducers/userReducer'
 import NavigationBar from './components/NavigationBar'
 import AddRecipe from './components/RecipiesView/AddRecipe'
 import Login from './components/Login'
@@ -12,6 +12,7 @@ import SignUp from './components/SignUp'
 import UserPage from './components/UserPage'
 import Notifications from './components/Notifications'
 import ChosenRecipy from './components/RecipiesView/ChosenRecipy'
+import RecipyFinder from './components/RecipyFinder'
 
 function App() {
   const dispatch = useDispatch()
@@ -31,6 +32,7 @@ function App() {
         <Route path="/recipes" element={<RecipiesView />} />
         <Route path="/recipes/new" element={<AddRecipe />} />
         <Route path="/recipes/:id" element={<ChosenRecipy />} />
+        <Route path="/recipyfinder" element={<RecipyFinder />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<UserPage />} />
