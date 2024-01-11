@@ -18,15 +18,23 @@ export const { addNewRecipy, setRecipies  } = recipySlice.actions
 
 export const createRecipy = (recipy) => {
     return async dispatch => {
-        const newRecipy = await recipyService.create(recipy)
-        dispatch(addNewRecipy(newRecipy))
+        try {
+            const newRecipy = await recipyService.create(recipy)
+            dispatch(addNewRecipy(newRecipy))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
 export const getAllRecipies = () => {
     return async dispatch => {
-        const recipies = await recipyService.getAll()
-        dispatch(setRecipies(recipies))
+        try {
+            const recipies = await recipyService.getAll()
+            dispatch(setRecipies(recipies))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
