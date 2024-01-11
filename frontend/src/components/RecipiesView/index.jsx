@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Recipies from './Recipies';
 import Filter from '../Filter';
+import Togglable from '../Togglable';
+import { filterBy } from '../../util/filterFunction';
 
 
 const RecipiesView = () => {
@@ -14,7 +16,7 @@ const RecipiesView = () => {
 
     const handleFilter = ({ option, value }) => {
         const filtered = recipies.filter((recipe) =>
-            recipe[option].toLowerCase().includes(value.toLowerCase())
+            filterBy({ option, value, recipe })
         );
 
         setFilteredRecipies(filtered);
@@ -22,7 +24,10 @@ const RecipiesView = () => {
 
     return (
         <div>
-            <Filter onFilter={handleFilter} />
+            <Togglable buttonLabel="Filter">
+                <Filter onFilter={handleFilter} />
+            </Togglable>
+            <br></br>
             <Recipies recipies={filteredRecipies} />
         </div>
     )
