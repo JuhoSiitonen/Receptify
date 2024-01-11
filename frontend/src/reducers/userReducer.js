@@ -20,9 +20,13 @@ export const { setUser, removeUser } = userSlice.actions
 
 export const login = (credentials) => {
     return async dispatch => {
-        const user = await loginService.login(credentials)
-        window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
-        dispatch(setUser(user))
+        try {
+            const user = await loginService.login(credentials)
+            window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
+            dispatch(setUser(user))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
@@ -45,9 +49,12 @@ export const logout = () => {
 
 export const signup = (credentials) => {
     return async dispatch => {
-        console.log(credentials)
-        const user = await userService.signup(credentials)
-        dispatch(setUser(user))
+        try {
+            const user = await userService.signup(credentials)
+            dispatch(setUser(user))
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
