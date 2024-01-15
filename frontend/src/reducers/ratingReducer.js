@@ -25,6 +25,7 @@ export const createRating = (id, newObject) => {
         } catch (error) {
             dispatch(addNotification({ message: 'Rating could not be added!', error: true }))
             console.log(error)
+            throw error
         }
     }
 }
@@ -37,6 +38,7 @@ export const getAverage = (id) => {
             console.log(ratings)
         } catch (error) {
             console.log(error)
+            throw error
         }
     }
 }

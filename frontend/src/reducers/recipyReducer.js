@@ -26,6 +26,7 @@ export const createRecipy = (recipy) => {
         } catch (error) {
             dispatch(addNotification({message: 'Recipy could not be added', error: true}))
             console.log(error)
+            throw error
         }
     }
 }

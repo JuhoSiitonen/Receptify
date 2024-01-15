@@ -29,6 +29,7 @@ export const createComment = (id, newObject) => {
                 message: 'Comment could not be added!', 
                 error: true}))
             console.log(error)
+            throw error
         }
     }
 }
@@ -41,6 +42,7 @@ export const getAllComments = (id) => {
             console.log(comments)
         } catch (error) {
             console.log(error)
+            throw error
         }
     }
 }
