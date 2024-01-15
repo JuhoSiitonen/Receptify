@@ -15,9 +15,13 @@ userRouter.get("/me", async (request, response) => {
 })
 
 userRouter.post("/", async (request, response) => {
-    const user = request.body;
-    const newUser = await User.create(user);
-    return response.status(201).json(newUser);;
+    try {
+      const user = request.body;
+      const newUser = await User.create(user);
+      return response.status(201).json(newUser);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
+    }
 })
 
 userRouter.get("/:id", async (request, response) => {
