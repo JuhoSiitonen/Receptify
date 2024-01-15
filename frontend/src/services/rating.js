@@ -11,4 +11,14 @@ const create = async (id, newObject) => {
   return response.data
 }
 
-export default { getRatingAverage, create }
+const update = async (id, newObject) => {
+  const request = await axios.put(`${baseUrl}/${id}/rating`, newObject)
+  return request.data
+}
+
+const deleteRating = async (id) => {
+  const request = await axios.delete(`${baseUrl}/${id}/rating`)
+  return request.data
+}
+
+export default { getRatingAverage, create, update, deleteRating }

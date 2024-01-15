@@ -11,5 +11,10 @@ const signup = async newObject => {
     const response = await axios.post(baseUrl, newUser)
     return response.data
   }
+
+  const deleteUser = async (id) => {
+    const request = await axios.delete(`${baseUrl}/${id}`)
+    return request.data
+  }
   
-  export default { signup }
+  export default { signup, deleteUser }

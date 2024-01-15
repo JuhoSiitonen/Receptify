@@ -11,4 +11,14 @@ const create = async (id, newObject) => {
   return response.data
 }
 
-export default { getAllComments, create }
+const update = async (id, newObject) => {
+  const request = await axios.put(`${baseUrl}/${id}/comments`, newObject)
+  return request.data
+}
+
+const deleteComment = async (id) => {
+  const request = await axios.delete(`${baseUrl}/${id}/comments`)
+  return request.data
+}
+
+export default { getAllComments, create, update, deleteComment }
