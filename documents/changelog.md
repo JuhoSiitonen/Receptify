@@ -59,3 +59,8 @@
     - Notifications functionality added with successfull action and error notifications, this works via notificationReducer.
     - Notifications are up for signup, logging in, comments, ratings and posting new recipies.
     - User input validation for signup
+    - Recipy router refactoring to separate ratings and comments as separate routers
+    - Comment and rating update and delete endpoints added
+    - Comment, rating and recipy update and delete axios services added.
+    - User deletion service added. 
+    
