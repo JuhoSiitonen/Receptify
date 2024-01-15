@@ -14,7 +14,9 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== password2 || password.length < 3) {
-            dispatch(addNotification('Passwords do not match or are too short!'));
+            dispatch(addNotification({
+                message: 'Passwords do not match or are too short!', 
+                error: true}));
             setPassword('');
             setPassword2('');
             return;
@@ -24,11 +26,15 @@ const SignUp = () => {
             setUsername('');
             setPassword('');
             setPassword2('');
-            dispatch(addNotification('Sign up successful!'));
+            dispatch(addNotification({
+                message: 'Sign up successful!', 
+                error: false}));
             navigate('/');
         } catch (error) {
             setUsername('');
-            dispatch(addNotification('Username already in use!'));
+            dispatch(addNotification({
+                message: 'Username already in use!', 
+                error: true}));
         }
     }
 

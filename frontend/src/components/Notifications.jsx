@@ -13,10 +13,21 @@ const Notifications = () => {
     padding: 10,
     marginBottom: 10,
   }
-  if (message === '') {
+
+  const errorStyle = {
+    ...messageStyle,
+    color: 'red'
+  }
+
+  if (message.message === '') {
     return <></>
   }
-  return <div style={messageStyle}>{message}</div>
+
+  if (message.error) {
+    return <div style={errorStyle}>{message.message}</div>
+  }
+
+  return <div style={messageStyle}>{message.message}</div>
 }
 
 export default Notifications
