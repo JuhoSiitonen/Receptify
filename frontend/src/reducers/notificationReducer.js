@@ -22,8 +22,8 @@ export const { addNewNotification, removeNotification } =
   notificationSlice.actions
 
 export const addNotification = ({message, error}) => {
-  return (dispatch) => {
-    dispatch(addNewNotification({
+  return async dispatch => {
+    await dispatch(addNewNotification({
       message, error}))
     setTimeout(() => {
       dispatch(removeNotification())

@@ -20,7 +20,6 @@ export const createRating = (id, newObject) => {
     return async dispatch => {
         try {
             const rating = await ratingService.create(id, newObject)
-            dispatch(setRating(rating))
         } catch (error) {
             console.log(error)
         }
