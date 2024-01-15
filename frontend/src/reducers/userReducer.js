@@ -52,9 +52,11 @@ export const signup = (credentials) => {
     return async dispatch => {
         try {
             const user = await userService.signup(credentials)
+            dispatch(login(credentials))
             dispatch(setUser(user))
         } catch (error) {
             console.log(error)
+            throw error
         }
     }
 }

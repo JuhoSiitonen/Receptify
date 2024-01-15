@@ -1,29 +1,34 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signup } from '../reducers/userReducer';
 import { useDispatch } from 'react-redux';
-import { signup, login } from '../reducers/userReducer';
+import { addNotification } from '../reducers/notificationReducer';
 
 const SignUp = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
-    const dispatch = useDispatch();
-
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password !== password2 && password.length < 3) {
+        if (password !== password2 || password.length < 3) {
+            dispatch(addNotification('Passwords do not match or are too short!'));
+            setPassword('');
+            setPassword2('');
             return;
         }
-        try {
-            const response = await dispatch(signup({username, password}));
-            console.log(response);
-            const loginResponse = await dispatch(login({username, password}));
+        try { 
+            await dispatch(signup({ username, password }));
+            setUsername('');
+            setPassword('');
+            setPassword2('');
+            dispatch(addNotification('Sign up successful!'));
             navigate('/');
-            
         } catch (error) {
-            console.log(error);
+            setUsername('');
+            dispatch(addNotification('Username already in use!'));
         }
     }
 
