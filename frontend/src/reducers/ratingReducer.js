@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import ratingService from '../services/rating'
+import { addNotification } from './notificationReducer'
 
 const ratingSlice = createSlice({
     name: 'rating',
@@ -20,7 +21,9 @@ export const createRating = (id, newObject) => {
     return async dispatch => {
         try {
             const rating = await ratingService.create(id, newObject)
+            dispatch(addNotification({ message: 'Rating added successfully!', error: false }))
         } catch (error) {
+            dispatch(addNotification({ message: 'Rating could not be added!', error: true }))
             console.log(error)
         }
     }
