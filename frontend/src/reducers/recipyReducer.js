@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import recipyService from '../services/recipies'
+import { addNotification } from './notificationReducer'
 
 const recipySlice = createSlice({
     name: 'recipies',
@@ -21,7 +22,9 @@ export const createRecipy = (recipy) => {
         try {
             const newRecipy = await recipyService.create(recipy)
             dispatch(addNewRecipy(newRecipy))
+            dispatch(addNotification({message: 'Recipy added', error: false}))
         } catch (error) {
+            dispatch(addNotification({message: 'Recipy could not be added', error: true}))
             console.log(error)
         }
     }

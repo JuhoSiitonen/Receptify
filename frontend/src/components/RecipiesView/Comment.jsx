@@ -1,18 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { createComment } from '../../reducers/commentReducer'
+import { addNotification } from '../../reducers/notificationReducer'
 
 const Comment = ({ recipyId }) => { 
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const commentObject = {
             content: e.target.comment.value,
             userId: user.id,
         }
-        dispatch(createComment(recipyId, commentObject))
-    }
+        try {
+            await dispatch(createComment(recipyId, commentObject))
+        }
+        catch (error) {
+            console.log(error)
+        }
+        e.target.comment.value = ''
+        }
 
     return ( 
         <div>

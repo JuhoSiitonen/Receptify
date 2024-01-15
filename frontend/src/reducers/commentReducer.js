@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import commentService from '../services/comments'
+import { addNotification } from './notificationReducer'
 
 const commentSlice = createSlice({
     name: 'comment',
@@ -20,8 +21,13 @@ export const createComment = (id, newObject) => {
     return async dispatch => {
         try {
             const comment = await commentService.create(id, newObject)
-            dispatch(setComment(comment))
+            dispatch(addNotification({
+                message: 'Comment added successfully!', 
+                error: false}))
         } catch (error) {
+            dispatch(addNotification({
+                message: 'Comment could not be added!', 
+                error: true}))
             console.log(error)
         }
     }
