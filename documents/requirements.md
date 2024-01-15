@@ -4,6 +4,7 @@
 - [x] Users can sign in
 - [x] Users can log in
 - [x] Users can post recipies
+- [ ] User sees clear error and success notifications upon actions
 - [ ] Users can view recipies in a scrollable list
     - [x] Recipy view
     - [ ] Paginated scrolling
@@ -31,7 +32,7 @@
 - Token validation expiry within certain amount of time
 - The app frontend is made with React
 - The backend is an Express server with PostgreSQL database
-- The app has a Redis cache
+- The app has a Redis cache and Redis pub/sub
 - The api is REST
 - The frontend state handling is done with Redux
 - The application development database is set with Docker

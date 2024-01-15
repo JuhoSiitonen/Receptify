@@ -55,3 +55,7 @@
     - Added component for finding recipies based on available ingredients
     - Endpoint ingredients added in backend
     - Ednpoints for deleting and updating recipies added in backend
+- 15.1 : 
+    - Notifications functionality added with successfull action and error notifications, this works via notificationReducer.
+    - Notifications are up for signup, logging in, comments, ratings and posting new recipies.
+    - User input validation for signup
