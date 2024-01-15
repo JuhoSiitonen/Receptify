@@ -26,15 +26,10 @@ const SignUp = () => {
             setUsername('');
             setPassword('');
             setPassword2('');
-            dispatch(addNotification({
-                message: 'Sign up successful!', 
-                error: false}));
+            
             navigate('/');
         } catch (error) {
             setUsername('');
-            dispatch(addNotification({
-                message: 'Username already in use!', 
-                error: true}));
         }
     }
 

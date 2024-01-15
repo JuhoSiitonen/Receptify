@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import userService from '../services/users'
 import loginService from '../services/login'
-
+import { addNotification } from './notificationReducer'
 
 const userSlice = createSlice({
     name: 'user',
@@ -53,8 +53,14 @@ export const signup = (credentials) => {
         try {
             const user = await userService.signup(credentials)
             dispatch(login(credentials))
+            dispatch(addNotification({
+                message: 'Sign up successful!', 
+                error: false}));
             dispatch(setUser(user))
         } catch (error) {
+            dispatch(addNotification({
+                message: 'Username already in use!', 
+                error: true}));
             console.log(error)
             throw error
         }
