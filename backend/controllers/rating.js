@@ -1,5 +1,4 @@
 const ratingRouter = require("express").Router();
-const { default: rating } = require("../../frontend/src/services/rating");
 const { Rating, User, Recipy } = require("../models");
 const { sequelize } = require('../utils/db');
 
