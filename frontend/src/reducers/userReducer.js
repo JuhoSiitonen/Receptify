@@ -70,4 +70,22 @@ export const signup = (credentials) => {
     }
 }
 
+export const deleteUser = (id) => {
+    return async dispatch => {
+        try {
+            await userService.deleteUser(id)
+            dispatch(removeUser())
+            dispatch(addNotification({
+                message: 'User deleted', 
+                error: false}));
+        } catch (error) {
+            dispatch(addNotification({
+                message: 'User could not be deleted', 
+                error: true}));
+            console.log(error)
+            throw error
+        }
+    }
+}
+
 export default userSlice.reducer
