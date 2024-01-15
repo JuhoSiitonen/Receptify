@@ -23,9 +23,12 @@ export const login = (credentials) => {
         try {
             const user = await loginService.login(credentials)
             window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
+            dispatch(addNotification({ message: 'Login successful!', error: false }))
             dispatch(setUser(user))
         } catch (error) {
+            dispatch(addNotification({ message: 'Wrong credentials!', error: true }))
             console.log(error)
+            throw error
         }
     }
 }

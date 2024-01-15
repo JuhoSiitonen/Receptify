@@ -11,12 +11,16 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch(login({username, password}))
+        try {
+            await dispatch(login({username, password}))
+            navigate('/recipes')
+        } catch (error) {
+            console.log(error)
+        }
         setUsername('')
         setPassword('')
-        navigate('/recipes')
     }
 
     return (
