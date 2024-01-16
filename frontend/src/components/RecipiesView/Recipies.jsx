@@ -1,11 +1,26 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useSelector } from "react-redux"
 import SingleRecipy from "./SingleRecipy"
 import Togglable from "../Togglable"
 import Comment from "./Comment"
 import Rating from "./Rating"
 
 const Recipies = ({ recipies }) => {
+    const user = useSelector(state => state.user)
+
+    const userActions = ({ id }) => {
+
+        return (
+            <div>
+                <Togglable buttonLabel="Comment">
+                    <Comment recipyId={id} />
+                </Togglable>
+                 <Togglable buttonLabel="Rate">
+                    <Rating  recipyId={id} />
+                </Togglable>
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -13,12 +28,7 @@ const Recipies = ({ recipies }) => {
                 <div key={recipe.id}>
                     <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
                     <SingleRecipy recipy={recipe} />
-                    <Togglable buttonLabel="Comment">
-                        <Comment recipyId={recipe.id} />
-                    </Togglable>
-                    <Togglable buttonLabel="Rate">
-                        <Rating  recipyId={recipe.id} />
-                    </Togglable>
+                    {user && userActions(recipe.id)}
                 </div>
             ))}
         </div>
