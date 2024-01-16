@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { createComment } from '../../reducers/commentReducer'
-import { addNotification } from '../../reducers/notificationReducer'
+import { createComment } from '../../../reducers/commentReducer'
+import { addNotification } from '../../../reducers/notificationReducer'
 
 const Comment = ({ recipyId }) => { 
     const dispatch = useDispatch()
