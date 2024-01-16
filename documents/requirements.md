@@ -5,6 +5,7 @@
 - [x] Users can log in
 - [x] Users can post recipies
 - [ ] User sees clear error and success notifications upon actions
+- [ ] User can update and delete their own recipies
 - [ ] Users can view recipies in a scrollable list
     - [x] Recipy view
     - [ ] Paginated scrolling
@@ -24,6 +25,7 @@
     - [ ] User can add miscellaneous items to list
 - [ ] The app has privileged users, e.g maintenance which can delete posts, comments and users
 - [ ] Users can comment on recipies
+- [ ] Users can rate each others recipies (1-5 rating)
 - [ ] Users can like recipies and add them as favorites
 - [ ] User can follow other users recipy posts
 

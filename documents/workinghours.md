@@ -15,7 +15,8 @@
 - 5h 9.1: Endpoint ratings and comments implemented in backend and frontend.
 - 1h 10.1: New page for viewing comments and rating average.
 - 4h 11.1: Refactoring and debugging.
-- 2h 12.1: Recipy finder
-- 3h 15.1: Notifications and update/delete endpoints and services
+- 2h 12.1: Recipy finder.
+- 3h 15.1: Notifications and update/delete endpoints and services.
+- 1h 16.1: Recipy update form and recipy deletion.
 
-Total hours: 45h
+Total hours: 46h

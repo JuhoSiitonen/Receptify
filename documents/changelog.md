@@ -63,4 +63,11 @@
     - Comment and rating update and delete endpoints added
     - Comment, rating and recipy update and delete axios services added.
     - User deletion service added. 
+- 16.1 :
+    - Preliminary form for updating a users own recipy
+    - Only logged in users can now see Comment and Rate buttons
+    - Recipy owner can't comment or rate their own recipy
+    - Recipy owner can enter update form from ChosenRecipy component
+    - Recipy owner can delete their own recipies from ChosenRecipy component
+    
     
