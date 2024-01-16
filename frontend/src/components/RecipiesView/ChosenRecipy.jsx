@@ -8,6 +8,7 @@ import SingleRecipy from "./SingleRecipy"
 import RatingAverage from "./RatingAverage"
 import AllComments from "./AllComments"
 import UpdateRecipy from "./UpdateRecipy"
+import DeleteButton from "./DeleteButton"
 
 const ChosenRecipy = () => {
     const dispatch = useDispatch()
@@ -35,7 +36,10 @@ const ChosenRecipy = () => {
             <AllComments comments={comments}/>
             <RatingAverage ratingAverage={ratingAverage} />
             {user && user.id === recipy.user.id && (
+            <div>
               <UpdateRecipy recipy={recipy} />
+              <DeleteButton recipy={recipy} />
+            </div>
             )}
         </div>
     )
