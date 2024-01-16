@@ -1,7 +1,8 @@
-
+import { useSelector } from "react-redux"
 
 const SingleRecipy = ({ recipy }) => {
-    console.log(recipy)
+    const user = useSelector(state => state.user)
+
     return (
         <div className="singleRecipy">
             <h2>{recipy.title}</h2>

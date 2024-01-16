@@ -7,13 +7,14 @@ import LoadingSpinner from "../LoadingSpinner"
 import SingleRecipy from "./SingleRecipy"
 import RatingAverage from "./RatingAverage"
 import AllComments from "./AllComments"
-
+import UpdateRecipy from "./UpdateRecipy"
 
 const ChosenRecipy = () => {
     const dispatch = useDispatch()
     const match = useMatch('/recipes/:id');
     const recipyId = Number(match?.params.id);
     const recipies = useSelector(state => state.recipies)
+    const user = useSelector(state => state.user)
 
     useEffect(() => {
         dispatch(getAllComments(recipyId))
@@ -33,6 +34,9 @@ const ChosenRecipy = () => {
             <SingleRecipy recipy={recipy} />
             <AllComments comments={comments}/>
             <RatingAverage ratingAverage={ratingAverage} />
+            {user && user.id === recipy.user.id && (
+              <UpdateRecipy recipy={recipy} />
+            )}
         </div>
     )
 }

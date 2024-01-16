@@ -35,7 +35,7 @@ const AddRecipe = () => {
                 instructions,
                 date: new Date().toISOString(),
                 visible: true,
-                userId: 1,
+                userId: user.id,
                 ingredients, 
                 categories: categories.map(category => ({ name: category }))
             }))

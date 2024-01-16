@@ -28,7 +28,7 @@ const Recipies = ({ recipies }) => {
                 <div key={recipe.id}>
                     <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
                     <SingleRecipy recipy={recipe} />
-                    {user && userActions(recipe.id)}
+                    {user && user.id !== recipe.user.id && userActions(recipe)}
                 </div>
             ))}
         </div>
