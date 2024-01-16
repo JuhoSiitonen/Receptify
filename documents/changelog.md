@@ -69,5 +69,6 @@
     - Recipy owner can't comment or rate their own recipy
     - Recipy owner can enter update form from ChosenRecipy component
     - Recipy owner can delete their own recipies from ChosenRecipy component
+    - Update form shows old recipy info, not yet fully functional
     
     

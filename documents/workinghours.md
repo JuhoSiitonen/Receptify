@@ -17,6 +17,6 @@
 - 4h 11.1: Refactoring and debugging.
 - 2h 12.1: Recipy finder.
 - 3h 15.1: Notifications and update/delete endpoints and services.
-- 1h 16.1: Recipy update form and recipy deletion.
+- 2h 16.1: Recipy update form and recipy deletion.
 
-Total hours: 46h
+Total hours: 47h
