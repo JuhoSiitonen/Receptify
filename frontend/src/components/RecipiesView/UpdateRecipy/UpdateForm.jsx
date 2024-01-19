@@ -17,9 +17,13 @@ const UpdateForm = ({ recipy }) => {
     const setupFields = () => {
         setTitle(recipy.title)
         setDescription(recipy.description)
-        setIngredients(recipy.recipy_ingredients)
+        setIngredients(recipy.recipy_ingredients.map(i => ({ name: i.ingredient.name, amount: i.amount })))
         setInstructions(recipy.instructions)
-        setCategories(recipy.recipy_categories)
+        setCategories(recipy.recipy_categories.map(c => {
+            console.log(c.category.name)
+            return c.category.name
+        }))
+        
     }
 
     const addIncredient = () => {
@@ -33,16 +37,15 @@ const UpdateForm = ({ recipy }) => {
     }
 
     const deleteIngredient = (ingredient) => {
-        setIngredients(ingredients.filter(i => i.id !== ingredient.id))
+        setIngredients(ingredients.filter(i => i.name !== ingredient.name))
     }
 
     const deleteCategory = (category) => {
-        setCategories(categories.filter(c => c.id !== category.id))
+        setCategories(categories.filter(c => c !== category))
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(event.target.title.value)
         
     }
     return (
@@ -68,8 +71,8 @@ const UpdateForm = ({ recipy }) => {
                 </div>
                 <div>
                 {ingredients.map(ingredient => (
-                    <li key={`${ingredient.id}-${ingredient.ingredient.id}`}>
-                        {ingredient.amount} of {ingredient.ingredient.name}
+                    <li key={`${ingredient.name}-${ingredient.amount}`}>
+                        {ingredient.amount} of {ingredient.name}
                         <button onClick={() => deleteIngredient(ingredient)} type="button">delete</button>
                     </li>
                 ))}
@@ -84,12 +87,12 @@ const UpdateForm = ({ recipy }) => {
                     <button onClick={addCategory} type="button">add</button>
                 </div>
                 <div>Categories: 
-                    {categories.map(category => {
-                        <li key={category.id}>
-                            {category.category.name} 
+                    {categories.map(category => (
+                        <li key={category}>
+                            {category} 
                             <button onClick={() => deleteCategory(category)} type="button">delete</button>
                         </li>
-                    })}
+                    ))}
                 </div>
                 <input type="submit" value="Submit" />
             </form>
