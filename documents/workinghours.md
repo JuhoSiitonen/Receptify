@@ -18,5 +18,6 @@
 - 2h 12.1: Recipy finder.
 - 3h 15.1: Notifications and update/delete endpoints and services.
 - 2h 16.1: Recipy update form and recipy deletion.
+- 1h 19.1: Update form.
 
-Total hours: 47h
+Total hours: 48h

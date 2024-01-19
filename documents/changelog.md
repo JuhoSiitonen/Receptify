@@ -70,5 +70,7 @@
     - Recipy owner can enter update form from ChosenRecipy component
     - Recipy owner can delete their own recipies from ChosenRecipy component
     - Update form shows old recipy info, not yet fully functional
+- 19.1 :
+    - Update sends requests correctly to backend, but backend endpoint needs fixing.
     
     
