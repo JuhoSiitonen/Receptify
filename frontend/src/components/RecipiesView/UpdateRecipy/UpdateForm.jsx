@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { updateRecipy } from '../../../reducers/recipyReducer'
 
 const UpdateForm = ({ recipy }) => {
@@ -12,6 +13,7 @@ const UpdateForm = ({ recipy }) => {
     const [categories, setCategories] = useState([])
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const user = useSelector(state => state.user)
 
     const setupFields = () => {
@@ -19,11 +21,7 @@ const UpdateForm = ({ recipy }) => {
         setDescription(recipy.description)
         setIngredients(recipy.recipy_ingredients.map(i => ({ name: i.ingredient.name, amount: i.amount })))
         setInstructions(recipy.instructions)
-        setCategories(recipy.recipy_categories.map(c => {
-            console.log(c.category.name)
-            return c.category.name
-        }))
-        
+        setCategories(recipy.recipy_categories.map(c => c.category.name))
     }
 
     const addIncredient = () => {
@@ -44,8 +42,30 @@ const UpdateForm = ({ recipy }) => {
         setCategories(categories.filter(c => c !== category))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
+        try {
+            const response = await dispatch(updateRecipy( recipy.id, {
+                title, 
+                description, 
+                instructions,
+                date: new Date().toISOString(),
+                visible: true,
+                userId: user.id,
+                ingredients, 
+                categories: categories.map(category => ({ name: category }))
+            }))
+            setTitle('')
+            setDescription('')
+            setIngredients([])
+            setInstructions('')
+            setCategories([])
+            console.log(response)
+            navigate('/recipes')
+        }
+        catch (error) {
+            console.log(error)
+        }
         
     }
     return (
