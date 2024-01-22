@@ -43,6 +43,18 @@ ratingRouter.get("/:id", async (req, res) => {
         userId: user.id, 
         recipyId: recipe.id, 
       });
+
+      const ratings = await Rating.findAll({
+        where: { recipyId: id },
+        attributes: [
+          [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating']
+        ],
+      });
+
+      const averageRating = ratings.length > 0 ? ratings[0].dataValues.averageRating : 0;
+
+      recipe.averageRating = averageRating;
+      await recipe.save();
   
       const returnRating = await Rating.findByPk(newRating.id);
   

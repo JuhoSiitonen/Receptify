@@ -34,6 +34,7 @@ recipyRouter.post("/", async (req, res) => {
       date,
       visible,
       userId: user.id, 
+      averageRating: 0,
     });
 
     for (const ingredientData of ingredients) {

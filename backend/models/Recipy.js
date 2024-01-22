@@ -29,6 +29,10 @@ Recipy.init({
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+  averageRating: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
 }, {
     sequelize,
     underscored: true,
