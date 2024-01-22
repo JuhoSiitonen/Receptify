@@ -10,12 +10,12 @@
     - [x] Recipy view
     - [ ] Paginated scrolling
     - [x] User can view own recipies in a list
-- [ ] User can search for recipies
+- [ ] User can filter recipies view
     - [x] Filtering recipies by user
     - [x] Filtering recipies by categories
     - [x] Filtering recipies by incredients
     - [x] Filtering recipies by title
-    - [ ] Filtering recipies by cooking time¨
+    - [ ] Filtering recipies by cooking time
 - [ ]  User can sort recipies
     - [ ] Recipy sorting newest -> oldest and vice versa
     - [ ] Average rating best -> worst and vice versa
