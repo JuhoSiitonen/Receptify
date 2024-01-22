@@ -128,6 +128,11 @@ recipyRouter.put("/:id", async (req, res) => {
       userId: user.id, 
     });
 
+    let recipeIngredients = await RecipyIngredient.findAll({ where: { recipyId: recipe.id } });
+    for (const singleIngredient of recipeIngredients) {
+      await singleIngredient.destroy();
+    }
+
     for (const ingredientData of ingredients) {
       const { name, amount } = ingredientData;
 
@@ -152,6 +157,11 @@ recipyRouter.put("/:id", async (req, res) => {
           ingredientId: ingredient.id, 
         });
       }
+    }
+
+    let recipeCategories = await RecipyCategory.findAll({ where: { recipyId: recipe.id } });
+    for (const singleCategory of recipeCategories) {
+      await singleCategory.destroy();
     }
 
     for (const categoryData of categories) {
