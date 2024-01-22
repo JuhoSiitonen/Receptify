@@ -7,10 +7,11 @@ const commentSlice = createSlice({
     initialState: null,
     reducers: {
         setComment(state, action) {
-        return action.payload
+            return action.payload
         },
         removeComment(state, action) {
-        return null
+            const id = action.payload
+            return state.filter(r => r.id !== id)
         }
     },
 })
@@ -41,6 +42,24 @@ export const getAllComments = (id) => {
             dispatch(setComment(comments))
             console.log(comments)
         } catch (error) {
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const deleteComment = (id) => {
+    return async dispatch => {
+        try {
+            const comment = await commentService.deleteComment(id)
+            dispatch(removeComment(id))
+            dispatch(addNotification({
+                message: 'Comment deleted successfully!', 
+                error: false}))
+        } catch (error) {
+            dispatch(addNotification({
+                message: 'Comment could not be deleted!', 
+                error: true}))
             console.log(error)
             throw error
         }

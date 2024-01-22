@@ -36,7 +36,7 @@ const ChosenRecipy = () => {
     return (
         <div> 
             <SingleRecipy recipy={recipy} />
-            <AllComments comments={comments}/>
+            <AllComments comments={comments} user={user}/>
             <RatingAverage averageRating={recipy.averageRating} />
             {user && user.id === recipy.user.id && (
             <div>
