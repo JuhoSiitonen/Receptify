@@ -4,9 +4,8 @@ import { deleteComment } from '../../../reducers/commentReducer'
 const AllComments = ({ comments, user }) => {
     const dispatch = useDispatch()
 
-    const handleDelete = ( comment ) => {
-        dispatch(deleteComment(comment.id))
-        console.log('delete')
+    const handleDelete = async ( comment ) => {
+        await dispatch(deleteComment(comment.id))
     }
 
     if (!comments) {
