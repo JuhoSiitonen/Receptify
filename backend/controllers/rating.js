@@ -55,10 +55,8 @@ ratingRouter.get("/:id", async (req, res) => {
 
       recipe.averageRating = averageRating;
       await recipe.save();
-  
-      const returnRating = await Rating.findByPk(newRating.id);
-  
-      return res.status(201).json(returnRating);
+    
+      return res.status(201).json(averageRating);
     } catch (error) {
       console.error('Error creating rating:', error);
       return res.status(500).json({ error: 'Internal server error' });
