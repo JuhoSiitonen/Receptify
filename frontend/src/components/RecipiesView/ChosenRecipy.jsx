@@ -16,19 +16,23 @@ const ChosenRecipy = () => {
     const recipyId = Number(match?.params.id);
     const user = useSelector(state => state.user)
     const recipies = useSelector(state => state.recipies)
+    const comments = useSelector(state => state.comment)
+    const ratingAverage = useSelector(state => state.rating)
 
     useEffect(() => {
         dispatch(getAllComments(recipyId))
         dispatch(getAverage(recipyId))
-    }, [])
+    }, [recipyId])
 
     if (!recipies || !user) {
         return <LoadingSpinner />;
     }
     
     const recipy = recipies.find(recipy => recipy.id === recipyId);
-    const comments = useSelector(state => state.comment)
-    const ratingAverage = useSelector(state => state.rating)
+
+    if (!recipy) {
+        return <>No recipy found</>
+    }
 
     return (
         <div> 
