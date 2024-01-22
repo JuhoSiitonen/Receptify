@@ -192,7 +192,7 @@ recipyRouter.put("/:id", async (req, res) => {
       include: [
         { model: User },
         { model: RecipyIngredient, include: [Ingredient] },
-        { model: RecipyCategory },
+        { model: RecipyCategory, include : [Category] },
       ],
     });
     return res.status(200).json(returnRecipy);
