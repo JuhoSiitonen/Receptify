@@ -14,15 +14,15 @@ const ChosenRecipy = () => {
     const dispatch = useDispatch()
     const match = useMatch('/recipes/:id');
     const recipyId = Number(match?.params.id);
-    const recipies = useSelector(state => state.recipies)
     const user = useSelector(state => state.user)
+    const recipies = useSelector(state => state.recipies)
 
     useEffect(() => {
         dispatch(getAllComments(recipyId))
         dispatch(getAverage(recipyId))
     }, [])
 
-    if (!recipies) {
+    if (!recipies || !user) {
         return <LoadingSpinner />;
     }
     

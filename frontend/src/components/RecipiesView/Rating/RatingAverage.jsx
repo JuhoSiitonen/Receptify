@@ -1,8 +1,5 @@
-import { useSelector } from 'react-redux'
 
-const RatingAverage = () => {
-    const ratingAverage = useSelector(state => state.rating)
-    console.log(ratingAverage)
+const RatingAverage = ({ ratingAverage }) => {
 
     if (!ratingAverage) {
         return <>No rating</>

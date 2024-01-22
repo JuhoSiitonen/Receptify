@@ -1,6 +1,5 @@
 
 const AllComments = ({ comments }) => {
-    console.log(comments)
 
     if (!comments) {
         return <>No comments</>
