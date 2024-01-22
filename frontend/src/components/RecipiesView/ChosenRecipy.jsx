@@ -17,7 +17,6 @@ const ChosenRecipy = () => {
     const user = useSelector(state => state.user)
     const recipies = useSelector(state => state.recipies)
     const comments = useSelector(state => state.comment)
-    const ratingAverage = useSelector(state => state.rating)
 
     useEffect(() => {
         dispatch(getAllComments(recipyId))
@@ -38,7 +37,7 @@ const ChosenRecipy = () => {
         <div> 
             <SingleRecipy recipy={recipy} />
             <AllComments comments={comments}/>
-            <RatingAverage ratingAverage={ratingAverage} />
+            <RatingAverage averageRating={recipy.averageRating} />
             {user && user.id === recipy.user.id && (
             <div>
               <UpdateRecipy recipy={recipy} />

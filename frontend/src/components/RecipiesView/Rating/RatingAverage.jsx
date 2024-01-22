@@ -1,13 +1,13 @@
 
-const RatingAverage = ({ ratingAverage }) => {
+const RatingAverage = ({ averageRating }) => {
 
-    if (!ratingAverage) {
+    if (!averageRating) {
         return <>No rating</>
     }
     return (
         <div>
             <h2>Rating</h2>
-            <p>{Math.round(ratingAverage.averageRating*100)/100}</p>
+            <p>{Math.round(averageRating*100)/100}</p>
         </div>
     )
 }

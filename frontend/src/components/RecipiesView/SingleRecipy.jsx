@@ -20,6 +20,16 @@ const SingleRecipy = ({ recipy }) => {
               ))}
             </ul>
             <p>{recipy.instructions}</p>
+            <p>Categories:</p>
+            <ul>
+              {recipy.recipy_categories.map(category => (
+                <li key={category.id}>
+                  {category.category.name}
+                </li>
+              ))}
+            </ul>
+            <p>Created by {recipy.user.username}</p>
+            Rating: {recipy.averageRating}
         </div>
     )
 }
