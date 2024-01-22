@@ -11,6 +11,7 @@ const UpdateForm = ({ recipy }) => {
     const [instructions, setInstructions] = useState('')
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
+    const [visible, setVisible] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -22,6 +23,7 @@ const UpdateForm = ({ recipy }) => {
         setIngredients(recipy.recipy_ingredients.map(i => ({ name: i.ingredient.name, amount: i.amount })))
         setInstructions(recipy.instructions)
         setCategories(recipy.recipy_categories.map(c => c.category.name))
+        setVisible(true)
     }
 
     const addIncredient = () => {
@@ -69,7 +71,7 @@ const UpdateForm = ({ recipy }) => {
     }
     return (
         <div>
-            {!title && setupFields()}
+            {!visible && setupFields()}
             <h1>Update Recipy</h1>
             <form onSubmit={handleSubmit}>
                 <div>
