@@ -72,5 +72,13 @@
     - Update form shows old recipy info, not yet fully functional
 - 19.1 :
     - Update sends requests correctly to backend, but backend endpoint needs fixing.
+- 22.1 :
+    - Finishing update functionality for recipies
+    - Routing directly to a single recipy view via url now possible
+    - Rating average added as a recipy model column in database
+    - Average rating shown in recipies view and is updated on screen when user posts a rating
+    - Recipyreducer updated with a "updaterating" reducer function 
+    
+    
     
     

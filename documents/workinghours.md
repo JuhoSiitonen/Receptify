@@ -19,5 +19,6 @@
 - 3h 15.1: Notifications and update/delete endpoints and services.
 - 2h 16.1: Recipy update form and recipy deletion.
 - 1h 19.1: Update form.
+- 2h 22.1: Updating recipies possible, direct url navigation possible, rating average.
 
-Total hours: 48h
+Total hours: 50h
