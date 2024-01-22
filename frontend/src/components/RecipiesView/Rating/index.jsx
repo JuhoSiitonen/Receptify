@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
 import { createRating } from '../../../reducers/ratingReducer'
+import { updateRating } from '../../../reducers/recipyReducer'
+
 
 const Rating = ({ recipyId }) => {
     const dispatch = useDispatch()
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user) 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(e.target.rating.value)
         const ratingObject = {
             rating: e.target.rating.value,
             userId: user.id,
         }
-        dispatch(createRating(recipyId, ratingObject))
+        const response = await dispatch(createRating(recipyId, ratingObject))
     }
 
     return (

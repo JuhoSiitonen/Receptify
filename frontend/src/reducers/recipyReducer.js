@@ -19,11 +19,16 @@ const recipySlice = createSlice({
         removeRecipy(state, action) {
             const id = action.payload
             return state.filter(r => r.id !== id)
+        },
+        updateRecipyRating(state, action) {
+            const { id, rating } = action.payload
+            const recipy = state.find(r => r.id === id)
+            recipy.averageRating = rating
         }
     },
 })
 
-export const { addNewRecipy, setRecipies, updateExistingRecipy, removeRecipy  } = recipySlice.actions
+export const { addNewRecipy, setRecipies, updateExistingRecipy, removeRecipy, updateRecipyRating  } = recipySlice.actions
 
 export const createRecipy = (recipy) => {
     return async dispatch => {
@@ -77,5 +82,17 @@ export const deleteRecipy = (id) => {
         }
     }
 }
+
+export const updateRating = (id, rating) => {
+    return async dispatch => {
+        try {
+            const updatedRating = { id, rating }
+            dispatch(updateRecipyRating(updatedRating))
+        } catch (error) {
+            throw error
+        }
+    }
+}
+
 
 export default recipySlice.reducer
