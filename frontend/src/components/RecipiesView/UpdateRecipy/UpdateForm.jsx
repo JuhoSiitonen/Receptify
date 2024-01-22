@@ -60,7 +60,7 @@ const UpdateForm = ({ recipy }) => {
             setIngredients([])
             setInstructions('')
             setCategories([])
-            navigate('/recipes')
+            navigate(`/recipes/${response.id}`)
         }
         catch (error) {
             console.log(error)
