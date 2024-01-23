@@ -9,6 +9,7 @@ import RatingAverage from "./Rating/RatingAverage"
 import AllComments from "./Comment/AllComments"
 import UpdateRecipy from "./UpdateRecipy"
 import DeleteButton from "./DeleteButton"
+import Togglable from "../Togglable"
 
 const ChosenRecipy = () => {
     const dispatch = useDispatch()
@@ -37,7 +38,9 @@ const ChosenRecipy = () => {
         <div>
             <h2>{recipy.title}</h2>
             <SingleRecipy recipy={recipy} />
-            <AllComments comments={comments} user={user}/>
+            <Togglable buttonLabel="Show comments">
+                <AllComments comments={comments} user={user}/>
+            </Togglable>
             <RatingAverage averageRating={recipy.averageRating} />
             {user && user.id === recipy.user.id && (
             <div>
