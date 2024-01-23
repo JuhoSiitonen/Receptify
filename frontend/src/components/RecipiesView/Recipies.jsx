@@ -26,7 +26,7 @@ const Recipies = ({ recipies }) => {
         <div>
             {recipies.map((recipe) => (
                 <div key={recipe.id}>
-                    <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+                    <Link to={`/recipes/${recipe.id}`}><h2>{recipe.title}</h2></Link>
                     <SingleRecipy recipy={recipe} />
                     {user && user.id !== recipe.user.id && userActions(recipe)}
                 </div>

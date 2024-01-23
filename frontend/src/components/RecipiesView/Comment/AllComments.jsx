@@ -9,11 +9,11 @@ const AllComments = ({ comments, user }) => {
     }
 
     if (!comments) {
-        return <>No comments</>
+        return <p>No comments</p>
     }
     return (
         <div>
-            <h2>Comments</h2>
+            <h3>Comments</h3>
             {comments.map(comment => (
                 <div key={comment.id}>
                 <p>{comment.comment} - {comment.user.username}  {comment.date}</p>

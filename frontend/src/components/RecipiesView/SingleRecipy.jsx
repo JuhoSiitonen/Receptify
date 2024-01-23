@@ -1,15 +1,11 @@
-import { useSelector } from "react-redux"
 
 const SingleRecipy = ({ recipy }) => {
-    const user = useSelector(state => state.user)
-
     if (!recipy) {
         return null
     }
 
     return (
         <div className="singleRecipy">
-            <h2>{recipy.title}</h2>
             <p>{recipy.description}</p>
             <p>Ingredients:</p>
             <ul>
@@ -29,7 +25,7 @@ const SingleRecipy = ({ recipy }) => {
               ))}
             </ul>
             <p>Created by {recipy.user.username}</p>
-            Rating: {recipy.averageRating}
+            <p>Rating: {recipy.averageRating}</p>
         </div>
     )
 }

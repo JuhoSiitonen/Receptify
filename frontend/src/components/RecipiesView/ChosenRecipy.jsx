@@ -34,7 +34,8 @@ const ChosenRecipy = () => {
     }
 
     return (
-        <div> 
+        <div>
+            <h2>{recipy.title}</h2>
             <SingleRecipy recipy={recipy} />
             <AllComments comments={comments} user={user}/>
             <RatingAverage averageRating={recipy.averageRating} />
