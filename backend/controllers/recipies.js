@@ -108,12 +108,7 @@ recipyRouter.delete("/:id", async (req, res) => {
 recipyRouter.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, instructions, date, visible, userId, ingredients, categories } = req.body;
-
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+    const { title, description, instructions, date, visible, ingredients, categories } = req.body;
 
     const recipe = await Recipy.findByPk(id);
     if (!recipe) {
@@ -126,7 +121,6 @@ recipyRouter.put("/:id", async (req, res) => {
       instructions,
       date,
       visible,
-      userId: user.id, 
     });
 
     let recipeIngredients = await RecipyIngredient.findAll({ where: { recipyId: recipe.id } });

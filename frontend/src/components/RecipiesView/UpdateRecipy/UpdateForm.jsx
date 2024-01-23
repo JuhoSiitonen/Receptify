@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateRecipy } from '../../../reducers/recipyReducer'
 
@@ -15,7 +15,6 @@ const UpdateForm = ({ recipy }) => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const user = useSelector(state => state.user)
 
     const setupFields = () => {
         setTitle(recipy.title)
@@ -47,22 +46,16 @@ const UpdateForm = ({ recipy }) => {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            const response = await dispatch(updateRecipy( recipy.id, {
+            await dispatch(updateRecipy( recipy.id, {
                 title, 
                 description, 
                 instructions,
                 date: new Date().toISOString(),
                 visible: true,
-                userId: user.id,
                 ingredients, 
                 categories: categories.map(category => ({ name: category }))
             }))
-            setTitle('')
-            setDescription('')
-            setIngredients([])
-            setInstructions('')
-            setCategories([])
-            navigate(`/recipes/${response.id}`)
+            navigate(`/recipes/${recipy.id}`)
         }
         catch (error) {
             console.log(error)
