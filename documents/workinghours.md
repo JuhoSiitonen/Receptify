@@ -20,5 +20,6 @@
 - 2h 16.1: Recipy update form and recipy deletion.
 - 1h 19.1: Update form.
 - 2h 22.1: Updating recipies possible, direct url navigation possible, rating average.
+- 1h 23.1: Deleting comments, refactoring, removing unnecessary parameters and imports. 
 
-Total hours: 50h
+Total hours: 51h

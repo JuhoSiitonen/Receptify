@@ -78,7 +78,10 @@
     - Rating average added as a recipy model column in database
     - Average rating shown in recipies view and is updated on screen when user posts a rating
     - Recipyreducer updated with a "updaterating" reducer function 
-    
-    
+- 23.1 :
+    - User can delete own comments from recipies.
+    - RatingAverage component deleted and single recipy view refactored.
+    - Removed unnecessary parameters from recipy update requests
+    - Seeing all comments of single recipy togglable
     
     
