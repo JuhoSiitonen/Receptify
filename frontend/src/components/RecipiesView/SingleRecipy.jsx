@@ -3,6 +3,8 @@ const SingleRecipy = ({ recipy }) => {
     if (!recipy) {
         return null
     }
+    let averageRating = recipy.averageRating
+    averageRating !== 0 ? averageRating = Math.round(averageRating*100)/100 : averageRating = 'No ratings yet'
 
     return (
         <div className="singleRecipy">
@@ -25,7 +27,7 @@ const SingleRecipy = ({ recipy }) => {
               ))}
             </ul>
             <p>Created by {recipy.user.username}</p>
-            <p>Rating: {recipy.averageRating}</p>
+            <p>Rating: {averageRating}</p>
         </div>
     )
 }

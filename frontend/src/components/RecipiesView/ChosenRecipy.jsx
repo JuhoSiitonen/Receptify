@@ -5,7 +5,6 @@ import { getAllComments } from "../../reducers/commentReducer"
 import { getAverage } from "../../reducers/ratingReducer"
 import LoadingSpinner from "../LoadingSpinner"
 import SingleRecipy from "./SingleRecipy"
-import RatingAverage from "./Rating/RatingAverage"
 import AllComments from "./Comment/AllComments"
 import UpdateRecipy from "./UpdateRecipy"
 import DeleteButton from "./DeleteButton"
@@ -41,7 +40,6 @@ const ChosenRecipy = () => {
             <Togglable buttonLabel="Show comments">
                 <AllComments comments={comments} user={user}/>
             </Togglable>
-            <RatingAverage averageRating={recipy.averageRating} />
             {user && user.id === recipy.user.id && (
             <div>
               <UpdateRecipy recipy={recipy} />
