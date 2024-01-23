@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
 import { createRating } from '../../../reducers/ratingReducer'
-import { updateRating } from '../../../reducers/recipyReducer'
-
 
 const Rating = ({ recipyId }) => {
     const dispatch = useDispatch()
@@ -14,7 +11,7 @@ const Rating = ({ recipyId }) => {
             rating: e.target.rating.value,
             userId: user.id,
         }
-        const response = await dispatch(createRating(recipyId, ratingObject))
+        await dispatch(createRating(recipyId, ratingObject))
     }
 
     return (
