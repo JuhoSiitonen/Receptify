@@ -7,14 +7,8 @@ const RecipyCategory = require('./RecipyCategory');
 const RecipyIngredient = require('./RecipyIngredient');
 const Rating = require('./Rating');
 
-User.sync({ alter: true })
-Ingredient.sync({ alter: true })
-Category.sync({ alter: true })
-
 User.hasMany(Recipy);
 Recipy.belongsTo(User);
-
-Recipy.sync({ alter: true })
 
 RecipyIngredient.belongsTo(Recipy);
 RecipyIngredient.belongsTo(Ingredient);
@@ -36,11 +30,16 @@ Rating.belongsTo(Recipy);
 Recipy.hasMany(Rating);
 User.hasMany(Rating);
 
-
+/*
+Recipy.sync({ alter: true })
+User.sync({ alter: true })
+Ingredient.sync({ alter: true })
+Category.sync({ alter: true })
 Comment.sync({ alter: true })
 Rating.sync({ alter: true })
 RecipyCategory.sync({ alter: true })
 RecipyIngredient.sync({ alter: true })
+*/
 
 module.exports = {
     User,
