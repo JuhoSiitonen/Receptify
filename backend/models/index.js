@@ -30,17 +30,6 @@ Rating.belongsTo(Recipy);
 Recipy.hasMany(Rating);
 User.hasMany(Rating);
 
-/*
-Recipy.sync({ alter: true })
-User.sync({ alter: true })
-Ingredient.sync({ alter: true })
-Category.sync({ alter: true })
-Comment.sync({ alter: true })
-Rating.sync({ alter: true })
-RecipyCategory.sync({ alter: true })
-RecipyIngredient.sync({ alter: true })
-*/
-
 module.exports = {
     User,
     Recipy,
