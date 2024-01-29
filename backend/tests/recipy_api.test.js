@@ -109,17 +109,17 @@ const newRecipyCategories = [
     {"recipyId": 2, "categoryId": 4},
 ]
 
-beforeEach(async () => {
+beforeEach( async () => {
+    await RecipyIngredient.destroy({ where: {} })
+    await RecipyCategory.destroy({ where: {} })
+    await Ingredient.destroy({ where: {} })
+    await Category.destroy({ where: {} })
+    await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)
     let user = await User.findOne({ where: { username: "john_doe" } })
     postableRecipies[0].userId = user.id
     postableRecipies[1].userId = user.id
-    await Recipy.destroy({ where: {} })
-    await Ingredient.destroy({ where: {} })
-    await Category.destroy({ where: {} })
-    await RecipyIngredient.destroy({ where: {} })
-    await RecipyCategory.destroy({ where: {} })
 })
 
 describe('GET /api/recipies', () => {
@@ -128,5 +128,33 @@ describe('GET /api/recipies', () => {
         const response = await api.get('/api/recipies')
         expect(response.status).toBe(200)
         expect(response.body).toHaveLength(1)
+    })
+})
+
+describe('POST /api/recipies', () => {
+    test('creates a new recipy', async () => {
+        const response = await api.post('/api/recipies').send(postableRecipies[0])
+        expect(response.status).toBe(201)
+        expect(response.body.title).toBe(postableRecipies[0].title)
+    })
+    test('returns 500 if title is missing', async () => {
+        const recipyUser = await User.findOne({ where: { username: "john_doe" } })
+        const newRecipy = {
+                "description": "Classic Italian pasta dish with rich tomato sauce.",
+                "instructions": "Cook pasta, prepare sauce, mix, and serve.",
+                "visible": true,
+                "userId": recipyUser.id,
+                "ingredients": [
+                    {"name": "Spaghetti", "amount": "200g"},
+                    {"name": "Ground Beef", "amount": "500g"},
+                    {"name": "Tomato Sauce", "amount": "1 cup"}
+                ],
+                "categories": [
+                    {"name": "Italian"},
+                    {"name": "Pasta"}
+                ]
+        }
+        const response = await api.post('/api/recipies').send(newRecipy)
+        expect(response.status).toBe(500)
     })
 })
