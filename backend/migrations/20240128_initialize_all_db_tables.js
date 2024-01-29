@@ -58,6 +58,10 @@ module.exports = {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
               },
+            average_rating: {
+                type: DataTypes.FLOAT,
+                allowNull: false,
+              },
             user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -108,7 +112,7 @@ module.exports = {
                 autoIncrement: true
               },
             amount: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.TEXT,
                 allowNull: false,
               },
             visible: {
@@ -194,6 +198,37 @@ module.exports = {
                   },
               },
         })
+        await queryInterface.createTable('ratings', {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+              },
+            rating: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+              },
+            visible: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+              },
+            user_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'users',
+                    key: 'id',
+                  },
+              },
+            recipy_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'recipies',
+                    key: 'id',
+                  },
+              },
+        })
     },
     down: async ({ context: queryInterface }) => {
         await queryInterface.dropTable('users')
@@ -203,5 +238,6 @@ module.exports = {
         await queryInterface.dropTable('recipy_ingredients')
         await queryInterface.dropTable('recipy_categories')
         await queryInterface.dropTable('comments')
+        await queryInterface.dropTable('ratings')
     }
 }
