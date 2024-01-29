@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
-const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory } = require('../models')
+const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory, Comment } = require('../models')
 
 const newUsers = [
     {
@@ -64,6 +64,7 @@ beforeEach( async () => {
     await RecipyCategory.destroy({ where: {} })
     await Ingredient.destroy({ where: {} })
     await Category.destroy({ where: {} })
+    await Comment.destroy({ where: {} })
     await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)

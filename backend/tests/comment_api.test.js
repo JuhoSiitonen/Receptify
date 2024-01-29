@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
-const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory } = require('../models')
+const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory, Comment } = require('../models')
 
 const newUsers = [
     {
@@ -64,6 +64,7 @@ beforeEach(async () => {
     await RecipyCategory.destroy({ where: {} })
     await Ingredient.destroy({ where: {} })
     await Category.destroy({ where: {} })
+    await Comment.destroy({ where: {} })
     await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)
@@ -72,30 +73,16 @@ beforeEach(async () => {
     postableRecipies[1].userId = user.id
 })
 
-describe('GET /api/comments', () => {
-    test('returns zero comments', async () => {
-        const response = await api.get('/api/comments')
-        expect(response.status).toBe(200)
-        expect(response.body).toHaveLength(0)
-    })
-    test('returns one comment', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
-        const comment = {
-            "content": "This is a comment",
-            "userId": postableRecipies[1].userId,
-            "recipyId": recipy.body.id
-        }
-        const response = await api.get('/api/comments')
-        expect(response.status).toBe(200)
-        expect(response.body).toHaveLength(1)
-    })
-})
-
 describe('GET /api/comments/:id', () => {
     test('returns all comments for a recipe', async () => {
         const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        const comment = {
+            "content": "This is a comment",
+            "userId": postableRecipies[1].userId
+        }
+        await api.post(`/api/comments/${recipy.body.id}`).send(comment)
         const response = await api.get(`/api/comments/${recipy.body.id}`)
         expect(response.status).toBe(200)
-        expect(response.body).toHaveLength(0)
+        expect(response.body).toHaveLength(1)
     })
 })
