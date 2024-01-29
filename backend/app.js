@@ -14,17 +14,11 @@ const ingredientRouter = require('./controllers/ingredients')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 require('dotenv').config()
-const { connectToDatabase } = require('./utils/db')
 
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger)
-
-const testConnection = async () => {
-  await connectToDatabase()
-}
-testConnection()
 
 app.use('/api/recipies', recipyRouter)
 app.use('/api/rating', ratingRouter)
@@ -41,6 +35,5 @@ if (process.env.NODE_ENV === 'test') {
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
-
 
 module.exports = app
