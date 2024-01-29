@@ -49,4 +49,32 @@ describe('POST /api/users', () => {
         expect(response.status).toBe(201)
         expect(response.body.username).toBe(newUser.username)
     })
+    test('returns 400 if username is not unique', async () => {
+        const newUser = {
+            "username": "john_doe",
+            "password": "password123",
+            "admin": false,
+            "visible": true
+        }
+        const response = await api.post('/api/users').send(newUser)
+        expect(response.status).toBe(400)
+    })
+    test('returns 400 if username is missing', async () => {
+        const newUser = {
+            "password": "password123",
+            "admin": false,
+            "visible": true
+        }
+        const response = await api.post('/api/users').send(newUser)
+        expect(response.status).toBe(400)
+    })
+    test('returns 400 if password is missing', async () => {
+        const newUser = {
+            "username": "new_user",
+            "admin": false,
+            "visible": true
+        }
+        const response = await api.post('/api/users').send(newUser)
+        expect(response.status).toBe(400)
+    })
 })
