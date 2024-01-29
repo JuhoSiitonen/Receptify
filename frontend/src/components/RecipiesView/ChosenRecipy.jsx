@@ -17,7 +17,7 @@ const ChosenRecipy = () => {
     const user = useSelector(state => state.user)
     const recipies = useSelector(state => state.recipies)
     const comments = useSelector(state => state.comment)
-
+ 
     useEffect(() => {
         dispatch(getAllComments(recipyId))
         dispatch(getAverage(recipyId))

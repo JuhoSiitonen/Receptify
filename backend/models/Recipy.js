@@ -21,10 +21,6 @@ Recipy.init({
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
   visible: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
@@ -36,7 +32,6 @@ Recipy.init({
 }, {
     sequelize,
     underscored: true,
-    timestamps: false,
     modelName: 'recipy'
 });
 
