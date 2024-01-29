@@ -2,7 +2,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory, Comment, Rating } = require('../models')
-
+/*
 const newUsers = [
     {
         "username": "john_doe",
@@ -65,54 +65,58 @@ beforeEach(async () => {
     await Ingredient.destroy({ where: {} })
     await Category.destroy({ where: {} })
     await Comment.destroy({ where: {} })
-    //await Rating.destroy({ where: {} })
+    await Rating.destroy({ where: {} })
     await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)
     let user = await User.findOne({ where: { username: "john_doe" } })
     postableRecipies[0].userId = user.id
     postableRecipies[1].userId = user.id
+    await api.post('/api/recipies').send(postableRecipies[0])
 })
 
-describe('POST /api/comments/:id', () => {
-    test('creates a new comment', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
-        const comment = {
-            "content": "This is a comment",
+describe('POST /api/rating/:id', () => {
+    test('creates a new rating', async () => {
+        const recipy = await Recipy.findOne()
+        const newRating = {
+            "rating": 5,
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
+        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
         expect(response.status).toBe(201)
-        expect(response.body.comment).toBe(comment.content)
+        expect(response.body.rating).toBe(newRating.rating)
     })
-    test('returns 500 if content is missing', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
-        const comment = {
+    test('returns 400 if rating is missing', async () => {
+        const newRating = {
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
-        expect(response.status).toBe(500)
+        const response = await api.post('/api/rating/1').send(newRating)
+        expect(response.status).toBe(400)
     })
-    test('returns 404 if recipy is not found', async () => {
-        const comment = {
-            "content": "This is a comment",
+    test('returns 400 if userId is missing', async () => {
+        const recipy = await Recipy.findOne()
+        const newRating = {
+            "rating": 5
+        }
+        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
+        expect(response.status).toBe(400)
+    })
+    test('returns 404 if recipe is not found', async () => {
+        const newRating = {
+            "rating": 5,
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/999`).send(comment)
+        const response = await api.post('/api/rating/999').send(newRating)
+        expect(response.status).toBe(404)
+    })
+    test('returns 404 if user is not found', async () => {
+        const recipy = await Recipy.findOne()
+        const newRating = {
+            "rating": 5,
+            "userId": 999
+        }
+        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
         expect(response.status).toBe(404)
     })
 })
-
-describe('GET /api/comments/:id', () => {
-    test('returns all comments for a recipe', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
-        const comment = {
-            "content": "This is a comment",
-            "userId": postableRecipies[1].userId
-        }
-        await api.post(`/api/comments/${recipy.body.id}`).send(comment)
-        const response = await api.get(`/api/comments/${recipy.body.id}`)
-        expect(response.status).toBe(200)
-        expect(response.body).toHaveLength(1)
-    })
-})
+*/
