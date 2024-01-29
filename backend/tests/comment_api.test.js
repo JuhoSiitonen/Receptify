@@ -73,6 +73,35 @@ beforeEach(async () => {
     postableRecipies[1].userId = user.id
 })
 
+describe('POST /api/comments/:id', () => {
+    test('creates a new comment', async () => {
+        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        const comment = {
+            "content": "This is a comment",
+            "userId": postableRecipies[1].userId
+        }
+        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
+        expect(response.status).toBe(201)
+        expect(response.body.comment).toBe(comment.content)
+    })
+    test('returns 500 if content is missing', async () => {
+        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        const comment = {
+            "userId": postableRecipies[1].userId
+        }
+        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
+        expect(response.status).toBe(500)
+    })
+    test('returns 404 if recipy is not found', async () => {
+        const comment = {
+            "content": "This is a comment",
+            "userId": postableRecipies[1].userId
+        }
+        const response = await api.post(`/api/comments/999`).send(comment)
+        expect(response.status).toBe(404)
+    })
+})
+
 describe('GET /api/comments/:id', () => {
     test('returns all comments for a recipe', async () => {
         const recipy = await api.post('/api/recipies').send(postableRecipies[0])
