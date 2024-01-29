@@ -11,7 +11,7 @@ userRouter.get("/me", async (request, response) => {
   if (!user) {
     return response.status(404).json({ error: 'User not found' });
   }
-  return response.json(user);
+  return response.status(200).json(user);
 })
 
 userRouter.post("/", async (request, response) => {
@@ -29,7 +29,7 @@ userRouter.get("/:id", async (request, response) => {
   if (!user) {
     return response.status(404).json({ error: 'User not found' });
   }
-  return response.json(user);
+  return response.status(200).json(user);
 })
 
 module.exports = userRouter;
