@@ -95,6 +95,10 @@ recipyRouter.delete("/:id", async (req, res) => {
       return res.status(404).json({ error: 'Recipe not found' });
     }
 
+    await RecipyIngredient.destroy({ where: { recipyId: recipe.id } });
+    await RecipyCategory.destroy({ where: { recipyId: recipe.id } });
+    await Rating.destroy({ where: { recipyId: recipe.id } });
+    await Comment.destroy({ where: { recipyId: recipe.id } });
     await recipe.destroy();
 
     return res.status(204).end();
