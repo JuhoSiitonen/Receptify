@@ -83,5 +83,7 @@
     - RatingAverage component deleted and single recipy view refactored.
     - Removed unnecessary parameters from recipy update requests
     - Seeing all comments of single recipy togglable
+- 29.1 : 
+    - Migrations added to previous database tables
     
     
