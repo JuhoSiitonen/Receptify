@@ -33,7 +33,6 @@ const AddRecipe = () => {
                 title, 
                 description, 
                 instructions,
-                date: new Date().toISOString(),
                 visible: true,
                 userId: user.id,
                 ingredients, 

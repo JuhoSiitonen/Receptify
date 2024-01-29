@@ -20,7 +20,7 @@ recipyRouter.get("/", async (req, res) => {
 
 recipyRouter.post("/", async (req, res) => {
   try {
-    const { title, description, instructions, date, visible, userId, ingredients, categories } = req.body;
+    const { title, description, instructions, visible, userId, ingredients, categories } = req.body;
 
     const user = await User.findByPk(userId);
     if (!user) {
@@ -31,7 +31,6 @@ recipyRouter.post("/", async (req, res) => {
       title,
       description,
       instructions,
-      date,
       visible,
       userId: user.id, 
       averageRating: 0,
