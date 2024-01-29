@@ -122,4 +122,18 @@ describe('DELETE /api/recipies/:id', () => {
     })
 })
 
+describe('PUT /api/recipies/:id', () => {
+    test('is successfull', async () => {
+        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        postableRecipies[0].title = "New Title"
+        const response = await api.put(`/api/recipies/${recipy.body.id}`).send(postableRecipies[0])
+        expect(response.status).toBe(200)
+        expect(response.body.title).toBe("New Title")
+    })
+    test('returns 404 if recipy is not found', async () => {
+        const response = await api.put('/api/recipies/999').send(postableRecipies[0])
+        expect(response.status).toBe(404)
+    })
+})
+
 
