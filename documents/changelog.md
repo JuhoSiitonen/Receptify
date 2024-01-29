@@ -84,6 +84,6 @@
     - Removed unnecessary parameters from recipy update requests
     - Seeing all comments of single recipy togglable
 - 29.1 : 
-    - Migrations added to previous database tables
+    - Migrations added to previous database tables. Added Jest and Supertest to dev dependencies and started testing backend. Tests for controllers for recipies, users, comments and ratings added. Dockerfiles and dev.Dockerfiles added to front and backend.
     
     
