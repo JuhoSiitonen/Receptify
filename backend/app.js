@@ -40,7 +40,6 @@ app.use(
   })
 );
 
-
 app.use('/api/recipies', recipyRouter)
 app.use('/api/rating', ratingRouter)
 app.use('/api/comments', commentRouter)
