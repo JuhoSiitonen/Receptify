@@ -4,7 +4,7 @@
 - 30.12 : Initialization of frontend, backend and documentation.
 - 31.12 : Basic setup of backend, added Express. Also made a logger for request info and a basic recipy endpoint controller. Redux chosen as state management, Axios handles frontend requests.
 
-## Janurary 2024
+## January 2024
 - 1.1 : Creating component structure and Redux basic setup.
 - 2.1 : Page for posting recipies added along with Redux, Axios and backend support.
 - 3.1 : Added possibility to add multiple ingredients and categories to one recipy. Also added basic login form and page. 
@@ -84,6 +84,15 @@
     - Removed unnecessary parameters from recipy update requests
     - Seeing all comments of single recipy togglable
 - 29.1 : 
-    - Migrations added to previous database tables. Added Jest and Supertest to dev dependencies and started testing backend. Tests for controllers for recipies, users, comments and ratings added. Dockerfiles and dev.Dockerfiles added to front and backend.
+    - Migrations added to previous database tables.
+    - Added Jest and Supertest to dev dependencies and started testing backend. 
+    - Tests for controllers for recipies, users, comments and ratings added. 
+    - Dockerfiles and dev.Dockerfiles added to front and backend.
+- 30.1 :
+    - More backend testing and test refactoring to use dedicated testing/reset endpoint to setup database tables, also a util module test_helpers for test variables.
+    - Redis basic setup via docker container. 
+    - First Redis implementation in session handling.
+    - Redis folder with index.js added with redisClient initializing and connecting.
+
     
     

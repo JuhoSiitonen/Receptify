@@ -41,7 +41,7 @@
 - Token validation expiry within certain amount of time
 - The app frontend is made with React
 - The backend is an Express server with PostgreSQL database
-- The app has a Redis cache and Redis pub/sub
+- The app has a Redis session cache and Redis pub/sub
 - The api is REST
 - The frontend state handling is done with Redux
 - The application development database is set with Docker

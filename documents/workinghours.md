@@ -22,5 +22,6 @@
 - 2h 22.1: Updating recipies possible, direct url navigation possible, rating average.
 - 1h 23.1: Deleting comments, refactoring, removing unnecessary parameters and imports. 
 - 8h 29.1: Migrations, backend testing and dockerfiles
+- 4h 30.1: More testing for backend and refactoring tests. Redis session setup.
 
-Total hours: 59h
+Total hours: 62h
