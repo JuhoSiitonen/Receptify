@@ -6,14 +6,6 @@ userRouter.get("/", async (request, response) => {
   return response.json(users);
 })
 
-userRouter.get("/me", async (request, response) => {
-  const user = await User.findByPk(request.user.id);
-  if (!user) {
-    return response.status(404).json({ error: 'User not found' });
-  }
-  return response.status(200).json(user);
-})
-
 userRouter.post("/", async (request, response) => {
     try {
       const user = request.body;
@@ -30,6 +22,18 @@ userRouter.get("/:id", async (request, response) => {
     return response.status(404).json({ error: 'User not found' });
   }
   return response.status(200).json(user);
+})
+
+userRouter.get("/session", async (request, response) => {
+  if (!request.session.user) {
+    return response.status(401).json({ error: 'Not logged in' });
+  }
+  return response.status(200).json(request.session.user);
+})
+
+userRouter.post("/logout", async (request, response) => {
+  request.session.destroy();
+  return response.status(204).end();
 })
 
 module.exports = userRouter;
