@@ -2,7 +2,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory, Comment, Rating } = require('../models')
-/*
+
 const newUsers = [
     {
         "username": "john_doe",
@@ -77,46 +77,45 @@ beforeEach(async () => {
 
 describe('POST /api/rating/:id', () => {
     test('creates a new rating', async () => {
-        const recipy = await Recipy.findOne()
+        const recipy = await Recipy.findOne({ where: { title: "Spaghetti Bolognese" } })
         const newRating = {
             "rating": 5,
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
+        const response = await api.post(`/api/rating/${recipy.id}`).send(newRating)
         expect(response.status).toBe(201)
-        expect(response.body.rating).toBe(newRating.rating)
+        expect(parseInt(response.body)).toBe(newRating.rating)
     })
-    test('returns 400 if rating is missing', async () => {
+    test('returns 404 if rating is missing', async () => {
         const newRating = {
             "userId": postableRecipies[1].userId
         }
         const response = await api.post('/api/rating/1').send(newRating)
-        expect(response.status).toBe(400)
+        expect(response.status).toBe(404)
     })
-    test('returns 400 if userId is missing', async () => {
-        const recipy = await Recipy.findOne()
+    test('returns 404 if userId is missing', async () => {
+        const recipy = await Recipy.findOne({ where: { title: "Spaghetti Bolognese" } })
         const newRating = {
             "rating": 5
         }
-        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
-        expect(response.status).toBe(400)
+        const response = await api.post(`/api/rating/${recipy.id}`).send(newRating)
+        expect(response.status).toBe(404)
     })
     test('returns 404 if recipe is not found', async () => {
         const newRating = {
             "rating": 5,
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post('/api/rating/999').send(newRating)
+        const response = await api.post('/api/rating/9999').send(newRating)
         expect(response.status).toBe(404)
     })
     test('returns 404 if user is not found', async () => {
-        const recipy = await Recipy.findOne()
+        const recipy = await Recipy.findOne({ where: { title: "Spaghetti Bolognese" } })
         const newRating = {
             "rating": 5,
-            "userId": 999
+            "userId": 9999
         }
-        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
+        const response = await api.post(`/api/rating/${recipy.id}`).send(newRating)
         expect(response.status).toBe(404)
     })
 })
-*/

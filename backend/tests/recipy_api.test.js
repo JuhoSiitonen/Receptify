@@ -65,7 +65,7 @@ beforeEach( async () => {
     await Ingredient.destroy({ where: {} })
     await Category.destroy({ where: {} })
     await Comment.destroy({ where: {} })
-    //await Rating.destroy({ where: {} })
+    await Rating.destroy({ where: {} })
     await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)
@@ -119,7 +119,7 @@ describe('DELETE /api/recipies/:id', () => {
         expect(response.status).toBe(204)
     })
     test('returns 404 if recipy is not found', async () => {
-        const response = await api.delete('/api/recipies/999')
+        const response = await api.delete('/api/recipies/9999')
         expect(response.status).toBe(404)
     })
 })
@@ -133,7 +133,7 @@ describe('PUT /api/recipies/:id', () => {
         expect(response.body.title).toBe("New Title")
     })
     test('returns 404 if recipy is not found', async () => {
-        const response = await api.put('/api/recipies/999').send(postableRecipies[0])
+        const response = await api.put('/api/recipies/9999').send(postableRecipies[0])
         expect(response.status).toBe(404)
     })
 })

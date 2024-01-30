@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
-const { User } = require('../models')
+const { User, Recipy, Ingredient, Category, RecipyCategory, RecipyIngredient, Rating, Comment } = require('../models')
 
 const newUsers = [
     {
@@ -25,6 +25,13 @@ const newUsers = [
 ]
 
 beforeEach(async () => {
+    await RecipyIngredient.destroy({ where: {} })
+    await RecipyCategory.destroy({ where: {} })
+    await Ingredient.destroy({ where: {} })
+    await Category.destroy({ where: {} })
+    await Comment.destroy({ where: {} })
+    await Rating.destroy({ where: {} })
+    await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)
 })
@@ -86,7 +93,7 @@ describe('GET /api/users/:id', () => {
         expect(response.status).toBe(200)
     })
     test('returns 404 if user is not found', async () => {
-        const response = await api.get('/api/users/999')
+        const response = await api.get('/api/users/9999')
         expect(response.status).toBe(404)
     })
 })

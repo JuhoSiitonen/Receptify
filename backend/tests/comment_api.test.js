@@ -65,7 +65,7 @@ beforeEach(async () => {
     await Ingredient.destroy({ where: {} })
     await Category.destroy({ where: {} })
     await Comment.destroy({ where: {} })
-    //await Rating.destroy({ where: {} })
+    await Rating.destroy({ where: {} })
     await Recipy.destroy({ where: {} })
     await User.destroy({ where: {} })
     await User.bulkCreate(newUsers)
@@ -98,7 +98,7 @@ describe('POST /api/comments/:id', () => {
             "content": "This is a comment",
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/999`).send(comment)
+        const response = await api.post(`/api/comments/9999`).send(comment)
         expect(response.status).toBe(404)
     })
 })

@@ -38,15 +38,11 @@ recipyRouter.post("/", async (req, res) => {
 
     for (const ingredientData of ingredients) {
       const { name, amount } = ingredientData;
-      console.log(name, amount)
 
       let ingredient = await Ingredient.findOne({ where: { name } });
       if (!ingredient) {
         ingredient = await Ingredient.create({ name });
       }
-
-      console.log(ingredient)
-      console.log(recipe.id)
 
       await RecipyIngredient.create({
         amount,

@@ -46,7 +46,7 @@ commentRouter.post("/:id", async (req, res) => {
   
       return res.status(201).json(returnComment);
     } catch (error) {
-      console.error('Error creating comment:', error);
+      console.log('Error creating comment:', error);
       return res.status(500).json({ error: 'Internal server error' });
     }
   });
