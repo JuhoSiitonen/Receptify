@@ -1,5 +1,5 @@
 const testingRouter = require('express').Router()
-const { User, Recipy, Rating, Ingredient, Category, RecipyCategory, RecipyIngredient } = require('../models')
+const { User, Recipy, Rating, Ingredient, Category, RecipyCategory, RecipyIngredient, Comment } = require('../models')
 
 testingRouter.post('/reset', async (request, response) => {
     await RecipyIngredient.destroy({ where: {} })

@@ -1,7 +1,7 @@
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
-const { User, Recipy, Ingredient, Category, RecipyIngredient, RecipyCategory, Comment, Rating } = require('../models')
+const { User } = require('../models')
 
 const newUsers = [
     {
@@ -60,14 +60,7 @@ const postableRecipies = [
 ]
 
 beforeEach(async () => {
-    await RecipyIngredient.destroy({ where: {} })
-    await RecipyCategory.destroy({ where: {} })
-    await Ingredient.destroy({ where: {} })
-    await Category.destroy({ where: {} })
-    await Comment.destroy({ where: {} })
-    await Rating.destroy({ where: {} })
-    await Recipy.destroy({ where: {} })
-    await User.destroy({ where: {} })
+    await api.post('/api/testing/reset')
     await User.bulkCreate(newUsers)
     let user = await User.findOne({ where: { username: "john_doe" } })
     postableRecipies[0].userId = user.id
