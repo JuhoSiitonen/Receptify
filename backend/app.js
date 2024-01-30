@@ -4,10 +4,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-const redisClient = require('./redis')
 const session = require('express-session');
-const RedisStore = require('connect-redis').default;
-const { REDIS_SESSION_KEY } = require('./utils/config')
+const { redisConf } = require('./redis')
 
 const recipyRouter = require('./controllers/recipies')
 const ratingRouter = require('./controllers/rating')
@@ -27,18 +25,7 @@ app.use(express.static('build'))
 app.use(express.json()) 
 app.use(middleware.requestLogger)
 
-app.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    secret: REDIS_SESSION_KEY, 
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: false, 
-      maxAge: 1000 * 60 * 60 * 24, 
-    },
-  })
-);
+app.use(session(redisConf));
 
 app.use('/api/recipies', recipyRouter)
 app.use('/api/rating', ratingRouter)
