@@ -16,5 +16,16 @@ const signup = async newObject => {
     const request = await axios.delete(`${baseUrl}/${id}`)
     return request.data
   }
+
+  const logoutUser = async () => {
+    const request = await axios.post(`${baseUrl}/logout`)
+    return request.data
+  }
+
+  const session = async () => {
+    const request = await axios.get(`${baseUrl}/session`)
+    console.log('session', request.data)
+    return request.data
+  }
   
-  export default { signup, deleteUser }
+  export default { signup, deleteUser, logoutUser, session }
