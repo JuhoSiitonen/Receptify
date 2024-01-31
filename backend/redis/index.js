@@ -10,7 +10,7 @@ const redisClient = redis.createClient({
 redisClient.on('ready', () => {
     console.log('Redis client connected');
 });
-  
+
 redisClient.on('error', (err) => {
     console.error('Redis client error:', err);
 });
@@ -24,9 +24,10 @@ const redisConf = {
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
-      sameSite: 'Lax',
+      //sameSite: 'lax',
+      secure: false,
       httpOnly: false,
-      path: '/',
+      //path: '/',
     },
 }
 
