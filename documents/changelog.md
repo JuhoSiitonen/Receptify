@@ -93,6 +93,8 @@
     - Redis basic setup via docker container. 
     - First Redis implementation in session handling.
     - Redis folder with index.js added with redisClient initializing and connecting.
+    - Removed earlier session handling via local storage.
+    - Redis bug fixing and hunting. 
 
     
     

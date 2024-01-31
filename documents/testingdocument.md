@@ -1,7 +1,7 @@
 # Testing document
 
 ## Unit testing
-- Unit testing is done with Jest 
+- Unit testing is done with Jest. 
 
 ## End to end testing
 - End to end testing is done with Cypress
