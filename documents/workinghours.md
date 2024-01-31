@@ -23,6 +23,6 @@
 - 1h 23.1: Deleting comments, refactoring, removing unnecessary parameters and imports. 
 - 8h 29.1: Migrations, backend testing and dockerfiles
 - 7h 30.1: More testing for backend and refactoring tests. Redis session setup. Redis session bug hunting.
-- 3h 31.1: Redis session cookie settings debugging. 
+- 3h 31.1: Redis session cookie settings debugging. Frontend testing.
 
-Total hours: 65h
+Total hours: 70h

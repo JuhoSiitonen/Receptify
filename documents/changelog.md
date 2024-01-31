@@ -100,6 +100,7 @@
     - CORS settings updated to allow only frontend connections 
     - Axios updated to use credentials
     - Redis cookie settings updated. Cookie is passed with requests and responses but not stored in Chrome. Works in Firefox as intended. 
+    - Frontend testing started with Jest and Cypress for E2E.
 
     
     
