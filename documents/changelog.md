@@ -94,7 +94,12 @@
     - First Redis implementation in session handling.
     - Redis folder with index.js added with redisClient initializing and connecting.
     - Removed earlier session handling via local storage.
-    - Redis bug fixing and hunting. 
+    - Redis bug fixing and hunting.
+- 31.1 : 
+    - Redis session cookie settings debugging. 
+    - CORS settings updated to allow only frontend connections 
+    - Axios updated to use credentials
+    - Redis cookie settings updated. Cookie is passed with requests and responses but not stored in Chrome. Works in Firefox as intended. 
 
     
     
