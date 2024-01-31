@@ -25,10 +25,16 @@ userRouter.get("/:id", async (request, response) => {
 })
 
 userRouter.get("/session", async (request, response) => {
-  if (!request.session.user) {
+  try {
+    const sess = request.session;
+    if (sess.user) {
+      return response.status(200).json(sess.user);
+    }
     return response.status(401).json({ error: 'Not logged in' });
   }
-  return response.status(200).json(request.session.user);
+  catch (error) {
+    return response.status(500).json({ error: error.message });
+  }
 })
 
 userRouter.post("/logout", async (request, response) => {
