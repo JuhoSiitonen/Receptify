@@ -20,7 +20,11 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 require('dotenv').config()
 
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  origin: "http://127.0.0.1",
+}))
+
 app.use(express.static('build'))
 app.use(express.json()) 
 app.use(middleware.requestLogger)
