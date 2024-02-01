@@ -28,12 +28,12 @@ const Login = () => {
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    Username:
-                    <input value={username} onChange={({ target }) => setUsername(target.value)} />
+                    <label htmlFor="username">Username:</label>
+                    <input id="username" value={username} onChange={({ target }) => setUsername(target.value)} />
                 </div>
                 <div>
-                    Password:
-                    <input value={password} onChange={({ target }) => setPassword(target.value)} />
+                    <label htmlFor="password">Password:</label>
+                    <input id="password" value={password} onChange={({ target }) => setPassword(target.value)} />
                 </div>
                 <button type="submit">Login</button>
             </form>
