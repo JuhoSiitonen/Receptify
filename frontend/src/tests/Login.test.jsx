@@ -1,17 +1,17 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Login from '../components/Login'
 import { renderWithProviders } from '../util/test-utils'
 import { customRender } from '../util/test-utils'
 import { server } from './testServer'
+import { act } from 'react-dom/test-utils'
 
 server.events.on('request:start', ({ request }) => {
   console.log('MSW intercepted:', request.method, request.url)
 })
-
 
 test('renders content', async () => {
     const mockHandler = jest.fn()
@@ -30,13 +30,25 @@ test('login form calls onSubmit with right details', async () => {
       expect(screen.getByLabelText(/username/i)).toBeVisible();
       expect(screen.getByLabelText(/password/i)).toBeVisible();
     });
-    userEvent.type(screen.getByLabelText(/username/i), 'testuser')
-    userEvent.type(screen.getByLabelText(/password/i), 'testpassword')
+    act(() => {
+    fireEvent.change(screen.getByLabelText(/username/i), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'password' } });
+    })
+    /*
+    userEvent.type(screen.getByLabelText(/username/i), 'John Doe')
+    userEvent.type(screen.getByLabelText(/password/i), 'password')
+    */
     const loginButton = screen.getByRole('button', { name: /login/i });
     userEvent.click(loginButton);
 
+    await waitFor(() => {
+      // You can add your assertions here
+      // For example, if you want to check the presence of a specific element after login
+       expect(screen.getByText(/John Doe/i)).toBeInTheDocument();
+    });
+
     /*
-    expect(await response.json()).toEqual({
+    expect(await server.response.json()).toEqual({
         "id": 1,
         "username": "John Doe",
         "password": "password",
@@ -47,4 +59,5 @@ test('login form calls onSubmit with right details', async () => {
       }
     )
     */
+    
 })

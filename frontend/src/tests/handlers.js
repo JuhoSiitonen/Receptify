@@ -3,9 +3,8 @@ import { http, HttpResponse, delay } from 'msw'
 const baseURL = process.env.REACT_APP_BACKEND_URL
 
 export const handlers = [
-    http.post(`${baseURL}/api/login`, async ({ request }) => {
-      await delay(150)
-      if (request.body.username !== 'john' || request.body.password !== 'password') {
+    http.post(`/api/login`, async ({ request }) => {
+      if (request.body.username !== 'John Doe' || request.body.password !== 'password') {
         return HttpResponse.status(401)
       }
       return HttpResponse.json({
