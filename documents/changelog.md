@@ -101,6 +101,7 @@
     - Axios updated to use credentials
     - Redis cookie settings updated. Cookie is passed with requests and responses but not stored in Chrome. Works in Firefox as intended. 
     - Frontend testing started with Jest and Cypress for E2E.
+
 ## February 2024
 - 1.2 :
     - MSW added as a dev dependency to make frontend integration tests

@@ -26,6 +26,6 @@
 - 3h 31.1: Redis session cookie settings debugging. Frontend testing.
 
 ## February 2024
-- 3h 1.2: Frontend integration testing.
+- 5h 1.2: Frontend integration testing.
 
-Total hours: 73h
+Total hours: 75h
