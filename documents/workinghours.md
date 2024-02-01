@@ -25,4 +25,7 @@
 - 7h 30.1: More testing for backend and refactoring tests. Redis session setup. Redis session bug hunting.
 - 3h 31.1: Redis session cookie settings debugging. Frontend testing.
 
-Total hours: 70h
+## February 2024
+- 3h 1.2: Frontend integration testing.
+
+Total hours: 73h
