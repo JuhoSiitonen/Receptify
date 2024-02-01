@@ -5,7 +5,7 @@ import notificationReducer from './notificationReducer'
 import ratingReducer from './ratingReducer'
 import commentReducer from './commentReducer'
 
-const store = configureStore({
+const reduxStore = configureStore({
     reducer: {
       recipies: recipyReducer,
       user: userReducer,
@@ -15,4 +15,4 @@ const store = configureStore({
     },
   })
   
-  export default store
+  export default reduxStore
