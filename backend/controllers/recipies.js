@@ -5,7 +5,8 @@ recipyRouter.get("/", async (req, res) => {
   try {
     const recipes = await Recipy.findAll({
       include: [
-        { model: User },
+        { model: User,
+          attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },
       ],
@@ -69,7 +70,8 @@ recipyRouter.post("/", async (req, res) => {
 
     const returnRecipy = await Recipy.findByPk(recipe.id,{
       include: [
-        { model: User },
+        { model: User,
+          attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },
       ],
@@ -184,7 +186,8 @@ recipyRouter.put("/:id", async (req, res) => {
 
     const returnRecipy = await Recipy.findByPk(recipe.id,{
       include: [
-        { model: User },
+        { model: User,
+          attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include : [Category] },
       ],

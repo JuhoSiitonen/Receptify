@@ -9,7 +9,8 @@ userRouter.get("/", async (request, response) => {
 userRouter.post("/", async (request, response) => {
     try {
       const user = request.body;
-      const newUser = await User.create(user);
+      const newUser = await User.create(user, {
+        returning: ['id', 'username']} );
       return response.status(201).json(newUser);
     } catch (error) {
       return response.status(400).json({ error: error.message });
@@ -17,7 +18,7 @@ userRouter.post("/", async (request, response) => {
 })
 
 userRouter.get("/:id", async (request, response) => {
-  const user = await User.findByPk(request.params.id);
+  const user = await User.findByPk(request.params.id, { attributes: { exclude: ['password'] } });
   if (!user) {
     return response.status(404).json({ error: 'User not found' });
   }
