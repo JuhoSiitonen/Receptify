@@ -111,6 +111,8 @@
 - 2.2 :
     - E2E testing with Cypress in frontend folder. 
     - Cypress testing for signing up, backend startup with node env as test.
+    - Debugging Redis sessions, now working with Chrome also with CORS settings accepting only frontend requests
+    
 
     
     

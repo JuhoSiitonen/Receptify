@@ -4,6 +4,8 @@
 - 2h 30.12 : Initialization of frontend, backend and documentation.
 - 3h 31.12 : Basic setup of backend and frontend.
 
+Month total : 5h 
+
 ## January 2024
 - 1h 1.1: Creating component structure and Redux basic setup.
 - 1h 2.1: Added page for posting recipies.
@@ -25,8 +27,10 @@
 - 7h 30.1: More testing for backend and refactoring tests. Redis session setup. Redis session bug hunting.
 - 3h 31.1: Redis session cookie settings debugging. Frontend testing.
 
+Month total : 65h
+
 ## February 2024
 - 5h 1.2: Frontend integration testing.
-- 2h 2.2: Started with E2E testing by using Cypress
+- 3h 2.2: Started with E2E testing by using Cypress, Redis session debugging.
 
-Total hours: 77h
+Total hours: 78h
