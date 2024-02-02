@@ -14,7 +14,6 @@ const NavigationBar = () => {
         return (
             <div>
                 <Link to="/">Mainpage  </Link>
-                <Link to="/recipes">Recipes  </Link>
                 <Link to="/login">Login  </Link>
                 <Link to="/signup">Sign up  </Link>
             </div>

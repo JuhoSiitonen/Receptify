@@ -18,8 +18,8 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllRecipies())
     dispatch(isUserLogged())
+    //dispatch(getAllRecipies())
   }, [])
 
   return (

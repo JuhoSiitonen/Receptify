@@ -22,7 +22,7 @@ export const login = (credentials) => {
     return async dispatch => {
         try {
             const user = await loginService.login(credentials)
-            window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
+            //window.localStorage.setItem('loggedAppUser', JSON.stringify(user))
             dispatch(addNotification({ message: 'Login successful!', error: false }))
             dispatch(setUser(user))
         } catch (error) {
@@ -35,8 +35,8 @@ export const login = (credentials) => {
 
 export const isUserLogged = () => {
     return async dispatch => {
-      //const loggedUserJSON = await userService.session()
-      const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
+      const loggedUserJSON = await userService.session()
+      // const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
       if (loggedUserJSON) {
         console.log('loggedUserJSON', loggedUserJSON)
         const user = loggedUserJSON
@@ -48,7 +48,7 @@ export const isUserLogged = () => {
 export const logout = () => {
     return async dispatch => {
         await userService.logoutUser()
-        window.localStorage.removeItem('loggedAppUser')
+        // window.localStorage.removeItem('loggedAppUser')
         dispatch(removeUser())
         console.log('logout')
     }

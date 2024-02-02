@@ -1,13 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Recipies from './Recipies';
 import Filter from '../Filter';
 import Togglable from '../Togglable';
 import { filterBy } from '../../util/filterFunction';
+import { getAllRecipies } from '../../reducers/recipyReducer';
 
 
 const RecipiesView = () => {
-    const recipies = useSelector(state => state.recipies)
+    const dispatch = useDispatch()
+    const recipies = dispatch(getAllRecipies())
+
+    if (!recipies) {
+        return <></>
+    }
+
+    //const recipies = useSelector(state => state.recipies)
     const [filteredRecipies, setFilteredRecipies] = useState(recipies);
 
     useEffect(() => {
