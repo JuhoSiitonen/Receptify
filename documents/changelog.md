@@ -108,6 +108,9 @@
     - Created util/test-utils.jsx to wrap custom render function for testing component with Redux store provider and React router.
     - Undici and isomorphic-fetch added as dev dependency to get MSW working with Jest
     - Login component testing.
+- 2.2 :
+    - E2E testing with Cypress in frontend folder. 
+    - Cypress testing for signing up, backend startup with node env as test.
 
     
     

@@ -27,5 +27,6 @@
 
 ## February 2024
 - 5h 1.2: Frontend integration testing.
+- 2h 2.2: Started with E2E testing by using Cypress
 
-Total hours: 75h
+Total hours: 77h
