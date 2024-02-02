@@ -27,13 +27,16 @@ userRouter.get("/:id", async (request, response) => {
 
 userRouter.get("/session", async (request, response) => {
   try {
-    const sess = request.session;
-    if (sess.user) {
-      return response.status(200).json(sess.user);
+    const sess =  await request.session;
+    console.log(sess.username);
+    if (sess.userId) {
+      currentUser = User.findByPk(sess.userId, { attributes: { exclude: ['password'] } })
+      return response.status(200).json(currentUser);
     }
     return response.status(401).json({ error: 'Not logged in' });
   }
   catch (error) {
+    console.error('Error in /session endpoint:', error);
     return response.status(500).json({ error: error.message });
   }
 })

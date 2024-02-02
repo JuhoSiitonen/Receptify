@@ -5,8 +5,10 @@ loginRouter.post('/', async (request, response) => {
     const { username, password } = request.body;
     const user = await User.findOne({ where: { username } }, );
     if (user && user.password === password) {
-        request.session.user = { id: user.id, username: user.username};
-        console.log(request.session.user);
+        const sess = request.session;
+        sess.userId = user.id;
+        sess.username = user.username;
+        console.log(request.session.userId);
         console.log(user)
         const returnUser = { id: user.id, username: user.username, admin: user.admin };
         return response.status(200).json(returnUser);
