@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 
 const Mainpage = () => {
+    
+
     return (
         <>
         <h2>Welcome to Receptify!</h2>

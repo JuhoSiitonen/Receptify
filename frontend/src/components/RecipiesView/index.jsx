@@ -9,18 +9,18 @@ import { getAllRecipies } from '../../reducers/recipyReducer';
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
-    const recipies = dispatch(getAllRecipies())
+    dispatch(getAllRecipies())
 
-    if (!recipies) {
-        return <></>
-    }
-
-    //const recipies = useSelector(state => state.recipies)
+    const recipies = useSelector(state => state.recipies)
     const [filteredRecipies, setFilteredRecipies] = useState(recipies);
 
     useEffect(() => {
         setFilteredRecipies(recipies);
     }, [recipies]);
+
+    if (!recipies) {
+        return <></>
+    }
 
     const handleFilter = ({ option, value }) => {
         const filtered = recipies.filter((recipe) =>
