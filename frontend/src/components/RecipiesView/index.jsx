@@ -5,11 +5,15 @@ import Filter from '../Filter';
 import Togglable from '../Togglable';
 import { filterBy } from '../../util/filterFunction';
 import { getAllRecipies } from '../../reducers/recipyReducer';
+import LoadingSpinner from '../LoadingSpinner';
 
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
-    dispatch(getAllRecipies())
+
+    useEffect(() => {
+        dispatch(getAllRecipies());
+      }, []);
 
     const recipies = useSelector(state => state.recipies)
     const [filteredRecipies, setFilteredRecipies] = useState(recipies);
@@ -19,7 +23,7 @@ const RecipiesView = () => {
     }, [recipies]);
 
     if (!recipies) {
-        return <></>
+        return <LoadingSpinner />
     }
 
     const handleFilter = ({ option, value }) => {
