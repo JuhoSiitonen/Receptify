@@ -17,6 +17,7 @@ userRouter.post("/", async (request, response) => {
     }
 })
 
+/*
 userRouter.get("/:id", async (request, response) => {
   const user = await User.findByPk(request.params.id, { attributes: { exclude: ['password'] } });
   if (!user) {
@@ -24,16 +25,20 @@ userRouter.get("/:id", async (request, response) => {
   }
   return response.status(200).json(user);
 })
+*/
 
 userRouter.get("/session", async (request, response) => {
+  console.log("mitä vittua saatana")
   try {
-    const sess =  await request.session;
-    console.log(sess.username);
+    const sess =  request.session;
+    console.log( "session username: ", sess.username);
     if (sess.userId) {
-      currentUser = User.findByPk(sess.userId, { attributes: { exclude: ['password'] } })
+      currentUser = await User.findByPk( sess.userId, { attributes: { exclude: ['password'] } })
+      console.log(sess.username)
+      
       return response.status(200).json(currentUser);
     }
-    return response.status(401).json({ error: 'Not logged in' });
+    return response.status(200);
   }
   catch (error) {
     console.error('Error in /session endpoint:', error);

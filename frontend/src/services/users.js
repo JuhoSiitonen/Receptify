@@ -23,9 +23,8 @@ const signup = async newObject => {
   }
 
   const session = async () => {
-    const request = await axios.get(`${baseUrl}/session`)
-    console.log('session', request.data)
-    return request.data
+    const response = await axios.get(`${baseUrl}/session`)
+    return response.data
   }
   
   export default { signup, deleteUser, logoutUser, session }
