@@ -26,5 +26,10 @@ const signup = async newObject => {
     const response = await axios.get(`${baseUrl}/session`)
     return response.data
   }
+
+  const getUserRecipies = (id) => {
+    const request = axios.get(`${baseUrl}/${id}/view`)
+    return request.then(response => response.data)
+  }
   
-  export default { signup, deleteUser, logoutUser, session }
+  export default { signup, deleteUser, logoutUser, session, getUserRecipies }

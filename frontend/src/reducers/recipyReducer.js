@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import recipyService from '../services/recipies'
+import userService from '../services/users'
 import { addNotification } from './notificationReducer'
 
 const recipySlice = createSlice({
@@ -88,6 +89,17 @@ export const updateRating = (id, rating) => {
         try {
             const updatedRating = { id, rating }
             dispatch(updateRecipyRating(updatedRating))
+        } catch (error) {
+            throw error
+        }
+    }
+}
+
+export const userRecipies = (id) => {
+    return async dispatch => {
+        try {
+            const recipies = await userService.getUserRecipies(id)
+            dispatch(setRecipies(recipies))
         } catch (error) {
             throw error
         }
