@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getAllRecipies } from './reducers/recipyReducer';
 import { isUserLogged } from './reducers/userReducer'
 import Mainpage from './components/Mainpage'
 import RecipiesView from './components/RecipiesView'
@@ -19,7 +18,6 @@ function App() {
 
   useEffect(() => {
     dispatch(isUserLogged())
-    //dispatch(getAllRecipies())
   }, [])
 
   return (
