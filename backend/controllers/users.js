@@ -1,5 +1,5 @@
 const userRouter = require("express").Router();
-const { User } = require("../models");
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory } = require("../models");
 
 userRouter.get("/", async (request, response) => {
   const users = await User.findAll();
@@ -35,6 +35,19 @@ userRouter.get("/session", async (request, response) => {
 userRouter.post("/logout", async (request, response) => {
   request.session.destroy();
   return response.status(204).end();
+})
+
+userRouter.get("/:id/view", async (request, response) => {
+  const { id } = request.params;
+  const recipes = await Recipy.findAll({ where: { userId: id},
+    include: [
+      { model: User,
+        attributes: [ "id", "username"] },
+      { model: RecipyIngredient, include: [Ingredient] },
+      { model: RecipyCategory, include: [Category] },
+    ],
+  });
+  return response.status(200).json(recipes);
 })
 
 module.exports = userRouter;
