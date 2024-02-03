@@ -32,5 +32,6 @@ Month total : 65h
 ## February 2024
 - 5h 1.2: Frontend integration testing.
 - 3h 2.2: Started with E2E testing by using Cypress, Redis session debugging.
+- 1h 3.2: Redis sessions work! 
 
-Total hours: 78h
+Total hours: 79h

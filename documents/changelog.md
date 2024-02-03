@@ -112,6 +112,9 @@
     - E2E testing with Cypress in frontend folder. 
     - Cypress testing for signing up, backend startup with node env as test.
     - Debugging Redis sessions, now working with Chrome also with CORS settings accepting only frontend requests
+- 3.2 : 
+    - Redis sessions work now, fault was in the Axios service call and the backend session endpoint (more accurately the api/users/:id existed also so all the calls to api/users/session went to :id ...)
+    - Fixed race condition with App.js useEffect call where two Redis sessions were created when opening app. This required some re structuring of the call to get the recipies. 
     
 
     
