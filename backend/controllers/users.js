@@ -17,25 +17,11 @@ userRouter.post("/", async (request, response) => {
     }
 })
 
-/*
-userRouter.get("/:id", async (request, response) => {
-  const user = await User.findByPk(request.params.id, { attributes: { exclude: ['password'] } });
-  if (!user) {
-    return response.status(404).json({ error: 'User not found' });
-  }
-  return response.status(200).json(user);
-})
-*/
-
 userRouter.get("/session", async (request, response) => {
-  console.log("mitä vittua saatana")
   try {
     const sess =  request.session;
-    console.log( "session username: ", sess.username);
     if (sess.userId) {
-      currentUser = await User.findByPk( sess.userId, { attributes: { exclude: ['password'] } })
-      console.log(sess.username)
-      
+      currentUser = await User.findByPk( sess.userId, { attributes: { exclude: ['password'] } })      
       return response.status(200).json(currentUser);
     }
     return response.status(200);
