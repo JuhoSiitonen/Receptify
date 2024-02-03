@@ -115,6 +115,7 @@
 - 3.2 : 
     - Redis sessions work now, fault was in the Axios service call and the backend session endpoint (more accurately the api/users/:id existed also so all the calls to api/users/session went to :id ...)
     - Fixed race condition with App.js useEffect call where two Redis sessions were created when opening app. This required some re structuring of the call to get the recipies. 
+    - New component ViewUser for viewing a single users recipies, also added a service method, reducer method and endpoint for api/users/:id/view.
     
 
     
