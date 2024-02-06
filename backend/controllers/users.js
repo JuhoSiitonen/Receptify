@@ -47,6 +47,7 @@ userRouter.get("/:id/view", async (request, response) => {
       { model: RecipyCategory, include: [Category] },
     ],
   });
+  console.log('recipes:', recipes)
   return response.status(200).json(recipes);
 })
 
