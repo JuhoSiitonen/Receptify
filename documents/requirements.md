@@ -4,6 +4,7 @@
 - [x] Users can sign in
 - [x] Users can log in
 - [x] Users can post recipies
+- [ ] User can post pictures of the recipy
 - [ ] User sees clear error and success notifications upon actions
 - [x] User can update and delete their own recipies
 - [ ] Users can view recipies in a scrollable list
@@ -47,6 +48,7 @@
 - The application development database is set with Docker
 - The app has a CICD pipeline with Github Actions
 - The app has unit testing with Jest and end to end testing with Cypress
+- Uploadcare for validating, storing and getting pictures from
 - The application is hosted in ???
 - Docker containers in deployment???
 - Other aspects???
