@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createRecipy } from '../../reducers/recipyReducer'
+import Uploader from '../Uploader'
 
 const AddRecipe = () => {
     const [title, setTitle] = useState('')
@@ -11,6 +12,7 @@ const AddRecipe = () => {
     const [instructions, setInstructions] = useState('')
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
+    const [photos, setPhotos] = useState([]);
     const user = useSelector(state => state.user)
     const navigate = useNavigate()
 
@@ -87,6 +89,8 @@ const AddRecipe = () => {
                     <button onClick={addCategory} type="button">add</button>
                 </div>
                 <div>Categories: {categories.join(", ")}</div>
+                <h3>Upload image</h3>
+                <Uploader files={photos} onChange={setPhotos} />
                 <input type="submit" value="Submit" />
             </form>
         </div>
