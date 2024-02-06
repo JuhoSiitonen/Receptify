@@ -22,14 +22,10 @@ const ViewUser = () => {
         return <LoadingSpinner />;
     }
 
-    if (!recipies) {
-        return <>Loading</>
-    }
-
     return (
         <div>
             <UserInfo />
-            <Recipies />
+            <Recipies recipies={recipies}/>
         </div>
     )
 }
