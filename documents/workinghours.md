@@ -34,5 +34,6 @@ Month total : 65h
 - 3h 2.2: Started with E2E testing by using Cypress, Redis session debugging.
 - 2h 3.2: Redis sessions work! Component for viewing a single users recipies.
 - 1h 5.2: Uploadcare added to handle validation and storage of pictures.
+- 1h 9.2: Debugging uploadcare context provider 
 
 Total hours: 81h

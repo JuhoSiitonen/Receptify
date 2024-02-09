@@ -118,6 +118,8 @@
     - New component ViewUser for viewing a single users recipies, also added a service method, reducer method and endpoint for api/users/:id/view.
 - 5.2 :
     - Uploadcare added to handle validation and storage of pictures related to recipies and user profile pictures. Preliminary setup done in frontend. 
+- 9.2 : 
+    - Debugging Uploadcare to get sent pictures uuid. 
 
     
     
