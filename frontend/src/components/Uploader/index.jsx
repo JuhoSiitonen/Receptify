@@ -7,34 +7,41 @@ import blocksStyles from '@uploadcare/blocks/web/lr-file-uploader-regular.min.cs
 import * as st from './Uploader.scss';
 import cssOverrides from './Uploader.css?inline';
 
+const baseUrl = 'https://ucarecdn.com/'
+
 LR.registerBlocks(LR);
 
 const Uploader = ({ files, onChange}) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
-    const ctxProviderRef = useRef(null);
+    const ctxProviderRef = useRef();
+
 
     const handleRemoveClick = useCallback(
         (uuid) => onChange(files.filter(f => f.uuid !== uuid)),
         [files, onChange],
       );
 
+
     useEffect(() => {
         const handleUploadEvent = (e) => {
           if (e.detail) {
             console.log(e.detail);
+            console.log("handleUploadEvent running")
             setUploadedFiles([...e.detail]);
           }
         };
-        ctxProviderRef.current?.addEventListener('data-output', handleUploadEvent);
+        console.log("adding event listener")
+        ctxProviderRef.current?.addEventListener('upload-finish', handleUploadEvent);
 
-        return () => {
-        ctxProviderRef.current?.removeEventListener('data-output', handleUploadEvent);
-        };
-    }, [setUploadedFiles]);
+        //return () => {
+        //ctxProviderRef.current?.removeEventListener('upload-finish', handleUploadEvent);
+        //};
+    }, []);
     
+    /*
     useEffect(() => {
         const resetUploaderState = () => ctxProviderRef.current?.uploadCollection.clearAll();
-    
+        console.log("resetUploaderState running")
         const handleDoneFlow = () => {
           resetUploaderState();
     
@@ -48,7 +55,7 @@ const Uploader = ({ files, onChange}) => {
           ctxProviderRef.current?.removeEventListener('done-flow', handleDoneFlow);
         };
       }, [files, onChange, uploadedFiles, setUploadedFiles]);
-      
+      */
 
   return (
     <div className={st.root}>
@@ -56,9 +63,7 @@ const Uploader = ({ files, onChange}) => {
         ctx-name="my-uploader"
         pubkey="e71d11ac7eca6e9bfa96"
         confirmUpload={false}
-        removeCopyright={true}
         imgOnly={true}
-        multiple={true}
       />
       <lr-file-uploader-regular
         ctx-name="my-uploader"
@@ -71,10 +76,13 @@ const Uploader = ({ files, onChange}) => {
         <div className={st.previews}>
         {files.map((file) => (
           <div key={file.uuid} className={st.preview} >
+            {console.log(file.uuid)}
+            {console.log(file.cdnUrl)}
+            {console.log("map function running")}
             <img
               className={st.previewImage}
               key={file.uuid}
-              src={`${file.cdnUrl}/-/preview/-/resize/x200/`}
+              src={`${baseUrl}/${file.uuid}/-/preview/-/resize/x200/`}
               width="100"
               alt={file.originalFilename || ''}
               title={file.originalFilename || ''}
