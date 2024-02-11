@@ -14,10 +14,14 @@ const UploaderWidget = ({ files, onChange}) => {
             console.log(file);
         }
         setUploadedFiles([...uploadedFiles, file]);
+        onChange([...files, file]);
         console.log("uploadedFiles: ", uploadedFiles);
     }
     const handleRemoveClick = useCallback(
-        (uuid) => onChange(uploadedFiles.filter(f => f.uuid !== uuid)),
+        (uuid) => {
+            onChange(files.filter(f => f.uuid !== uuid))
+            setUploadedFiles(uploadedFiles.filter(f => f.uuid !== uuid))
+        },
         [files, onChange],
       );
 
