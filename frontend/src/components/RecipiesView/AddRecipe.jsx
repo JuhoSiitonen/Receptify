@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createRecipy } from '../../reducers/recipyReducer'
 import Uploader from '../Uploader'
+import UploaderWidget from '../Uploader/UploaderWidget'
 
 const AddRecipe = () => {
     const [title, setTitle] = useState('')
@@ -90,7 +91,7 @@ const AddRecipe = () => {
                 </div>
                 <div>Categories: {categories.join(", ")}</div>
                 <h3>Upload image</h3>
-                <Uploader files={photos} onChange={setPhotos} />
+                <UploaderWidget files={photos} onChange={setPhotos} />
                 <input type="submit" value="Submit" />
             </form>
         </div>
