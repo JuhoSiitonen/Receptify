@@ -120,6 +120,10 @@
     - Uploadcare added to handle validation and storage of pictures related to recipies and user profile pictures. Preliminary setup done in frontend. 
 - 9.2 : 
     - Debugging Uploadcare to get sent pictures uuid. 
+- 11.2 :
+    - Switched to using Uploadcare React widget instead of the previous unstable release.
+    - Uploadcare picture preview in AddRecipyView
+    
 
     
     

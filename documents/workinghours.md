@@ -35,5 +35,6 @@ Month total : 65h
 - 2h 3.2: Redis sessions work! Component for viewing a single users recipies.
 - 1h 5.2: Uploadcare added to handle validation and storage of pictures.
 - 1h 9.2: Debugging uploadcare context provider 
+- 1h 11.2: Switched to using Uploadcare React widget. 
 
-Total hours: 81h
+Total hours: 82h
