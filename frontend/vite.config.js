@@ -6,7 +6,8 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     define: {
-      'process.env.REACT_APP_BACKEND_URL': JSON.stringify(env.REACT_APP_BACKEND_URL)
+      'process.env.REACT_APP_BACKEND_URL': JSON.stringify(env.REACT_APP_BACKEND_URL),
+      'process.env.UPLOADCARE_PUBLIC_KEY': JSON.stringify(env.UPLOADCARE_PUBLIC_KEY),
     },
     plugins: [react()],
   }
