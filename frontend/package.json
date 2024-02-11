@@ -14,6 +14,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@uploadcare/blocks": "0.32.0",
+    "@uploadcare/react-widget": "^2.4.5",
     "axios": "^1.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
