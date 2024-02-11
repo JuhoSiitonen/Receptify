@@ -9,7 +9,23 @@ const baseUrl = 'https://ucarecdn.com/'
 const UploaderWidget = ({ files, onChange}) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
 
-    const handleChange = (file) => {
+    const handleChange = file => {
+        if (!file) {
+          console.log("File removed from widget");
+          onChange([])
+          setUploadedFiles([])
+          return;
+        }
+        file.done(file => {
+          console.log("File uploaded: ", file.cdnUrl);
+          setUploadedFiles([...uploadedFiles, file]);
+          onChange([...files, file]);
+          console.log("uploadedFiles: ", uploadedFiles);
+        });
+    }
+    
+    /*
+    (file) => {
         if (file) {
             console.log(file);
         }
@@ -17,6 +33,7 @@ const UploaderWidget = ({ files, onChange}) => {
         onChange([...files, file]);
         console.log("uploadedFiles: ", uploadedFiles);
     }
+    */
     const handleRemoveClick = useCallback(
         (uuid) => {
             onChange(files.filter(f => f.uuid !== uuid))
@@ -29,11 +46,12 @@ const UploaderWidget = ({ files, onChange}) => {
     return (
     <div>
     <Widget 
-        onChange={handleChange} 
+        //onChange={handleChange} 
         publicKey={process.env.UPLOADCARE_PUBLIC_KEY}
         clearable
         imagesOnly
         previewStep='true'
+        onFileSelect={handleChange}
         />
     <div className={st.previews}>
         {uploadedFiles.map((file) => (
