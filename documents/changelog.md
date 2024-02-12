@@ -129,7 +129,8 @@
     - New AddFriendButton which is rendered in ViewUser page for adding friends. 
     - Endpoints for adding and deleting friends with a userinfo get endpoint.
     - Frontend Axios services for deleting and adding friends.
-    - Frontend reducers added to modify user reducer state where current users friends are stored. 
+    - Frontend reducers added to modify user reducer state where current users friends are stored.
+ 
 
 
     
