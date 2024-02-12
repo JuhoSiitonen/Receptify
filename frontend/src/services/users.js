@@ -33,8 +33,8 @@ const signup = async newObject => {
   }
  
   const addFriend = async (id) => {
-    const request = await axios.post(`${baseUrl}/friends/${id}`)
-    return request.data
+    const response = await axios.post(`${baseUrl}/friends/${id}`)
+    return response.data
   }
 
   const deleteFriend = async (id) => {

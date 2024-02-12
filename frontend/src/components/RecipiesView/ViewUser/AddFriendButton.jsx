@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import userService from '../../../services/users'
 
-const AddFriendButton = ({ friendId, addFriend }) => {
+const AddFriendButton = ({ friendId }) => {
     const [buttonText, setButtonText] = useState('Add friend')
-    const dispatch = useDispatch()
 
-    const handleAddFriend = async () => {
+    const handleAddFriend = async (e) => {
+        e.preventDefault()
         await userService.addFriend(friendId)
         setButtonText('Friend added')
     }

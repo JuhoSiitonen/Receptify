@@ -16,14 +16,14 @@ const userSlice = createSlice({
         addNewFriend(state, action) {
             state.friends.push(action.payload)
         },
-        deleteFriend(state, action) {
+        deleteFriends(state, action) {
             const id = action.payload
             state.friends = state.friends.filter(f => f.id !== id)
         }
     },
 })
 
-export const { setUser, removeUser } = userSlice.actions
+export const { setUser, removeUser, addNewFriend, deleteFriends } = userSlice.actions
 
 export const login = (credentials) => {
     return async dispatch => {
@@ -118,7 +118,7 @@ export const deleteFriend = (id) => {
     return async dispatch => {
         try {
             await userService.deleteFriend(id)
-            dispatch(deleteFriend(id))
+            dispatch(deleteFriends(id))
             dispatch(addNotification({
                 message: 'Friend deleted', 
                 error: false}));
