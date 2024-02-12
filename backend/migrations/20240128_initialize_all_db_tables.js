@@ -80,6 +80,9 @@ module.exports = {
                 allowNull: false,
                 defaultValue: DataTypes.NOW,
             },
+            picture_uuid: {
+                type: DataTypes.TEXT,
+            },
         })
         await queryInterface.createTable('ingredients', {
             id: {

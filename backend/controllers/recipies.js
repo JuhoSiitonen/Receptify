@@ -21,12 +21,14 @@ recipyRouter.get("/", async (req, res) => {
 
 recipyRouter.post("/", async (req, res) => {
   try {
-    const { title, description, instructions, visible, userId, ingredients, categories } = req.body;
+    const { title, description, instructions, visible, userId, ingredients, categories, pictureUuid } = req.body;
 
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+
+    console.log("picture UUID HERE:", pictureUuid)
 
     const recipe = await Recipy.create({
       title,
@@ -35,6 +37,7 @@ recipyRouter.post("/", async (req, res) => {
       visible,
       userId: user.id, 
       averageRating: 0,
+      pictureUuid
     });
 
     for (const ingredientData of ingredients) {

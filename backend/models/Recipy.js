@@ -29,6 +29,9 @@ Recipy.init({
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  pictureUuid: {
+    type: DataTypes.TEXT,
+  },
 }, {
     sequelize,
     underscored: true,
