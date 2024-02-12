@@ -30,16 +30,19 @@ userRouter.post("/", async (request, response) => {
 
 userRouter.post("/friends/:id", async (request, response) => {
     try {
+      
       const userId = request.session.userId;
-      const friendId = request.params.id;
+      const { id } = request.params;
+      console.log('userId:', userId)
+      console.log('id:', id)
       const user = await User.findByPk(userId);
-      const friend = await User.findByPk(friendId);
+      const friend = await User.findByPk(id);
       if (!user || !friend) {
         return response.status(404).json({ error: 'User not found' });
       }
       await Friend.create({ 
-        userId1: userId,
-        userId2: friendId 
+        user_id_1: userId,
+        user_id_2: id,
       });
       return response.status(201).json({ message: 'Friend added' });
     } catch (error) {

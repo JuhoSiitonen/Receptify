@@ -260,5 +260,6 @@ module.exports = {
         await queryInterface.dropTable('recipy_categories')
         await queryInterface.dropTable('comments')
         await queryInterface.dropTable('ratings')
+        await queryInterface.dropTable('friends')
     }
 }

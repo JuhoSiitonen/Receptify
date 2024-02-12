@@ -12,7 +12,12 @@ const Rating = require('./Rating');
 User.hasMany(Recipy);
 Recipy.belongsTo(User);
 
-User.belongsToMany(User, { as: 'friends', through: Friend });
+User.belongsToMany(User, { 
+    through: Friend, 
+    as: 'friends',
+    foreignKey: 'user_id_1', 
+    otherKey: 'user_id_2'
+ });
 
 RecipyIngredient.belongsTo(Recipy);
 RecipyIngredient.belongsTo(Ingredient);
