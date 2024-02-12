@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createRecipy } from '../../reducers/recipyReducer'
-import Uploader from '../Uploader'
 import UploaderWidget from '../Uploader/UploaderWidget'
 
 const AddRecipe = () => {
@@ -13,7 +12,7 @@ const AddRecipe = () => {
     const [instructions, setInstructions] = useState('')
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
-    const [photos, setPhotos] = useState([]);
+    const [photos, setPhotos] = useState("");
     const user = useSelector(state => state.user)
     const navigate = useNavigate()
 
@@ -31,6 +30,7 @@ const AddRecipe = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("photos state in addrecipy:", photos)
         try {
             const response = await dispatch(createRecipy({
                 title, 
@@ -39,7 +39,8 @@ const AddRecipe = () => {
                 visible: true,
                 userId: user.id,
                 ingredients, 
-                categories: categories.map(category => ({ name: category }))
+                categories: categories.map(category => ({ name: category })),
+                pictureUuid: photos
             }))
             setTitle('')
             setDescription('')

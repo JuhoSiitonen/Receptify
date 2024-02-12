@@ -1,4 +1,6 @@
 
+const baseUrl = 'https://ucarecdn.com/'
+
 const SingleRecipy = ({ recipy }) => {
     if (!recipy) {
         return null
@@ -9,6 +11,10 @@ const SingleRecipy = ({ recipy }) => {
     return (
         <div className="singleRecipy">
             <p>{recipy.description}</p>
+            <img
+              src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x300/`}
+              width="200"
+            />
             <p>Ingredients:</p>
             <ul>
               {recipy.recipy_ingredients.map(ingredient => (

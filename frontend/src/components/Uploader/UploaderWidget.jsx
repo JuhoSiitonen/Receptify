@@ -12,15 +12,16 @@ const UploaderWidget = ({ files, onChange}) => {
     const handleChange = file => {
         if (!file) {
           console.log("File removed from widget");
-          onChange([])
+          onChange("")
           setUploadedFiles([])
           return;
         }
         file.done(file => {
           console.log("File uploaded: ", file.cdnUrl);
           setUploadedFiles([...uploadedFiles, file]);
-          onChange([...files, file]);
-          console.log("uploadedFiles: ", uploadedFiles);
+          onChange(file.uuid);
+          console.log("files state:", files)
+          console.log("the uuid:", file.uuid)
         });
     }
     
@@ -46,7 +47,6 @@ const UploaderWidget = ({ files, onChange}) => {
     return (
     <div>
     <Widget 
-        //onChange={handleChange} 
         publicKey={process.env.UPLOADCARE_PUBLIC_KEY}
         clearable
         imagesOnly
