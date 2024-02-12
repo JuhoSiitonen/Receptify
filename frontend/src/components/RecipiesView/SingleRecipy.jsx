@@ -11,10 +11,13 @@ const SingleRecipy = ({ recipy }) => {
     return (
         <div className="singleRecipy">
             <p>{recipy.description}</p>
+            {recipy.pictureUuid !== "" ? 
             <img
-              src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x300/`}
-              width="200"
-            />
+            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x300/`}
+            width="200"
+            /> :
+            <></> 
+            }
             <p>Ingredients:</p>
             <ul>
               {recipy.recipy_ingredients.map(ingredient => (
