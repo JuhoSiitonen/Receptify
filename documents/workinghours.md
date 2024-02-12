@@ -36,5 +36,6 @@ Month total : 65h
 - 1h 5.2: Uploadcare added to handle validation and storage of pictures.
 - 1h 9.2: Debugging uploadcare context provider 
 - 1h 11.2: Switched to using Uploadcare React widget. 
+- 3h 12.2: Uploadcare pictures showcased in recipiesview, also added basic support for having friends. 
 
-Total hours: 82h
+Total hours: 85h

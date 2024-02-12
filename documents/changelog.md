@@ -123,7 +123,14 @@
 - 11.2 :
     - Switched to using Uploadcare React widget instead of the previous unstable release.
     - Uploadcare picture preview in AddRecipyView
-    
+- 12.2 : 
+    - Showcasing pictures in recipiesview added.
+    - Database table for friendships added.
+    - New AddFriendButton which is rendered in ViewUser page for adding friends. 
+    - Endpoints for adding and deleting friends with a userinfo get endpoint.
+    - Frontend Axios services for deleting and adding friends.
+    - Frontend reducers added to modify user reducer state where current users friends are stored. 
+
 
     
     
