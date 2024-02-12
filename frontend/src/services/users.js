@@ -31,5 +31,20 @@ const signup = async newObject => {
     const request = axios.get(`${baseUrl}/${id}/view`)
     return request.then(response => response.data)
   }
-  
-  export default { signup, deleteUser, logoutUser, session, getUserRecipies }
+ 
+  const addFriend = async (id) => {
+    const request = await axios.post(`${baseUrl}/friends/${id}`)
+    return request.data
+  }
+
+  const deleteFriend = async (id) => {
+    const request = await axios.delete(`${baseUrl}/friends/${id}`)
+    return request.data
+  }
+
+  const getUserInfo = async (id) => {
+    const request = await axios.get(`${baseUrl}/userinfo/${id}`)
+    return request.data
+  }
+
+  export default { signup, deleteUser, logoutUser, session, getUserRecipies, addFriend, deleteFriend, getUserInfo }
