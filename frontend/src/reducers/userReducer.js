@@ -12,6 +12,13 @@ const userSlice = createSlice({
         },
         removeUser(state, action) {
             return null
+        },
+        addNewFriend(state, action) {
+            state.friends.push(action.payload)
+        },
+        deleteFriend(state, action) {
+            const id = action.payload
+            state.friends = state.friends.filter(f => f.id !== id)
         }
     },
 })
@@ -82,6 +89,42 @@ export const deleteUser = (id) => {
         } catch (error) {
             dispatch(addNotification({
                 message: 'User could not be deleted', 
+                error: true}));
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const addFriend = (id) => {
+    return async dispatch => {
+        try {
+            await userService.addFriend(id)
+            dispatch(addNewFriend(id))
+            dispatch(addNotification({
+                message: 'Friend added', 
+                error: false}));
+        } catch (error) {
+            dispatch(addNotification({
+                message: 'Friend could not be added', 
+                error: true}));
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const deleteFriend = (id) => {
+    return async dispatch => {
+        try {
+            await userService.deleteFriend(id)
+            dispatch(deleteFriend(id))
+            dispatch(addNotification({
+                message: 'Friend deleted', 
+                error: false}));
+        } catch (error) {
+            dispatch(addNotification({
+                message: 'Friend could not be deleted', 
                 error: true}));
             console.log(error)
             throw error
