@@ -84,6 +84,24 @@ module.exports = {
                 type: DataTypes.TEXT,
             },
         })
+        await queryInterface.createTable('friends', {
+          user_id_1: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id',
+            },
+          },
+          user_id_2: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id',
+            },
+          },
+        })
         await queryInterface.createTable('ingredients', {
             id: {
                 type: DataTypes.INTEGER,

@@ -1,5 +1,6 @@
 const User = require('./User');
 const Recipy = require('./Recipy');
+const Friend = require('./Friend');
 const Category = require('./Category');
 const Comment = require('./Comment');
 const Ingredient = require('./Ingredient');
@@ -7,8 +8,11 @@ const RecipyCategory = require('./RecipyCategory');
 const RecipyIngredient = require('./RecipyIngredient');
 const Rating = require('./Rating');
 
+
 User.hasMany(Recipy);
 Recipy.belongsTo(User);
+
+User.belongsToMany(User, { as: 'friends', through: Friend });
 
 RecipyIngredient.belongsTo(Recipy);
 RecipyIngredient.belongsTo(Ingredient);
@@ -39,4 +43,5 @@ module.exports = {
     Rating,
     RecipyCategory,
     RecipyIngredient,
+    Friend
     };
