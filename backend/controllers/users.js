@@ -1,9 +1,20 @@
 const userRouter = require("express").Router();
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory } = require("../models");
+const { response } = require("express");
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Friend } = require("../models");
 
 userRouter.get("/", async (request, response) => {
   const users = await User.findAll();
   return response.json(users);
+})
+
+userRouter.get("/userinfo/:id", async (request, response) => {
+  const { id } = request.params;
+  try {
+    const user = await User.findByPk(id);
+    return response.status(200).json(user);
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
 })
 
 userRouter.post("/", async (request, response) => {
@@ -15,6 +26,41 @@ userRouter.post("/", async (request, response) => {
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
+})
+
+userRouter.post("/friends/:id", async (request, response) => {
+    try {
+      const userId = request.session.userId;
+      const friendId = request.params.id;
+      const user = await User.findByPk(userId);
+      const friend = await User.findByPk(friendId);
+      if (!user || !friend) {
+        return response.status(404).json({ error: 'User not found' });
+      }
+      await Friend.create({ 
+        userId1: userId,
+        userId2: friendId 
+      });
+      return response.status(201).json({ message: 'Friend added' });
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
+    }
+})
+
+userRouter.delete("/friends/:id", async (request, response) => {
+  try {
+    const userId = request.session.userId;
+    const friendId = request.params.id;
+    const user = await User.findByPk(userId);
+    const friend = await User.findByPk(friendId);
+    if (!user || !friend) {
+      return response.status(404).json({ error: 'User not found' });
+    }
+    await Friend.destroy({ where: { userId1: userId, userId2: friendId } });
+    return response.status(204).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
 })
 
 userRouter.get("/session", async (request, response) => {
