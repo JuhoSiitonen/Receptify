@@ -102,6 +102,24 @@ module.exports = {
             },
           },
         })
+        await queryInterface.createTable('favorites', {
+          user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id',
+            },
+          },
+          recipy_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'recipies',
+                key: 'id',
+            },
+          }
+        })
         await queryInterface.createTable('ingredients', {
             id: {
                 type: DataTypes.INTEGER,
@@ -261,5 +279,6 @@ module.exports = {
         await queryInterface.dropTable('comments')
         await queryInterface.dropTable('ratings')
         await queryInterface.dropTable('subscriptions')
+        await queryInterface.dropTable('favorites')
       }
 }

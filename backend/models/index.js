@@ -7,7 +7,7 @@ const Ingredient = require('./Ingredient');
 const RecipyCategory = require('./RecipyCategory');
 const RecipyIngredient = require('./RecipyIngredient');
 const Rating = require('./Rating');
-
+const Favorite = require('./Favorite');
 
 User.hasMany(Recipy);
 Recipy.belongsTo(User);
@@ -18,6 +18,11 @@ User.belongsToMany(User, {
     foreignKey: 'subscriberId', 
     otherKey: 'publisherId'
  });
+
+ Recipy.belongsToMany(User, {
+    through: Favorite,
+    as: 'favorites'
+ })
 
 RecipyIngredient.belongsTo(Recipy);
 RecipyIngredient.belongsTo(Ingredient);
@@ -48,5 +53,6 @@ module.exports = {
     Rating,
     RecipyCategory,
     RecipyIngredient,
-    Subscription
+    Subscription,
+    Favorite
     };
