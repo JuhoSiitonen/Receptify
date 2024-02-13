@@ -16,14 +16,19 @@ const ViewUser = () => {
     const userId = Number(match?.params.id);
     const user = useSelector(state => state.user)
 
+    const userInfoGetter = async (userId) => {
+        const userInfo = await userService.getUserInfo(userId)
+        setUserInfo(userInfo)
+    }
+
     useEffect(() => {
         dispatch(userRecipies(userId))
-        setUserInfo(userService.getUserInfo(userId))
+        userInfoGetter(userId)
     }, [])
     
     const recipies = useSelector(state => state.recipies)
 
-    if (!recipies || !user) {
+    if (!recipies || !user || !userInfo) {
         return <LoadingSpinner />;
     }
 
@@ -31,17 +36,17 @@ const ViewUser = () => {
         return (
             <div>
                 <AddSubscriptionButton friendId={userId} />
-                <h2>Recipies by :</h2>
+                <h2>Recipies by {userInfo.username}:</h2>
             </div>
         )
     }
 
     return (
         <div>
-            <UserInfo />
+            <UserInfo userInfo={userInfo}/>
             {user.id === userId && <h2>Your recipies:</h2>}
             {user.id !== userId && (userSubscribe())}
-            <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies">
+            <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true}>
                 <Recipies recipies={recipies} inViewUser={true}/>
             </Togglable>
         </div>

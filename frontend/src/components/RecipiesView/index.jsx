@@ -7,7 +7,6 @@ import { filterBy } from '../../util/filterFunction';
 import { getAllRecipies } from '../../reducers/recipyReducer';
 import LoadingSpinner from '../LoadingSpinner';
 
-
 const RecipiesView = () => {
     const dispatch = useDispatch()
 
@@ -30,7 +29,6 @@ const RecipiesView = () => {
         const filtered = recipies.filter((recipe) =>
             filterBy({ option, value, recipe })
         );
-
         setFilteredRecipies(filtered);
     };
 
