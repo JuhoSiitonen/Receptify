@@ -59,7 +59,7 @@ userRouter.delete("/subscriptions/:id", async (request, response) => {
     if (!user || !friend) {
       return response.status(404).json({ error: 'User not found' });
     }
-    await Subscription.destroy({ where: { userId1: userId, userId2: friendId } });
+    await Subscription.destroy({ where: { user_id_1: userId, user_id_2: friendId } });
     return response.status(204).end();
   } catch (error) {
     return response.status(400).json({ error: error.message });
