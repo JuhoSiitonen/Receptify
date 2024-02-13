@@ -5,7 +5,8 @@ import Togglable from "../Togglable"
 import Comment from "./Comment"
 import Rating from "./Rating"
 
-const Recipies = ({ recipies }) => {
+const Recipies = (props) => {
+    const recipies = props.recipies
     const navigate = useNavigate()
     const user = useSelector(state => state.user)
 
@@ -15,7 +16,10 @@ const Recipies = ({ recipies }) => {
         }
         return (
             <div>
-                <button onClick={handleViewUser}>View User</button>
+                {!props.inViewUser && (
+                    <button onClick={() => navigate(`/users/${user.id}/view`)}>View User
+                    </button>
+                )}
                 <Togglable buttonLabel="Comment">
                     <Comment recipyId={id} />
                 </Togglable>
