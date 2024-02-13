@@ -12,10 +12,11 @@ const AddSubscriptionButton = ({ friendId }) => {
         e.preventDefault()
         try {
             await dispatch(addSubscription(friendId))
-            setIsSubscribed(true)
             setButtonText('Subscription added')
+            setIsSubscribed(true)
         }catch (error) {
             console.log(error)
+            setButtonText('Subscribed')
             setIsSubscribed(true)
         }
     }
