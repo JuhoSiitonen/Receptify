@@ -32,13 +32,13 @@ const signup = async newObject => {
     return request.then(response => response.data)
   }
  
-  const addFriend = async (id) => {
-    const response = await axios.post(`${baseUrl}/friends/${id}`)
+  const addSubscription = async (id) => {
+    const response = await axios.post(`${baseUrl}/subscriptions/${id}`)
     return response.data
   }
 
-  const deleteFriend = async (id) => {
-    const request = await axios.delete(`${baseUrl}/friends/${id}`)
+  const deleteSubscription = async (id) => {
+    const request = await axios.delete(`${baseUrl}/subscriptions/${id}`)
     return request.data
   }
 
@@ -47,4 +47,4 @@ const signup = async newObject => {
     return request.data
   }
 
-  export default { signup, deleteUser, logoutUser, session, getUserRecipies, addFriend, deleteFriend, getUserInfo }
+  export default { signup, deleteUser, logoutUser, session, getUserRecipies, addSubscription, deleteSubscription, getUserInfo }

@@ -6,7 +6,7 @@ import userService from "../../../services/users";
 import UserInfo from "./UserInfo";
 import Recipies from "../Recipies";
 import LoadingSpinner from "../../LoadingSpinner";
-import AddFriendButton from "./AddFriendButton";
+import AddSubscriptionButton from "./AddSubscriptionButton";
 
 const ViewUser = () => {
     const [userInfo, setUserInfo] = useState(null)
@@ -32,7 +32,7 @@ const ViewUser = () => {
             {user.id === userId && <h2>Your recipies:</h2>}
             {user.id !== userId && (
             <div>
-                <AddFriendButton friendId={userId} />
+                <AddSubscriptionButton friendId={userId} />
                 <h2>Recipies by :</h2>
             </div>
             )}

@@ -13,17 +13,17 @@ const userSlice = createSlice({
         removeUser(state, action) {
             return null
         },
-        addNewFriend(state, action) {
-            state.friends.push(action.payload)
+        addNewSubscription(state, action) {
+            state.subscriptions.push(action.payload)
         },
-        deleteFriends(state, action) {
+        deleteSubscriptions(state, action) {
             const id = action.payload
-            state.friends = state.friends.filter(f => f.id !== id)
+            state.subscriptions = state.subscriptions.filter(f => f.id !== id)
         }
     },
 })
 
-export const { setUser, removeUser, addNewFriend, deleteFriends } = userSlice.actions
+export const { setUser, removeUser, addNewSubscription, deleteSubscriptions } = userSlice.actions
 
 export const login = (credentials) => {
     return async dispatch => {
@@ -96,17 +96,17 @@ export const deleteUser = (id) => {
     }
 }
 
-export const addFriend = (id) => {
+export const addSubscription = (id) => {
     return async dispatch => {
         try {
-            await userService.addFriend(id)
-            dispatch(addNewFriend(id))
+            await userService.addSubscription(id)
+            dispatch(addNewSubscription(id))
             dispatch(addNotification({
-                message: 'Friend added', 
+                message: 'Subscription added', 
                 error: false}));
         } catch (error) {
             dispatch(addNotification({
-                message: 'Friend could not be added', 
+                message: 'Subscription could not be added', 
                 error: true}));
             console.log(error)
             throw error
@@ -114,17 +114,17 @@ export const addFriend = (id) => {
     }
 }
 
-export const deleteFriend = (id) => {
+export const deleteSubscription = (id) => {
     return async dispatch => {
         try {
-            await userService.deleteFriend(id)
-            dispatch(deleteFriends(id))
+            await userService.deleteSubscription(id)
+            dispatch(deleteSubscriptions(id))
             dispatch(addNotification({
-                message: 'Friend deleted', 
+                message: 'Subscription deleted', 
                 error: false}));
         } catch (error) {
             dispatch(addNotification({
-                message: 'Friend could not be deleted', 
+                message: 'Subscription could not be deleted', 
                 error: true}));
             console.log(error)
             throw error
