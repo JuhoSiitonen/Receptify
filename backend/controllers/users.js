@@ -1,5 +1,5 @@
 const userRouter = require("express").Router();
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription } = require("../models");
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription, Favorite } = require("../models");
 
 userRouter.get("/", async (request, response) => {
   const users = await User.findAll();
@@ -61,6 +61,39 @@ userRouter.delete("/subscriptions/:id", async (request, response) => {
       return response.status(404).json({ error: 'User not found' });
     }
     await Subscription.destroy({ where: { user_id_1: userId, user_id_2: friendId } });
+    return response.status(204).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+})
+
+userRouter.post("/favorite/:id", async (request, response) => {
+  try {
+    const userId = request.session.userId;
+    const { id } = request.params;
+    const recipe = await Recipy.findByPk(id);
+    if (!userId || !recipe) {
+      return response.status(404).json({ error: 'User or recipe not found' });
+    }
+    await Favorite.create({
+      userId,
+      recipyId: id,
+    });
+    return response.status(201).json({ message: 'Favorite added' });
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+})
+
+userRouter.delete("/favorite/:id", async (request, response) => {
+  try {
+    const userId = request.session.userId;
+    const { id } = request.params;
+    const recipe = await Recipy.findByPk(id);
+    if (!userId || !recipe) {
+      return response.status(404).json({ error: 'User or recipe not found' });
+    }
+    await Favorite.destroy({ where: { userId, recipyId: id } });
     return response.status(204).end();
   } catch (error) {
     return response.status(400).json({ error: error.message });
