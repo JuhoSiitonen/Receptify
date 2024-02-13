@@ -131,4 +131,38 @@ export const deleteSubscription = (id) => {
     }
 }
 
+export const addFavorite = (id) => {
+    return async dispatch => {
+        try {
+            await userService.addFavorite(id)
+            dispatch(addNotification({
+                message: 'Favorite added', 
+                error: false}));
+        } catch (error) {
+            dispatch(addNotification({
+                message: 'Favorite could not be added', 
+                error: true}));
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const deleteFavorite = (id) => {
+    return async dispatch => {
+        try {
+            await userService.deleteFavorite(id)
+            dispatch(addNotification({
+                message: 'Favorite deleted', 
+                error: false}));
+        } catch (error) {
+            dispatch(addNotification({
+                message: 'Favorite could not be deleted', 
+                error: true}));
+            console.log(error)
+            throw error
+        }
+    }
+}
+
 export default userSlice.reducer

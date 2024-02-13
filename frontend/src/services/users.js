@@ -47,4 +47,25 @@ const signup = async newObject => {
     return request.data
   }
 
-  export default { signup, deleteUser, logoutUser, session, getUserRecipies, addSubscription, deleteSubscription, getUserInfo }
+  const addFavorite = async (id) => {
+    const response = await axios.post(`${baseUrl}/favorites/${id}`)
+    return response.data
+  }
+
+  const deleteFavorite = async (id) => {
+    const request = await axios.delete(`${baseUrl}/favorites/${id}`)
+    return request.data
+  }
+
+  export default { 
+    signup, 
+    deleteUser, 
+    logoutUser, 
+    session, 
+    getUserRecipies, 
+    addSubscription, 
+    deleteSubscription, 
+    getUserInfo,
+    addFavorite,
+    deleteFavorite
+  }

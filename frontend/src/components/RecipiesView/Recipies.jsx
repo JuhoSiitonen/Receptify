@@ -4,6 +4,7 @@ import SingleRecipy from "./SingleRecipy"
 import Togglable from "../Togglable"
 import Comment from "./Comment"
 import Rating from "./Rating"
+import FavoriteButton from "./FavoriteButton"
 
 const Recipies = (props) => {
     const recipies = props.recipies
@@ -17,6 +18,7 @@ const Recipies = (props) => {
                     <button onClick={() => navigate(`/users/${user.id}/view`)}>View User
                     </button>
                 )}
+                <FavoriteButton recipyId={id} />
                 <Togglable buttonLabel="Comment">
                     <Comment recipyId={id} />
                 </Togglable>
