@@ -7,6 +7,7 @@ import UserInfo from "./UserInfo";
 import Recipies from "../Recipies";
 import LoadingSpinner from "../../LoadingSpinner";
 import AddSubscriptionButton from "./AddSubscriptionButton";
+import Togglable from "../../Togglable";
 
 const ViewUser = () => {
     const [userInfo, setUserInfo] = useState(null)
@@ -26,17 +27,23 @@ const ViewUser = () => {
         return <LoadingSpinner />;
     }
 
-    return (
-        <div>
-            <UserInfo />
-            {user.id === userId && <h2>Your recipies:</h2>}
-            {user.id !== userId && (
+    const userSubscribe = () => {
+        return (
             <div>
                 <AddSubscriptionButton friendId={userId} />
                 <h2>Recipies by :</h2>
             </div>
-            )}
-            <Recipies recipies={recipies}/>
+        )
+    }
+
+    return (
+        <div>
+            <UserInfo />
+            {user.id === userId && <h2>Your recipies:</h2>}
+            {user.id !== userId && (userSubscribe())}
+            <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies">
+                <Recipies recipies={recipies} inViewUser={true}/>
+            </Togglable>
         </div>
     )
 }
