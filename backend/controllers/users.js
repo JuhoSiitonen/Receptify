@@ -67,7 +67,7 @@ userRouter.delete("/subscriptions/:id", async (request, response) => {
   }
 })
 
-userRouter.post("/favorite/:id", async (request, response) => {
+userRouter.post("/favorites/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
     const { id } = request.params;
@@ -85,9 +85,10 @@ userRouter.post("/favorite/:id", async (request, response) => {
   }
 })
 
-userRouter.delete("/favorite/:id", async (request, response) => {
+userRouter.delete("/favorites/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
+
     const { id } = request.params;
     const recipe = await Recipy.findByPk(id);
     if (!userId || !recipe) {
