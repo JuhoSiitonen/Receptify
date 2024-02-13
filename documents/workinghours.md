@@ -37,6 +37,6 @@ Month total : 65h
 - 1h 9.2: Debugging uploadcare context provider 
 - 1h 11.2: Switched to using Uploadcare React widget. 
 - 3h 12.2: Uploadcare pictures showcased in recipiesview, also added basic support for adding friends. 
-- 1h 13.2: Friends table changed to subscriptions, error messages for user in notifications component. 
+- 3h 13.2: Friends table changed to subscriptions, favorites table and support within front and backend.  
 
-Total hours: 86h
+Total hours: 88h

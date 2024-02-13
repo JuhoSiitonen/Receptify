@@ -132,8 +132,12 @@
     - Frontend reducers added to modify user reducer state where current users friends are stored.
 - 13.2 : 
     - Changing the "friends" table to a more suitable name "subscriptions", changes in backend and frontend.
-    - Subscribing added in userReducer to give user meaningful error messages
-    
+    - Subscribing added in userReducer to give user meaningful error messages.
+    - Togglable component made more functional with props for cancel button text and cancel button location. 
+    - Added database table for favorites where a users favorite recipies are listed. 
+    - Frontend services and reducers added for favorites.
+    - Small refactoring within RecipiesView components to use subscription button and favorite buttons. 
+
 
  
 
