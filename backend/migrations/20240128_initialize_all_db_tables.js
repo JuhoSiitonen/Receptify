@@ -84,7 +84,7 @@ module.exports = {
                 type: DataTypes.TEXT,
             },
         })
-        await queryInterface.createTable('friends', {
+        await queryInterface.createTable('subscriptions', {
           user_id_1: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -260,6 +260,6 @@ module.exports = {
         await queryInterface.dropTable('recipy_categories')
         await queryInterface.dropTable('comments')
         await queryInterface.dropTable('ratings')
-        await queryInterface.dropTable('friends')
-    }
+        await queryInterface.dropTable('subscriptions')
+      }
 }

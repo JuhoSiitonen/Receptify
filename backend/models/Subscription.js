@@ -1,15 +1,13 @@
 const { Model, DataTypes } = require('sequelize');
 const { sequelize } = require('../utils/db');
 
-class RecipyCategory extends Model {}
+class Subscription extends Model {}
 
-class Friend extends Model {}
-
-Friend.init({}, {
+Subscription.init({}, {
     sequelize,
     underscored: true,
     timestamps: false,
     modelName: 'friend'
     });
 
-module.exports = Friend;
+module.exports = Subscription;

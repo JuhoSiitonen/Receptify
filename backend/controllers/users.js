@@ -1,6 +1,6 @@
 const userRouter = require("express").Router();
 const { response } = require("express");
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Friend } = require("../models");
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription } = require("../models");
 
 userRouter.get("/", async (request, response) => {
   const users = await User.findAll();
@@ -28,7 +28,7 @@ userRouter.post("/", async (request, response) => {
     }
 })
 
-userRouter.post("/friends/:id", async (request, response) => {
+userRouter.post("/subscriptions/:id", async (request, response) => {
     try {
       
       const userId = request.session.userId;
@@ -40,17 +40,17 @@ userRouter.post("/friends/:id", async (request, response) => {
       if (!user || !friend) {
         return response.status(404).json({ error: 'User not found' });
       }
-      await Friend.create({ 
+      await Subscription.create({ 
         user_id_1: userId,
         user_id_2: id,
       });
-      return response.status(201).json({ message: 'Friend added' });
+      return response.status(201).json({ message: 'Subscription added' });
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
 })
 
-userRouter.delete("/friends/:id", async (request, response) => {
+userRouter.delete("/subscriptions/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
     const friendId = request.params.id;
@@ -59,7 +59,7 @@ userRouter.delete("/friends/:id", async (request, response) => {
     if (!user || !friend) {
       return response.status(404).json({ error: 'User not found' });
     }
-    await Friend.destroy({ where: { userId1: userId, userId2: friendId } });
+    await Subscription.destroy({ where: { userId1: userId, userId2: friendId } });
     return response.status(204).end();
   } catch (error) {
     return response.status(400).json({ error: error.message });
