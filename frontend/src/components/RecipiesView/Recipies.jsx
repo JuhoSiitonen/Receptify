@@ -11,9 +11,6 @@ const Recipies = (props) => {
     const user = useSelector(state => state.user)
 
     const userActions = ({ id, user }) => {
-        const handleViewUser = () => {
-            navigate(`/users/${user.id}/view`)
-        }
         return (
             <div>
                 {!props.inViewUser && (
