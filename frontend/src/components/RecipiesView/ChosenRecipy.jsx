@@ -37,7 +37,7 @@ const ChosenRecipy = () => {
         <div>
             <h2>{recipy.title}</h2>
             <SingleRecipy recipy={recipy} />
-            <Togglable buttonLabel="Show comments">
+            <Togglable buttonLabel="Show comments" cancelLabel="Hide comments" topCancel={true}>
                 <AllComments comments={comments} user={user}/>
             </Togglable>
             {user && user.id === recipy.user.id && (
