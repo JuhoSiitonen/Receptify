@@ -106,9 +106,8 @@ export const addSubscription = (id) => {
                 error: false}));
         } catch (error) {
             dispatch(addNotification({
-                message: 'Subscription could not be added', 
+                message: `${error.response.data.error}`, 
                 error: true}));
-            console.log(error)
             throw error
         }
     }

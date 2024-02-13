@@ -1,13 +1,20 @@
 import { useState } from 'react'
-import userService from '../../../services/users'
+import { useDispatch } from 'react-redux'
+import { addSubscription } from '../../../reducers/userReducer'
 
 const AddSubscriptionButton = ({ friendId }) => {
     const [buttonText, setButtonText] = useState('Subscribe')
+    const dispatch = useDispatch()
+
 
     const handleAddSubscription = async (e) => {
         e.preventDefault()
-        await userService.addSubscription(friendId)
-        setButtonText('Subscription added')
+        try {
+            await dispatch(addSubscription(friendId))
+            setButtonText('Subscription added')
+        }catch (error) {
+            console.log(error)
+        }
     }
 
     return (
