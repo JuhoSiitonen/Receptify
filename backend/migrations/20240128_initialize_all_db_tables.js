@@ -85,7 +85,7 @@ module.exports = {
             },
         })
         await queryInterface.createTable('subscriptions', {
-          user_id_1: {
+          subscriber_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -93,7 +93,7 @@ module.exports = {
                 key: 'id',
             },
           },
-          user_id_2: {
+          publisher_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {

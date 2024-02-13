@@ -1,5 +1,4 @@
 const userRouter = require("express").Router();
-const { response } = require("express");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription } = require("../models");
 
 userRouter.get("/", async (request, response) => {
@@ -30,19 +29,21 @@ userRouter.post("/", async (request, response) => {
 
 userRouter.post("/subscriptions/:id", async (request, response) => {
     try {
-      
       const userId = request.session.userId;
       const { id } = request.params;
       console.log('userId:', userId)
       console.log('id:', id)
-      const user = await User.findByPk(userId);
       const friend = await User.findByPk(id);
-      if (!user || !friend) {
+      const subscribed = await Subscription.findOne({ where: { subscriberId: userId, publisherId: id } });
+      if (!userId || !friend) {
         return response.status(404).json({ error: 'User not found' });
       }
+      if (subscribed) {
+        return response.status(400).json({ error: 'Already subscribed' });
+      }
       await Subscription.create({ 
-        user_id_1: userId,
-        user_id_2: id,
+        subscriberId: userId,
+        publisherId: id,
       });
       return response.status(201).json({ message: 'Subscription added' });
     } catch (error) {

@@ -15,8 +15,8 @@ Recipy.belongsTo(User);
 User.belongsToMany(User, { 
     through: Subscription, 
     as: 'subscriptions',
-    foreignKey: 'user_id_1', 
-    otherKey: 'user_id_2'
+    foreignKey: 'subscriberId', 
+    otherKey: 'publisherId'
  });
 
 RecipyIngredient.belongsTo(Recipy);
