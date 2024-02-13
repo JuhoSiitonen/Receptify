@@ -130,6 +130,11 @@
     - Endpoints for adding and deleting friends with a userinfo get endpoint.
     - Frontend Axios services for deleting and adding friends.
     - Frontend reducers added to modify user reducer state where current users friends are stored.
+- 13.2 : 
+    - Changing the "friends" table to a more suitable name "subscriptions", changes in backend and frontend.
+    - Subscribing added in userReducer to give user meaningful error messages
+    
+
  
 
 
