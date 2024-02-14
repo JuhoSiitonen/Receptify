@@ -35,7 +35,7 @@ const ViewUser = () => {
     const userSubscribe = () => {
         return (
             <div>
-                <AddSubscriptionButton friendId={userId} />
+                <AddSubscriptionButton friendId={userId} subscriptionStatus={true} />
                 <h2>Recipies by {userInfo.username}:</h2>
             </div>
         )

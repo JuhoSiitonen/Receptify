@@ -1,30 +1,35 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addSubscription } from '../../../reducers/userReducer'
+import { addSubscription, deleteSubscription } from '../../../reducers/userReducer'
 
-const AddSubscriptionButton = ({ friendId }) => {
-    const [buttonText, setButtonText] = useState('Subscribe')
-    const [isSubscribed, setIsSubscribed] = useState(false)
+const AddSubscriptionButton = ({ friendId, subscriptionStatus }) => {
+    const [isSubscribed, setIsSubscribed] = useState(subscriptionStatus)
     const dispatch = useDispatch()
-
 
     const handleAddSubscription = async (e) => {
         e.preventDefault()
         try {
             await dispatch(addSubscription(friendId))
-            setButtonText('Subscription added')
             setIsSubscribed(true)
         }catch (error) {
             console.log(error)
-            setButtonText('Subscribed')
-            setIsSubscribed(true)
+        }
+    }
+
+    const handleDeleteSubscription = async (e) => {
+        e.preventDefault()
+        try {
+            await dispatch(deleteSubscription(friendId))
+            setIsSubscribed(false)
+        }catch (error) {
+            console.log(error)
         }
     }
 
     return (
         <div>
-            {!isSubscribed && <button onClick={handleAddSubscription}>{buttonText}</button>}
-            {isSubscribed && <button disabled>{buttonText}</button>}
+            {!isSubscribed && <button onClick={handleAddSubscription}>Subscribe</button>}
+            {isSubscribed && <button onClick={handleDeleteSubscription}>Unsubscribe</button>}
         </div>
     )
 }
