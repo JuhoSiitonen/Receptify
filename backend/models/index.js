@@ -24,6 +24,11 @@ User.belongsToMany(User, {
     as: 'favorites'
  })
 
+ User.belongsToMany(Recipy, {
+    through: Favorite,
+    as: 'userFavorites'
+ })
+
 RecipyIngredient.belongsTo(Recipy);
 RecipyIngredient.belongsTo(Ingredient);
 Recipy.hasMany(RecipyIngredient);
