@@ -55,12 +55,11 @@ userRouter.delete("/subscriptions/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
     const friendId = request.params.id;
-    const user = await User.findByPk(userId);
     const friend = await User.findByPk(friendId);
-    if (!user || !friend) {
+    if (!userId || !friend) {
       return response.status(404).json({ error: 'User not found' });
     }
-    await Subscription.destroy({ where: { user_id_1: userId, user_id_2: friendId } });
+    await Subscription.destroy({ where: { subscriberId: userId, publisherId: friendId } });
     return response.status(204).end();
   } catch (error) {
     return response.status(400).json({ error: error.message });
@@ -88,7 +87,6 @@ userRouter.post("/favorites/:id", async (request, response) => {
 userRouter.delete("/favorites/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
-
     const { id } = request.params;
     const recipe = await Recipy.findByPk(id);
     if (!userId || !recipe) {
