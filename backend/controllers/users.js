@@ -70,15 +70,21 @@ userRouter.post("/favorites/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
     const { id } = request.params;
+    let favorites = JSON.parse(request.session.userFavorites);
     const recipe = await Recipy.findByPk(id);
     if (!userId || !recipe) {
       return response.status(404).json({ error: 'User or recipe not found' });
+    }
+    if (favorites.filter(f => f.id === id)) {
+      return response.status(400).json({ error: 'Recipe already in favorites' });
     }
     await Favorite.create({
       userId,
       recipyId: id,
     });
-    return response.status(201).json({ message: 'Favorite added' });
+    favorites.push({ id: recipe.id, title: recipe.title });
+    request.session.userFavorites = JSON.stringify(favorites);
+    return response.status(201).json({ id: recipe.id, title: recipe.title});
   } catch (error) {
     return response.status(400).json({ error: error.message });
   }
@@ -88,10 +94,15 @@ userRouter.delete("/favorites/:id", async (request, response) => {
   try {
     const userId = request.session.userId;
     const { id } = request.params;
-    const recipe = await Recipy.findByPk(id);
-    if (!userId || !recipe) {
-      return response.status(404).json({ error: 'User or recipe not found' });
+    if (!userId) {
+      return response.status(404).json({ error: 'User not found' });
     }
+    let favorites = JSON.parse(request.session.userFavorites);
+    if (!favorites.filter(f => f.id === id)) {
+      return response.status(404).json({ error: 'Recipe is not in favorites' });
+    }
+    favorites = favorites.filter(f => f.id !== id);
+    request.session.userFavorites = JSON.stringify(favorites);
     await Favorite.destroy({ where: { userId, recipyId: id } });
     return response.status(204).end();
   } catch (error) {
@@ -103,25 +114,6 @@ userRouter.get("/session", async (request, response) => {
   try {
     const sess =  request.session;
     if (sess.userId) {
-      /*
-      currentUser = await User.findByPk( sess.userId, 
-        { attributes: { exclude: ['password'] },
-          include: [
-            { model: User, 
-              as: 'subscriptions', 
-              attributes: ["id", "username"],
-              through: {
-                attributes: []
-              }, },
-            { model: Recipy, 
-              as: 'userFavorites', 
-              attributes: ["id", "title"],
-              through: {
-                attributes: []
-              }, },
-          ],
-        });
-      */
       const currentUser = {
         id: sess.userId,
         username: sess.username,
