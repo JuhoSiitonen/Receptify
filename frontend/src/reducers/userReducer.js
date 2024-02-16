@@ -14,16 +14,30 @@ const userSlice = createSlice({
             return null
         },
         addNewSubscription(state, action) {
-            state.subscriptions.push(action.payload)
+            state.user.subscriptions.push(action.payload)
         },
         deleteSubscriptions(state, action) {
             const id = action.payload
-            state.subscriptions = state.subscriptions.filter(f => f.id !== id)
-        }
+            state.user.subscriptions = state.user.subscriptions.filter(f => f.id !== id)
+        },
+        addNewFavorite(state, action) {
+            state.user.userFavorites.push(action.payload)
+        },
+        deleteFavorites(state, action) {
+            const id = action.payload
+            state.user.userFavorites = state.user.userFavorites.filter(f => f.id !== id)
+        },
     },
 })
 
-export const { setUser, removeUser, addNewSubscription, deleteSubscriptions } = userSlice.actions
+export const { 
+    setUser, 
+    removeUser, 
+    addNewSubscription,
+    deleteSubscriptions,
+    addNewFavorite,
+    deleteFavorites
+ } = userSlice.actions
 
 export const login = (credentials) => {
     return async dispatch => {
@@ -134,7 +148,8 @@ export const deleteSubscription = (id) => {
 export const addFavorite = (id) => {
     return async dispatch => {
         try {
-            await userService.addFavorite(id)
+            const newFavorite = await userService.addFavorite(id)
+            dispatch(addNewFavorite(newFavorite))
             dispatch(addNotification({
                 message: 'Favorite added', 
                 error: false}));
@@ -152,6 +167,7 @@ export const deleteFavorite = (id) => {
     return async dispatch => {
         try {
             await userService.deleteFavorite(id)
+            dispatch(deleteFavorites(id))
             dispatch(addNotification({
                 message: 'Favorite deleted', 
                 error: false}));

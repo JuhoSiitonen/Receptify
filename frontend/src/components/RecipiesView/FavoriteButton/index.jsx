@@ -1,23 +1,38 @@
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
-import { addFavorite } from '../../../reducers/userReducer'
+import { useEffect, useState } from 'react'
+import { addFavorite, deleteFavorite } from '../../../reducers/userReducer'
 
-const FavoriteButton = ({ recipyId }) => {
-    const [buttonText, setButtonText] = useState('Favorite')
-    const [isFavorite, setIsFavorite] = useState(false)
+const FavoriteButton = ({ recipyId, user }) => {
+    const [buttonText, setButtonText] = useState('')
+    const [isFavorite, setIsFavorite] = useState(user.userFavorites.some(f => f.id === recipyId))
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (isFavorite) {
+            setButtonText('Remove favorite')
+        } else {
+            setButtonText('Favorite')
+        }
+    }, [isFavorite])
 
     const handleClick = async () => {
         console.log('Favorite button clicked')
         await dispatch(addFavorite(recipyId))
-        setButtonText('Favorited')
+        setButtonText('Remove favorite')
         setIsFavorite(true)
+    }
+
+    const handleDeleteClick = async () => {
+        console.log('Favorite button clicked')
+        await dispatch(deleteFavorite(recipyId))
+        setButtonText('Favorite')
+        setIsFavorite(false)
     }
 
     return (
         <div>
             {!isFavorite && <button onClick={handleClick}>{buttonText}</button>}
-            {isFavorite && <button disabled>{buttonText}</button>}
+            {isFavorite && <button onClick={handleDeleteClick}>{buttonText}</button>}
         </div>
     )
 

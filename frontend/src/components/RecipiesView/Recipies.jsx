@@ -11,19 +11,19 @@ const Recipies = (props) => {
     const navigate = useNavigate()
     const user = useSelector(state => state.user)
 
-    const userActions = ({ id, user }) => {
+    const userActions = ( recipe, user ) => {
         return (
             <div>
                 {!props.inViewUser && (
-                    <button onClick={() => navigate(`/users/${user.id}/view`)}>View User
+                    <button onClick={() => navigate(`/users/${recipe.user.id}/view`)}>View User
                     </button>
                 )}
-                <FavoriteButton recipyId={id} />
+                <FavoriteButton recipyId={recipe.id} user={user} />
                 <Togglable buttonLabel="Comment">
-                    <Comment recipyId={id} />
+                    <Comment recipyId={recipe.id} />
                 </Togglable>
                  <Togglable buttonLabel="Rate">
-                    <Rating  recipyId={id} />
+                    <Rating  recipyId={recipe.id} />
                 </Togglable>
             </div>
         )
@@ -35,7 +35,7 @@ const Recipies = (props) => {
                 <div key={recipe.id}>
                     <Link to={`/recipes/${recipe.id}`}><h2>{recipe.title}</h2></Link>
                     <SingleRecipy recipy={recipe} />
-                    {user && user.id !== recipe.user.id && userActions(recipe)}
+                    {user && user.id !== recipe.user.id && userActions(recipe, user)}
                 </div>
             ))}
         </div>
