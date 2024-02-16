@@ -4,8 +4,9 @@
 - [x] Users can sign in
 - [x] Users can log in
 - [x] Users can post recipies
-- [ ] User can post pictures of the recipy
-- [ ] User sees clear error and success notifications upon actions
+- [x] User can post pictures of the recipy
+    - [ ] User can update said pictures
+- [x] User sees clear error and success notifications upon actions
 - [x] User can update and delete their own recipies
 - [ ] Users can view recipies in a scrollable list
     - [x] Recipy view
@@ -33,9 +34,11 @@
     - [x] User can't rate own recipies
     - [x] Rating average is shown to all users
     - [x] Rating only for logged in users
-- [ ] Users can like recipies 
+- [ ] Users can favorite recipies 
 - [ ] User can add recipies as favorites
-- [ ] User can follow other users recipy posts
+- [ ] User can subscribe to other users recipy posts
+    - [ ] While using the app user can get notifications on new recipies from subscribed users
+    - [ ] User can see a list of newest recipies from subscribed users
 
 ## Technical requirements
 - Token based authentication for requests

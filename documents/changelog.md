@@ -137,10 +137,9 @@
     - Added database table for favorites where a users favorite recipies are listed. 
     - Frontend services and reducers added for favorites.
     - Small refactoring within RecipiesView components to use subscription button and favorite buttons. 
-
-
- 
-
-
-    
+- 14.2 : 
+    - Small changes in Favorites and Subscriptions models to be able to query them inside a user related query.
+    - Favorites and subscriptions added to Redux state.
+- 16.2 : 
+    - Redis state is updated everytime a new favorite or subscription is added, from here it is sent to Redux state via session endpoint which is called on refresh. 
     

@@ -37,6 +37,8 @@ Month total : 65h
 - 1h 9.2: Debugging uploadcare context provider 
 - 1h 11.2: Switched to using Uploadcare React widget. 
 - 3h 12.2: Uploadcare pictures showcased in recipiesview, also added basic support for adding friends. 
-- 3h 13.2: Friends table changed to subscriptions, favorites table and support within front and backend.  
+- 3h 13.2: Friends table changed to subscriptions, favorites table and support within front and backend.
+- 1h 14.2: Adding user favorites and subscriptions to Redux state and Redis session. 
+- 2h 16.2: Debugging Redux and Redis to get favorites and subscriptions working correctly.  
 
-Total hours: 88h
+Total hours: 91h
