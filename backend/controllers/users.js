@@ -103,18 +103,32 @@ userRouter.get("/session", async (request, response) => {
   try {
     const sess =  request.session;
     if (sess.userId) {
+      /*
       currentUser = await User.findByPk( sess.userId, 
         { attributes: { exclude: ['password'] },
           include: [
             { model: User, 
               as: 'subscriptions', 
-              attributes: ["publisherId"],
+              attributes: ["id", "username"],
               through: {
                 attributes: []
               }, },
-            { model: Recipy, as: 'userFavorites', attributes: [] },
+            { model: Recipy, 
+              as: 'userFavorites', 
+              attributes: ["id", "title"],
+              through: {
+                attributes: []
+              }, },
           ],
         });
+      */
+      const currentUser = {
+        id: sess.userId,
+        username: sess.username,
+        admin: sess.admin,
+        subscriptions: JSON.parse(sess.subscriptions),
+        userFavorites: JSON.parse(sess.userFavorites),
+      }
       console.log('currentUser:', currentUser)      
       return response.status(200).json(currentUser);
     }
