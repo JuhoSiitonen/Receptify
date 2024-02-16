@@ -21,11 +21,13 @@ const userSlice = createSlice({
             state.user.subscriptions = state.user.subscriptions.filter(f => f.id !== id)
         },
         addNewFavorite(state, action) {
-            state.user.userFavorites.push(action.payload)
+            state.userFavorites?.push(action.payload)
         },
         deleteFavorites(state, action) {
             const id = action.payload
-            state.user.userFavorites = state.user.userFavorites.filter(f => f.id !== id)
+            console.log('id:', id)
+            console.log('state.userFavorites:', state.userFavorites)
+            state.userFavorites = state.userFavorites?.filter(f => f.id !== id)
         },
     },
 })
@@ -149,6 +151,7 @@ export const addFavorite = (id) => {
     return async dispatch => {
         try {
             const newFavorite = await userService.addFavorite(id)
+            console.log('newFavorite:', newFavorite)
             dispatch(addNewFavorite(newFavorite))
             dispatch(addNotification({
                 message: 'Favorite added', 
