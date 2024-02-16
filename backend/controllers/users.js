@@ -75,7 +75,7 @@ userRouter.post("/favorites/:id", async (request, response) => {
     if (!userId || !recipe) {
       return response.status(404).json({ error: 'User or recipe not found' });
     }
-    if (favorites.filter(f => f.id === id)) {
+    if (favorites.some(f => f.id === id)) {
       return response.status(400).json({ error: 'Recipe already in favorites' });
     }
     await Favorite.create({
@@ -102,6 +102,7 @@ userRouter.delete("/favorites/:id", async (request, response) => {
       return response.status(404).json({ error: 'Recipe is not in favorites' });
     }
     favorites = favorites.filter(f => f.id !== id);
+    console.log('favorites:', favorites)
     request.session.userFavorites = JSON.stringify(favorites);
     await Favorite.destroy({ where: { userId, recipyId: id } });
     return response.status(204).end();
