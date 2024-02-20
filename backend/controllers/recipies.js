@@ -16,7 +16,7 @@ recipyRouter.get("/", async (req, res) => {
     return res.status(200).json(recipes);
   } catch (error) {
     console.error('Error fetching recipes:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500);
   }
 });
 
@@ -77,7 +77,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
     return res.status(201).json(returnRecipy);
   } catch (error) {
     console.error('Error creating recipe:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500);
   }
 });
 
@@ -99,7 +99,7 @@ recipyRouter.delete("/:id", sessionChecker, async (req, res) => {
     return res.status(204).end();
   } catch (error) {
     console.error('Error deleting recipe:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500);
   }
 });
 
@@ -193,7 +193,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
     
   } catch (error) {
     console.error('Error updating recipe:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500);
   }
 });
 

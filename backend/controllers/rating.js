@@ -1,6 +1,7 @@
 const ratingRouter = require("express").Router();
 const { Rating, User, Recipy } = require("../models");
 const { sequelize } = require('../utils/db');
+const { sessionChecker } = require("../utils/middleware");
 
 ratingRouter.get("/:id", async (req, res) => {
     try {
@@ -18,19 +19,14 @@ ratingRouter.get("/:id", async (req, res) => {
       res.status(200).json({ averageRating });
       } catch (error) {
       console.error('Error calculating average rating for recipe:', error);
-      throw error;
+      return res.status(500);
     }
   });
   
-  ratingRouter.post("/:id", async (req, res) => {
+  ratingRouter.post("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
       const { userId, rating } = req.body;
-  
-      const user = await User.findByPk(userId);
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
   
       const recipe = await Recipy.findByPk(id);
       if (!recipe) {
@@ -40,7 +36,7 @@ ratingRouter.get("/:id", async (req, res) => {
       const newRating = await Rating.create({
         rating,
         visible: true,
-        userId: user.id, 
+        userId: req.session.userId, 
         recipyId: recipe.id, 
       });
 
@@ -59,19 +55,14 @@ ratingRouter.get("/:id", async (req, res) => {
       return res.status(201).json(averageRating);
     } catch (error) {
       console.error('Error creating rating:', error);
-      return res.status(500).json({ error: 'Internal server error' });
+      return res.status(500);
     }
   });
 
-ratingRouter.put("/:id", async (req, res) => {
+ratingRouter.put("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
       const { userId, rating } = req.body;
-  
-      const user = await User.findByPk(userId);
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
   
       const recipe = await Recipy.findByPk(id);
       if (!recipe) {
@@ -79,7 +70,7 @@ ratingRouter.put("/:id", async (req, res) => {
       }
   
       const existingRating = await Rating.findOne({
-        where: { userId: user.id, recipyId: recipe.id },
+        where: { userId: req.session.userId, recipyId: recipe.id },
       });
   
       if (!existingRating) {
@@ -94,11 +85,11 @@ ratingRouter.put("/:id", async (req, res) => {
       return res.status(200).json(returnRating);
     } catch (error) {
       console.error('Error updating rating:', error);
-      return res.status(500).json({ error: 'Internal server error' });
+      return res.status(500);
     }
   });
 
-  ratingRouter.delete("/:id", async (req, res) => {
+  ratingRouter.delete("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
   
@@ -112,7 +103,7 @@ ratingRouter.put("/:id", async (req, res) => {
       return res.status(204).end();
     } catch (error) {
       console.error('Error deleting rating:', error);
-      return res.status(500).json({ error: 'Internal server error' });
+      return res.status(500);
     }
   });
 

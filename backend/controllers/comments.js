@@ -1,7 +1,8 @@
 const commentRouter = require('express').Router();
 const { Comment, User, Recipy } = require('../models');
+const { sessionChecker } = require('../utils/middleware');
 
-commentRouter.get("/:id", async (req, res) => {
+commentRouter.get("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
   
@@ -17,15 +18,10 @@ commentRouter.get("/:id", async (req, res) => {
     }
   });
 
-commentRouter.post("/:id", async (req, res) => {
+commentRouter.post("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
       const { userId, content } = req.body;
-  
-      const user = await User.findByPk(userId);
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
   
       const recipe = await Recipy.findByPk(id);
       if (!recipe) {
@@ -36,7 +32,7 @@ commentRouter.post("/:id", async (req, res) => {
         comment: content,
         date: new Date(),
         visible: true,
-        userId: user.id, 
+        userId: req.session.userId, 
         recipyId: recipe.id, 
       });
   
@@ -51,15 +47,10 @@ commentRouter.post("/:id", async (req, res) => {
     }
   });
 
-commentRouter.put("/:id", async (req, res) => {
+commentRouter.put("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
       const { userId, content } = req.body;
-  
-      const user = await User.findByPk(userId);
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
   
       const recipe = await Recipy.findByPk(id);
       if (!recipe) {
@@ -67,7 +58,7 @@ commentRouter.put("/:id", async (req, res) => {
       }
   
       const existingComment = await Comment.findOne({
-        where: { userId: user.id, recipyId: recipe.id },
+        where: { userId: req.session.userId, recipyId: recipe.id },
       });
   
       if (!existingComment) {
@@ -88,7 +79,7 @@ commentRouter.put("/:id", async (req, res) => {
     }
   });
 
-commentRouter.delete("/:id", async (req, res) => {
+commentRouter.delete("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
   
