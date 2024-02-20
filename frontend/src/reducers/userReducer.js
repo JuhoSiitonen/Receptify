@@ -14,11 +14,11 @@ const userSlice = createSlice({
             return null
         },
         addNewSubscription(state, action) {
-            state.user.subscriptions.push(action.payload)
+            state.subscriptions?.push(action.payload)
         },
         deleteSubscriptions(state, action) {
             const id = action.payload
-            state.user.subscriptions = state.user.subscriptions.filter(f => f.id !== id)
+            state.subscriptions = state.subscriptions?.filter(f => f.id !== id)
         },
         addNewFavorite(state, action) {
             state.userFavorites?.push(action.payload)
@@ -115,8 +115,8 @@ export const deleteUser = (id) => {
 export const addSubscription = (id) => {
     return async dispatch => {
         try {
-            await userService.addSubscription(id)
-            dispatch(addNewSubscription(id))
+            const newSubscription = await userService.addSubscription(id)
+            dispatch(addNewSubscription(newSubscription))
             dispatch(addNotification({
                 message: 'Subscription added', 
                 error: false}));
