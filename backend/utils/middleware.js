@@ -1,5 +1,12 @@
 const logger = require('./logger')
 
+const sessionChecker = (request, response, next) => {
+    if (request.session.userId) {
+      next();
+    } else {
+      response.status(401).json({ error: 'Unauthorized' });
+    }
+  }
 
 const requestLogger = (request, response, next) => {
     logger.info('Method:', request.method)
@@ -31,4 +38,5 @@ const requestLogger = (request, response, next) => {
     requestLogger,
     unknownEndpoint,
     errorHandler,
+    sessionChecker
   }

@@ -1,4 +1,5 @@
 const recipyRouter = require("express").Router();
+const { sessionChecker } = require("../utils/middleware");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment } = require('../models');
 
 recipyRouter.get("/", async (req, res) => {
@@ -19,23 +20,16 @@ recipyRouter.get("/", async (req, res) => {
   }
 });
 
-recipyRouter.post("/", async (req, res) => {
+recipyRouter.post("/", sessionChecker, async (req, res) => {
   try {
-    const { title, description, instructions, visible, userId, ingredients, categories, pictureUuid } = req.body;
-
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    console.log("picture UUID HERE:", pictureUuid)
+    const { title, description, instructions, visible, ingredients, categories, pictureUuid } = req.body;
 
     const recipe = await Recipy.create({
       title,
       description,
       instructions,
       visible,
-      userId: user.id, 
+      userId: request.session.userId, 
       averageRating: 0,
       pictureUuid
     });
@@ -87,7 +81,7 @@ recipyRouter.post("/", async (req, res) => {
   }
 });
 
-recipyRouter.delete("/:id", async (req, res) => {
+recipyRouter.delete("/:id", sessionChecker, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -109,7 +103,7 @@ recipyRouter.delete("/:id", async (req, res) => {
   }
 });
 
-recipyRouter.put("/:id", async (req, res) => {
+recipyRouter.put("/:id", sessionChecker, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, instructions, date, visible, ingredients, categories } = req.body;
