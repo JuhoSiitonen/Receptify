@@ -1,6 +1,6 @@
 const recipyRouter = require("express").Router();
 const { sessionChecker } = require("../utils/middleware");
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment } = require('../models');
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
 
 recipyRouter.get("/", async (req, res) => {
   try {
@@ -94,6 +94,7 @@ recipyRouter.delete("/:id", sessionChecker, async (req, res) => {
     await RecipyCategory.destroy({ where: { recipyId: recipe.id } });
     await Rating.destroy({ where: { recipyId: recipe.id } });
     await Comment.destroy({ where: { recipyId: recipe.id } });
+    await Favorite.destroy({ where: { recipyId: recipe.id } });
     await recipe.destroy();
 
     return res.status(204).end();
@@ -173,11 +174,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
           categoryId: category.id, 
         });
       } else {
-        await recipeCategory.update({
-          visible: true,
-          recipyId: recipe.id, 
-          categoryId: category.id, 
-        });
+        await recipeCategory.update({ visible: true, recipyId: recipe.id, categoryId: category.id });
       }
     }
 
