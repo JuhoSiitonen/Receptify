@@ -15,14 +15,16 @@ const FavoriteButton = ({ recipyId, user }) => {
         }
     }, [isFavorite])
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
+        e.preventDefault()
         console.log('Favorite button clicked')
         await dispatch(addFavorite(recipyId))
         setButtonText('Remove favorite')
         setIsFavorite(true)
     }
 
-    const handleDeleteClick = async () => {
+    const handleDeleteClick = async (e) => {
+        e.preventDefault()
         console.log('Favorite button clicked')
         await dispatch(deleteFavorite(recipyId))
         setButtonText('Favorite')

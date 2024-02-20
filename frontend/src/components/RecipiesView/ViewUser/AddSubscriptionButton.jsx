@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addSubscription, deleteSubscription } from '../../../reducers/userReducer'
 
-const AddSubscriptionButton = ({ friendId, subscriptionStatus }) => {
-    const [isSubscribed, setIsSubscribed] = useState(subscriptionStatus)
+const AddSubscriptionButton = ({ friendId, user }) => {
+    const [isSubscribed, setIsSubscribed] = useState(user.subscriptions.some(s => s.id === friendId))
     const dispatch = useDispatch()
 
     const handleAddSubscription = async (e) => {
