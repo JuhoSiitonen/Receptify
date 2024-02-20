@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateRecipy } from '../../../reducers/recipyReducer'
+import UploaderWidget from '../../Uploader/UploaderWidget'
 
 const UpdateForm = ({ recipy }) => {
     const [title, setTitle] = useState('')
@@ -12,6 +13,7 @@ const UpdateForm = ({ recipy }) => {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
+    const [photos, setPhotos] = useState("");
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -23,6 +25,7 @@ const UpdateForm = ({ recipy }) => {
         setInstructions(recipy.instructions)
         setCategories(recipy.recipy_categories.map(c => c.category.name))
         setVisible(true)
+        setPhotos(recipy.pictureUuid)
     }
 
     const addIncredient = () => {
@@ -53,7 +56,8 @@ const UpdateForm = ({ recipy }) => {
                 date: new Date().toISOString(),
                 visible: true,
                 ingredients, 
-                categories: categories.map(category => ({ name: category }))
+                categories: categories.map(category => ({ name: category })),
+                pictureUuid: photos
             }))
             navigate(`/recipes/${recipy.id}`)
         }
@@ -108,6 +112,8 @@ const UpdateForm = ({ recipy }) => {
                         </li>
                     ))}
                 </div>
+                <h3>Change picture</h3>
+                <UploaderWidget files={photos} onChange={setPhotos} />
                 <input type="submit" value="Submit" />
             </form>
         </div>

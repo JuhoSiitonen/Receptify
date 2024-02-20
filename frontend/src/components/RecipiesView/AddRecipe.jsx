@@ -13,9 +13,9 @@ const AddRecipe = () => {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [photos, setPhotos] = useState("");
+
     const user = useSelector(state => state.user)
     const navigate = useNavigate()
-
     const dispatch = useDispatch()
 
     const addIncredient = () => {
@@ -30,7 +30,6 @@ const AddRecipe = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("photos state in addrecipy:", photos)
         try {
             const response = await dispatch(createRecipy({
                 title, 
