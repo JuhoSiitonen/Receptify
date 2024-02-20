@@ -31,21 +31,21 @@ userRouter.post("/subscriptions/:id", async (request, response) => {
     try {
       const userId = request.session.userId;
       const { id } = request.params;
-      console.log('userId:', userId)
-      console.log('id:', id)
       const friend = await User.findByPk(id);
-      const subscribed = await Subscription.findOne({ where: { subscriberId: userId, publisherId: id } });
       if (!userId || !friend) {
         return response.status(404).json({ error: 'User not found' });
       }
-      if (subscribed) {
-        return response.status(400).json({ error: 'Already subscribed' });
+      let subscriptions = JSON.parse(request.session.subscriptions);
+      if (!subscriptions.some(s => Number(s.id) === Number(id))) {
+        return response.status(404).json({ error: 'Not subscribed' });
       }
+      subscriptions.push({ id: friend.id, username: friend.username })
+      request.session.subscriptions = JSON.stringify(subscriptions);
       await Subscription.create({ 
         subscriberId: userId,
         publisherId: id,
       });
-      return response.status(201).json({ message: 'Subscription added' });
+      return response.status(201).json({ id: friend.id, username: friend.username });
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
@@ -59,6 +59,12 @@ userRouter.delete("/subscriptions/:id", async (request, response) => {
     if (!userId || !friend) {
       return response.status(404).json({ error: 'User not found' });
     }
+    let sunscriptions = JSON.parse(request.session.subscriptions);
+    if (!sunscriptions.some(s => Number(s.id) === Number(friendId))) {
+      return response.status(404).json({ error: 'Not subscribed' });
+    }
+    const newSubscriptions = sunscriptions.filter(s => Number(s.id) !== Number(friendId));
+    request.session.subscriptions = JSON.stringify(newSubscriptions);
     await Subscription.destroy({ where: { subscriberId: userId, publisherId: friendId } });
     return response.status(204).end();
   } catch (error) {
@@ -101,9 +107,9 @@ userRouter.delete("/favorites/:id", async (request, response) => {
     if (!favorites.filter(f => f.id === id)) {
       return response.status(404).json({ error: 'Recipe is not in favorites' });
     }
-    favorites = favorites.filter(f => f.id !== id);
-    console.log('favorites:', favorites)
-    request.session.userFavorites = JSON.stringify(favorites);
+    const newFavorites = favorites.filter(f => Number(f.id) !== Number(id));
+    console.log('favorites:', newFavorites)
+    request.session.userFavorites = JSON.stringify(newFavorites);
     await Favorite.destroy({ where: { userId, recipyId: id } });
     return response.status(204).end();
   } catch (error) {
