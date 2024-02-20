@@ -142,4 +142,7 @@
     - Favorites and subscriptions added to Redux state.
 - 16.2 : 
     - Redis state is updated everytime a new favorite or subscription is added, from here it is sent to Redux state via session endpoint which is called on refresh. 
+- 20.2 : 
+    - Fixed bug in Redis update logic regarding subscription and favorite deletion. 
+    - Adding and deleting favorites and subscriptions now works and is updated in Redis and Redux.
     
