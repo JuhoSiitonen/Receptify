@@ -36,8 +36,8 @@ userRouter.post("/subscriptions/:id", sessionChecker, async (request, response) 
         return response.status(404).json({ error: 'User not found' });
       }
       let subscriptions = JSON.parse(request.session.subscriptions);
-      if (!subscriptions.some(s => Number(s.id) === Number(id))) {
-        return response.status(404).json({ error: 'Not subscribed' });
+      if (subscriptions.some(s => Number(s.id) === Number(id))) {
+        return response.status(404).json({ error: 'Already subscribed' });
       }
       subscriptions.push({ id: friend.id, username: friend.username })
       request.session.subscriptions = JSON.stringify(subscriptions);
