@@ -29,7 +29,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
       description,
       instructions,
       visible,
-      userId: request.session.userId, 
+      userId: req.session.userId, 
       averageRating: 0,
       pictureUuid
     });
