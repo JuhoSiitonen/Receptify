@@ -125,7 +125,7 @@ userRouter.get("/session", async (request, response) => {
       console.log('currentUser:', currentUser)      
       return response.status(200).json(currentUser);
     }
-    return response.status(200);
+    return response.status(200).json({});
   }
   catch (error) {
     console.error('Error in /session endpoint:', error);

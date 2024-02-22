@@ -59,10 +59,11 @@ export const isUserLogged = () => {
     return async dispatch => {
         try {
             const loggedUserJSON = await userService.session()
-            if (loggedUserJSON) {
-                const user = loggedUserJSON
-                dispatch(setUser(user))
+            if (Object.keys(loggedUserJSON).length === 0 && loggedUserJSON.constructor === Object) {
+                return 
               }
+            const user = loggedUserJSON
+            dispatch(setUser(user))
         } catch (error) {}
     }
   }
