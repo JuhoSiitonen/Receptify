@@ -145,4 +145,9 @@
 - 20.2 : 
     - Fixed bug in Redis update logic regarding subscription and favorite deletion. 
     - Adding and deleting favorites and subscriptions now works and is updated in Redis and Redux.
-    
+    - Middleware for checking user session, added to appropriate endpoints.
+    - Refactoring endpoint controllers.
+    - Updating recipy picture same way as in adding a recipe.
+- 21.2 :
+    - Setting up docker compose, everything else works except session cookies.
+    - Tried having Nginx set CORS headers, modifying cookie settings in session, having backend trust proxy enabled. Nothing works yet.
