@@ -48,6 +48,7 @@ services:
       - 3000:3000
     environment:
       - REACT_APP_BACKEND_URL=http://localhost:8080/api
+      #- UPLOADCARE_PUBLIC_KEY=
   nginx:
     image: nginx:1.20.1
     volumes:
