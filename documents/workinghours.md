@@ -42,5 +42,6 @@ Month total : 65h
 - 2h 16.2: Debugging Redux and Redis to get favorites and subscriptions working correctly.  
 - 2h 20.2: Redis and Redux logic working for favorites and subscriptions.
 - 1h 21.2: Debugging session cookie settings with Nginx setup. 
+- 1h 22.2: Session endpoint had a hidden issue with a pending request, fixed. 
 
-Total hours: 94h
+Total hours: 95h
