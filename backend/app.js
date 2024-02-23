@@ -20,6 +20,8 @@ const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 require('dotenv').config()
 
+app.enable('trust proxy');
+
 app.use(cors({
   credentials: true,
   origin: "http://localhost:5173",
