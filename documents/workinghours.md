@@ -43,5 +43,6 @@ Month total : 65h
 - 2h 20.2: Redis and Redux logic working for favorites and subscriptions.
 - 1h 21.2: Debugging session cookie settings with Nginx setup. 
 - 1h 22.2: Session endpoint had a hidden issue with a pending request, fixed. 
+- 1h 23.2: Session cookies now work with docker compose environment with nginx.
 
-Total hours: 95h
+Total hours: 96h

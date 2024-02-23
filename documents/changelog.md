@@ -153,3 +153,6 @@
     - Tried having Nginx set CORS headers, modifying cookie settings in session, having backend trust proxy enabled. Nothing works yet.
 - 22.2 :
     - Session endpoint was causing a pending request which didn't timeout in regular dev environment but with Nginx it did. resolved by having session endpoint return an empty object in case user isn't logged in and frontend reducer checks the objects keys. 
+- 23.2 : 
+    - Session cookies finally work in a full app docker compose environment, backend enable trust proxy and nginx conf add cookies headers did the trick. 
+    - Dev nevironment now available with "docker compose -f docker-compose.dev.yml up --build"
