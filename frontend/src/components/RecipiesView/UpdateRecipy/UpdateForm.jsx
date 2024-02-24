@@ -14,19 +14,34 @@ const UpdateForm = ({ recipy }) => {
     const [categories, setCategories] = useState([])
     const [visible, setVisible] = useState(false)
     const [photos, setPhotos] = useState("");
+    const [cookingTime, setCookingTime] = useState('00:00')
+    const [error, setError] = useState('')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const isValidTimeFormat = (time) => {
+        const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+        return regex.test(time);
+    };
+
     const setupFields = () => {
+        const formattedTime = recipy.cookingTime.split(':').slice(0, 2).join(':')
+
         setTitle(recipy.title)
         setDescription(recipy.description)
         setIngredients(recipy.recipy_ingredients.map(i => ({ name: i.ingredient.name, amount: i.amount })))
         setInstructions(recipy.instructions)
         setCategories(recipy.recipy_categories.map(c => c.category.name))
         setVisible(true)
+        setCookingTime(formattedTime)
         setPhotos(recipy.pictureUuid)
     }
+
+    const handleCookingTimeChange = (e) => {
+        setCookingTime(e.target.value);
+        setError('');
+      };
 
     const addIncredient = () => {
         setIngredients([...ingredients, ingredient]);
@@ -48,6 +63,12 @@ const UpdateForm = ({ recipy }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+
+        if (!isValidTimeFormat(cookingTime)) {
+            setError('Invalid time format');
+            return;
+        }
+
         try {
             await dispatch(updateRecipy( recipy.id, {
                 title, 
@@ -57,6 +78,7 @@ const UpdateForm = ({ recipy }) => {
                 visible: true,
                 ingredients, 
                 categories: categories.map(category => ({ name: category })),
+                cookingTime,
                 pictureUuid: photos
             }))
             navigate(`/recipes/${recipy.id}`)
@@ -78,6 +100,11 @@ const UpdateForm = ({ recipy }) => {
                 <div>
                     Description:
                     <input value={description} onChange={({ target }) => setDescription(target.value)} />
+                </div>
+                <div>
+                    Cooking time:
+                    <input value={cookingTime} onChange={handleCookingTimeChange} required />
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
                 <div>
                     Ingredients:

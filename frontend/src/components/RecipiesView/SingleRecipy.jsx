@@ -8,8 +8,12 @@ const SingleRecipy = ({ recipy }) => {
     let averageRating = recipy.averageRating
     averageRating !== 0 ? averageRating = Math.round(averageRating*100)/100 : averageRating = 'No ratings yet'
 
+    const timeParts = recipy.cookingTime.split(':');
+    const formattedTime = timeParts.slice(0, 2).join(':');
+
     return (
         <div className="singleRecipy">
+            <h3>Cooking time {formattedTime}</h3>
             <p>{recipy.description}</p>
             {recipy.pictureUuid !== "" ? 
             <img

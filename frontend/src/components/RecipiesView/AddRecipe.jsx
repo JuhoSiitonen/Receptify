@@ -40,6 +40,14 @@ const AddRecipe = () => {
         setCategory('')
     }
 
+    const deleteIngredient = (ingredient) => {
+        setIngredients(ingredients.filter(i => i.name !== ingredient.name))
+    }
+
+    const deleteCategory = (category) => {
+        setCategories(categories.filter(c => c !== category))
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -102,6 +110,7 @@ const AddRecipe = () => {
                 {ingredients.map(ingredient => (
                     <li key={`${ingredient.name}-${ingredient.amount}`}>
                         {ingredient.amount} of {ingredient.name}
+                        <button onClick={() => deleteIngredient(ingredient)} type="button">delete</button>
                     </li>
                 ))}
                 </div>
@@ -114,7 +123,14 @@ const AddRecipe = () => {
                     <input value={category} onChange={({ target }) => setCategory(target.value)} />
                     <button onClick={addCategory} type="button">add</button>
                 </div>
-                <div>Categories: {categories.join(", ")}</div>
+                <div>Categories: 
+                    {categories.map(category => (
+                        <li key={category}>
+                            {category} 
+                            <button onClick={() => deleteCategory(category)} type="button">delete</button>
+                        </li>
+                    ))}
+                </div>
                 <h3>Upload image</h3>
                 <UploaderWidget files={photos} onChange={setPhotos} />
                 <input type="submit" value="Submit" />
