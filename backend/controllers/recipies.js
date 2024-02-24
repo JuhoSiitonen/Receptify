@@ -4,6 +4,12 @@ const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Ra
 
 recipyRouter.get("/", async (req, res) => {
   try {
+    let whereClause = {};
+
+    if (req.query.title) {
+      whereClause = { ...whereClause, title: req.query.title };
+    }
+
     const recipes = await Recipy.findAll({
       include: [
         { model: User,
@@ -11,6 +17,7 @@ recipyRouter.get("/", async (req, res) => {
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },
       ],
+      where: whereClause,
     });
 
     return res.status(200).json(recipes);
