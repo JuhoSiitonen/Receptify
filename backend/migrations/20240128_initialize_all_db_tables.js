@@ -158,6 +158,9 @@ module.exports = {
                 type: DataTypes.TEXT,
                 allowNull: false,
               },
+            unit: {
+                type: DataTypes.TEXT,
+              },
             visible: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
