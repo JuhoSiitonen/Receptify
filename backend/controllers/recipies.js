@@ -36,7 +36,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
     });
 
     for (const ingredientData of ingredients) {
-      const { name, amount } = ingredientData;
+      const { name, amount, unit } = ingredientData;
 
       let ingredient = await Ingredient.findOne({ where: { name } });
       if (!ingredient) {
@@ -45,6 +45,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
 
       await RecipyIngredient.create({
         amount,
+        unit,
         visible: true,
         recipyId: recipe.id, 
         ingredientId: ingredient.id, 
@@ -131,7 +132,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
     }
 
     for (const ingredientData of ingredients) {
-      const { name, amount } = ingredientData;
+      const { name, amount, unit } = ingredientData;
 
       let ingredient = await Ingredient.findOne({ where: { name } });
       if (!ingredient) {
@@ -142,6 +143,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
       if (!recipeIngredient) {
         recipeIngredient = await RecipyIngredient.create({
           amount,
+          unit,
           visible: true,
           recipyId: recipe.id, 
           ingredientId: ingredient.id, 
@@ -149,6 +151,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
       } else {
         await recipeIngredient.update({
           amount,
+          unit,
           visible: true,
           recipyId: recipe.id, 
           ingredientId: ingredient.id, 
