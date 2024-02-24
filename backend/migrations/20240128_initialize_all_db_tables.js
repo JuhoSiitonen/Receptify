@@ -62,6 +62,10 @@ module.exports = {
                 type: DataTypes.FLOAT,
                 allowNull: false,
               },
+            cooking_time: {
+                type: DataTypes.TIME,
+                allowNull: false,
+              },
             user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

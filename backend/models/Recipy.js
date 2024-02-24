@@ -29,6 +29,10 @@ Recipy.init({
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  cookingTime: {
+    type: DataTypes.TIME,
+    allowNull: false,
+  },
   pictureUuid: {
     type: DataTypes.TEXT,
   },
