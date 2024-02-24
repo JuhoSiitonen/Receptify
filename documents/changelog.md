@@ -160,3 +160,4 @@
     - Cooking time column added in recipy table and implemented in the rest of the app with user input validation. 
     - In AddRecipies view ingredients and categories can be removed after initial addition. 
     - Units added to recipy_ingredients table, frontend adjusted to have units tbsp, tsp, g, kg, l, dl, and others.
+    - Endpoint for getting all recipies added with a url queries where clause to filter recipies in backend.
