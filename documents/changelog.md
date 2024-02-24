@@ -156,3 +156,7 @@
 - 23.2 : 
     - Session cookies finally work in a full app docker compose environment, backend enable trust proxy and nginx conf add cookies headers did the trick. 
     - Dev nevironment now available with "docker compose -f docker-compose.dev.yml up --build"
+- 24.2 :
+    - Cooking time column added in recipy table and implemented in the rest of the app with user input validation. 
+    - In AddRecipies view ingredients and categories can be removed after initial addition. 
+    - Units added to recipy_ingredients table, frontend adjusted to have units tbsp, tsp, g, kg, l, dl, and others.

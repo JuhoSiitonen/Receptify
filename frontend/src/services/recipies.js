@@ -1,9 +1,13 @@
 import axios from '../util/apiClient'
 const baseUrl = '/api/recipies'
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getAll = async (query) => {
+  if (query) {
+    const request = await axios.get(`${baseUrl}/?${query}`)
+    return request.data
+  }
+  const request = await axios.get(baseUrl)
+  return request.data
 }
 
 const create = async newObject => {

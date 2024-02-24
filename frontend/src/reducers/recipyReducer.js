@@ -45,10 +45,10 @@ export const createRecipy = (recipy) => {
     }
 }
 
-export const getAllRecipies = () => {
+export const getAllRecipies = (query) => {
     return async dispatch => {
         try {
-            const recipies = await recipyService.getAll()
+            const recipies = await recipyService.getAll(query)
             dispatch(setRecipies(recipies))
         } catch (error) {
             console.log(error)
