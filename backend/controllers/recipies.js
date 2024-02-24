@@ -22,7 +22,7 @@ recipyRouter.get("/", async (req, res) => {
 
 recipyRouter.post("/", sessionChecker, async (req, res) => {
   try {
-    const { title, description, instructions, visible, ingredients, categories, pictureUuid } = req.body;
+    const { title, description, instructions, visible, ingredients, categories, pictureUuid, cookingTime } = req.body;
 
     const recipe = await Recipy.create({
       title,
@@ -31,6 +31,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
       visible,
       userId: req.session.userId, 
       averageRating: 0,
+      cookingTime,
       pictureUuid
     });
 
@@ -107,7 +108,7 @@ recipyRouter.delete("/:id", sessionChecker, async (req, res) => {
 recipyRouter.put("/:id", sessionChecker, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, instructions, date, visible, ingredients, categories, pictureUuid } = req.body;
+    const { title, description, instructions, date, visible, ingredients, categories, pictureUuid, cookingTime } = req.body;
 
     const recipe = await Recipy.findByPk(id);
     if (!recipe) {
@@ -120,6 +121,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
       instructions,
       date,
       visible,
+      cookingTime,
       pictureUuid
     });
 
