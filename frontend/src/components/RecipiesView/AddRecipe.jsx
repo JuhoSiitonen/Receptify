@@ -13,10 +13,22 @@ const AddRecipe = () => {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [photos, setPhotos] = useState("");
+    const [cookingTime, setCookingTime] = useState('00:00')
+    const [error, setError] = useState('')
 
     const user = useSelector(state => state.user)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const isValidTimeFormat = (time) => {
+        const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+        return regex.test(time);
+    };
+
+    const handleCookingTimeChange = (e) => {
+        setCookingTime(e.target.value);
+        setError('');
+      };
 
     const addIncredient = () => {
         setIngredients([...ingredients, ingredient]);
@@ -30,6 +42,12 @@ const AddRecipe = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!isValidTimeFormat(cookingTime)) {
+            setError('Invalid time format');
+            return;
+          }
+        
         try {
             const response = await dispatch(createRecipy({
                 title, 
@@ -39,6 +57,7 @@ const AddRecipe = () => {
                 userId: user.id,
                 ingredients, 
                 categories: categories.map(category => ({ name: category })),
+                cookingTime,
                 pictureUuid: photos
             }))
             setTitle('')
@@ -46,6 +65,7 @@ const AddRecipe = () => {
             setIngredients([])
             setInstructions('')
             setCategories([])
+            setCookingTime('00:00')
             navigate('/recipes')
         }
         catch (error) {
@@ -64,6 +84,11 @@ const AddRecipe = () => {
                 <div>
                     Description:
                     <input value={description} onChange={({ target }) => setDescription(target.value)} />
+                </div>
+                <div>
+                    Cooking time:
+                    <input value={cookingTime} onChange={handleCookingTimeChange} required />
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
                 <div>
                     Ingredients:
