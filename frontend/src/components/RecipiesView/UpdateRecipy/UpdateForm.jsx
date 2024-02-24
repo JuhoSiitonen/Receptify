@@ -8,7 +8,8 @@ const UpdateForm = ({ recipy }) => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [ingredients, setIngredients] = useState([])
-    const [ingredient, setIngredient] = useState({ name: '', amount: '' });
+    const [ingredient, setIngredient] = useState({ name: '', amount: '', unit: ''});
+    const [units] = useState(['tbsp', 'tsp', 'g', 'kg', 'l', 'dl', 'ml', 'pcs', 'cup', '']);
     const [instructions, setInstructions] = useState('')
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
@@ -45,7 +46,7 @@ const UpdateForm = ({ recipy }) => {
 
     const addIncredient = () => {
         setIngredients([...ingredients, ingredient]);
-        setIngredient({ name: '', amount: '' });
+        setIngredient({ name: '', amount: '', unit: ''});
     };
 
     const addCategory = () => {
@@ -112,12 +113,23 @@ const UpdateForm = ({ recipy }) => {
                      placeholder="Ingredient name" />
                     <input value={ingredient.amount} onChange={({ target }) => setIngredient({ ...ingredient, amount: target.value })}
                      placeholder="Amount" />
+                     <select
+                        value={ingredient.unit}
+                        onChange={({ target }) => setIngredient({ ...ingredient, unit: target.value })}
+                    >
+                        <option value="">Select unit</option>
+                        {units.map((unit) => (
+                            <option key={unit} value={unit}>
+                                {unit}
+                            </option>
+                        ))}
+                    </select>
                     <button onClick={addIncredient} type="button">add</button>
                 </div>
                 <div>
                 {ingredients.map(ingredient => (
                     <li key={`${ingredient.name}-${ingredient.amount}`}>
-                        {ingredient.amount} of {ingredient.name}
+                        {ingredient.amount} {ingredient.unit} of {ingredient.name}
                         <button onClick={() => deleteIngredient(ingredient)} type="button">delete</button>
                     </li>
                 ))}

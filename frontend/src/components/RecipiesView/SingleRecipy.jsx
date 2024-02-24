@@ -26,7 +26,7 @@ const SingleRecipy = ({ recipy }) => {
             <ul>
               {recipy.recipy_ingredients.map(ingredient => (
                 <li key={ingredient.id}>
-                  {ingredient.amount} of {ingredient.ingredient.name}
+                  {ingredient.amount} {ingredient.unit} of {ingredient.ingredient.name}
                 </li>
               ))}
             </ul>
