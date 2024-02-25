@@ -143,6 +143,7 @@ userRouter.get("/:id/view", sessionChecker, async (request, response) => {
   const recipes = await Recipy.findAll({ where: { userId: id},
     include: [
       { model: User,
+        as: 'owner',
         attributes: [ "id", "username"] },
       { model: RecipyIngredient, include: [Ingredient] },
       { model: RecipyCategory, include: [Category] },

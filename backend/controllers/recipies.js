@@ -50,6 +50,7 @@ recipyRouter.get("/", async (req, res) => {
     const recipes = await Recipy.findAll({
       include: [
         { model: User,
+          as: 'owner',
           attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },
@@ -61,6 +62,20 @@ recipyRouter.get("/", async (req, res) => {
     return res.status(200).json(recipes);
   } catch (error) {
     console.error('Error fetching recipes:', error);
+    return res.status(500);
+  }
+});
+
+recipyRouter.get("/favorites/:id", async (req, res) => {
+  try {
+    const {id} = req.params;
+    const user = await User.findByPk(id, {
+      include: [{ model: Recipy, as: 'userFavorites' }],
+    });
+
+    return res.status(200).json(user.userFavorites);
+  } catch (error) {
+    console.error('Error fetching user favorites:', error);
     return res.status(500);
   }
 });
@@ -115,6 +130,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
     const returnRecipy = await Recipy.findByPk(recipe.id,{
       include: [
         { model: User,
+          as: 'owner',
           attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },
@@ -232,6 +248,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
     const returnRecipy = await Recipy.findByPk(recipe.id,{
       include: [
         { model: User,
+          as: 'owner',
           attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include : [Category] },
