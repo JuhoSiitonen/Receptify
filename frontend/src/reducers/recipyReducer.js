@@ -45,11 +45,15 @@ export const createRecipy = (recipy) => {
     }
 }
 
-export const getAllRecipies = (query, favorites) => {
+export const getAllRecipies = (query, favorites, subscribed) => {
     return async dispatch => {
         try {
             if (favorites) {
                 const recipies = await recipyService.getFavorites()
+                dispatch(setRecipies(recipies))
+                return
+            } else if (subscribed) {
+                const recipies = await recipyService.getSubscribed()
                 dispatch(setRecipies(recipies))
                 return
             } else{

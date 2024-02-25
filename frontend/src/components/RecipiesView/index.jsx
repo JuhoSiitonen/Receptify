@@ -7,16 +7,18 @@ import Togglable from '../Togglable';
 import LoadingSpinner from '../LoadingSpinner';
 import SortBy from '../SortBy';
 import ShowFavoritesButton from './ShowFavoritesButton';
+import ShowSubscribedButton from './ShowSubscribedButton';
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
     const recipies = useSelector(state => state.recipies)
     const [query, setQuery] = useState('');
     const [favorites, setFavorites] = useState(false);
+    const [subscribed, setSubscribed] = useState(false);
 
     useEffect(() => {
-        dispatch(getAllRecipies(query, favorites));
-      }, [query, favorites]);
+        dispatch(getAllRecipies(query, favorites, subscribed));
+      }, [query, favorites, subscribed]);
     
     if (!recipies) {
         return <LoadingSpinner />
@@ -58,6 +60,7 @@ const RecipiesView = () => {
                 <SortBy onSort={handleSort} />
             </Togglable>
             <ShowFavoritesButton favorites={favorites} setFavorites={setFavorites} />
+            <ShowSubscribedButton subscribed={subscribed} setSubscribed={setSubscribed} />
             <br></br>
             <Recipies recipies={recipies} />
         </div>
