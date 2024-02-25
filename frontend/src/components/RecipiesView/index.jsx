@@ -6,6 +6,7 @@ import Filter from '../Filter';
 import Togglable from '../Togglable';
 import LoadingSpinner from '../LoadingSpinner';
 import SortBy from '../SortBy';
+import ShowFavoritesButton from './ShowFavoritesButton';
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
@@ -56,7 +57,7 @@ const RecipiesView = () => {
             <Togglable buttonLabel="Sort" onCancel={handleCancel}>
                 <SortBy onSort={handleSort} />
             </Togglable>
-            <button onClick={() => setFavorites(!favorites)}>Show favorites</button>
+            <ShowFavoritesButton favorites={favorites} setFavorites={setFavorites} />
             <br></br>
             <Recipies recipies={recipies} />
         </div>
