@@ -40,7 +40,7 @@ const ChosenRecipy = () => {
             <Togglable buttonLabel="Show comments" cancelLabel="Hide comments" topCancel={true}>
                 <AllComments comments={comments} user={user}/>
             </Togglable>
-            {user && user.id === recipy.user.id && (
+            {user && user.id === recipy.owner.id && (
             <div>
               <UpdateRecipy recipy={recipy} />
               <DeleteButton recipy={recipy} />

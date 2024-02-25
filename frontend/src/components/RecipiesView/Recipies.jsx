@@ -15,7 +15,7 @@ const Recipies = (props) => {
         return (
             <div>
                 {!props.inViewUser && (
-                    <button onClick={() => navigate(`/users/${recipe.user.id}/view`)}>View User
+                    <button onClick={() => navigate(`/users/${recipe.owner.id}/view`)}>View User
                     </button>
                 )}
                 <FavoriteButton recipyId={recipe.id} user={user} />
@@ -35,7 +35,7 @@ const Recipies = (props) => {
                 <div key={recipe.id}>
                     <Link to={`/recipes/${recipe.id}`}><h2>{recipe.title}</h2></Link>
                     <SingleRecipy recipy={recipe} />
-                    {user && user.id !== recipe.user.id && userActions(recipe, user)}
+                    {user && user.id !== recipe.owner.id && userActions(recipe, user)}
                 </div>
             ))}
         </div>
