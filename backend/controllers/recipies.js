@@ -77,7 +77,6 @@ recipyRouter.get("/favorites", async (req, res) => {
           attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },] },
-        
       ],
     });
 
@@ -88,19 +87,29 @@ recipyRouter.get("/favorites", async (req, res) => {
   }
 });
 
-recipyRouter.get("/subscriptions", async (req, res) => {
+recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
   try {
-    const userId = req.session.userId;
-    const user = await User.findByPk(userId, {
-      include: [{ model: User, as: 'subscriptions' }],
+    const subscribedUserIds = 
+        JSON.parse(req.session.subscribedUsers)
+        .map(user => user.id);
+
+    const recipes = await Recipy.findAll({
+      where: {
+        userId: subscribedUserIds
+      },
+      include: [
+        { model: User, as: 'owner', attributes: ['id', 'username'] },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] }
+      ]
     });
 
-    return res.status(200).json(user.subscriptions);
+    return res.status(200).json(recipes);
   } catch (error) {
-    console.error('Error fetching user subscriptions:', error);
-    return res.status(500);
+    console.error('Error fetching subscribed users recipes:', error);
+    return res.status(500).end();
   }
-})
+});
 
 recipyRouter.post("/", sessionChecker, async (req, res) => {
   try {
