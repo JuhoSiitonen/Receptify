@@ -66,10 +66,10 @@ recipyRouter.get("/", async (req, res) => {
   }
 });
 
-recipyRouter.get("/favorites/:id", async (req, res) => {
+recipyRouter.get("/favorites", async (req, res) => {
   try {
-    const {id} = req.params;
-    const user = await User.findByPk(id, {
+    const userId = req.session.userId;
+    const user = await User.findByPk(userId, {
       include: [{ model: Recipy, as: 'userFavorites' }],
     });
 
@@ -79,6 +79,20 @@ recipyRouter.get("/favorites/:id", async (req, res) => {
     return res.status(500);
   }
 });
+
+recipyRouter.get("/subscriptions", async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    const user = await User.findByPk(userId, {
+      include: [{ model: User, as: 'subscriptions' }],
+    });
+
+    return res.status(200).json(user.subscriptions);
+  } catch (error) {
+    console.error('Error fetching user subscriptions:', error);
+    return res.status(500);
+  }
+})
 
 recipyRouter.post("/", sessionChecker, async (req, res) => {
   try {
