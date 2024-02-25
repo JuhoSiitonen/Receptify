@@ -10,6 +10,16 @@ const getAll = async (query) => {
   return response.data
 }
 
+const getFavorites = async () => {
+  const response = await axios.get(`${baseUrl}/favorites`)
+  return response.data
+}
+
+const getSubscribed = async () => {
+  const response = await axios.get(`${baseUrl}/subscriptions`)
+  return response.data
+}
+
 const create = async newObject => {
   const response = await axios.post(baseUrl, newObject)
   return response.data
@@ -25,4 +35,4 @@ const deleteRecipy = async (id) => {
   return request.data
 }
 
-export default { getAll, create, update, deleteRecipy }
+export default { getAll, getFavorites, getSubscribed, create, update, deleteRecipy }

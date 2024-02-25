@@ -11,10 +11,11 @@ const RecipiesView = () => {
     const dispatch = useDispatch()
     const recipies = useSelector(state => state.recipies)
     const [query, setQuery] = useState('');
+    const [favorites, setFavorites] = useState(false);
 
     useEffect(() => {
-        dispatch(getAllRecipies(query));
-      }, [query]);
+        dispatch(getAllRecipies(query, favorites));
+      }, [query, favorites]);
     
     if (!recipies) {
         return <LoadingSpinner />
@@ -52,9 +53,10 @@ const RecipiesView = () => {
             <Togglable buttonLabel="Filter" onCancel={handleCancel}>
                 <Filter onFilter={handleFilter} />
             </Togglable>
-            <Togglable buttonLabel="Sort">
+            <Togglable buttonLabel="Sort" onCancel={handleCancel}>
                 <SortBy onSort={handleSort} />
             </Togglable>
+            <button onClick={() => setFavorites(!favorites)}>Show favorites</button>
             <br></br>
             <Recipies recipies={recipies} />
         </div>
