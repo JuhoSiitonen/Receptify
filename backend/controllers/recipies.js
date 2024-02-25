@@ -6,14 +6,14 @@ const { Op } = require('sequelize');
 recipyRouter.get("/", async (req, res) => {
   try {
     let whereClause = {};
+    let orderClause = [];
 
     if (req.query.title) {
-      console.log(req.query.title)
       whereClause = { 
         ...whereClause, 
         title: {
           [Op.like]: `%${req.query.title}%`
-        } };
+        }};
     }
 
     if (req.query.ingredients) {
@@ -43,6 +43,11 @@ recipyRouter.get("/", async (req, res) => {
       };
     }
 
+    if (req.query.sortBy) {
+      
+      orderClause.push(['cookingTime', 'ASC']);
+    }
+
     const recipes = await Recipy.findAll({
       include: [
         { model: User,
@@ -51,6 +56,7 @@ recipyRouter.get("/", async (req, res) => {
         { model: RecipyCategory, include: [Category] },
       ],
       where: whereClause,
+      order: orderClause,
     });
 
     return res.status(200).json(recipes);
