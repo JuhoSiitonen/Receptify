@@ -1,13 +1,46 @@
 const recipyRouter = require("express").Router();
 const { sessionChecker } = require("../utils/middleware");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
+const { Op } = require('sequelize');
 
 recipyRouter.get("/", async (req, res) => {
   try {
     let whereClause = {};
 
     if (req.query.title) {
-      whereClause = { ...whereClause, title: req.query.title };
+      console.log(req.query.title)
+      whereClause = { 
+        ...whereClause, 
+        title: {
+          [Op.like]: `%${req.query.title}%`
+        } };
+    }
+
+    if (req.query.ingredients) {
+      whereClause = {
+        ...whereClause,
+        '$recipy_ingredients.ingredient.name$': {
+          [Op.like]: `%${req.query.ingredients}%`
+        }
+      };
+    }
+
+    if (req.query.username) {
+      whereClause = {
+        ...whereClause,
+        '$user.username$': {
+          [Op.like]: `%${req.query.username}%`
+        }
+      };
+    }
+
+    if (req.query.categories) {
+      whereClause = {
+        ...whereClause,
+        '$recipy_categories.category.name$': {
+          [Op.like]: `%${req.query.categories}%`
+        }
+      };
     }
 
     const recipes = await Recipy.findAll({
