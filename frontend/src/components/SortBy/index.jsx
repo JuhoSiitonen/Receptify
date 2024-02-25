@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const SortBy = ({ onSort }) => {
-  const [sortOption, setSortOption] = useState('title');
+  const [sortOption, setSortOption] = useState('cookingTime');
   const [sortValue, setSortValue] = useState('ASC');
 
   const handleSorter = () => {

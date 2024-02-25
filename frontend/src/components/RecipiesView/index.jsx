@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { getAllRecipies } from '../../reducers/recipyReducer';
 import Recipies from './Recipies';
 import Filter from '../Filter';
 import Togglable from '../Togglable';
-import { filterBy } from '../../util/filterFunction';
-import { getAllRecipies } from '../../reducers/recipyReducer';
 import LoadingSpinner from '../LoadingSpinner';
+import SortBy from '../SortBy';
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
@@ -21,9 +21,27 @@ const RecipiesView = () => {
     }
 
     const handleFilter = ({ option, value }) => {
-        let queryParams = `${option}=${value}`
-        setQuery(queryParams)
+        if (query === '') {
+            let queryParams = `${option}=${value}`
+            setQuery(queryParams)
+        } else {
+            let queryParams = `&${option}=${value}`
+            let newQuery = query + queryParams
+            setQuery(newQuery)
+        }
+        
     };
+
+    const handleSort = ({ option, value }) => {
+        if (query === '') {
+            let queryParams = `sort=${option}&order=${value}`
+            setQuery(queryParams)
+        } else {
+            let queryParams = `&sort=${option}&order=${value}`
+            let newQuery = query + queryParams
+            setQuery(newQuery)
+        }
+    }
 
     const handleCancel = () => {
         setQuery('')
@@ -33,6 +51,9 @@ const RecipiesView = () => {
         <div>
             <Togglable buttonLabel="Filter" onCancel={handleCancel}>
                 <Filter onFilter={handleFilter} />
+            </Togglable>
+            <Togglable buttonLabel="Sort">
+                <SortBy onSort={handleSort} />
             </Togglable>
             <br></br>
             <Recipies recipies={recipies} />
