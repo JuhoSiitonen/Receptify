@@ -43,9 +43,8 @@ recipyRouter.get("/", async (req, res) => {
       };
     }
 
-    if (req.query.sortBy) {
-      
-      orderClause.push(['cookingTime', 'ASC']);
+    if (req.query.sort) {
+      orderClause.push([req.query.sort, req.query.order || 'ASC']);
     }
 
     const recipes = await Recipy.findAll({
