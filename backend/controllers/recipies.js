@@ -70,7 +70,15 @@ recipyRouter.get("/favorites", async (req, res) => {
   try {
     const userId = req.session.userId;
     const user = await User.findByPk(userId, {
-      include: [{ model: Recipy, as: 'userFavorites' }],
+      include: [
+        { model: Recipy, as: 'userFavorites', include: 
+        [{ model: User,
+          as: 'owner',
+          attributes: [ "id", "username"] },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },] },
+        
+      ],
     });
 
     return res.status(200).json(user.userFavorites);
