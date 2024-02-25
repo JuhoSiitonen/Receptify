@@ -45,5 +45,6 @@ Month total : 65h
 - 1h 22.2: Session endpoint had a hidden issue with a pending request, fixed. 
 - 1h 23.2: Session cookies now work with docker compose environment with nginx.
 - 3h 24.2: Making frontend a more cohesive system, recipies url queries added.
+- 5h 25.2: Recipies URL queries, filtering and sorting, even both together. Favorites and subscribed to users recipies by button click.
 
-Total hours: 99h
+Total hours: 104h

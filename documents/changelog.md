@@ -161,3 +161,10 @@
     - In AddRecipies view ingredients and categories can be removed after initial addition. 
     - Units added to recipy_ingredients table, frontend adjusted to have units tbsp, tsp, g, kg, l, dl, and others.
     - Endpoint for getting all recipies added with a url queries where clause to filter recipies in backend.
+- 25.2 :
+    - Recipies endpoint url queries work for recipy title, username, ingredients and categories, recipies view frontend adjusted accordingly.
+    - Component SortBy added to implement recipy get request sorting by creation time, rating and cooking time with use of URL queries. 
+    - Filtering and sorting can be joined in queries.
+    - Updated database model many to many relations to be able to get favorited recipies in one query.
+    - Show favorites button included in recipiesview to see favorited recipies. Reducer and Axios logic also updated.
+    - Show subscribed users button included in recipiesview to see subscribed users recipies, reducer and Axios logic adjusted. Not yet fully functional.
