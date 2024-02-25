@@ -9,8 +9,15 @@ const RecipyIngredient = require('./RecipyIngredient');
 const Rating = require('./Rating');
 const Favorite = require('./Favorite');
 
-User.hasMany(Recipy);
-Recipy.belongsTo(User);
+User.hasMany(Recipy, {
+   as: 'recipies',
+   foreignKey: 'userId'
+});
+
+Recipy.belongsTo(User, {
+   as: 'owner',
+   foreignKey: 'userId'
+});
 
 User.belongsToMany(User, { 
     through: Subscription, 
@@ -21,7 +28,8 @@ User.belongsToMany(User, {
 
  Recipy.belongsToMany(User, {
     through: Favorite,
-    as: 'favorites'
+    as: 'favoritedBy',
+    foreignKey: 'recipyId',
  })
 
  User.belongsToMany(Recipy, {
