@@ -10,35 +10,23 @@ import LoadingSpinner from '../LoadingSpinner';
 const RecipiesView = () => {
     const dispatch = useDispatch()
     const recipies = useSelector(state => state.recipies)
-    const [filteredRecipies, setFilteredRecipies] = useState(recipies);
     const [query, setQuery] = useState('');
 
     useEffect(() => {
         dispatch(getAllRecipies(query));
       }, [query]);
     
-    /*
-    useEffect(() => {
-        setFilteredRecipies(recipies);
-    }, [recipies]);
-    */
     if (!recipies) {
         return <LoadingSpinner />
     }
 
     const handleFilter = ({ option, value }) => {
-        let queryParams = `{${option}:${value}}`
+        let queryParams = `${option}=${value}`
         setQuery(queryParams)
-        /*
-        const filtered = recipies.filter((recipe) =>
-            filterBy({ option, value, recipe })
-        );
-        setFilteredRecipies(filtered);
-        */
     };
 
     const handleCancel = () => {
-        setFilteredRecipies(recipies);
+        setQuery('')
     }
 
     return (
