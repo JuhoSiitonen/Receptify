@@ -10,7 +10,11 @@ const getAll = async (query) => {
   return response.data
 }
 
-const getFavorites = async () => {
+const getFavorites = async (query) => {
+  if (query !== '') {
+    const response = await axios.get(`${baseUrl}/favorites?${query}`)
+    return response.data
+  }
   const response = await axios.get(`${baseUrl}/favorites`)
   return response.data
 }
