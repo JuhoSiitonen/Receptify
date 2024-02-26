@@ -46,5 +46,6 @@ Month total : 65h
 - 1h 23.2: Session cookies now work with docker compose environment with nginx.
 - 3h 24.2: Making frontend a more cohesive system, recipies url queries added.
 - 5h 25.2: Recipies URL queries, filtering and sorting, even both together. Favorites and subscribed to users recipies by button click.
+- 1h 26.2: Filtering and sorting in recipiesview combined with selecting user favorites and subscriptions, not yet fully functional.
 
-Total hours: 104h
+Total hours: 105h

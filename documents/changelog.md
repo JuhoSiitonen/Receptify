@@ -168,3 +168,5 @@
     - Updated database model many to many relations to be able to get favorited recipies in one query.
     - Show favorites button included in recipiesview to see favorited recipies. Reducer and Axios logic also updated.
     - Show subscribed users button included in recipiesview to see subscribed users recipies, reducer and Axios logic adjusted. Not yet fully functional.
+- 26.2 :
+    - Recipiesview filtering and sorting added to work with selecting favorites and subscriptions, not yet fully functional.
