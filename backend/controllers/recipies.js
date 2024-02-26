@@ -2,6 +2,8 @@ const recipyRouter = require("express").Router();
 const { sessionChecker } = require("../utils/middleware");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
 const { Op } = require('sequelize');
+const { sequelize } = require('../utils/db');
+
 
 recipyRouter.get("/", async (req, res) => {
   try {
@@ -45,6 +47,7 @@ recipyRouter.get("/", async (req, res) => {
 
     if (req.query.sort) {
       orderClause.push([req.query.sort, req.query.order || 'ASC']);
+      console.log('orderClause:', orderClause);
     }
 
     const recipes = await Recipy.findAll({
@@ -68,7 +71,23 @@ recipyRouter.get("/", async (req, res) => {
 
 recipyRouter.get("/favorites", async (req, res) => {
   try {
+    let orderClause = [];
+
+    if (req.query.sort) {
+      let sorter = req.query.sort;
+      if (req.query.sort === 'cookingTime') {
+        sorter = 'cooking_time';
+      } else if (req.query.sort === 'averageRating') {
+        sorter = 'average_rating';
+      } else {
+        sorter = 'created_at';
+      }
+      orderClause.push([sequelize.literal('"userFavorites"."' + sorter + '"'), req.query.order || 'ASC']);
+      console.log('orderClause:', orderClause)
+    }
+
     const userId = req.session.userId;
+
     const user = await User.findByPk(userId, {
       include: [
         { model: Recipy, as: 'userFavorites', include: 
@@ -76,24 +95,35 @@ recipyRouter.get("/favorites", async (req, res) => {
           as: 'owner',
           attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
-        { model: RecipyCategory, include: [Category] },] },
+        { model: RecipyCategory, include: [Category] },
+          ],
+          
+        },
       ],
+      order: orderClause,
     });
+
+    console.log('user.userFavorites:', user.userFavorites);
 
     return res.status(200).json(user.userFavorites);
   } catch (error) {
     console.error('Error fetching user favorites:', error);
-    return res.status(500);
+    return res.status(500).end();
   }
 });
 
 recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
   try {
+    let orderClause = [];
+
     const subscribedUserIds = 
         JSON.parse(req.session.subscriptions)
         .map(user => user.id);
-      
-    console.log('subscribedUserIds:', subscribedUserIds);
+    
+    if (req.query.sort) {
+        orderClause.push([req.query.sort, req.query.order || 'ASC']);
+        console.log('orderClause:', orderClause);
+      }
 
     const recipes = await Recipy.findAll({
       where: {
@@ -103,7 +133,8 @@ recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
         { model: User, as: 'owner', attributes: ['id', 'username'] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] }
-      ]
+      ],
+      order: orderClause,
     });
 
     return res.status(200).json(recipes);
