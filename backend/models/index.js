@@ -47,6 +47,30 @@ RecipyCategory.belongsTo(Category);
 Recipy.hasMany(RecipyCategory);
 Category.hasMany(RecipyCategory);
 
+Recipy.belongsToMany(Ingredient, {
+   through: RecipyIngredient,
+   as: 'ingredients',
+   foreignKey: 'recipyId',
+ });
+ 
+ Ingredient.belongsToMany(Recipy, {
+   through: RecipyIngredient,
+   as: 'recipies',
+   foreignKey: 'ingredientId',
+ });
+
+ Recipy.belongsToMany(Category, {
+   through: RecipyCategory,
+   as: 'categories',
+   foreignKey: 'recipyId',
+ });
+ 
+ Category.belongsToMany(Recipy, {
+   through: RecipyCategory,
+   as: 'recipies',
+   foreignKey: 'categoryId',
+ });
+
 Comment.belongsTo(User);
 Comment.belongsTo(Recipy);
 Recipy.hasMany(Comment);

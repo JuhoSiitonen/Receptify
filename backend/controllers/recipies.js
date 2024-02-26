@@ -29,7 +29,7 @@ recipyRouter.get("/", async (req, res) => {
     if (req.query.username) {
       whereClause = {
         ...whereClause,
-        '$user.username$': {
+        '$owner.username$': {
           [Op.like]: `%${req.query.username}%`
         }
       };
@@ -48,9 +48,7 @@ recipyRouter.get("/", async (req, res) => {
       orderClause.push([req.query.sort, req.query.order || 'ASC']);
     }
 
-    console.log('whereClause:', whereClause);
-
-    const recipes = await Recipy.findAll({
+    const foundRecipes = await Recipy.findAll({
       include: [
         { model: User,
           as: 'owner',
@@ -59,6 +57,20 @@ recipyRouter.get("/", async (req, res) => {
         { model: RecipyCategory, include: [Category] },
       ],
       where: whereClause,
+      order: orderClause,
+    })
+    
+    const recipeIds = foundRecipes.map(recipe => recipe.id);
+
+    const recipes = await Recipy.findAll({
+      include: [
+        { model: User,
+          as: 'owner',
+          attributes: [ "id", "username"]},
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+      ],
+      where: { id: recipeIds },
       order: orderClause,
     });
 
@@ -104,7 +116,7 @@ recipyRouter.get("/favorites", async (req, res) => {
     if (req.query.username) {
       whereClause = {
         ...whereClause,
-        '$user.username$': {
+        '$userFavorites.owner.username$': {
           [Op.like]: `%${req.query.username}%`
         }
       };
@@ -178,7 +190,7 @@ recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
     if (req.query.username) {
       whereClause = {
         ...whereClause,
-        '$user.username$': {
+        '$owner.username$': {
           [Op.like]: `%${req.query.username}%`
         }
       };
