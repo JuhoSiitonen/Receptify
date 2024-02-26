@@ -65,7 +65,7 @@ recipyRouter.get("/", async (req, res) => {
     return res.status(200).json(recipes);
   } catch (error) {
     console.error('Error fetching recipes:', error);
-    return res.status(500);
+    return res.status(500).end();
   }
 });
 
@@ -73,6 +73,51 @@ recipyRouter.get("/favorites", async (req, res) => {
   try {
     let orderClause = [];
     let whereClause = {};
+
+    /*
+    if (req.query.title) {
+      whereClause = { 
+        ...whereClause, 
+        '$userFavorites.title$': {
+          [Op.like]: `%${req.query.title}%`
+        }};
+    }
+    */
+
+    if (req.query.title) {
+      whereClause = { 
+        ...whereClause, 
+        title: {
+          [Op.like]: `%${req.query.title}%`
+        }};
+    }
+
+    if (req.query.ingredients) {
+      whereClause = {
+        ...whereClause,
+        '$recipy_ingredients.ingredient.name$': {
+          [Op.like]: `%${req.query.ingredients}%`
+        }
+      };
+    }
+
+    if (req.query.username) {
+      whereClause = {
+        ...whereClause,
+        '$user.username$': {
+          [Op.like]: `%${req.query.username}%`
+        }
+      };
+    }
+
+    if (req.query.categories) {
+      whereClause = {
+        ...whereClause,
+        '$recipy_categories.category.name$': {
+          [Op.like]: `%${req.query.categories}%`
+        }
+      };
+    }
 
     if (req.query.sort) {
       let sorter;
@@ -94,8 +139,10 @@ recipyRouter.get("/favorites", async (req, res) => {
             { model: RecipyIngredient, include: [Ingredient] },
             { model: RecipyCategory, include: [Category] },
           ],
+          where: whereClause,
         },
       ],
+      
       order: orderClause,
     });
 
@@ -108,20 +155,59 @@ recipyRouter.get("/favorites", async (req, res) => {
 
 recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
   try {
+    let whereClause = {};
     let orderClause = [];
+
+    if (req.query.title) {
+      whereClause = { 
+        ...whereClause, 
+        title: {
+          [Op.like]: `%${req.query.title}%`
+        }};
+    }
+
+    if (req.query.ingredients) {
+      whereClause = {
+        ...whereClause,
+        '$recipy_ingredients.ingredient.name$': {
+          [Op.like]: `%${req.query.ingredients}%`
+        }
+      };
+    }
+
+    if (req.query.username) {
+      whereClause = {
+        ...whereClause,
+        '$user.username$': {
+          [Op.like]: `%${req.query.username}%`
+        }
+      };
+    }
+
+    if (req.query.categories) {
+      whereClause = {
+        ...whereClause,
+        '$recipy_categories.category.name$': {
+          [Op.like]: `%${req.query.categories}%`
+        }
+      };
+    }
+
+    if (req.query.sort) {
+      orderClause.push([req.query.sort, req.query.order || 'ASC']);
+    }
 
     const subscribedUserIds = 
         JSON.parse(req.session.subscriptions)
         .map(user => user.id);
     
-    if (req.query.sort) {
-        orderClause.push([req.query.sort, req.query.order || 'ASC']);
-      }
+    whereClause = {
+      ...whereClause,
+      userId: subscribedUserIds
+    };
 
     const recipes = await Recipy.findAll({
-      where: {
-        userId: subscribedUserIds
-      },
+      where: whereClause,
       include: [
         { model: User, as: 'owner', attributes: ['id', 'username'] },
         { model: RecipyIngredient, include: [Ingredient] },
