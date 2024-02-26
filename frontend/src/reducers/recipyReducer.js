@@ -53,7 +53,7 @@ export const getAllRecipies = (query, favorites, subscribed) => {
                 dispatch(setRecipies(recipies))
                 return
             } else if (subscribed) {
-                const recipies = await recipyService.getSubscribed()
+                const recipies = await recipyService.getSubscribed(query)
                 dispatch(setRecipies(recipies))
                 return
             } else{

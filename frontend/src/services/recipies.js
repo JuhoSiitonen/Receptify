@@ -19,7 +19,11 @@ const getFavorites = async (query) => {
   return response.data
 }
 
-const getSubscribed = async () => {
+const getSubscribed = async (query) => {
+  if (query !== '') {
+    const response = await axios.get(`${baseUrl}/subscriptions?${query}`)
+    return response.data
+  }
   const response = await axios.get(`${baseUrl}/subscriptions`)
   return response.data
 }
