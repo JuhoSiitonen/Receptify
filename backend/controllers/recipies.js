@@ -90,8 +90,10 @@ recipyRouter.get("/favorites", async (req, res) => {
 recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
   try {
     const subscribedUserIds = 
-        JSON.parse(req.session.subscribedUsers)
+        JSON.parse(req.session.subscriptions)
         .map(user => user.id);
+      
+    console.log('subscribedUserIds:', subscribedUserIds);
 
     const recipes = await Recipy.findAll({
       where: {
