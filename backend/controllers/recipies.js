@@ -4,7 +4,6 @@ const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Ra
 const { Op } = require('sequelize');
 const { sequelize } = require('../utils/db');
 
-
 recipyRouter.get("/", async (req, res) => {
   try {
     let whereClause = {};
@@ -47,8 +46,9 @@ recipyRouter.get("/", async (req, res) => {
 
     if (req.query.sort) {
       orderClause.push([req.query.sort, req.query.order || 'ASC']);
-      console.log('orderClause:', orderClause);
     }
+
+    console.log('whereClause:', whereClause);
 
     const recipes = await Recipy.findAll({
       include: [
@@ -72,9 +72,10 @@ recipyRouter.get("/", async (req, res) => {
 recipyRouter.get("/favorites", async (req, res) => {
   try {
     let orderClause = [];
+    let whereClause = {};
 
     if (req.query.sort) {
-      let sorter = req.query.sort;
+      let sorter;
       if (req.query.sort === 'cookingTime') {
         sorter = 'cooking_time';
       } else if (req.query.sort === 'averageRating') {
@@ -83,27 +84,20 @@ recipyRouter.get("/favorites", async (req, res) => {
         sorter = 'created_at';
       }
       orderClause.push([sequelize.literal('"userFavorites"."' + sorter + '"'), req.query.order || 'ASC']);
-      console.log('orderClause:', orderClause)
     }
 
-    const userId = req.session.userId;
-
-    const user = await User.findByPk(userId, {
+    const user = await User.findByPk(req.session.userId, {
       include: [
         { model: Recipy, as: 'userFavorites', include: 
-        [{ model: User,
-          as: 'owner',
-          attributes: [ "id", "username"] },
-        { model: RecipyIngredient, include: [Ingredient] },
-        { model: RecipyCategory, include: [Category] },
+          [
+            { model: User, as: 'owner', attributes: [ "id", "username"] },
+            { model: RecipyIngredient, include: [Ingredient] },
+            { model: RecipyCategory, include: [Category] },
           ],
-          
         },
       ],
       order: orderClause,
     });
-
-    console.log('user.userFavorites:', user.userFavorites);
 
     return res.status(200).json(user.userFavorites);
   } catch (error) {
@@ -122,7 +116,6 @@ recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
     
     if (req.query.sort) {
         orderClause.push([req.query.sort, req.query.order || 'ASC']);
-        console.log('orderClause:', orderClause);
       }
 
     const recipes = await Recipy.findAll({
@@ -193,9 +186,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
 
     const returnRecipy = await Recipy.findByPk(recipe.id,{
       include: [
-        { model: User,
-          as: 'owner',
-          attributes: [ "id", "username"] },
+        { model: User, as: 'owner', attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] },
       ],
@@ -204,7 +195,7 @@ recipyRouter.post("/", sessionChecker, async (req, res) => {
     return res.status(201).json(returnRecipy);
   } catch (error) {
     console.error('Error creating recipe:', error);
-    return res.status(500);
+    return res.status(500).end();
   }
 });
 
@@ -227,7 +218,7 @@ recipyRouter.delete("/:id", sessionChecker, async (req, res) => {
     return res.status(204).end();
   } catch (error) {
     console.error('Error deleting recipe:', error);
-    return res.status(500);
+    return res.status(500).end();
   }
 });
 
@@ -311,9 +302,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
 
     const returnRecipy = await Recipy.findByPk(recipe.id,{
       include: [
-        { model: User,
-          as: 'owner',
-          attributes: [ "id", "username"] },
+        { model: User, as: 'owner', attributes: [ "id", "username"] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include : [Category] },
       ],
@@ -322,7 +311,7 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
     
   } catch (error) {
     console.error('Error updating recipe:', error);
-    return res.status(500);
+    return res.status(500).end();
   }
 });
 
