@@ -23,12 +23,12 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: app-secret
               key: postgres-user
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: postgres-secret
+              name: app-secret
               key: postgres-password
 ---
 apiVersion: v1
