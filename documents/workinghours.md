@@ -48,4 +48,9 @@ Month total : 65h
 - 5h 25.2: Recipies URL queries, filtering and sorting, even both together. Favorites and subscribed to users recipies by button click.
 - 1h 26.2: Filtering and sorting in recipiesview combined with selecting user favorites and subscriptions, not yet fully functional.
 
-Total hours: 105h
+Month total: 36h
+
+## March 2024
+- 1h 7.3: Preliminary Kubernetes yaml file setting and testing.
+
+Total hours: 107h

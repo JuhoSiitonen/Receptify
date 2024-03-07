@@ -170,3 +170,7 @@
     - Show subscribed users button included in recipiesview to see subscribed users recipies, reducer and Axios logic adjusted. Not yet fully functional.
 - 26.2 :
     - Recipiesview filtering and sorting added to work with selecting favorites and subscriptions, not yet fully functional.
+
+## March 2024
+- 7.3 :
+    - Preliminary Kubernetes yaml file setting and testing
