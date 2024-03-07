@@ -20,7 +20,7 @@ recipyRouter.get("/", async (req, res) => {
     if (req.query.ingredients) {
       whereClause = {
         ...whereClause,
-        '$recipy_ingredients.ingredient.name$': {
+        '$ingredients.name$': {
           [Op.like]: `%${req.query.ingredients}%`
         }
       };
@@ -60,6 +60,7 @@ recipyRouter.get("/", async (req, res) => {
       order: orderClause,
     })
     
+    /*
     const recipeIds = foundRecipes.map(recipe => recipe.id);
 
     const recipes = await Recipy.findAll({
@@ -73,8 +74,9 @@ recipyRouter.get("/", async (req, res) => {
       where: { id: recipeIds },
       order: orderClause,
     });
+    */
 
-    return res.status(200).json(recipes);
+    return res.status(200).json(foundRecipes);
   } catch (error) {
     console.error('Error fetching recipes:', error);
     return res.status(500).end();
