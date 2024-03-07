@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize')
-const { DATABASE_URL } = require('./config')
+const { DATABASE_URL, POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD } = require('./config')
 const { Umzug, SequelizeStorage } = require('umzug')
 
-const sequelize = new Sequelize(DATABASE_URL)
+let db_connect = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}/${POSTGRES_DB}`
+
+const sequelize = new Sequelize(db_connect)
 
 const connectToDatabase = async () => {
   try {

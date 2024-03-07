@@ -3,8 +3,10 @@ const { REDIS_URL } = require('../utils/config')
 const RedisStore = require('connect-redis').default;
 const { REDIS_SESSION_KEY } = require('../utils/config')
 
+let redisConnection = `redis://${REDIS_URL}`
+
 const redisClient = redis.createClient({
-    url: REDIS_URL,
+    url: redisConnection,
 });
   
 redisClient.on('ready', () => {
