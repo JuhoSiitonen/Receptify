@@ -174,3 +174,5 @@
 ## March 2024
 - 7.3 :
     - Preliminary Kubernetes yaml file setting and testing
+- 8.3 :
+    - Kubernetes cluster works between backend, postgres and redis, next implementing frontend and nginx.

@@ -52,5 +52,6 @@ Month total: 36h
 
 ## March 2024
 - 1h 7.3: Preliminary Kubernetes yaml file setting and testing.
+- 1h 8.3: More Kubernetes yaml files and testing.
 
-Total hours: 107h
+Total hours: 108h
