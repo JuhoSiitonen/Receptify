@@ -25,6 +25,11 @@ spec:
             secretKeyRef:
               name: app-secret
               key: postgres-user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: postgres-password
         - name: NODE_ENV
           value: development
         - name: SECRET
@@ -55,11 +60,9 @@ kind: Service
 metadata:
   name: receptify-backend-service
 spec:
-  type: NodePort
   selector:
     app: receptify-backend
   ports:
   - protocol: TCP
     port: 3001
     targetPort: 3001
-    nodePort: 30001

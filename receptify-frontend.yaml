@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: receptify-frontend-deployment
+  labels:
+    app: receptify-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: receptify-frontend
+  template:
+    metadata:
+      labels:
+        app: receptify-frontend
+    spec:
+      containers:
+      - name: receptify-frontend
+        image: juhosii/receptify-frontend-dev:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REACT_APP_BACKEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: receptify-backend-config
+              key: backend-url
+        - name: UPLOADCARE_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: uploadcare-public-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: receptify-frontend-service
+spec:
+  type: NodePort
+  selector:
+    app: receptify-frontend
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    nodePort: 30001
