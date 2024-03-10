@@ -60,6 +60,7 @@ kind: Service
 metadata:
   name: receptify-backend-service
 spec:
+  type: LoadBalancer
   selector:
     app: receptify-backend
   ports:
