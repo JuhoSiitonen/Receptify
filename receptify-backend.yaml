@@ -54,6 +54,11 @@ spec:
             secretKeyRef:
               name: app-secret
               key: redis-session
+        - name: FRONTEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: receptify-frontend-config
+              key: frontend-url
 ---
 apiVersion: v1
 kind: Service
