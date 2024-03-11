@@ -1,5 +1,5 @@
 import axios from '../util/apiClient'
-const baseUrl = '/recipies'
+const baseUrl = '/api/recipies'
 
 const getAll = async (query) => {
   if (query !== '') {

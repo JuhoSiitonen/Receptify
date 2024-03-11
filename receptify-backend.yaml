@@ -30,6 +30,11 @@ spec:
             secretKeyRef:
               name: app-secret
               key: postgres-password
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: postgres-db
         - name: NODE_ENV
           value: development
         - name: SECRET
