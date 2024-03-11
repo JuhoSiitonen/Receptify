@@ -9,4 +9,5 @@ module.exports = {
   PORT: process.env.PORT || 3001,
   REDIS_URL: process.env.REDIS_URL,
   REDIS_SESSION_KEY: process.env.REDIS_SESSION_KEY,
+  FRONTEND_URL: process.env.FRONTEND_URL,
   }
