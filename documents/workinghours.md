@@ -54,5 +54,6 @@ Month total: 36h
 - 1h 7.3: Preliminary Kubernetes yaml file setting and testing.
 - 1h 8.3: More Kubernetes yaml files and testing.
 - 1h 10.3: Nginx conf for serving frontend and proxying backend in Kubernetes settings. 
+- 1h 11.3: Kubernetes setup for frontend and backend communication working (except CORS)
 
-Total hours: 109h
+Total hours: 110h
