@@ -180,3 +180,5 @@
     - More kubernetes settings, Nginx serves static frontend files and proxies traffic to backend service. Nginx settings with a separate nginx.conf file in frontend folder and dockerfile in frontend folder configures nginx to serve the dist folder. Requires more configuring, everything else works but frontend to backend communication doesn't work. 
 - 11.3 : 
     - Kubernetes setup: frontend sends requests to url "/api" and NGINX proxies it to receptify-backend-service:3001, now messages are being correctly sent between frontend and backend. 
+    - CORS settings also work after changing dockerignore files in backend and frontend to include .env. 
+    - Kubernetes files gathered to folder K8s
