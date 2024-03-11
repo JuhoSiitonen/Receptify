@@ -1,5 +1,5 @@
 import axios from '../util/apiClient'
-const baseUrl = '/api/login'
+const baseUrl = '/login'
 
 const login = async newObject => {
     const response = await axios.post(baseUrl, newObject)

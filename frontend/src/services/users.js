@@ -1,5 +1,5 @@
 import axios from '../util/apiClient'
-const baseUrl = '/api/users'
+const baseUrl = '/users'
 
 const signup = async newObject => {
     const newUser = {

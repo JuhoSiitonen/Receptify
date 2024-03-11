@@ -1,5 +1,5 @@
 import axios from '../util/apiClient'
-const baseUrl = '/api/rating'
+const baseUrl = '/rating'
 
 const getRatingAverage = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`)

@@ -1,5 +1,5 @@
 import axios from '../util/apiClient'
-const baseUrl = '/api/comments'
+const baseUrl = '/comments'
 
 const getAllComments = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`)

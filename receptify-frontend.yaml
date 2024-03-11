@@ -21,10 +21,7 @@ spec:
         - containerPort: 80
         env:
         - name: REACT_APP_BACKEND_URL
-          valueFrom:
-            configMapKeyRef:
-              name: receptify-backend-config
-              key: backend-url
+          value: /api
         - name: UPLOADCARE_PUBLIC_KEY
           valueFrom:
             secretKeyRef:
