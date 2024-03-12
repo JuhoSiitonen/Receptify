@@ -1,0 +1,13 @@
+.mainpage-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.mainpage-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.mainpage-link:hover {
+    text-decoration: underline;
+}
