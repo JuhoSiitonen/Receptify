@@ -23,17 +23,33 @@ const Login = () => {
         setPassword('')
     }
 
+    const handleUsernameChange = (event) => {
+        if (event.target.value.length < 20) {
+            setUsername(event.target.value)
+        } else {
+            alert('Username must be less than 20 characters')
+        }
+    }
+
+    const handlePasswordChange = (event) => {
+        if (event.target.value.length < 20) {
+            setPassword(event.target.value)
+        } else {
+            alert('Password must be less than 20 characters')
+        }
+    }
+
     return (
         <div>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username:</label>
-                    <input id="username" value={username} onChange={({ target }) => setUsername(target.value)} />
+                    <input id="username" value={username} onChange={handleUsernameChange} />
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>
-                    <input id="password" value={password} onChange={({ target }) => setPassword(target.value)} />
+                    <input id="password" value={password} onChange={handlePasswordChange} />
                 </div>
                 <button type="submit">Login</button>
             </form>
