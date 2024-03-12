@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { login } from '../reducers/userReducer'
+import './Login.css'
 
 
 const Login = () => {
@@ -40,9 +41,9 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="login-container">
             <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="login-form">
                 <div>
                     <label htmlFor="username">Username:</label>
                     <input id="username" value={username} onChange={handleUsernameChange} />
