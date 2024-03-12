@@ -13,6 +13,7 @@ import Notifications from './components/Notifications'
 import ChosenRecipy from './components/RecipiesView/ChosenRecipy'
 import RecipyFinder from './components/RecipyFinder'
 import ViewUser from './components/RecipiesView/ViewUser'
+import './App.css'
 
 function App() {
   const dispatch = useDispatch()
@@ -24,20 +25,22 @@ function App() {
   return (
     <div>
       <NavigationBar />
-      <Notifications />
-      <h1>Receptify!</h1>
-      <Routes>
-        <Route path="/" element={<Mainpage />} />
-        <Route path="/recipes" element={<RecipiesView />} />
-        <Route path="/recipes/new" element={<AddRecipe />} />
-        <Route path="/recipes/:id" element={<ChosenRecipy />} />
-        <Route path="/recipyfinder" element={<RecipyFinder />} />
-        <Route path="/users/:id/view" element={<ViewUser />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/mypage" element={<UserPage />} />
-        <Route path="/logout" element={<Login />} />
-      </Routes>
+      <h1 className='receptify-header'>Receptify!</h1>
+      <div className="content-wrapper">
+        <Notifications />
+        <Routes>
+          <Route path="/" element={<Mainpage />} />
+          <Route path="/recipes" element={<RecipiesView />} />
+          <Route path="/recipes/new" element={<AddRecipe />} />
+          <Route path="/recipes/:id" element={<ChosenRecipy />} />
+          <Route path="/recipyfinder" element={<RecipyFinder />} />
+          <Route path="/users/:id/view" element={<ViewUser />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/mypage" element={<UserPage />} />
+          <Route path="/logout" element={<Login />} />
+        </Routes>
+      </div>
     </div>
   )
 }
