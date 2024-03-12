@@ -182,3 +182,5 @@
     - Kubernetes setup: frontend sends requests to url "/api" and NGINX proxies it to receptify-backend-service:3001, now messages are being correctly sent between frontend and backend. 
     - CORS settings also work after changing dockerignore files in backend and frontend to include .env. 
     - Kubernetes files gathered to folder K8s
+- 12.3 :
+    - Login form user input validation, login form, mainpage, navigationbar and App component css style added.
