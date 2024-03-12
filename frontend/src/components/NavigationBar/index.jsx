@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../reducers/userReducer'
+import './Navigationbar.css'
 
 const NavigationBar = () => {
     const dispatch = useDispatch()
@@ -12,22 +13,22 @@ const NavigationBar = () => {
 
     if (user === null) {
         return (
-            <div>
-                <Link to="/">Mainpage  </Link>
-                <Link to="/login">Login  </Link>
-                <Link to="/signup">Sign up  </Link>
+            <div className="navigation-bar">
+                <Link to="/" className="navigation-link">Mainpage</Link>
+                <Link to="/login" className="navigation-link">Login</Link>
+                <Link to="/signup" className="navigation-link">Sign up</Link>
             </div>
         )
     }
 
     return (
-        <div>
-            <Link to="/">Mainpage  </Link>
-            <Link to="/recipes">Recipes  </Link>
-            <Link to="/recipes/new">Add recipe  </Link>
-            <Link to="/recipyfinder">Find recipes  </Link>
-            <Link to="/mypage">My page  </Link>
-            <Link to="/logout" onClick={handleLogout}>Logout </Link>
+        <div className="navigation-bar">
+            <Link to="/" className="navigation-link">Mainpage</Link>
+            <Link to="/recipes" className="navigation-link">Recipes</Link>
+            <Link to="/recipes/new" className="navigation-link">Add recipe</Link>
+            <Link to="/recipyfinder" className="navigation-link">Find recipes</Link>
+            <Link to="/mypage" className="navigation-link">My page</Link>
+            <Link to="/logout" className="navigation-link" onClick={handleLogout}>Logout</Link>
         </div>
     )
 }
