@@ -56,5 +56,6 @@ Month total: 36h
 - 1h 10.3: Nginx conf for serving frontend and proxying backend in Kubernetes settings. 
 - 2h 11.3: Kubernetes setup for frontend and backend communication working!!!
 - 1h 12.3: Login form user input validation, login form, mainpage, navigationbar and App component css style added.
+- 1h 13.3: SignUp component user validation and css. Addrecipe component first css draft. 
 
-Total hours: 112h
+Total hours: 113h

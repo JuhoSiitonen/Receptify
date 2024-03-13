@@ -184,3 +184,5 @@
     - Kubernetes files gathered to folder K8s
 - 12.3 :
     - Login form user input validation, login form, mainpage, navigationbar and App component css style added.
+- 13.3 :
+    - SignUp component user validation and css, addrecipe component draft css. 
