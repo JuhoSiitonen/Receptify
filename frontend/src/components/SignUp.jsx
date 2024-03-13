@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { signup } from '../reducers/userReducer';
 import { useDispatch } from 'react-redux';
 import { addNotification } from '../reducers/notificationReducer';
+import './SignUp.css';
 
 const SignUp = () => {
     const dispatch = useDispatch();
@@ -33,23 +34,53 @@ const SignUp = () => {
         }
     }
 
+    const handleUsernameChange = (event) => {
+        if (event.target.value.length < 20) {
+            setUsername(event.target.value);
+        } else {
+            dispatch(addNotification({
+                message: 'Username must be less than 20 characters', 
+                error: true}));
+        }
+    }
+
+    const handlePasswordChange = (event) => {
+        if (event.target.value.length < 20) {
+            setPassword(event.target.value);
+        } else {
+            dispatch(addNotification({
+                message: 'Password must be less than 20 characters', 
+                error: true}));
+        }
+    }
+
+    const handlePassword2Change = (event) => {
+        if (event.target.value.length < 20) {
+            setPassword2(event.target.value);
+        } else {
+            dispatch(addNotification({
+                message: 'Password must be less than 20 characters', 
+                error: true}));
+        }
+    }
+
     return (
         <div className="signup">
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="login-form">
                 <div>
                     <label htmlFor="username">Username:</label>
-                    <input type="text" name="username" onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" name="username" onChange={handleUsernameChange} />
                 </div>
                 <div>
                     <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" name="password" onChange={handlePasswordChange} />
                 </div>
                 <div>
                     <label htmlFor="password2">Confirm Password:</label>
-                    <input type="password" name="password2" onChange={(e) => setPassword2(e.target.value)} />
+                    <input type="password" name="password2" onChange={handlePassword2Change} />
                 </div>
-                <input type="submit" value="Sign Up" />
+                <button type="submit">Submit</button>
             </form>
         </div>
     )
