@@ -5,6 +5,9 @@
     border: 1px solid #ccc;
     border-radius: 40px;
     background-color: #f9f9f9;
+    justify-content: center;
+    margin: auto;
+    width: 60%;
 }
 
 .single-recipe-container {
@@ -20,7 +23,7 @@
     border: 2px solid cornflowerblue;
     padding: 10px;
     background-color: white;
-    box-shadow: 5px 5px lightblue;
+    box-shadow: 5px 5px 2px lightblue;
 }
 
 .single-recipe-right {
@@ -29,7 +32,7 @@
     border: 2px solid cornflowerblue;
     padding: 10px;
     background-color: white;
-    box-shadow: 5px 5px lightblue;
+    box-shadow: 5px 5px 2px lightblue;
 }
 
 .single-recipe h3 {
@@ -54,6 +57,8 @@
 
 .single-recipe ul li {
     margin-bottom: 5px;
+    border-style: none none solid none;
+    border-color: #ccc;
 }
 
 .single-recipe p.created-by {
