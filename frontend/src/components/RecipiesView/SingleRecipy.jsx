@@ -1,8 +1,15 @@
+import { useState } from 'react'
 import './SingleRecipy.css'
 
 const baseUrl = 'https://ucarecdn.com/'
 
 const SingleRecipy = ({ recipy }) => {
+    const [showDetails, setShowDetails] = useState(false);
+
+    const toggleDetails = () => {
+        setShowDetails(!showDetails);
+    };
+
     if (!recipy) {
         return null
     }
@@ -13,7 +20,7 @@ const SingleRecipy = ({ recipy }) => {
     const formattedTime = timeParts.slice(0, 2).join(':');
 
     return (
-        <div>
+        <div onClick={toggleDetails}>
             {recipy.pictureUuid !== "" ? 
             <img
             src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x600/`}
@@ -21,7 +28,9 @@ const SingleRecipy = ({ recipy }) => {
             /> :
             <></> 
             }
+            <h2>{recipy.title}</h2>
             <h3>Cooking time {formattedTime}</h3>
+            {showDetails && (
             <div className='single-recipe-container'>
               <div className='single-recipe-left'>
                 <h3>Ingredients:</h3>
@@ -48,6 +57,7 @@ const SingleRecipy = ({ recipy }) => {
                 <p>{recipy.instructions}</p>
               </div>
             </div>
+            )}
             <h3>Created by: {recipy.owner.username}</h3>
             <h3>Rating: {averageRating}</h3>
         </div>
