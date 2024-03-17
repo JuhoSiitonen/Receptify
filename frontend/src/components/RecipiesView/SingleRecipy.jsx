@@ -1,3 +1,4 @@
+import './SingleRecipy.css'
 
 const baseUrl = 'https://ucarecdn.com/'
 
@@ -12,33 +13,41 @@ const SingleRecipy = ({ recipy }) => {
     const formattedTime = timeParts.slice(0, 2).join(':');
 
     return (
-        <div className="singleRecipy">
-            <h3>Cooking time {formattedTime}</h3>
-            <p>{recipy.description}</p>
+        <div>
             {recipy.pictureUuid !== "" ? 
             <img
-            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x300/`}
-            width="200"
+            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x500/`}
+            width="400"
             /> :
             <></> 
             }
-            <p>Ingredients:</p>
-            <ul>
-              {recipy.recipy_ingredients.map(ingredient => (
-                <li key={ingredient.id}>
-                  {ingredient.amount} {ingredient.unit} of {ingredient.ingredient.name}
-                </li>
-              ))}
-            </ul>
-            <p>{recipy.instructions}</p>
-            <p>Categories:</p>
-            <ul>
-              {recipy.recipy_categories.map(category => (
-                <li key={category.id}>
-                  {category.category.name}
-                </li>
-              ))}
-            </ul>
+            <h3>Cooking time {formattedTime}</h3>
+            <div className='single-recipe-container'>
+              <div className='single-recipe-left'>
+                <h3>Ingredients:</h3>
+                <ul>
+                  {recipy.recipy_ingredients.map(ingredient => (
+                    <li key={ingredient.id}>
+                      {ingredient.amount} {ingredient.unit} of {ingredient.ingredient.name}
+                    </li>
+                  ))}
+                </ul>
+                <h3>Categories:</h3>
+                <ul>
+                  {recipy.recipy_categories.map(category => (
+                    <li key={category.id}>
+                      {category.category.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className='single-recipe-right'>
+                <h3>Description:</h3>
+                <p>{recipy.description}</p>
+                <h3>Instructions:</h3>
+                <p>{recipy.instructions}</p>
+              </div>
+            </div>
             <p>Created by {recipy.owner.username}</p>
             <p>Rating: {averageRating}</p>
         </div>
