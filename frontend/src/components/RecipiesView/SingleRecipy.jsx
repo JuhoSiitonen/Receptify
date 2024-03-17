@@ -13,6 +13,15 @@ const SingleRecipy = ({ recipy }) => {
     if (!recipy) {
         return null
     }
+
+    const calculateStars = (rating) => {
+      const stars = [];
+      for (let i = 0; i < Math.floor(rating); i++) {
+          stars.push(<span key={i} role="img" aria-label="star">⭐</span>);
+      }
+      return stars;
+    };
+
     let averageRating = recipy.averageRating
     averageRating !== 0 ? averageRating = Math.round(averageRating*100)/100 : averageRating = 'No ratings yet'
 
@@ -59,7 +68,9 @@ const SingleRecipy = ({ recipy }) => {
             </div>
             )}
             <h3>Created by: {recipy.owner.username}</h3>
-            <h3>Rating: {averageRating}</h3>
+            <h3>
+              Rating: {calculateStars(averageRating)}
+            </h3>
         </div>
     )
 }
