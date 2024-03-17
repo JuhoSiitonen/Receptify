@@ -16,8 +16,8 @@ const SingleRecipy = ({ recipy }) => {
         <div>
             {recipy.pictureUuid !== "" ? 
             <img
-            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x500/`}
-            width="400"
+            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x600/`}
+            width="500"
             /> :
             <></> 
             }
