@@ -132,11 +132,11 @@ const AddRecipe = () => {
                     <textarea value={instructions} onChange={({ target }) => setInstructions(target.value)} />
                 </div>
                 <div>
-                    Category:
+                    <p>Category:</p>
                     <input value={category} onChange={({ target }) => setCategory(target.value)} />
                     <button onClick={addCategory} type="button">add</button>
                 </div>
-                <div>Categories: 
+                <div> 
                     {categories.map(category => (
                         <li key={category}>
                             {category} 

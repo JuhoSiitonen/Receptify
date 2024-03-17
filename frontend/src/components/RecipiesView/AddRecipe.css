@@ -36,12 +36,17 @@
 }
 
 .add-recipe-container p {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    display: block;
+    margin-block-start: 6px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
 
 .add-recipe-container .ingredient-inputs {
     display: flex;
     align-items: center; 
+    margin: 5px 0;
 }
 
 .add-recipe-container .ingredient-inputs input {
@@ -50,11 +55,11 @@
 
 .add-recipe-container .ingredient-inputs select {
     width: 70px; 
-    margin-right: 5px;
+    margin-right: 4px;
 }
 
 .add-recipe-container button {
-    padding: 6px 10px;
+    padding: 4px 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -84,6 +89,7 @@
 
 .add-recipe-container li {
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .add-recipe-container p.error-message {
