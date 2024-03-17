@@ -1,3 +1,8 @@
+#cooking-time {
+    margin-top: 4px;
+    width: 40px;
+}
+
 .add-recipe-container {
     margin-top: 20px;
     padding: 20px;
@@ -12,7 +17,9 @@
 }
 
 .add-recipe-container input[type="text"],
+
 .add-recipe-container input[type="number"],
+
 .add-recipe-container textarea {
     width: calc(100% - 24px); 
     padding: 8px;
@@ -24,7 +31,7 @@
 
 .add-recipe-container select {
     width: calc(33.33% - 12px); 
-    padding: 8px;
+    padding: 4px;
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -34,7 +41,6 @@
 .add-recipe-container .ingredient-inputs {
     display: flex;
     align-items: center; 
-    margin-bottom: 10px;
 }
 
 .add-recipe-container .ingredient-inputs input {
@@ -42,12 +48,12 @@
 }
 
 .add-recipe-container .ingredient-inputs select {
-    width: 100px; 
-    margin-right: 10px;
+    width: 70px; 
+    margin-right: 5px;
 }
 
 .add-recipe-container button {
-    padding: 8px 12px;
+    padding: 6px 10px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -56,7 +62,7 @@
 }
 
 .add-recipe-container button[type="submit"] {
-    width: 100%;
+    width: 15%;
 }
 
 .add-recipe-container button[type="button"] {
