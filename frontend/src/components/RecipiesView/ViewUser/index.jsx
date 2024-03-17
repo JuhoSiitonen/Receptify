@@ -8,6 +8,7 @@ import Recipies from "../Recipies";
 import LoadingSpinner from "../../LoadingSpinner";
 import AddSubscriptionButton from "./AddSubscriptionButton";
 import Togglable from "../../Togglable";
+import './ViewUser.css'
 
 const ViewUser = () => {
     const [userInfo, setUserInfo] = useState(null)
@@ -42,7 +43,7 @@ const ViewUser = () => {
     }
 
     return (
-        <div>
+        <div className="view-user">
             <UserInfo userInfo={userInfo}/>
             {user.id === userId && <h2>Your recipies:</h2>}
             {user.id !== userId && (userSubscribe())}
