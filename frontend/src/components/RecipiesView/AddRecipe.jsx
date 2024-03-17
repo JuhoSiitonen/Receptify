@@ -88,16 +88,16 @@ const AddRecipe = () => {
             <h1>Add Recipe</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    Recipy name:
+                    <p>Recipy name:</p>
                     <input value={title} onChange={({ target }) => setTitle(target.value)} />
                 </div>
                 <div>
-                    Cooking time:
+                    Cooking time: 
                     <input id='cooking-time' value={cookingTime} onChange={handleCookingTimeChange} required />
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
+                <p>Ingredients:</p>
                 <div className="ingredient-inputs">
-                    Ingredients:
                     <input value={ingredient.name} onChange={({ target }) => setIngredient({ ...ingredient, name: target.value })}
                      placeholder="Ingredient name" />
                     <input value={ingredient.amount} onChange={({ target }) => setIngredient({ ...ingredient, amount: target.value })}

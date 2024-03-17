@@ -7,18 +7,15 @@
     margin-top: 20px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 25px;
     max-width: 600px;
     margin: 20px auto; 
+    background-color: #f9f9f9;
 }
 
 .add-recipe-container h1 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
-
-.add-recipe-container input[type="text"],
-
-.add-recipe-container input[type="number"],
 
 .add-recipe-container textarea {
     width: calc(100% - 24px); 
@@ -36,6 +33,10 @@
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+}
+
+.add-recipe-container p {
+    margin-bottom: 8px;
 }
 
 .add-recipe-container .ingredient-inputs {
