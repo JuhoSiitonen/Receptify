@@ -48,8 +48,8 @@ const SingleRecipy = ({ recipy }) => {
                 <p>{recipy.instructions}</p>
               </div>
             </div>
-            <p>Created by {recipy.owner.username}</p>
-            <p>Rating: {averageRating}</p>
+            <h3>Created by: {recipy.owner.username}</h3>
+            <h3>Rating: {averageRating}</h3>
         </div>
     )
 }
