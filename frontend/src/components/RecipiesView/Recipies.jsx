@@ -5,6 +5,7 @@ import Togglable from "../Togglable"
 import Comment from "./Comment"
 import Rating from "./Rating"
 import FavoriteButton from "./FavoriteButton"
+import './SingleRecipy.css'
 
 const Recipies = (props) => {
     const recipies = props.recipies
@@ -13,7 +14,7 @@ const Recipies = (props) => {
 
     const userActions = ( recipe, user ) => {
         return (
-            <div>
+            <div >
                 {!props.inViewUser && (
                     <button onClick={() => navigate(`/users/${recipe.owner.id}/view`)}>View User
                     </button>
@@ -32,7 +33,7 @@ const Recipies = (props) => {
     return (
         <div>
             {recipies.map((recipe) => (
-                <div key={recipe.id}>
+                <div key={recipe.id} className="single-recipe">
                     <Link to={`/recipes/${recipe.id}`}><h2>{recipe.title}</h2></Link>
                     <SingleRecipy recipy={recipe} />
                     {user && user.id !== recipe.owner.id && userActions(recipe, user)}
