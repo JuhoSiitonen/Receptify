@@ -85,22 +85,18 @@ const AddRecipe = () => {
 
     return (
         <div className='add-recipe-container'>
-            <h1>AddRecipe</h1>
+            <h1>Add Recipe</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     Recipy name:
                     <input value={title} onChange={({ target }) => setTitle(target.value)} />
                 </div>
                 <div>
-                    Description:
-                    <input value={description} onChange={({ target }) => setDescription(target.value)} />
-                </div>
-                <div>
                     Cooking time:
-                    <input value={cookingTime} onChange={handleCookingTimeChange} required />
+                    <input id='cooking-time' value={cookingTime} onChange={handleCookingTimeChange} required />
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
-                <div>
+                <div className="ingredient-inputs">
                     Ingredients:
                     <input value={ingredient.name} onChange={({ target }) => setIngredient({ ...ingredient, name: target.value })}
                      placeholder="Ingredient name" />
@@ -110,7 +106,7 @@ const AddRecipe = () => {
                         value={ingredient.unit}
                         onChange={({ target }) => setIngredient({ ...ingredient, unit: target.value })}
                     >
-                        <option value="">Select unit</option>
+                        <option value="">Unit</option>
                         {units.map((unit) => (
                             <option key={unit} value={unit}>
                                 {unit}
@@ -128,8 +124,12 @@ const AddRecipe = () => {
                 ))}
                 </div>
                 <div>
+                    Description:
+                    <textarea value={description} onChange={({ target }) => setDescription(target.value)} />
+                </div>
+                <div>
                     Instructions:
-                    <input value={instructions} onChange={({ target }) => setInstructions(target.value)} />
+                    <textarea value={instructions} onChange={({ target }) => setInstructions(target.value)} />
                 </div>
                 <div>
                     Category:
@@ -146,6 +146,7 @@ const AddRecipe = () => {
                 </div>
                 <h3>Upload image</h3>
                 <UploaderWidget files={photos} onChange={setPhotos} />
+                <br></br>
                 <button type="submit">Submit</button>
             </form>
         </div>
