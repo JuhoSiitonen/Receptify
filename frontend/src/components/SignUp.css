@@ -20,10 +20,10 @@
 }
 
 .login-form input {
-    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    box-sizing: border-box;
 }
 
 .login-form button {
