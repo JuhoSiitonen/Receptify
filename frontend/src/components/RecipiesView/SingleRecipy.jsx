@@ -1,13 +1,18 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { getAllComments } from '../../reducers/commentReducer'
+import UserActions from './UserActions'
 import './SingleRecipy.css'
 
 const baseUrl = 'https://ucarecdn.com/'
 
-const SingleRecipy = ({ recipy }) => {
+const SingleRecipy = ({ recipy, user }) => {
     const [showDetails, setShowDetails] = useState(false);
+    const dispatch = useDispatch()
 
     const toggleDetails = () => {
         setShowDetails(!showDetails);
+        dispatch(getAllComments(recipy.id))
     };
 
     if (!recipy) {
@@ -71,6 +76,10 @@ const SingleRecipy = ({ recipy }) => {
             <h3>
               Rating: {calculateStars(averageRating)}
             </h3>
+            {showDetails && (
+            <>
+            {user && user.id !== recipy.owner.id && <UserActions recipe={recipy} user={user}/>}
+            </>)}
         </div>
     )
 }
