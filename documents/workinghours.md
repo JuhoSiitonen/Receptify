@@ -57,5 +57,6 @@ Month total: 36h
 - 2h 11.3: Kubernetes setup for frontend and backend communication working!!!
 - 1h 12.3: Login form user input validation, login form, mainpage, navigationbar and App component css style added.
 - 1h 13.3: SignUp component user validation and css. Addrecipe component first css draft. 
+- 3h 17.3: Add recipe component rearrangement and css, recipies feed css. Chosenrecipy component extracted to SingleRecipy component. Recipies component user actions from Singlerecipy also.
 
-Total hours: 113h
+Total hours: 116h

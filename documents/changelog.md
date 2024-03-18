@@ -186,3 +186,10 @@
     - Login form user input validation, login form, mainpage, navigationbar and App component css style added.
 - 13.3 :
     - SignUp component user validation and css, addrecipe component draft css. 
+- 17.3 : 
+    - Add recipe component rearrangement and more CSS, Recipies feed css created. 
+    - Recipies component user actions extracted as own component, called from singlerecipy component.
+    - Rating shown as stars.
+    - SingleRecipy components on click shows extra info on recipy such as description, instructions and ingredients.
+    - ChosenRecipy component being phased out to have its functionality straight in SingleRecipy component.
+    
