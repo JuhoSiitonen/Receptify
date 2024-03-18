@@ -77,9 +77,9 @@ const SingleRecipy = ({ recipy, user }) => {
               Rating: {calculateStars(averageRating)}
             </h3>
             {showDetails && (
-            <>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {user && user.id !== recipy.owner.id && <UserActions recipe={recipy} user={user}/>}
-            </>)}
+            </div>)}
         </div>
     )
 }

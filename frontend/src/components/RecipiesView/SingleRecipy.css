@@ -70,3 +70,32 @@
 .single-recipe p.rating {
     font-weight: bold;
 }
+
+.single-recipy-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.single-recipy-actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.single-recipy-actions button:last-child {
+    margin-right: 0; 
+}
+
+.single-recipy-actions button:hover {
+    background-color: #0056b3;
+}
+
+.single-recipy-actions button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}

@@ -11,7 +11,6 @@ const Recipies = (props) => {
         <div>
             {recipies.map((recipe) => (
                 <div key={recipe.id} className="single-recipe">
-                    <Link to={`/recipes/${recipe.id}`}><h2>{recipe.title}</h2></Link>
                     <SingleRecipy recipy={recipe} user={user} />
                 </div>
             ))}
