@@ -1,0 +1,25 @@
+name: Testing pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+jobs:
+  testing-pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: adambirds/docker-compose-action@v1.3.0
+      with:
+        compose-file: "./docker-compose.dev.yml"
+        test-container: "receptify-backend-dev"
+        test-command: "npm test"
+    
+      - uses: adambirds/docker-compose-action@v1.3.0
+      with:
+        compose-file: "./docker-compose.dev.yml"
+        test-container: "receptify-frontend-dev"
+        test-command: "npm test"
