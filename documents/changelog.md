@@ -192,4 +192,6 @@
     - Rating shown as stars.
     - SingleRecipy components on click shows extra info on recipy such as description, instructions and ingredients.
     - ChosenRecipy component being phased out to have its functionality straight in SingleRecipy component.
-    
+- 19.3 :
+    - Updated Docker compose setup
+    - Added preliminary github action to create a Dcoker compose testing pipeline.
