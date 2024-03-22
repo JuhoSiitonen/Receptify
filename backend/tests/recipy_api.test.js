@@ -36,14 +36,16 @@ describe('POST /api/recipies', () => {
                 "visible": true,
                 "userId": recipyUser.id,
                 "ingredients": [
-                    {"name": "Spaghetti", "amount": "200g"},
-                    {"name": "Ground Beef", "amount": "500g"},
-                    {"name": "Tomato Sauce", "amount": "1 cup"}
+                    {"name": "Spaghetti", "amount": "200", "unit": "g"},
+                    {"name": "Ground Beef", "amount": "500", "unit": "g"},
+                    {"name": "Tomato Sauce", "amount": "1", "unit": "cup"}
                 ],
                 "categories": [
                     {"name": "Italian"},
                     {"name": "Pasta"}
-                ]
+                ],
+                "cookingTime": "00:30",
+                "pictureUuid": "1234-5678-91011"
         }
         const response = await api.post('/api/recipies').send(newRecipy)
         expect(response.status).toBe(500)
