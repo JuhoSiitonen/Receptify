@@ -59,5 +59,7 @@ Month total: 36h
 - 1h 13.3: SignUp component user validation and css. Addrecipe component first css draft. 
 - 3h 17.3: Add recipe component rearrangement and css, recipies feed css. Chosenrecipy component extracted to SingleRecipy component. Recipies component user actions from Singlerecipy also.
 - 1h 19.3: Updated Docker compose setup, and created first draft of a github action testing pipeline with Docker compose.
+- 1h 20.3: App deployed via Google Kubernetes engine and is hosted by Cloudflare at receptifyonline.com.
+- 1h 22.3: Added github action to build and push docker images for frontend and backend when a new release is published. 
 
-Total hours: 117h
+Total hours: 119h

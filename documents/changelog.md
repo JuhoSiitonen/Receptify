@@ -195,3 +195,7 @@
 - 19.3 :
     - Updated Docker compose setup
     - Added preliminary github action to create a Dcoker compose testing pipeline.
+- 20.3 :
+    - App is now hosted in a Google Kubernetes Engine cluster. Cloudflare DNS and domain registered for receptifyonline.com
+- 22.3 :
+    - Added github action to build and push Docker images for frontend and backend to Dockerhub when a new release of the app is published. 
