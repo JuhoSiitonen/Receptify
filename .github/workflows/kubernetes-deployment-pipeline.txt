@@ -13,6 +13,7 @@ env:
 
 jobs:
   setup-build-publish-deploy:
+    needs: [push_to_registry]
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-20.04
     environment: production
