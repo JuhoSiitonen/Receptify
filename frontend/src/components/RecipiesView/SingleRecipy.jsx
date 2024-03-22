@@ -34,7 +34,8 @@ const SingleRecipy = ({ recipy, user }) => {
     const formattedTime = timeParts.slice(0, 2).join(':');
 
     return (
-        <div onClick={toggleDetails}>
+        <div>
+          <div onClick={toggleDetails} id='single-recipy-clickarea'>
             {recipy.pictureUuid !== "" ? 
             <img
             src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x600/`}
@@ -72,6 +73,7 @@ const SingleRecipy = ({ recipy, user }) => {
               </div>
             </div>
             )}
+            </div>
             <h3>Created by: {recipy.owner.username}</h3>
             <h3>
               Rating: {calculateStars(averageRating)}
