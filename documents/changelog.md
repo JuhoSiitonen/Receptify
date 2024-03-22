@@ -198,4 +198,4 @@
 - 20.3 :
     - App is now hosted in a Google Kubernetes Engine cluster. Cloudflare DNS and domain registered for receptifyonline.com
 - 22.3 :
-    - Added github action to build and push Docker images for frontend and backend to Dockerhub when a new release of the app is published. 
+    - Added github action to build and push Docker images for frontend and backend to Dockerhub when a new release of the app is published. First draft of GKE deployment pipeline in github actions, runs on release. 
