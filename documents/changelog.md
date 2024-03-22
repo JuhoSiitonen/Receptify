@@ -197,5 +197,8 @@
     - Added preliminary github action to create a Dcoker compose testing pipeline.
 - 20.3 :
     - App is now hosted in a Google Kubernetes Engine cluster. Cloudflare DNS and domain registered for receptifyonline.com
-- 22.3 :
+- 21.3 :
     - Added github action to build and push Docker images for frontend and backend to Dockerhub when a new release of the app is published. First draft of GKE deployment pipeline in github actions, runs on release. 
+- 22.3 : 
+    - Fixing backend tests to be able to implement the github action for testing pipeline. Redis sessionchecker middleware updated to check if Node ENV is test, in that case request session variable is added to it. 
+
