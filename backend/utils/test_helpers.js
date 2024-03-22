@@ -29,14 +29,16 @@ const postableRecipies = [
         "visible": true,
         "userId": 1,
         "ingredients": [
-            {"name": "Spaghetti", "amount": "200g"},
-            {"name": "Ground Beef", "amount": "500g"},
-            {"name": "Tomato Sauce", "amount": "1 cup"}
+            {"name": "Spaghetti", "amount": "200", "unit": "g"},
+            {"name": "Ground Beef", "amount": "500", "unit": "g"},
+            {"name": "Tomato Sauce", "amount": "1", "unit": "cup"}
         ],
         "categories": [
             {"name": "Italian"},
             {"name": "Pasta"}
-        ]
+        ],
+        "cookingTime": "00:30",
+        "pictureUuid": "1234-5678-91011"
     },
     {
         "title": "Chicken Tikka Masala",
@@ -45,14 +47,16 @@ const postableRecipies = [
         "visible": true,
         "userId": 2,
         "ingredients": [
-            {"name": "Chicken", "amount": "500g"},
-            {"name": "Tomato Sauce", "amount": "1 cup"},
-            {"name": "Cream", "amount": "1 cup"}
+            {"name": "Chicken", "amount": "500", "unit": "g"},
+            {"name": "Tomato Sauce", "amount": "1", "unit": "cup"},
+            {"name": "Cream", "amount": "1", "unit": "cup"}
         ],
         "categories": [
             {"name": "Indian"},
             {"name": "Chicken"}
-        ]
+        ],
+        "cookingTime": "00:50",
+        "pictureUuid": "1234-5678-91234"
     },
 ]
 

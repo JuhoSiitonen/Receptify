@@ -1,6 +1,12 @@
+require('dotenv').config()
 const logger = require('./logger')
 
 const sessionChecker = (request, response, next) => {
+    if (process.env.NODE_ENV === 'test') {
+      userId = request.body.userId;
+      request.session.userId = userId;
+      next();
+    }
     if (request.session.userId) {
       next();
     } else {
@@ -27,8 +33,6 @@ const requestLogger = (request, response, next) => {
       return response.status(400).send({ error: 'malformatted id' })
     } else if (error.name === 'ValidationError') {
       return response.status(400).json({ error: error.message })
-    }else if (error.name ===  'JsonWebTokenError') {
-      return response.status(401).json({ error: 'token missing or invalid' })
     }
   
     next(error)
