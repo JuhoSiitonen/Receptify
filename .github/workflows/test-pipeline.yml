@@ -9,12 +9,12 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     env:
-      REDIS_URL: localhost:6379
+      REDIS_URL: redis:6379
       REDIS_SESSION_KEY: secret
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres_test
-      DATABASE_URL: localhost:5432
+      DATABASE_URL: postgres:5432
       FRONTEND_URL: http://localhost:5173
 
     services:
