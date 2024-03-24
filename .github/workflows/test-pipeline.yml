@@ -1,0 +1,51 @@
+name: Testing pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    env:
+      REDIS_URL: localhost:6379
+      REDIS_SESSION_KEY: secret
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres_test
+      DATABASE_URL: localhost:5432
+      FRONTEND_URL: http://localhost:5173
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --appendonly yes
+
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: receptify_test
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Backend Dependencies
+        run: npm install
+        working-directory: backend  
+
+      - name: Run Backend Tests
+        run: npm run test
+        working-directory: backend
