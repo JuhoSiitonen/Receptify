@@ -31,7 +31,7 @@ const UpdateForm = ({ recipy }) => {
 
         setTitle(recipy.title)
         setDescription(recipy.description)
-        setIngredients(recipy.recipy_ingredients.map(i => ({ name: i.ingredient.name, amount: i.amount })))
+        setIngredients(recipy.recipy_ingredients.map(i => ({ name: i.ingredient.name, amount: i.amount, unit: i.unit })))
         setInstructions(recipy.instructions)
         setCategories(recipy.recipy_categories.map(c => c.category.name))
         setVisible(true)
