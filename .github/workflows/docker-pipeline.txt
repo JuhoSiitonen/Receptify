@@ -27,7 +27,7 @@ jobs:
           context: ./frontend/
           file: Dockerfile
           push: true
-          tags: juhosii/receptify-frontend-dev
+          tags: juhosii/receptify-frontend-dev:latest
 
       - name: Build and push Docker image for Backend
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
