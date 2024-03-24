@@ -2,11 +2,19 @@ require('dotenv').config()
 const logger = require('./logger')
 
 const sessionChecker = (request, response, next) => {
+    /*
     if (process.env.NODE_ENV === 'test') {
-      userId = request.body.userId;
+      if (request.method === 'GET' || request.method === 'DELETE') {
+        next();
+        return;
+      }
+      let userId = request.body.userId;
       request.session.userId = userId;
       next();
     }
+    */
+    
+
     if (request.session.userId) {
       next();
     } else {
