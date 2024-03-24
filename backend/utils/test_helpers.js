@@ -38,7 +38,8 @@ const postableRecipies = [
             {"name": "Pasta"}
         ],
         "cookingTime": "00:30",
-        "pictureUuid": "1234-5678-91011"
+        "pictureUuid": "1234-5678-91011",
+        "averageRating": "0"
     },
     {
         "title": "Chicken Tikka Masala",
@@ -56,7 +57,8 @@ const postableRecipies = [
             {"name": "Chicken"}
         ],
         "cookingTime": "00:50",
-        "pictureUuid": "1234-5678-91234"
+        "pictureUuid": "1234-5678-91234",
+        "averageRating": "0"
     },
 ]
 
