@@ -5,7 +5,7 @@ const { Umzug, SequelizeStorage } = require('umzug')
 let db_connect = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}/${POSTGRES_DB}`
 
 if (process.env.NODE_ENV === 'test') {
-  db_connect = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}/${POSTGRES_DB}test`
+  db_connect = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${DATABASE_URL}/${POSTGRES_DB}`
 }
 
 const sequelize = new Sequelize(db_connect)
