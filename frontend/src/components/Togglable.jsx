@@ -1,4 +1,4 @@
-import { useState, useImperativeHandle, forwardRef } from 'react'
+import { useState, forwardRef } from 'react'
 import './ButtonStyle.css'
 
 const Togglable = forwardRef((props, ref) => {
@@ -13,12 +13,6 @@ const Togglable = forwardRef((props, ref) => {
       }
     setVisible(!visible)
   }
-
-  useImperativeHandle(ref, () => {
-    return {
-      toggleVisibility
-    }
-  })
 
   const cancelLabel = props.cancelLabel || 'cancel'
 

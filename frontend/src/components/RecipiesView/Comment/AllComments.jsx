@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteComment, getAllComments } from '../../../reducers/commentReducer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const AllComments = ({ user, recipy }) => {
     const dispatch = useDispatch()
+    // const [comments, setComments] = useState()
     const comments = useSelector(state => state.comments)
 
     useEffect(() => {
@@ -17,6 +18,7 @@ const AllComments = ({ user, recipy }) => {
     if (!comments) {
         return <p>No comments</p>
     }
+
     return (
         <div>
             <h3>Comments</h3>

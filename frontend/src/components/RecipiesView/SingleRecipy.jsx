@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { getAllComments } from '../../reducers/commentReducer'
 import UserActions from './UserActions'
 import OwnerActions from './OwnerActions'
 
@@ -10,11 +8,9 @@ const baseUrl = 'https://ucarecdn.com/'
 
 const SingleRecipy = ({ recipy, user }) => {
     const [showDetails, setShowDetails] = useState(false);
-    const dispatch = useDispatch()
 
     const toggleDetails = () => {
         setShowDetails(!showDetails);
-        dispatch(getAllComments(recipy.id))
     };
 
     if (!recipy) {
