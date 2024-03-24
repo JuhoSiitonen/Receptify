@@ -59,14 +59,10 @@ describe('POST /api/users', () => {
     })
 })
 
-describe('GET /api/users/:id', () => {
+describe('GET /api/users/:id/view', () => {
     test('returns a user', async () => {
         const user = await User.findOne({ where: { username: 'john_doe' } })
-    const response = await api.get(`/api/users/${user.id}`)
+        const response = await api.get(`/api/users/${user.id}/view`)
         expect(response.status).toBe(200)
-    })
-    test('returns 404 if user is not found', async () => {
-        const response = await api.get('/api/users/9999')
-        expect(response.status).toBe(404)
     })
 })

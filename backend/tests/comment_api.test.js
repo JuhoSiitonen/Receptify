@@ -20,7 +20,7 @@ describe('POST /api/comments/:id', () => {
             "content": "This is a comment",
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/${recipy.id}`).send(comment)
+        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
         expect(response.status).toBe(201)
         expect(response.body.comment).toBe(comment.content)
     })

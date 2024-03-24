@@ -55,7 +55,6 @@ describe('POST /api/recipies', () => {
 describe('DELETE /api/recipies/:id', () => {
     test('is successfull', async () => {
         const recipy = await api.post('/api/recipies').send(postableRecipies[0])
-        console.log(recipy.body.id)
         const response = await api.delete(`/api/recipies/${recipy.body.id}`)
         expect(response.status).toBe(204)
     })

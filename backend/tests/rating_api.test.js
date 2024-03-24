@@ -54,7 +54,7 @@ describe('POST /api/rating/:id', () => {
             "rating": 5,
             "userId": 9999
         }
-        const response = await api.post(`/api/rating/${recipy.id}`).send(newRating)
+        const response = await api.post(`/api/rating/${recipy.body.id}`).send(newRating)
         expect(response.status).toBe(404)
     })
 })
