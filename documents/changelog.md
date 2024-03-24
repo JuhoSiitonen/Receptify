@@ -201,4 +201,6 @@
     - Added github action to build and push Docker images for frontend and backend to Dockerhub when a new release of the app is published. First draft of GKE deployment pipeline in github actions, runs on release. 
 - 22.3 : 
     - Fixing backend tests to be able to implement the github action for testing pipeline. Redis sessionchecker middleware updated to check if Node ENV is test, in that case request session variable is added to it. 
+- 23.3 :
+    - New test file for session, will need to implement same cookie logic for all tests so there won't need to be extra checks in sessionChecker middleware for NODE_ENV. 
 

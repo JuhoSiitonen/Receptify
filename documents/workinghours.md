@@ -62,5 +62,6 @@ Month total: 36h
 - 1h 20.3: App deployed via Google Kubernetes engine and is hosted by Cloudflare at receptifyonline.com.
 - 1h 21.3: Added github action to build and push docker images for frontend and backend when a new release is published. First draft of GKE deployment pipeline in github actions, runs on release.
 - 1h 22.3: Fixing backend tests to be able to implement the github action for testing pipeline.
+- 1h 23.3: New test file for session, new logic for doing tests with correct session management.
 
-Total hours: 120h
+Total hours: 121h
