@@ -53,15 +53,24 @@ const RecipiesView = () => {
 
     return (
         <div>
-            <Togglable buttonLabel="Filter" onCancel={handleCancel}>
+          <div className='user-actions'>
+            <div className='action-button'>
+              <Togglable buttonLabel="Filter" onCancel={handleCancel}>
                 <Filter onFilter={handleFilter} />
-            </Togglable>
-            <Togglable buttonLabel="Sort" onCancel={handleCancel}>
+              </Togglable>
+            </div>
+            <div className='action-button'>
+              <Togglable buttonLabel="Sort" onCancel={handleCancel}>
                 <SortBy onSort={handleSort} />
-            </Togglable>
-            <ShowFavoritesButton favorites={favorites} setFavorites={setFavorites} />
-            <ShowSubscribedButton subscribed={subscribed} setSubscribed={setSubscribed} />
-            <br></br>
+              </Togglable>
+            </div>
+            <div className='action-button'>
+              <ShowFavoritesButton favorites={favorites} setFavorites={setFavorites} />
+            </div>
+            <div className='action-button'>
+              <ShowSubscribedButton subscribed={subscribed} setSubscribed={setSubscribed} />
+            </div>
+          </div>
             <Recipies recipies={recipies} />
         </div>
     )

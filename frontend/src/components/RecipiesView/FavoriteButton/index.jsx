@@ -33,7 +33,7 @@ const FavoriteButton = ({ recipyId, user }) => {
     }
 
     return (
-        <div className='togglable'>
+        <div >
             {!isFavorite && <button onClick={handleClick}>{buttonText}</button>}
             {isFavorite && <button onClick={handleDeleteClick}>{buttonText}</button>}
         </div>
