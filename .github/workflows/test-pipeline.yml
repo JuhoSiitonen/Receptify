@@ -22,7 +22,6 @@ jobs:
         image: redis
         ports:
           - 6379:6379
-        options: --appendonly yes
 
       postgres:
         image: postgres
