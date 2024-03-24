@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "test": "node utils/setupTests.js && cross-env NODE_ENV=test jest --verbose --runInBand",
     "start": "node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "migration:down": "node util/rollback.js",
+    "migration:down": "node utils/rollback.js",
     "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "Juho Siitonen",
