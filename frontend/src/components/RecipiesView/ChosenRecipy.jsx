@@ -2,7 +2,6 @@ import { useMatch } from "react-router-dom"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllComments } from "../../reducers/commentReducer"
-import { getAverage } from "../../reducers/ratingReducer"
 import LoadingSpinner from "../LoadingSpinner"
 import SingleRecipy from "./SingleRecipy"
 import AllComments from "./Comment/AllComments"
@@ -20,7 +19,6 @@ const ChosenRecipy = () => {
  
     useEffect(() => {
         dispatch(getAllComments(recipyId))
-        dispatch(getAverage(recipyId))
     }, [recipyId])
 
     if (!recipies || !user) {

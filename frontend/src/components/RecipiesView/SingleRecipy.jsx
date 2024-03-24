@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom"
 import { getAllComments } from '../../reducers/commentReducer'
 import UserActions from './UserActions'
 import './SingleRecipy.css'
@@ -9,6 +10,7 @@ const baseUrl = 'https://ucarecdn.com/'
 const SingleRecipy = ({ recipy, user }) => {
     const [showDetails, setShowDetails] = useState(false);
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const toggleDetails = () => {
         setShowDetails(!showDetails);
@@ -79,8 +81,14 @@ const SingleRecipy = ({ recipy, user }) => {
               Rating: {calculateStars(averageRating)}
             </h3>
             {showDetails && (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div >
             {user && user.id !== recipy.owner.id && <UserActions recipe={recipy} user={user}/>}
+            {user && user.id === recipy.owner.id && 
+            (<div>
+              <button onClick={() => navigate(`/recipes/${recipy.id}`)}>Edit</button>
+              <button>Delete</button>
+            </div>)
+              }
             </div>)}
         </div>
     )
