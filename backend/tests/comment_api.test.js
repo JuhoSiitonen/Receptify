@@ -5,31 +5,48 @@ const { User } = require('../models')
 const { newUsers } = require('../utils/test_helpers')
 const { postableRecipies } = require('../utils/test_helpers')
 
+let sessionCookie;
+
 beforeEach(async () => {
     await api.post('/api/testing/reset')
     await User.bulkCreate(newUsers)
-    let user = await User.findOne({ where: { username: "john_doe" } })
+    const loginResponse = await api.post('/api/login').send({ username: 'john_doe', password: 'password123' });
+    const rawCookies = loginResponse.headers['set-cookie'];
+    sessionCookie = rawCookies.map(cookie => cookie.split(';')[0]).join(';');
+    let user = await User.findOne({ where: { username: "john_doe" } });
     postableRecipies[0].userId = user.id
     postableRecipies[1].userId = user.id
 })
 
 describe('POST /api/comments/:id', () => {
     test('creates a new comment', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        const recipy = await api
+        .post('/api/recipies')
+        .send(postableRecipies[0])
+        .set('Cookie', sessionCookie);
         const comment = {
             "content": "This is a comment",
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
+        const response = await api
+        .post(`/api/comments/${recipy.body.id}`)
+        .send(comment)
+        .set('Cookie', sessionCookie);
         expect(response.status).toBe(201)
         expect(response.body.comment).toBe(comment.content)
     })
     test('returns 500 if content is missing', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        const recipy = await api
+        .post('/api/recipies')
+        .send(postableRecipies[0])
+        .set('Cookie', sessionCookie);
         const comment = {
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/${recipy.body.id}`).send(comment)
+        const response = await api
+        .post(`/api/comments/${recipy.body.id}`)
+        .send(comment)
+        .set('Cookie', sessionCookie);
         expect(response.status).toBe(500)
     })
     test('returns 404 if recipy is not found', async () => {
@@ -37,20 +54,31 @@ describe('POST /api/comments/:id', () => {
             "content": "This is a comment",
             "userId": postableRecipies[1].userId
         }
-        const response = await api.post(`/api/comments/9999`).send(comment)
+        const response = await api
+        .post(`/api/comments/9999`)
+        .send(comment)
+        .set('Cookie', sessionCookie);
         expect(response.status).toBe(404)
     })
 })
 
 describe('GET /api/comments/:id', () => {
     test('returns all comments for a recipe', async () => {
-        const recipy = await api.post('/api/recipies').send(postableRecipies[0])
+        const recipy = await api
+        .post('/api/recipies')
+        .send(postableRecipies[0])
+        .set('Cookie', sessionCookie);
         const comment = {
             "content": "This is a comment",
             "userId": postableRecipies[1].userId
         }
-        await api.post(`/api/comments/${recipy.body.id}`).send(comment)
-        const response = await api.get(`/api/comments/${recipy.body.id}`)
+        await api
+        .post(`/api/comments/${recipy.body.id}`)
+        .send(comment)
+        .set('Cookie', sessionCookie);
+        const response = await api
+        .get(`/api/comments/${recipy.body.id}`)
+        .set('Cookie', sessionCookie);
         expect(response.status).toBe(200)
         expect(response.body).toHaveLength(1)
     })
