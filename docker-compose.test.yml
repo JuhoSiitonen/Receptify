@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    command: ["redis-server", "--appendonly", "yes"] 
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=receptify_test
+  server:
+    image: receptify-backend-dev
+    container_name: receptify-backend-dev
+    build:
+      context: ./backend/
+      dockerfile: test.Dockerfile
+    volumes:
+      - ./backend/:/usr/src/app
+    ports:
+      - 3001:3001
+    environment:
+      - NODE_ENV=development
+      - SECRET="123456789"
+      - PORT=3001
+      - DATABASE_URL=postgres:5432
+      - REDIS_URL=redis:6379
+      - CORS_ORIGIN=http://localhost:3000
+      - REDIS_SESSION_KEY=secret
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=receptify_test
+    depends_on:
+      - redis
+      - postgres
+  app:
+    image: receptify-frontend-dev
+    container_name: receptify-frontend-dev
+    build:
+      context: ./frontend/
+      dockerfile: test.Dockerfile 
+    volumes:
+      - ./frontend/:/usr/src/app 
+    ports:
+      - 5173:80
+    environment:
+      - REACT_APP_BACKEND_URL=/api
+    depends_on:
+      - server
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.test.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+      - server
