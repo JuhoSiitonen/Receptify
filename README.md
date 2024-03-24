@@ -1,3 +1,5 @@
+[![Testing pipeline](https://github.com/JuhoSiitonen/Receptify/actions/workflows/test-pipeline.yml/badge.svg)](https://github.com/JuhoSiitonen/Receptify/actions/workflows/test-pipeline.yml)
+
 # Receptify
 Repository for Fullstackopen course project. 
 
