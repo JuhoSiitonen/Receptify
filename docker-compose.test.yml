@@ -26,7 +26,7 @@ services:
     ports:
       - 3001:3001
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=test
       - SECRET="123456789"
       - PORT=3001
       - DATABASE_URL=postgres:5432
