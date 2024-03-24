@@ -13,7 +13,7 @@ jobs:
       REDIS_SESSION_KEY: secret
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres_test
+      POSTGRES_DB: postgrestest
       DATABASE_URL: postgres:5432
       FRONTEND_URL: http://localhost:5173
 
@@ -28,7 +28,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: receptify_test
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
 
