@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { addFavorite, deleteFavorite } from '../../../reducers/userReducer'
+import '../../ButtonStyle.css'
 
 const FavoriteButton = ({ recipyId, user }) => {
     const [buttonText, setButtonText] = useState('')
@@ -32,7 +33,7 @@ const FavoriteButton = ({ recipyId, user }) => {
     }
 
     return (
-        <div>
+        <div className='togglable'>
             {!isFavorite && <button onClick={handleClick}>{buttonText}</button>}
             {isFavorite && <button onClick={handleDeleteClick}>{buttonText}</button>}
         </div>

@@ -4,12 +4,13 @@ import Togglable from "../Togglable"
 import Comment from "./Comment"
 import Rating from "./Rating"
 import AllComments from "./Comment/AllComments"
+import '../ButtonStyle.css'
 
 const UserActions = ({ recipe, user }) => {
     const navigate = useNavigate()
 
     return (
-        <div >
+        <div className='togglable'>
             <button onClick={() => navigate(`/users/${recipe.owner.id}/view`)}>View User
             </button>
             <FavoriteButton recipyId={recipe.id} user={user} />
