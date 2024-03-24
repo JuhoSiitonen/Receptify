@@ -30,7 +30,7 @@ const UserActions = ({ recipe, user }) => {
           </div>
           <div className='action-button'>
             <Togglable buttonLabel="Show comments" cancelLabel="Hide comments" topCancel={true}>
-                <AllComments />
+                <AllComments user={user} recipy={recipe}/>
             </Togglable>
           </div>
         </div>

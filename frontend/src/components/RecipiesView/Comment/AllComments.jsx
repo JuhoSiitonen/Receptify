@@ -1,10 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteComment } from '../../../reducers/commentReducer'
+import { deleteComment, getAllComments } from '../../../reducers/commentReducer'
+import { useEffect } from 'react'
 
-const AllComments = () => {
+const AllComments = ({ user, recipy }) => {
     const dispatch = useDispatch()
     const comments = useSelector(state => state.comments)
-    const user = useSelector(state => state.user)
+
+    useEffect(() => {
+        dispatch(getAllComments(recipy.id))
+    }, [])
 
     const handleDelete = async ( comment ) => {
         await dispatch(deleteComment(comment.id))

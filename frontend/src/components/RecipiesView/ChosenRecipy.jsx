@@ -15,12 +15,7 @@ const ChosenRecipy = () => {
     const recipyId = Number(match?.params.id);
     const user = useSelector(state => state.user)
     const recipies = useSelector(state => state.recipies)
-    const comments = useSelector(state => state.comment)
  
-    useEffect(() => {
-        dispatch(getAllComments(recipyId))
-    }, [recipyId])
-
     if (!recipies || !user) {
         return <LoadingSpinner />;
     }
@@ -35,13 +30,9 @@ const ChosenRecipy = () => {
         <div>
             <h2>{recipy.title}</h2>
             <SingleRecipy recipy={recipy} />
-            <Togglable buttonLabel="Show comments" cancelLabel="Hide comments" topCancel={true}>
-                <AllComments comments={comments} user={user}/>
-            </Togglable>
             {user && user.id === recipy.owner.id && (
             <div>
               <UpdateRecipy recipy={recipy} />
-              <DeleteButton recipy={recipy} />
             </div>
             )}
         </div>
