@@ -116,5 +116,15 @@ export const userRecipies = (id) => {
     }
 }
 
+export const recipySearch = (ingredients) => {
+    return async dispatch => {
+        try {
+            const recipies = await recipyService.search(ingredients)
+            dispatch(setRecipies(recipies))
+        } catch (error) {
+            throw error
+        }
+    }
+}
 
 export default recipySlice.reducer

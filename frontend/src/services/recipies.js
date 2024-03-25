@@ -43,4 +43,9 @@ const deleteRecipy = async (id) => {
   return request.data
 }
 
-export default { getAll, getFavorites, getSubscribed, create, update, deleteRecipy }
+const search = async (ingredients) => {
+  const response = await axios.post(`${baseUrl}/search`, ingredients)
+  return response.data
+}
+
+export default { getAll, getFavorites, getSubscribed, create, update, deleteRecipy, search }
