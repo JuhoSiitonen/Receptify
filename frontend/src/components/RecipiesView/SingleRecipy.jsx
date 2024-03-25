@@ -49,7 +49,7 @@ const SingleRecipy = ({ recipy, user }) => {
                 <h3>Ingredients:</h3>
                 <ul>
                   {recipy.recipy_ingredients.map(ingredient => (
-                    <li key={ingredient.id}>
+                    <li key={ingredient.id + ingredient.amount}>
                       {ingredient.amount} {ingredient.unit} of {ingredient.ingredient.name}
                     </li>
                   ))}
@@ -57,7 +57,7 @@ const SingleRecipy = ({ recipy, user }) => {
                 <h3>Categories:</h3>
                 <ul>
                   {recipy.recipy_categories.map(category => (
-                    <li key={category.id}>
+                    <li key={category.id + category.category.name }>
                       {category.category.name}
                     </li>
                   ))}
