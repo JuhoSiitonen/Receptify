@@ -4,7 +4,7 @@ import UpdateForm from "./UpdateForm"
 const UpdateRecipy = ({ recipy }) => {
 
     return (
-        <div>
+        <div className='action-button user-actions'>
             <Togglable buttonLabel="Update">
                 <UpdateForm recipy={recipy} />
             </Togglable>
