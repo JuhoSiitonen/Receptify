@@ -6,6 +6,7 @@ import './RecipyFinder.css'
 
 const RecipyFinder = () => {
     const dispatch = useDispatch()
+    const user = useSelector(state => state.user)
     const [ingredient, setIngredient] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [recipies, setRecipies] = useState([])
@@ -30,10 +31,8 @@ const RecipyFinder = () => {
     }
 
     const searchRecipies = async () => {
-        await dispatch(recipySearch(ingredients))
-        let results = useSelector(state => state.recipies)
+        let results = await dispatch(recipySearch(ingredients))
         setRecipies(results)
-        console.log('Search recipies')
     }
 
     return (
@@ -61,7 +60,9 @@ const RecipyFinder = () => {
             <div>
               <h2>Recipies</h2>
                 {recipies.map(recipy => (
-                  <SingleRecipy key={recipy.id} recipy={recipy} />
+                  <div className="single-recipe">
+                    <SingleRecipy recipy={recipy} user={user} />
+                  </div>
               ))}
             </div>
             )}

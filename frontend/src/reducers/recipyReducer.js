@@ -121,6 +121,7 @@ export const recipySearch = (ingredients) => {
         try {
             const recipies = await recipyService.search(ingredients)
             dispatch(setRecipies(recipies))
+            return recipies
         } catch (error) {
             throw error
         }

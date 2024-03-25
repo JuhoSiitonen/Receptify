@@ -44,7 +44,7 @@ const deleteRecipy = async (id) => {
 }
 
 const search = async (ingredients) => {
-  const response = await axios.post(`${baseUrl}/search`, ingredients)
+  const response = await axios.post(`${baseUrl}/search`, { ingredients: ingredients })
   return response.data
 }
 
