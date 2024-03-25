@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './RecipyFinder.css'
 
 const RecipyFinder = () => {
     const [ingredient, setIngredient] = useState('')
@@ -24,12 +25,12 @@ const RecipyFinder = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="recipy-finder-container">
+            <form className="recipy-finder-form" onSubmit={handleSubmit}>
                 <input type="text" value={ingredient} onChange={handleIngredientChange} />
                 <button type="submit" onClick={addIngredient}>Add ingredient</button>
             </form>
-            <ul>
+            <ul className="recipy-finder-list">
                 {ingredients.map(ingredient => (
                     <li key={ingredient}>
                         {ingredient}

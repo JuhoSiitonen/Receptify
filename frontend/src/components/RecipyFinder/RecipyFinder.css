@@ -1,0 +1,56 @@
+.recipy-finder-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.recipy-finder-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.recipy-finder-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.recipy-finder-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.recipy-finder-list {
+    width: 60%;
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipy-finder-list li {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-width: 0.1em;
+    border-radius: 5px;
+}
+
+.recipy-finder-list li button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
