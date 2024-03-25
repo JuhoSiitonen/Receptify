@@ -23,7 +23,7 @@ const Rating = ({ recipyId }) => {
               <input type="radio" name="rating" value="4" id="4"/><label htmlFor="4">☆</label>
               <input type="radio" name="rating" value="3" id="3"/><label htmlFor="3">☆</label>
               <input type="radio" name="rating" value="2" id="2"/><label htmlFor="2">☆</label>
-              <input type="radio" name="rating" value="1" checked id="1"/><label htmlFor="1">☆</label>            
+              <input type="radio" name="rating" value="1" defaultChecked id="1"/><label htmlFor="1">☆</label>            
             </div>
             <button type="submit">Submit</button>
             </form>
