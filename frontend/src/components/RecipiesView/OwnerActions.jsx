@@ -7,12 +7,18 @@ const OwnerActions = ({ recipe, user }) => {
     const navigate = useNavigate()
 
     return (
-        <div>
+        <div className='user-actions'>
+          <div className='action-button'>
             <button onClick={() => navigate(`/recipes/${recipe.id}`)}>Edit</button>
+          </div>
+          <div className='action-button'>
             <DeleteButton recipy={recipe} />
+          </div>
+          <div className='action-button'>
             <Togglable buttonLabel="Show comments" cancelLabel="Hide comments" topCancel={true}>
                 <AllComments user={user} recipy={recipe}/>
             </Togglable>
+          </div>
         </div>
     )
 }
