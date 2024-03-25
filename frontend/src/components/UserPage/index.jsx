@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LoadingSpinner from '../LoadingSpinner'
+import './UserPage.css'
 
 const UserPage = () => {
     const user = useSelector(state => state.user)
@@ -14,7 +15,7 @@ const UserPage = () => {
       }
     
     return (
-        <div>
+        <div className="user-page">
             <h1>UserPage</h1>
             <h2>Your recipies:</h2>
             <ul>
