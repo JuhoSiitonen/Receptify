@@ -415,5 +415,53 @@ recipyRouter.put("/:id", sessionChecker, async (req, res) => {
   }
 });
 
+recipyRouter.post("/search", async (req, res) => {
+  try {
+    const { ingredients } = req.body;
+
+    console.log('ingredients:', ingredients);
+
+    const ingredientsConditions = ingredients.map(ingredient => ({
+      '$recipy_ingredients.ingredient.name$': {
+        [Op.like]: `%${ingredient}%`
+      }
+    }));
+
+    const recipes = await Recipy.findAll({
+      include: [
+        {
+          model: RecipyIngredient,
+          include: [
+            {
+              model: Ingredient,
+              where: {
+                name: {
+                  [Op.or]: ingredientsConditions, 
+                },
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    recipes.sort((a, b) => {
+      const aMatchCount = a.recipy_ingredients.filter(
+        (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
+      ).length;
+      const bMatchCount = b.recipy_ingredients.filter(
+        (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
+      ).length;
+      return bMatchCount - aMatchCount; 
+    });
+
+    return res.status(200).json(recipes);
+  } catch (error) {
+    console.error('Error searching recipes by ingredients:', error);
+    throw error;
+  }
+}
+);
+
 
 module.exports = recipyRouter
