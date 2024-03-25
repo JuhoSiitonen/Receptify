@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { recipySearch } from '../../reducers/recipyReducer'
 import SingleRecipy from '../RecipiesView/SingleRecipy'
@@ -10,6 +10,14 @@ const RecipyFinder = () => {
     const [ingredient, setIngredient] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [recipies, setRecipies] = useState([])
+
+    useEffect(() => {
+        const fetchIngredients = async () => {
+            let results = await dispatch(recipySearch(ingredients))
+            setRecipies(results)
+        }
+        fetchIngredients()
+    }, [ingredients])
 
     const handleIngredientChange = (event) => {
         setIngredient(event.target.value)
@@ -30,11 +38,6 @@ const RecipyFinder = () => {
         console.log(ingredients)
     }
 
-    const searchRecipies = async () => {
-        let results = await dispatch(recipySearch(ingredients))
-        setRecipies(results)
-    }
-
     return (
         <div>
           <div className="recipy-finder-container">
@@ -51,11 +54,9 @@ const RecipyFinder = () => {
                     </li>
                 ))}
             </ul>
-            {ingredients.length > 0 && 
-            <button onClick={searchRecipies}>Search recipies</button>
-            }
           </div>
           <div>
+            {!recipies && <></>}
             {recipies.length > 0 && (
             <div>
               <h2>Recipies</h2>
