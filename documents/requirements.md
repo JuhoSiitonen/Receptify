@@ -41,20 +41,26 @@
     - [ ] User can see a list of newest recipies from subscribed users
 
 ## Technical requirements
-- Token based authentication for requests
-- Token validation expiry within certain amount of time
+- Redis session based authentication for requests
+- Session validation expiry within certain amount of time
 - The app frontend is made with React
 - The backend is an Express server with PostgreSQL database
-- The app has a Redis session cache and Redis pub/sub
+- The app has a Redis session cache
 - The api is REST
 - The frontend state handling is done with Redux
-- The application development database is set with Docker
+- The application development done with a Docker compose setup
 - The app has a CICD pipeline with Github Actions
 - The app has unit testing with Jest and end to end testing with Cypress
-- Uploadcare for validating, storing and getting pictures from
-- The application is hosted in ???
-- Docker containers in deployment???
-- Other aspects???
+- Uploadcare for validating, storing and getting stored pictures
+- The application is hosted in Google Kubernetes Engine as a Kubernetes cluster
+- Application domain is with Cloudflare 
+
 
 ## Architechture
-- TBA
+- Node.js
+- Express server
+- Redis session cache
+- PostgreSQL database
+- React frontend
+- Redux state management
+- Kubernetes cluster 

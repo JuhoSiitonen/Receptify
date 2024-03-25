@@ -203,4 +203,14 @@
     - Fixing backend tests to be able to implement the github action for testing pipeline. Redis sessionchecker middleware updated to check if Node ENV is test, in that case request session variable is added to it. 
 - 23.3 :
     - New test file for session, will need to implement same cookie logic for all tests so there won't need to be extra checks in sessionChecker middleware for NODE_ENV. 
+- 24.3 :
+    - Backend tests updated to use Redis sessions, all backend tests working now. 
+    - Also added a script "setupTests.js" to make sure db is initialized before tests.
+    - Testing pipeline implemented now, but only with backend unit tests.
+    - Refactoring Recipiesview related components, ChosenRecipy component only used to Update recipies from now on. Recipiesview will show either UserActions or OwnerActions when clicking a recipy according to whether the user is the recipy owner. 
+    - More css styles to RecipiesView, buttons to adhere to same style choice.
+    - Ratings are now sent with clicking at stars, done with css.
+    - Styles for UpdateRecipy, UserPage, RecipyFinder and ChosenRecipy components
+    
+    
 
