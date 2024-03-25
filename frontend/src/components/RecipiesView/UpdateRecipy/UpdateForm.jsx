@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateRecipy } from '../../../reducers/recipyReducer'
 import UploaderWidget from '../../Uploader/UploaderWidget'
+import '../AddRecipe.css'
 
 const UpdateForm = ({ recipy }) => {
     const [title, setTitle] = useState('')
@@ -90,7 +91,7 @@ const UpdateForm = ({ recipy }) => {
         
     }
     return (
-        <div>
+        <div className='add-recipe-container'>
             {!visible && setupFields()}
             <h1>Update Recipy</h1>
             <form onSubmit={handleSubmit}>

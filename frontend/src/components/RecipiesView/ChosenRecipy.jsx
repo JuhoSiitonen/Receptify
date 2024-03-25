@@ -1,16 +1,11 @@
 import { useMatch } from "react-router-dom"
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getAllComments } from "../../reducers/commentReducer"
+import { useSelector } from "react-redux"
 import LoadingSpinner from "../LoadingSpinner"
 import SingleRecipy from "./SingleRecipy"
-import AllComments from "./Comment/AllComments"
 import UpdateRecipy from "./UpdateRecipy"
-import DeleteButton from "./DeleteButton"
-import Togglable from "../Togglable"
+import './SingleRecipy.css'
 
 const ChosenRecipy = () => {
-    const dispatch = useDispatch()
     const match = useMatch('/recipes/:id');
     const recipyId = Number(match?.params.id);
     const user = useSelector(state => state.user)
@@ -28,8 +23,9 @@ const ChosenRecipy = () => {
 
     return (
         <div>
-            <h2>{recipy.title}</h2>
-            <SingleRecipy recipy={recipy} />
+            <div className="single-recipe">
+              <SingleRecipy recipy={recipy} />
+            </div>
             {user && user.id === recipy.owner.id && (
             <div>
               <UpdateRecipy recipy={recipy} />
