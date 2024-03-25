@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { createRating } from '../../../reducers/ratingReducer'
+import './rating.css'
 
 const Rating = ({ recipyId }) => {
     const dispatch = useDispatch()
@@ -14,21 +15,17 @@ const Rating = ({ recipyId }) => {
         await dispatch(createRating(recipyId, ratingObject))
     }
 
-    return (
+    return (       
         <div>
-            Rating
             <form onSubmit={handleSubmit}> 
-                <input type="radio" id="1" name="rating" value="1" />
-                <label htmlFor="1">1</label>
-                <input type="radio" id="2" name="rating" value="2" />
-                <label htmlFor="2">2</label>
-                <input type="radio" id="3" name="rating" value="3" />
-                <label htmlFor="3">3</label>
-                <input type="radio" id="4" name="rating" value="4" />
-                <label htmlFor="4">4</label>
-                <input type="radio" id="5" name="rating" value="5" />
-                <label htmlFor="5">5</label>
-                <button type="submit">Submit</button>
+            <div className="rating">
+              <input type="radio" name="rating" value="5" id="5"/><label htmlFor="5">☆</label>
+              <input type="radio" name="rating" value="4" id="4"/><label htmlFor="4">☆</label>
+              <input type="radio" name="rating" value="3" id="3"/><label htmlFor="3">☆</label>
+              <input type="radio" name="rating" value="2" id="2"/><label htmlFor="2">☆</label>
+              <input type="radio" name="rating" value="1" checked id="1"/><label htmlFor="1">☆</label>            
+            </div>
+            <button type="submit">Submit</button>
             </form>
         </div>
     )
