@@ -211,6 +211,9 @@
     - More css styles to RecipiesView, buttons to adhere to same style choice.
     - Ratings are now sent with clicking at stars, done with css.
     - Styles for UpdateRecipy, UserPage, RecipyFinder and ChosenRecipy components
+- 25.3 :
+    - RecipyFinder logic implemented in backend recipies controller as  post endpoint /search. Also added Axios service function and Redux reducer function. 
+    - RecipyFinder page works, with multiple ingredients can be searched and the results will be shown in order of more hits to the searched ingredients. Main point of the component is a useEffect with an async function inside it.
     
     
 
