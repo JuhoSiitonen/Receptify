@@ -442,11 +442,28 @@ recipyRouter.post("/search", async (req, res) => {
     const foundRecipeIds = recipeIds.map(recipe => recipe.recipyId);
 
     const recipes = await Recipy.findAll({
+      include: [
+        { model: User,
+          as: 'owner',
+          attributes: [ "id", "username"] },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+      ],
       where: {
         id: {
           [Op.in]: foundRecipeIds
         }
       }
+    })
+
+    recipes.sort((a, b) => {
+      const aMatchCount = a.recipy_ingredients.filter(
+        (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
+      ).length;
+      const bMatchCount = b.recipy_ingredients.filter(
+        (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
+      ).length;
+      return bMatchCount - aMatchCount;
     });
 
     return res.status(200).json(recipes);
