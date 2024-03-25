@@ -419,40 +419,34 @@ recipyRouter.post("/search", async (req, res) => {
   try {
     const { ingredients } = req.body;
 
-    console.log('ingredients:', ingredients);
-
-    const ingredientsConditions = ingredients.map(ingredient => ({
-      '$recipy_ingredients.ingredient.name$': {
-        [Op.like]: `%${ingredient}%`
+    const foundIngredients = await Ingredient.findAll({
+      where: {
+        name: {
+          [Op.in]: ingredients
+        }
       }
-    }));
-
-    const recipes = await Recipy.findAll({
-      include: [
-        {
-          model: RecipyIngredient,
-          include: [
-            {
-              model: Ingredient,
-              where: {
-                name: {
-                  [Op.or]: ingredientsConditions, 
-                },
-              },
-            },
-          ],
-        },
-      ],
     });
 
-    recipes.sort((a, b) => {
-      const aMatchCount = a.recipy_ingredients.filter(
-        (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
-      ).length;
-      const bMatchCount = b.recipy_ingredients.filter(
-        (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
-      ).length;
-      return bMatchCount - aMatchCount; 
+    const ingredientIds = foundIngredients.map(ingredient => ingredient.id);
+
+    const recipeIds = await RecipyIngredient.findAll({
+      where: {
+        ingredientId: {
+          [Op.in]: ingredientIds
+        }
+      },
+      attributes: ['recipyId'],
+      raw: true
+    });
+
+    const foundRecipeIds = recipeIds.map(recipe => recipe.recipyId);
+
+    const recipes = await Recipy.findAll({
+      where: {
+        id: {
+          [Op.in]: foundRecipeIds
+        }
+      }
     });
 
     return res.status(200).json(recipes);
