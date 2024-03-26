@@ -64,6 +64,7 @@ Month total: 36h
 - 1h 22.3: Fixing backend tests to be able to implement the github action for testing pipeline.
 - 1h 23.3: New test file for session, new logic for doing tests with correct session management.
 - 6h 24.3: Backend tests work again! Testing pipeline implemented. Refactoring plus more coherent css styles. 
-- 2h 25.3: RecipyFinder component and associated logic implemented. 
+- 2h 25.3: RecipyFinder component and associated logic implemented.
+- 2h 26.3: RecipiesView sorting and filtering logic fixed. Docker build push pipeline.
 
-Total hours: 129h
+Total hours: 131h

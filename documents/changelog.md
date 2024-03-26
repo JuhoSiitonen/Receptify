@@ -214,6 +214,11 @@
 - 25.3 :
     - RecipyFinder logic implemented in backend recipies controller as  post endpoint /search. Also added Axios service function and Redux reducer function. 
     - RecipyFinder page works, with multiple ingredients can be searched and the results will be shown in order of more hits to the searched ingredients. Main point of the component is a useEffect with an async function inside it.
+- 26.3 :
+    - Fixed filtering, sorting, subscription and favorites search logic in RecipiesView. The search first finds relevant recipies and their IDs and then makes another query to DB to return full recipies. 
+    - Sorts and filters can be used together with the favorite recipies and subscriptions via URL params. Three endpoints are used, the /recipies/ , /recipies/favorites and /recipies/subscriptions. Needs still refactoring.
+    - Docker images build push pipeline action added, will activate on release events. 
+
     
     
 
