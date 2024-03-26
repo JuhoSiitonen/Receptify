@@ -20,7 +20,7 @@ recipyRouter.get("/", async (req, res) => {
     if (req.query.ingredients) {
       whereClause = {
         ...whereClause,
-        '$ingredients.name$': {
+        '$recipy_ingredients.ingredient.name$': {
           [Op.like]: `%${req.query.ingredients}%`
         }
       };
@@ -60,7 +60,7 @@ recipyRouter.get("/", async (req, res) => {
       order: orderClause,
     })
     
-    /*
+    
     const recipeIds = foundRecipes.map(recipe => recipe.id);
 
     const recipes = await Recipy.findAll({
@@ -74,9 +74,9 @@ recipyRouter.get("/", async (req, res) => {
       where: { id: recipeIds },
       order: orderClause,
     });
-    */
+    
 
-    return res.status(200).json(foundRecipes);
+    return res.status(200).json(recipes);
   } catch (error) {
     console.error('Error fetching recipes:', error);
     return res.status(500).end();
@@ -87,16 +87,6 @@ recipyRouter.get("/favorites", async (req, res) => {
   try {
     let orderClause = [];
     let whereClause = {};
-
-    /*
-    if (req.query.title) {
-      whereClause = { 
-        ...whereClause, 
-        '$userFavorites.title$': {
-          [Op.like]: `%${req.query.title}%`
-        }};
-    }
-    */
 
     if (req.query.title) {
       whereClause = { 
@@ -118,7 +108,7 @@ recipyRouter.get("/favorites", async (req, res) => {
     if (req.query.username) {
       whereClause = {
         ...whereClause,
-        '$userFavorites.owner.username$': {
+        '$owner.username$': {
           [Op.like]: `%${req.query.username}%`
         }
       };
@@ -134,33 +124,43 @@ recipyRouter.get("/favorites", async (req, res) => {
     }
 
     if (req.query.sort) {
-      let sorter;
-      if (req.query.sort === 'cookingTime') {
-        sorter = 'cooking_time';
-      } else if (req.query.sort === 'averageRating') {
-        sorter = 'average_rating';
-      } else {
-        sorter = 'created_at';
-      }
-      orderClause.push([sequelize.literal('"userFavorites"."' + sorter + '"'), req.query.order || 'ASC']);
+      orderClause.push([req.query.sort, req.query.order || 'ASC']);
     }
 
-    const user = await User.findByPk(req.session.userId, {
+    const favorites = 
+      JSON.parse(req.session.userFavorites)
+      .map(favorite => favorite.id);
+
+    whereClause = {
+      ...whereClause,
+      id: favorites
+    };
+
+    const foundRecipes = await Recipy.findAll({
+      where: whereClause,
       include: [
-        { model: Recipy, as: 'userFavorites', include: 
-          [
-            { model: User, as: 'owner', attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: whereClause,
-        },
+        { model: User, as: 'owner', attributes: ['id', 'username'] },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] }
       ],
-      
       order: orderClause,
     });
 
-    return res.status(200).json(user.userFavorites);
+    const recipeIds = foundRecipes.map(recipe => recipe.id);
+
+    const recipes = await Recipy.findAll({
+      include: [
+        { model: User,
+          as: 'owner',
+          attributes: [ "id", "username"]},
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+      ],
+      where: { id: recipeIds },
+      order: orderClause,
+    });
+
+    return res.status(200).json(recipes);
   } catch (error) {
     console.error('Error fetching user favorites:', error);
     return res.status(500).end();
@@ -220,13 +220,27 @@ recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
       userId: subscribedUserIds
     };
 
-    const recipes = await Recipy.findAll({
+    const foundRecipes = await Recipy.findAll({
       where: whereClause,
       include: [
         { model: User, as: 'owner', attributes: ['id', 'username'] },
         { model: RecipyIngredient, include: [Ingredient] },
         { model: RecipyCategory, include: [Category] }
       ],
+      order: orderClause,
+    });
+
+    const recipeIds = foundRecipes.map(recipe => recipe.id);
+
+    const recipes = await Recipy.findAll({
+      include: [
+        { model: User,
+          as: 'owner',
+          attributes: [ "id", "username"]},
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+      ],
+      where: { id: recipeIds },
       order: orderClause,
     });
 
