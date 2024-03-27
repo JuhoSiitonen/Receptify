@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const SortBy = ({ onSort }) => {
   const [sortOption, setSortOption] = useState('cookingTime');
-  const [sortValue, setSortValue] = useState('ASC');
+  const [sortValue, setSortValue] = useState('DESC');
 
   const handleSorter = () => {
     onSort({ option: sortOption, value: sortValue });
