@@ -45,7 +45,9 @@ recipyRouter.get("/", async (req, res) => {
     }
 
     if (req.query.sort) {
-      orderClause.push([req.query.sort, req.query.order || 'ASC']);
+      orderClause.push([req.query.sort, req.query.order || 'DESC']);
+    } else {
+      orderClause.push(['created_at', 'DESC']);
     }
 
     const foundRecipes = await Recipy.findAll({
@@ -124,7 +126,7 @@ recipyRouter.get("/favorites", async (req, res) => {
     }
 
     if (req.query.sort) {
-      orderClause.push([req.query.sort, req.query.order || 'ASC']);
+      orderClause.push([req.query.sort, req.query.order || 'DESC']);
     }
 
     const favorites = 
@@ -208,7 +210,7 @@ recipyRouter.get("/subscriptions", sessionChecker, async (req, res) => {
     }
 
     if (req.query.sort) {
-      orderClause.push([req.query.sort, req.query.order || 'ASC']);
+      orderClause.push([req.query.sort, req.query.order || 'DESC']);
     }
 
     const subscribedUserIds = 
