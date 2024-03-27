@@ -33,7 +33,7 @@ const SingleRecipy = ({ recipy, user }) => {
 
     return (
         <div>
-          <div onClick={toggleDetails} id='single-recipy-clickarea'>
+          <div onClick={toggleDetails} className='single-recipe-clickarea'>
             {recipy.pictureUuid !== "" ? 
             <img
             src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x600/`}
@@ -71,8 +71,8 @@ const SingleRecipy = ({ recipy, user }) => {
               </div>
             </div>
             )}
+              <h3>Created by: {recipy.owner.username}</h3>
             </div>
-            <h3>Created by: {recipy.owner.username}</h3>
             <h3>
               Rating: {calculateStars(averageRating)}
             </h3>
