@@ -17,6 +17,7 @@ spec:
       containers:
       - name: receptify-frontend
         image: juhosii/receptify-frontend-dev:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
