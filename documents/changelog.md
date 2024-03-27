@@ -218,6 +218,11 @@
     - Fixed filtering, sorting, subscription and favorites search logic in RecipiesView. The search first finds relevant recipies and their IDs and then makes another query to DB to return full recipies. 
     - Sorts and filters can be used together with the favorite recipies and subscriptions via URL params. Three endpoints are used, the /recipies/ , /recipies/favorites and /recipies/subscriptions. Needs still refactoring.
     - Docker images build push pipeline action added, will activate on release events. 
+- 27.3 : 
+    - Frontend fixes: Comments fetched for recipy in an async function inside useEffect, comments now visible when pressing show comments.
+    - Default sorting for recipiesview is DESC
+    - Show favorites and Show subscribed buttons can be pressed back to back, pressing the other button will deactivate the other. 
+    - Pre release, new deployment to Kubernetes cluster. Docker pipeline needs to change to use spesific tags, othervise Kubernetes deployment pipeline will not work.
 
     
     

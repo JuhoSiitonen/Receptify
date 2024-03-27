@@ -66,5 +66,6 @@ Month total: 36h
 - 6h 24.3: Backend tests work again! Testing pipeline implemented. Refactoring plus more coherent css styles. 
 - 2h 25.3: RecipyFinder component and associated logic implemented.
 - 2h 26.3: RecipiesView sorting and filtering logic fixed. Docker build push pipeline.
+- 2h 27.3: Frontend fixes, pre release with new deployment to GKE.
 
-Total hours: 131h
+Total hours: 133h
