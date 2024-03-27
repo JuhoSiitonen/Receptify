@@ -4,15 +4,19 @@ import { useEffect, useState } from 'react'
 
 const AllComments = ({ user, recipy }) => {
     const dispatch = useDispatch()
-    // const [comments, setComments] = useState()
-    const comments = useSelector(state => state.comments)
+    const [comments, setComments] = useState()
 
     useEffect(() => {
-        dispatch(getAllComments(recipy.id))
+        const fetchComments = async () => {
+            let results = await dispatch(getAllComments(recipy.id))
+            setComments(results)
+        }
+        fetchComments()
     }, [])
 
     const handleDelete = async ( comment ) => {
         await dispatch(deleteComment(comment.id))
+        setComments(comments.filter(c => c.id !== comment.id))
     }
 
     if (!comments) {

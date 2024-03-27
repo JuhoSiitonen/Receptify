@@ -41,6 +41,7 @@ export const getAllComments = (id) => {
             const comments = await commentService.getAllComments(id)
             dispatch(setComment(comments))
             console.log(comments)
+            return comments
         } catch (error) {
             console.log(error)
             throw error
