@@ -65,10 +65,20 @@ const RecipiesView = () => {
               </Togglable>
             </div>
             <div className='action-button'>
-              <ShowFavoritesButton favorites={favorites} setFavorites={setFavorites} />
+              <ShowFavoritesButton 
+                favorites={favorites} 
+                setFavorites={setFavorites}
+                subscribed={subscribed}
+                setSubscribed={setSubscribed}
+                />
             </div>
             <div className='action-button'>
-              <ShowSubscribedButton subscribed={subscribed} setSubscribed={setSubscribed} />
+              <ShowSubscribedButton 
+                subscribed={subscribed} 
+                setSubscribed={setSubscribed}
+                favorites={favorites}
+                setFavorites={setFavorites}
+                />
             </div>
           </div>
             <Recipies recipies={recipies} />
