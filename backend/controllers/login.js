@@ -25,6 +25,8 @@ loginRouter.post('/', async (request, response) => {
       attributes: ["recipyId", "rating"],
     });
 
+    const shoppinglist = []
+
     if (user && user.password === password) {
         const sess = request.session;
         sess.userId = user.id;
@@ -33,6 +35,7 @@ loginRouter.post('/', async (request, response) => {
         sess.subscriptions = JSON.stringify(user.subscriptions);
         sess.userFavorites = JSON.stringify(user.userFavorites);
         sess.rated = JSON.stringify(rated);
+        sess.shoppinglist = JSON.stringify(shoppinglist);
         const returnUser = { 
             id: user.id, 
             username: user.username, 

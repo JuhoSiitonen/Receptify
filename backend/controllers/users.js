@@ -121,6 +121,7 @@ userRouter.get("/session", async (request, response) => {
         subscriptions: JSON.parse(sess.subscriptions),
         userFavorites: JSON.parse(sess.userFavorites),
         rated: JSON.parse(sess.rated),
+        shoppinglist: JSON.parse(sess.shoppinglist),
       }
       console.log('currentUser:', currentUser)      
       return response.status(200).json(currentUser);
@@ -151,5 +152,18 @@ userRouter.get("/:id/view", sessionChecker, async (request, response) => {
   });
   return response.status(200).json(recipes);
 })
+
+userRouter.post("/shoppinglist", sessionChecker, async (request, response) => {
+  try {
+    const { items } = request.body;
+    let shoppinglist = JSON.parse(request.session.shoppinglist);
+    shoppinglist.push(items);
+    request.session.shoppinglist = JSON.stringify(shoppinglist);
+    return response.status(201).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+}
+)
 
 module.exports = userRouter;
