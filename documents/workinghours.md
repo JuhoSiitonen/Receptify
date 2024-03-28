@@ -67,5 +67,6 @@ Month total: 36h
 - 2h 25.3: RecipyFinder component and associated logic implemented.
 - 2h 26.3: RecipiesView sorting and filtering logic fixed. Docker build push pipeline.
 - 2h 27.3: Frontend fixes, pre release with new deployment to GKE.
+- 2h 28.3: Refactoring reducers, user rating updating. Shoppinglist component.
 
-Total hours: 133h
+Total hours: 135h

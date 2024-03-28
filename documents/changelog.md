@@ -223,6 +223,15 @@
     - Default sorting for recipiesview is DESC
     - Show favorites and Show subscribed buttons can be pressed back to back, pressing the other button will deactivate the other. 
     - Pre release, new deployment to Kubernetes cluster. Docker pipeline needs to change to use spesific tags, othervise Kubernetes deployment pipeline will not work.
+- 28.3 : 
+    - Refactored reducers, rating reducer removed and functionality added to user and recipy reducers.
+    - Added service for updating a users rating of a recipy.
+    - Redis session variable for user rated recipies added.
+    - User redux state also has user rated recipies.
+    - Rating component checks redux state if user has rated recipy and if user rates it again calls update reducer.
+    - Proper notifications depending on if rating is a new rating or update.
+    - New component for shoppinglist, also userrouter endpoint for adding shoppinglist items to redis.
+    - Shoppinglist items also in redux state.
 
     
     
