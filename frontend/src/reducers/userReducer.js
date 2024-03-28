@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import userService from '../services/users'
 import loginService from '../services/login'
+import ratingService from '../services/rating'
 import { addNotification } from './notificationReducer'
+import { updateRating } from './recipyReducer'
 
 const userSlice = createSlice({
     name: 'user',
@@ -25,10 +27,16 @@ const userSlice = createSlice({
         },
         deleteFavorites(state, action) {
             const id = action.payload
-            console.log('id:', id)
-            console.log('state.userFavorites:', state.userFavorites)
             state.userFavorites = state.userFavorites?.filter(f => f.id !== id)
         },
+        newUserRating(state, action) {
+            state.rated.push(action.payload)
+        },
+        updateUserRating(state, action) {
+            const { recipyId, rating } = action.payload
+            const rated = state.rated.find(r => r.recipyId === recipyId)
+            rated.rating = rating
+        }
     },
 })
 
@@ -38,7 +46,9 @@ export const {
     addNewSubscription,
     deleteSubscriptions,
     addNewFavorite,
-    deleteFavorites
+    deleteFavorites,
+    newUserRating,
+    updateUserRating
  } = userSlice.actions
 
 export const login = (credentials) => {
@@ -179,6 +189,38 @@ export const deleteFavorite = (id) => {
             dispatch(addNotification({
                 message: 'Favorite could not be deleted', 
                 error: true}));
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const createRating = (id, rating) => {
+    return async dispatch => {
+        try {
+            const newRating = await ratingService.create(id, rating)
+            dispatch(updateRating(id, newRating))
+            const userRating = { recipyId: id, rating: rating.rating }
+            dispatch(newUserRating(userRating))
+            dispatch(addNotification({ message: 'Rating added successfully!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Rating could not be added!', error: true }))
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const updateExistingRating = (id, rating) => {
+    return async dispatch => {
+        try {
+            const newRating = await ratingService.update(id, rating)
+            dispatch(updateRating(id, newRating))
+            const userRating = { recipyId: id, rating: rating.rating }
+            dispatch(updateUserRating(userRating))
+            dispatch(addNotification({ message: 'Rating updated successfully!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Rating could not be updated!', error: true }))
             console.log(error)
             throw error
         }
