@@ -25,7 +25,7 @@ const UserActions = ({ recipe, user }) => {
           </div>
           <div className='action-button'>
              <Togglable buttonLabel="Rate">
-                <Rating  recipyId={recipe.id} />
+                <Rating  recipyId={recipe.id} user={user} />
             </Togglable>
           </div>
           <div className='action-button'>
