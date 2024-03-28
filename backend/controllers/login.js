@@ -1,5 +1,5 @@
 const loginRouter = require('express').Router();
-const { User, Recipy } = require('../models');
+const { User, Recipy, Rating } = require('../models');
 
 loginRouter.post('/', async (request, response) => {
     const { username, password } = request.body;
@@ -19,7 +19,12 @@ loginRouter.post('/', async (request, response) => {
               }, },
           ],
         }
-        );
+      );
+    const rated = await Rating.findAll({ 
+      where: { userId: user.id },
+      attributes: ["recipyId", "rating"],
+    });
+
     if (user && user.password === password) {
         const sess = request.session;
         sess.userId = user.id;
@@ -27,12 +32,14 @@ loginRouter.post('/', async (request, response) => {
         sess.admin = user.admin;
         sess.subscriptions = JSON.stringify(user.subscriptions);
         sess.userFavorites = JSON.stringify(user.userFavorites);
+        sess.rated = JSON.stringify(rated);
         const returnUser = { 
             id: user.id, 
             username: user.username, 
             admin: user.admin,
             subscriptions: user.subscriptions,
             userFavorites: user.userFavorites,
+            rated: rated,
          };
         return response.status(200).json(returnUser);
     }
