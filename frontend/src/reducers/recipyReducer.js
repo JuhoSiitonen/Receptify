@@ -22,9 +22,9 @@ const recipySlice = createSlice({
             return state.filter(r => r.id !== id)
         },
         updateRecipyRating(state, action) {
-            const { id, rating } = action.payload
+            const { id, newRating } = action.payload
             const recipy = state.find(r => r.id === id)
-            recipy.averageRating = rating
+            recipy.averageRating = newRating
         }
     },
 })
@@ -94,10 +94,10 @@ export const deleteRecipy = (id) => {
     }
 }
 
-export const updateRating = (id, rating) => {
+export const updateRating = (id, newRating) => {
     return async dispatch => {
         try {
-            const updatedRating = { id, rating }
+            const updatedRating = { id, newRating }
             dispatch(updateRecipyRating(updatedRating))
         } catch (error) {
             throw error
