@@ -230,9 +230,8 @@
     - User redux state also has user rated recipies.
     - Rating component checks redux state if user has rated recipy and if user rates it again calls update reducer.
     - Proper notifications depending on if rating is a new rating or update.
-    - New component for shoppinglist, also userrouter endpoint for adding shoppinglist items to redis.
-    - Shoppinglist items also in redux state.
-
-    
-    
+    - New component for shoppinglist, also userrouter endpoint (/users/shoppinglist) for adding shoppinglist items to redis user session.
+    - Shoppinglist items also in redux state, added via userReducer.
+    - ShoppinglistButton component added to SingleRecipy component.
+    - Shoppinglist page routing via Navigationbar, Route added to App.jsx    
 
