@@ -1,10 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { createRating } from '../../../reducers/ratingReducer'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
+import { createRating, updateExistingRating } from '../../../reducers/userReducer'
 import './rating.css'
 
-const Rating = ({ recipyId }) => {
+const Rating = ({ recipyId, user }) => {
     const dispatch = useDispatch()
-    const user = useSelector(state => state.user) 
+    const [alreadyRated, setAlreadyRated] = useState(
+        user.rated.some(rating => rating.recipyId === recipyId)
+    )
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -12,7 +15,15 @@ const Rating = ({ recipyId }) => {
             rating: e.target.rating.value,
             userId: user.id,
         }
-        await dispatch(createRating(recipyId, ratingObject))
+
+        if (alreadyRated) {
+            console.log("already rated")
+            await dispatch(updateExistingRating(recipyId, ratingObject))
+        } else {
+            console.log("not rated")
+            await dispatch(createRating(recipyId, ratingObject))
+            setAlreadyRated(true)
+        }
     }
 
     return (       
