@@ -102,7 +102,6 @@ userRouter.delete("/favorites/:id", sessionChecker, async (request, response) =>
       return response.status(404).json({ error: 'Recipe is not in favorites' });
     }
     const newFavorites = favorites.filter(f => Number(f.id) !== Number(id));
-    console.log('favorites:', newFavorites)
     request.session.userFavorites = JSON.stringify(newFavorites);
     await Favorite.destroy({ where: { userId: request.session.userId, recipyId: id } });
     return response.status(204).end();
@@ -121,6 +120,7 @@ userRouter.get("/session", async (request, response) => {
         admin: sess.admin,
         subscriptions: JSON.parse(sess.subscriptions),
         userFavorites: JSON.parse(sess.userFavorites),
+        rated: JSON.parse(sess.rated),
       }
       console.log('currentUser:', currentUser)      
       return response.status(200).json(currentUser);
