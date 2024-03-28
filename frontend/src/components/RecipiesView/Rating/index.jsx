@@ -17,10 +17,8 @@ const Rating = ({ recipyId, user }) => {
         }
 
         if (alreadyRated) {
-            console.log("already rated")
             await dispatch(updateExistingRating(recipyId, ratingObject))
         } else {
-            console.log("not rated")
             await dispatch(createRating(recipyId, ratingObject))
             setAlreadyRated(true)
         }
