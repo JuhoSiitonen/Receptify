@@ -26,7 +26,7 @@ ratingRouter.get("/:id", async (req, res) => {
   ratingRouter.post("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
-      const { userId, rating } = req.body;
+      const { rating }  = req.body;
   
       const recipe = await Recipy.findByPk(id);
       if (!recipe) {
@@ -39,6 +39,9 @@ ratingRouter.get("/:id", async (req, res) => {
         userId: req.session.userId, 
         recipyId: recipe.id, 
       });
+
+      let userRatings = JSON.parse(req.session.rated);
+      userRatings.push({ recipyId: recipe.id, rating: rating });
 
       const ratings = await Rating.findAll({
         where: { recipyId: id },
@@ -62,7 +65,7 @@ ratingRouter.get("/:id", async (req, res) => {
 ratingRouter.put("/:id", sessionChecker, async (req, res) => {
     try {
       const { id } = req.params;
-      const { userId, rating } = req.body;
+      const { rating } = req.body;
   
       const recipe = await Recipy.findByPk(id);
       if (!recipe) {
@@ -79,10 +82,26 @@ ratingRouter.put("/:id", sessionChecker, async (req, res) => {
   
       existingRating.rating = rating;
       await existingRating.save();
-  
-      const returnRating = await Rating.findByPk(existingRating.id);
-  
-      return res.status(200).json(returnRating);
+
+      let userRatings = JSON.parse(req.session.rated);
+      const newRatings = userRatings.filter(r => r.recipyId !== recipe.id);
+      req.session.rated = JSON.stringify(newRatings);
+
+      newRatings.push({ recipyId: recipe.id, rating: rating });
+
+      const ratings = await Rating.findAll({
+        where: { recipyId: id },
+        attributes: [
+          [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating']
+        ],
+      });
+
+      const averageRating = ratings.length > 0 ? ratings[0].dataValues.averageRating : 0;
+
+      recipe.averageRating = averageRating;
+      await recipe.save();
+    
+      return res.status(200).json(averageRating);
     } catch (error) {
       console.error('Error updating rating:', error);
       return res.status(500);
