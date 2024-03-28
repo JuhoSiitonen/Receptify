@@ -13,6 +13,7 @@ import Notifications from './components/Notifications'
 import ChosenRecipy from './components/RecipiesView/ChosenRecipy'
 import RecipyFinder from './components/RecipyFinder'
 import ViewUser from './components/RecipiesView/ViewUser'
+import Shoppinglist from './components/Shoppinglist'
 import './App.css'
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/mypage" element={<UserPage />} />
+          <Route path="/shoppinglist" element={<Shoppinglist />} />
           <Route path="/logout" element={<Login />} />
         </Routes>
       </div>
