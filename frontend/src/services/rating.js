@@ -6,13 +6,13 @@ const getRatingAverage = async (id) => {
   return response.data
 }
 
-const create = async (id, newObject) => {
-  const response = await axios.post(`${baseUrl}/${id}`, newObject)
+const create = async (id, rating) => {
+  const response = await axios.post(`${baseUrl}/${id}`, rating)
   return response.data
 }
 
-const update = async (id, newObject) => {
-  const request = await axios.put(`${baseUrl}/${id}`, newObject)
+const update = async (id, rating) => {
+  const request = await axios.put(`${baseUrl}/${id}`, rating)
   return request.data
 }
 
