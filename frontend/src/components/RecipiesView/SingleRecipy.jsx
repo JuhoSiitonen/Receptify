@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import UserActions from './UserActions'
 import OwnerActions from './OwnerActions'
+import Shoppinglist from '../Shoppinglist'
 
 import './SingleRecipy.css'
 
@@ -82,6 +83,7 @@ const SingleRecipy = ({ recipy, user }) => {
               {user && user.id === recipy.owner.id && <OwnerActions recipe={recipy} user={user}/>}
             </div>
             )}
+            <Shoppinglist recipy={recipy} />
         </div>
     )
 }
