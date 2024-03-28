@@ -36,6 +36,9 @@ const userSlice = createSlice({
             const { recipyId, rating } = action.payload
             const rated = state.rated.find(r => r.recipyId === recipyId)
             rated.rating = rating
+        },
+        addToShoppinglistItem(state, action) {
+            state.shoppinglist.push(action.payload)
         }
     },
 })
@@ -48,7 +51,8 @@ export const {
     addNewFavorite,
     deleteFavorites,
     newUserRating,
-    updateUserRating
+    updateUserRating,
+    addToShoppinglistItem
  } = userSlice.actions
 
 export const login = (credentials) => {
@@ -221,6 +225,20 @@ export const updateExistingRating = (id, rating) => {
             dispatch(addNotification({ message: 'Rating updated successfully!', error: false }))
         } catch (error) {
             dispatch(addNotification({ message: 'Rating could not be updated!', error: true }))
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const addToShoppinglist = (shoppinglist) => {
+    return async dispatch => {
+        try {
+            await userService.addShoppinglistItem(shoppinglist)
+            dispatch(addToShoppinglistItem(shoppinglist))
+            dispatch(addNotification({ message: 'Added to shoppinglist!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Could not add to shoppinglist!', error: true }))
             console.log(error)
             throw error
         }
