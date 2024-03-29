@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteFromShoppinglist } from '../../reducers/userReducer';
 import { combineIngredients } from '../../util/shoppingListFunctions';
 import ItemAddForm from './ItemAddForm';
+import './Shoppinglist.css';
 
 const Shoppinglist = () => {
     const dispatch = useDispatch();
@@ -19,14 +20,14 @@ const Shoppinglist = () => {
     const combinedShoppingList = combineIngredients(shoppinglist);
 
     return (
-        <div>
+        <div className='shoppinglist-container'>
             <h1>Shoppinglist</h1>
             <ItemAddForm />
             <ul>
                 {combinedShoppingList.map(item => (    
                     <li key={item.id}>
                         {item.amount} {item.unit} of {item.ingredient} {item.recipy}
-                        <button onClick={() => handleDelete(item.id)}>Delete</button>
+                        <button type='delete' onClick={() => handleDelete(item.id)}>Delete</button>
                     </li>
                 ))}
             </ul>

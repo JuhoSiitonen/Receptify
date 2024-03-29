@@ -29,7 +29,7 @@ const ItemAddForm = () => {
     };
     
     return (
-        <form onSubmit={handleAddItem}>
+        <form className='shoppinglist-form' onSubmit={handleAddItem}>
         <input
             type="text"
             value={ingredient}
