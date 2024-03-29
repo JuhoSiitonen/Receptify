@@ -7,16 +7,16 @@ const ShoppinglistButton = ({ recipy }) => {
     const handleClick = (e) => {
         e.preventDefault();
 
-        const shoppinglist = {
-            recipy: recipy.id,
-            ingredients: recipy.recipy_ingredients.map(ingredient => {
+        const shoppinglist = 
+            recipy.recipy_ingredients.map(ingredient => {
                 return {
                     ingredient: ingredient.ingredient.name,
                     amount: ingredient.amount,
                     unit: ingredient.unit
                 }
             })
-        }
+        
+        console.log(shoppinglist);
         dispatch(addToShoppinglist(shoppinglist));
     }
 

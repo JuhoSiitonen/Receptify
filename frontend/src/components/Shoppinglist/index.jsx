@@ -15,14 +15,10 @@ const Shoppinglist = () => {
         <div>
             <h1>Shoppinglist</h1>
             <ul>
-                {shoppinglist.map(item => (
-                    <li key={item.recipy}>
-                        {item.map(ingredient => (
-                            <li key={ingredient.ingredient}>
-                                {ingredient.amount} {ingredient.unit} of {ingredient.ingredient}
-                                <button onClick={() => handleDelete()}>Delete</button>
-                            </li>
-                        ))}
+                {shoppinglist.map(item => (    
+                    <li key={item.ingredient}>
+                        {item.amount} {item.unit} of {item.ingredient}
+                        <button onClick={() => handleDelete()}>Delete</button>
                     </li>
                 ))}
             </ul>
