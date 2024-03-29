@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteFromShoppinglist } from '../../reducers/userReducer';
+import ItemAddForm from './ItemAddForm';
 
 const Shoppinglist = () => {
     const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const Shoppinglist = () => {
     return (
         <div>
             <h1>Shoppinglist</h1>
+            <ItemAddForm />
             <ul>
                 {combinedShoppingList.map(item => (    
                     <li key={item.id}>
