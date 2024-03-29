@@ -23,7 +23,7 @@ const ShoppinglistButton = ({ recipy }) => {
     }
 
     return (
-        <div>
+        <div className="action-button">
             <button onClick={handleClick}>Add to Shoppinglist</button>
         </div>
     )
