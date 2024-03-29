@@ -163,7 +163,21 @@ userRouter.post("/shoppinglist", sessionChecker, async (request, response) => {
   } catch (error) {
     return response.status(400).json({ error: error.message });
   }
-}
-)
+})
+
+userRouter.delete("/shoppinglist/:id", sessionChecker, async (request, response) => {
+  try {
+    const { id } = request.params;
+    let shoppinglist = JSON.parse(request.session.shoppinglist);
+    if (!shoppinglist.some(i => i.id === id)) {
+      return response.status(404).json({ error: 'Item not found in shoppinglist' });
+    }
+    const newShoppinglist = shoppinglist.filter(i => Number(i.id) !== Number(id));
+    request.session.shoppinglist = JSON.stringify(newShoppinglist);
+    return response.status(204).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+})
 
 module.exports = userRouter;
