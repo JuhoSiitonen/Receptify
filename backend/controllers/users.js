@@ -155,9 +155,10 @@ userRouter.get("/:id/view", sessionChecker, async (request, response) => {
 
 userRouter.post("/shoppinglist", sessionChecker, async (request, response) => {
   try {
-    const { items } = request.body;
+    const items = request.body;
+    console.log('items:', items)
     let shoppinglist = JSON.parse(request.session.shoppinglist);
-    shoppinglist.push(items);
+    items.map(i => shoppinglist.push(i));
     request.session.shoppinglist = JSON.stringify(shoppinglist);
     return response.status(201).end();
   } catch (error) {
@@ -169,7 +170,7 @@ userRouter.delete("/shoppinglist/:id", sessionChecker, async (request, response)
   try {
     const { id } = request.params;
     let shoppinglist = JSON.parse(request.session.shoppinglist);
-    if (!shoppinglist.some(i => i.id === id)) {
+    if (!shoppinglist.filter(i => i.id === id)) {
       return response.status(404).json({ error: 'Item not found in shoppinglist' });
     }
     const newShoppinglist = shoppinglist.filter(i => Number(i.id) !== Number(id));
