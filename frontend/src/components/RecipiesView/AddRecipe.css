@@ -75,6 +75,16 @@
     margin-left: 10px;
 }
 
+.add-recipe-container button[type="delete"] {
+    margin-left: 10px;
+    background-color: #dc3545;
+}
+
+.add-recipe-container button[type="delete"]:hover {
+    margin-left: 10px;
+    background-color: #b02936;
+}
+
 .add-recipe-container button:hover {
     background-color: #0056b3;
 }

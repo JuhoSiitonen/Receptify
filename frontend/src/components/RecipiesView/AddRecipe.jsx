@@ -119,7 +119,7 @@ const AddRecipe = () => {
                 {ingredients.map(ingredient => (
                     <li key={`${ingredient.name}-${ingredient.amount}`}>
                         {ingredient.amount} {ingredient.unit} of {ingredient.name}
-                        <button onClick={() => deleteIngredient(ingredient)} type="button">delete</button>
+                        <button onClick={() => deleteIngredient(ingredient)} type="delete">delete</button>
                     </li>
                 ))}
                 </div>
