@@ -23,9 +23,9 @@
     - [x] Average rating best -> worst and vice versa
 - [x] User can type in specific incredients and find recipies which match those (even partially)
 - [ ] User can compose a shopping list out of selected recipies
-    - [ ] User can select to multiply chosen recipies incredient amounts on shopping list
+    - [x] Same items on shopping list will be combined, and units converted to match
     - [ ] Shopping list can be printed or sent to email
-    - [ ] User can add miscellaneous items to list
+    - [x] User can add miscellaneous items to list
 - [ ] The app has privileged users, e.g maintenance which can delete posts, comments and users
 - [x] Users can comment on recipies
 - [x] Users can rate each others recipies (1-5 rating)

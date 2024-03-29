@@ -234,4 +234,9 @@
     - Shoppinglist items also in redux state, added via userReducer.
     - ShoppinglistButton component added to SingleRecipy component.
     - Shoppinglist page routing via Navigationbar, Route added to App.jsx    
+- 29.3 :
+    - Shoppinglist items are in form { id: (random number), ingredient: ingredient name, amount: the amount, unit: the unit, recipy: the title of the recipe}
+    - Shoppinglist item deletion endpoint, service and reducer function.
+    - Function to add together same ingredients in the shoppinglist, also uses a switch case to convert units together.
+    - Miscellaneous items can be added via new component, ItemAddForm. Adds the items to the redux state and redis session.
 
