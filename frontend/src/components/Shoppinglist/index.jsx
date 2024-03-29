@@ -1,10 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteFromShoppinglist } from '../../reducers/userReducer';
 
 const Shoppinglist = () => {
+    const dispatch = useDispatch();
     const shoppinglist = useSelector(state => state.user.shoppinglist);
 
-    const handleDelete = () => {
-        console.log('delete')
+    const handleDelete = (id) => {
+        dispatch(deleteFromShoppinglist(id))
+        shoppinglist.filter(item => item.id !== id)
     }
 
     if (!shoppinglist) {
@@ -17,8 +20,8 @@ const Shoppinglist = () => {
             <ul>
                 {shoppinglist.map(item => (    
                     <li key={item.ingredient}>
-                        {item.amount} {item.unit} of {item.ingredient}
-                        <button onClick={() => handleDelete()}>Delete</button>
+                        {item.amount} {item.unit} of {item.ingredient} {item.recipy}
+                        <button onClick={() => handleDelete(item.id)}>Delete</button>
                     </li>
                 ))}
             </ul>

@@ -10,9 +10,11 @@ const ShoppinglistButton = ({ recipy }) => {
         const shoppinglist = 
             recipy.recipy_ingredients.map(ingredient => {
                 return {
+                    id: Math.floor(Math.random() * 10000000),
                     ingredient: ingredient.ingredient.name,
                     amount: ingredient.amount,
-                    unit: ingredient.unit
+                    unit: ingredient.unit,
+                    recipy: recipy.title
                 }
             })
         
