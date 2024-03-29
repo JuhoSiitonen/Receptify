@@ -17,8 +17,6 @@ const ShoppinglistButton = ({ recipy }) => {
                     recipy: recipy.title
                 }
             })
-        
-        console.log(shoppinglist);
         dispatch(addToShoppinglist(shoppinglist));
     }
 
