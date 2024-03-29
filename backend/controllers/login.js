@@ -43,6 +43,7 @@ loginRouter.post('/', async (request, response) => {
             subscriptions: user.subscriptions,
             userFavorites: user.userFavorites,
             rated: rated,
+            shoppinglist: shoppinglist,
          };
         return response.status(200).json(returnUser);
     }
