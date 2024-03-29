@@ -38,8 +38,10 @@ const userSlice = createSlice({
             rated.rating = rating
         },
         addToShoppinglistItem(state, action) {
-            state.shoppinglist.push(action.payload)
-        }
+            const items = action.payload
+            items.map(item => 
+                state.shoppinglist.push(item)
+            )}
     },
 })
 
