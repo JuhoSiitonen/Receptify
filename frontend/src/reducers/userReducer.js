@@ -41,7 +41,12 @@ const userSlice = createSlice({
             const items = action.payload
             items.map(item => 
                 state.shoppinglist.push(item)
-            )}
+           )
+        },
+        removeShoppinglistItem(state, action) {
+            const id = action.payload
+            state.shoppinglist = state.shoppinglist.filter(i => i.id !== id)
+        }
     },
 })
 
@@ -54,7 +59,8 @@ export const {
     deleteFavorites,
     newUserRating,
     updateUserRating,
-    addToShoppinglistItem
+    addToShoppinglistItem,
+    removeShoppinglistItem
  } = userSlice.actions
 
 export const login = (credentials) => {
@@ -241,6 +247,20 @@ export const addToShoppinglist = (shoppinglist) => {
             dispatch(addNotification({ message: 'Added to shoppinglist!', error: false }))
         } catch (error) {
             dispatch(addNotification({ message: 'Could not add to shoppinglist!', error: true }))
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const deleteFromShoppinglist = (id) => {
+    return async dispatch => {
+        try {
+            await userService.deleteShoppinglistItem(id)
+            dispatch(removeShoppinglistItem(id))
+            dispatch(addNotification({ message: 'Removed from shoppinglist!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Could not remove from shoppinglist!', error: true }))
             console.log(error)
             throw error
         }
