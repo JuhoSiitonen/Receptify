@@ -10,4 +10,6 @@ module.exports = {
   REDIS_URL: process.env.REDIS_URL,
   REDIS_SESSION_KEY: process.env.REDIS_SESSION_KEY,
   FRONTEND_URL: process.env.FRONTEND_URL,
+  EMAIL: process.env.EMAIL,
+  EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   }
