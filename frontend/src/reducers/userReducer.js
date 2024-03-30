@@ -46,6 +46,12 @@ const userSlice = createSlice({
         removeShoppinglistItem(state, action) {
             const id = action.payload
             state.shoppinglist = state.shoppinglist.filter(i => i.id !== id)
+        },
+        editAboutMeInfo(state, action) {
+            state.about = action.payload
+        },
+        editEmailAddress(state, action) {
+            state.email = true
         }
     },
 })
@@ -60,7 +66,9 @@ export const {
     newUserRating,
     updateUserRating,
     addToShoppinglistItem,
-    removeShoppinglistItem
+    removeShoppinglistItem,
+    editAboutMeInfo,
+    editEmailAddress
  } = userSlice.actions
 
 export const login = (credentials) => {
@@ -274,6 +282,34 @@ export const sendShoppinglistItems = (items) => {
             dispatch(addNotification({ message: 'Shoppinglist sent!', error: false }))
         } catch (error) {
             dispatch(addNotification({ message: 'Could not send shoppinglist!', error: true }))
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const editAboutMe = (about) => {
+    return async dispatch => {
+        try {
+            await userService.editAbout(about)
+            dispatch(editAboutMeInfo(about))
+            dispatch(addNotification({ message: 'About me updated!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Could not update about me!', error: true }))
+            console.log(error)
+            throw error
+        }
+    }
+}
+
+export const editEmail = (email) => {
+    return async dispatch => {
+        try {
+            await userService.editEmail(email)
+            dispatch(editEmailAddress())
+            dispatch(addNotification({ message: 'Email updated!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Could not update email!', error: true }))
             console.log(error)
             throw error
         }
