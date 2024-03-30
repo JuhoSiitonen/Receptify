@@ -1,5 +1,6 @@
 const userRouter = require("express").Router();
 const nodemailer = require('nodemailer');
+const bcrypt = require("bcrypt");
 const { sessionChecker } = require("../utils/middleware");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription, Favorite } = require("../models");
 const { EMAIL, EMAIL_PASSWORD } = require("../utils/config");
@@ -21,7 +22,15 @@ userRouter.get("/userinfo/:id", sessionChecker, async (request, response) => {
 
 userRouter.post("/", async (request, response) => {
     try {
-      const user = request.body;
+      const { username, password } = request.body;
+      const saltRounds = 10
+      const passwordHash = await bcrypt.hash(password, saltRounds)
+      const user = {
+        username,
+        password: passwordHash,
+        admin: false,
+        visible: true,
+      }
       const newUser = await User.create(user, {
         returning: ['id', 'username']} );
       return response.status(201).json(newUser);

@@ -1,4 +1,5 @@
 const loginRouter = require('express').Router();
+const bcrypt = require('bcrypt')
 const { User, Recipy, Rating } = require('../models');
 
 loginRouter.post('/', async (request, response) => {
@@ -25,9 +26,12 @@ loginRouter.post('/', async (request, response) => {
       attributes: ["recipyId", "rating"],
     });
 
-    const shoppinglist = []
+    const shoppinglist = [];
+    const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(password, user.password)
 
-    if (user && user.password === password) {
+    if (user && passwordCorrect) {
         const sess = request.session;
         sess.userId = user.id;
         sess.username = user.username;
