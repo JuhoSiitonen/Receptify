@@ -1,22 +1,30 @@
 import { useMatch } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import recipyService from "../../services/recipies"
 import LoadingSpinner from "../LoadingSpinner"
 import SingleRecipy from "./SingleRecipy"
 import UpdateRecipy from "./UpdateRecipy"
 import './SingleRecipy.css'
 
 const ChosenRecipy = () => {
+    const [recipy, setRecipy] = useState(null)
     const match = useMatch('/recipes/:id');
     const recipyId = Number(match?.params.id);
     const user = useSelector(state => state.user)
-    const recipies = useSelector(state => state.recipies)
+
+    useEffect(() => {
+        const fetchSingleRecipy = async () => {
+            const result = await recipyService.getSingleRecipy(recipyId)
+            setRecipy(result)
+        }
+        fetchSingleRecipy()
+    }, [])
  
-    if (!recipies || !user) {
+    if (!user) {
         return <LoadingSpinner />;
     }
     
-    const recipy = recipies.find(recipy => recipy.id === recipyId);
-
     if (!recipy) {
         return <>No recipy found</>
     }

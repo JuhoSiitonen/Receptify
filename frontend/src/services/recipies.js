@@ -48,4 +48,25 @@ const search = async (ingredients) => {
   return response.data
 }
 
-export default { getAll, getFavorites, getSubscribed, create, update, deleteRecipy, search }
+const getUserRecipies = async () => {
+  const response = await axios.get(`${baseUrl}/user`)
+  return response.data
+}
+
+const getSingleRecipy = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`)
+  return response.data
+}
+
+
+export default { 
+  getAll, 
+  getFavorites, 
+  getSubscribed, 
+  create, 
+  update, 
+  deleteRecipy, 
+  search, 
+  getUserRecipies,
+  getSingleRecipy
+ }
