@@ -146,7 +146,7 @@ const AddRecipe = () => {
                     {categories.map(category => (
                         <li key={category}>
                             {category} 
-                            <button onClick={() => deleteCategory(category)} type="button">delete</button>
+                            <button type="delete" onClick={() => deleteCategory(category)} >delete</button>
                         </li>
                     ))}
                 </div>
