@@ -49,7 +49,7 @@ const Shoppinglist = () => {
 
     const sendToOtherEmail = () => {
         return (
-            <div>
+            <div className='shoppinglist-actions'>
                 <button type='' onClick={() => setSendToOther(!sendToOther)}>Send to other email</button>
             </div>
         )
@@ -67,9 +67,11 @@ const Shoppinglist = () => {
                     </li>
                 ))}
             </ul>
-            {sendToOther && (emailInput())}
-            {!sendToOther && sendToOtherEmail()}
-            {user.email && sendToSelf()}
+            <div>
+                {sendToOther && (emailInput())}
+                {!sendToOther && sendToOtherEmail()}
+                {user.email && sendToSelf()}
+            </div>
         </div>
     )
 }

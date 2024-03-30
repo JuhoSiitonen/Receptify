@@ -88,3 +88,18 @@
 .shoppinglist-container button[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.shoppinglist-actions button {
+    padding: 7px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.shoppinglist-actions button:hover {
+    background-color: #0056b3;
+}
