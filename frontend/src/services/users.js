@@ -67,6 +67,11 @@ const signup = async newObject => {
     return request.data
   }
 
+  const sendShoppinglist = async (items) => {
+    const response = await axios.post(`${baseUrl}/shoppinglist/email`, items)
+    return response.data
+  }
+
   export default { 
     signup, 
     deleteUser, 
@@ -79,5 +84,6 @@ const signup = async newObject => {
     addFavorite,
     deleteFavorite,
     addShoppinglistItem,
-    deleteShoppinglistItem
+    deleteShoppinglistItem,
+    sendShoppinglist
   }
