@@ -487,8 +487,45 @@ recipyRouter.post("/search", async (req, res) => {
     console.error('Error searching recipes by ingredients:', error);
     throw error;
   }
-}
-);
+});
 
+recipyRouter.get("/user", sessionChecker, async (req, res) => {
+  try {
+    const recipes = await Recipy.findAll({
+      include: [
+        { model: User, as: 'owner', attributes: [ "id", "username"] },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+      ],
+      where: { userId: req.session.userId }
+    });
+
+    return res.status(200).json(recipes);
+  } catch (error) {
+    console.error('Error fetching user recipes:', error);
+    return res.status(500).end();
+  }
+});
+
+recipyRouter.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const recipe = await Recipy.findByPk(id, {
+      include: [
+        { model: User, as: 'owner', attributes: [ "id", "username"] },
+        { model: RecipyIngredient, include: [Ingredient] },
+        { model: RecipyCategory, include: [Category] },
+        { model: Rating, attributes: ['rating'] },
+        { model: Comment, include: [User] },
+      ]
+    });
+
+    return res.status(200).json(recipe);
+  } catch (error) {
+    console.error('Error fetching single recipe:', error);
+    return res.status(500).end();
+  }
+});
 
 module.exports = recipyRouter
