@@ -29,8 +29,8 @@ loginRouter.post('/', async (request, response) => {
     const shoppinglist = [];
 
     const email = user.email === null 
-    ? '' 
-    : user.email;
+    ? false 
+    : true;
 
     const about = user.about === null
     ? ''
@@ -49,6 +49,8 @@ loginRouter.post('/', async (request, response) => {
         sess.userFavorites = JSON.stringify(user.userFavorites);
         sess.rated = JSON.stringify(rated);
         sess.shoppinglist = JSON.stringify(shoppinglist);
+        sess.email = email;
+        sess.about = about;
         const returnUser = { 
             id: user.id, 
             username: user.username, 
