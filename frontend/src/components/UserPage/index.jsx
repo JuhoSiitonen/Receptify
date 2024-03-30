@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import LoadingSpinner from '../LoadingSpinner'
+import EditUserinfo from './EditUserinfo'
 import './UserPage.css'
 
 const UserPage = () => {
@@ -17,12 +18,11 @@ const UserPage = () => {
     return (
         <div className="user-page">
             <h1>UserPage</h1>
-            {user.about !== '' && (
                 <div>
                     <h2>About me:</h2>
                     <p>{user.about}</p>
+                    <EditUserinfo user={user} />
                 </div>
-            )}
             <h2>Your recipies:</h2>
             <ul>
                 {recipies.map(recipy => 
