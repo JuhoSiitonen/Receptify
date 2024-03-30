@@ -30,7 +30,7 @@ User.init({
     type: DataTypes.TEXT,
     allowNull: true,
   },
-  disabled: {
+  about: {
     type: DataTypes.TEXT,
     allowNull: true,
   },
