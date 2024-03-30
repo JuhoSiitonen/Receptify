@@ -11,12 +11,12 @@ const EditUserinfo = ({ user }) => {
 
     return (
         <div className="edit-user-actions">
-        <Togglable buttonLabel='Edit ebout me info'>
-            <EditAboutMe user={user} />
-        </Togglable>
-        <Togglable buttonLabel={placeholder}>
-            <EditEmail user={user} />
-        </Togglable>
+            <Togglable buttonLabel='Edit about me info'>
+                <EditAboutMe user={user} />
+            </Togglable>
+            <Togglable buttonLabel={placeholder}>
+                <EditEmail user={user} />
+            </Togglable>
         </div>
     )
 }
