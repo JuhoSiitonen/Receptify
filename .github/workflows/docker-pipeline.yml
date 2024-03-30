@@ -1,4 +1,4 @@
-name: Publish Docker images
+name: Publish Images and Deploy to GKE
 
 on:
   push:
