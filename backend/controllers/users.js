@@ -247,11 +247,11 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
 
 userRouter.put("/about", sessionChecker, async (request, response) => {
   try {
-    const { about } = request.body;
-    request.session.about = about;
+    const { aboutMe } = request.body;
+    request.session.about = aboutMe
 
     const user = await User.findByPk(request.session.userId);
-    user.about = about;
+    user.about = aboutMe
     await user.save();
 
     return response.status(201).end();
