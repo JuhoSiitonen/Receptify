@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteFromShoppinglist } from '../../reducers/userReducer';
+import { useState } from 'react';
+import { deleteFromShoppinglist, sendShoppinglistItems } from '../../reducers/userReducer';
 import { combineIngredients } from '../../util/shoppingListFunctions';
 import ItemAddForm from './ItemAddForm';
 import './Shoppinglist.css';
 
 const Shoppinglist = () => {
     const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
     const shoppinglist = useSelector(state => state.user.shoppinglist);
 
     const handleDelete = (id) => {
@@ -19,6 +21,15 @@ const Shoppinglist = () => {
 
     const combinedShoppingList = combineIngredients(shoppinglist);
 
+    const handleSendShoppinglist = (e) => {
+        e.preventDefault();
+        const info = {
+            email: email,
+            shoppinglist: combinedShoppingList
+        }
+        dispatch(sendShoppinglistItems(info))
+    }
+
     return (
         <div className='shoppinglist-container'>
             <h1>Shoppinglist</h1>
@@ -31,6 +42,10 @@ const Shoppinglist = () => {
                     </li>
                 ))}
             </ul>
+            <div>
+                <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <button type='submit' onClick={handleSendShoppinglist}>Send shoppinglist</button>
+            </div>
         </div>
     )
 }
