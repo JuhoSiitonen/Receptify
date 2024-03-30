@@ -5,8 +5,6 @@ const signup = async newObject => {
     const newUser = {
       username: newObject.username,
       password: newObject.password,
-      admin: false,
-      visible: true
     }
     const response = await axios.post(baseUrl, newUser)
     return response.data
