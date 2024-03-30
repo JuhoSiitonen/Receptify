@@ -237,4 +237,35 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
   }
 })
 
+userRouter.put("/about", sessionChecker, async (request, response) => {
+  try {
+    const { about } = request.body;
+    request.session.about = about;
+
+    const user = await User.findByPk(request.session.userId);
+    user.about = about;
+    await user.save();
+
+    return response.status(201).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+})
+
+userRouter.put("/email", sessionChecker, async (request, response) => {
+  try {
+    const { email } = request.body;
+    request.session.email = true;
+
+    const user = await User.findByPk(request.session.userId);
+    user.email = email;
+    await user.save();
+
+    return response.status(201).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+})
+
+
 module.exports = userRouter;
