@@ -1,15 +1,22 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import recipyService from '../../services/recipies'
 import LoadingSpinner from '../LoadingSpinner'
 import EditUserinfo from './EditUserinfo'
 import './UserPage.css'
 
 const UserPage = () => {
+    const [recipies, setRecipies] = useState([])
     const user = useSelector(state => state.user)
 
-    const recipies = useSelector(state => {
-        return state.recipies.filter(recipy => recipy.userId === user.id)
-    })
+    useEffect(() => {
+        const fetchMyRecipies = async () => {
+            const result = await recipyService.getUserRecipies()
+            setRecipies(result)
+        }
+        fetchMyRecipies()
+    } , [])
 
     if (user === null) {
         return <LoadingSpinner />;
@@ -27,8 +34,7 @@ const UserPage = () => {
             <ul>
                 {recipies.map(recipy => 
                 <li key={recipy.id}>
-                    <Link to={`/recipes/${recipy.id}`}>{recipy.title}</Link>
-                    
+                    <Link to={`/recipes/${recipy.id}`}>{recipy.title}</Link>  
                 </li>)}
             </ul>
         </div>
