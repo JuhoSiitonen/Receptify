@@ -70,6 +70,16 @@ const signup = async newObject => {
     return response.data
   }
 
+  const editAbout = async (info) => {
+    const response = await axios.put(`${baseUrl}/about`, info)
+    return response.data
+  }
+
+  const editEmail = async (email) => {
+    const response = await axios.put(`${baseUrl}/email`, email)
+    return response.data
+  }
+
   export default { 
     signup, 
     deleteUser, 
@@ -83,5 +93,7 @@ const signup = async newObject => {
     deleteFavorite,
     addShoppinglistItem,
     deleteShoppinglistItem,
-    sendShoppinglist
+    sendShoppinglist,
+    editAbout,
+    editEmail
   }
