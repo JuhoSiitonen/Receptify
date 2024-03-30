@@ -1,6 +1,6 @@
 
-
 const UserInfo = ({ userInfo }) => {
+
     if (!userInfo) {
         return (
             <div>
@@ -12,7 +12,7 @@ const UserInfo = ({ userInfo }) => {
     return (
         <div>
             <h2>{userInfo.username}</h2>
-            <p>Test user and his/her recipies:</p>
+            <p>{userInfo.about}</p>
         </div>
     )
 }

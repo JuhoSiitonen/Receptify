@@ -17,14 +17,13 @@ const ViewUser = () => {
     const userId = Number(match?.params.id);
     const user = useSelector(state => state.user)
 
-    const userInfoGetter = async (userId) => {
-        const userInfo = await userService.getUserInfo(userId)
-        setUserInfo(userInfo)
-    }
-
     useEffect(() => {
-        dispatch(userRecipies(userId))
-        userInfoGetter(userId)
+        const fetchUserInfo = async () => {
+            await dispatch(userRecipies(userId))
+            const userInfo = await userService.getUserInfo(userId)
+            setUserInfo(userInfo)
+        }
+        fetchUserInfo()
     }, [])
     
     const recipies = useSelector(state => state.recipies)
@@ -37,19 +36,23 @@ const ViewUser = () => {
         return (
             <div>
                 <AddSubscriptionButton friendId={userId} user={user} />
-                <h2>Recipies by {userInfo.username}:</h2>
             </div>
         )
     }
 
     return (
-        <div className="view-user">
-            <UserInfo userInfo={userInfo}/>
-            {user.id === userId && <h2>Your recipies:</h2>}
-            {user.id !== userId && (userSubscribe())}
-            <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true}>
-                <Recipies recipies={recipies} inViewUser={true}/>
-            </Togglable>
+        <div>
+            <div className="view-user">
+                <UserInfo userInfo={userInfo}/>
+                {user.id !== userId && (userSubscribe())}
+            </div>
+            <div>
+                {user.id === userId && <h2>Your recipies:</h2>}
+                {user.id !== userId && <h2>Recipies by {userInfo.username}:</h2>}
+                <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true}>
+                    <Recipies recipies={recipies} inViewUser={true}/>
+                </Togglable>
+            </div>
         </div>
     )
 }
