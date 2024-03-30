@@ -10,16 +10,17 @@ const Shoppinglist = () => {
     const [email, setEmail] = useState('');
     const [sendToOther, setSendToOther] = useState(false);
     const user = useSelector(state => state.user);
-    const shoppinglist = useSelector(state => state.user.shoppinglist);
 
     const handleDelete = (id) => {
         dispatch(deleteFromShoppinglist(id))
         shoppinglist.filter(item => item.id !== id)
     }
 
-    if (!shoppinglist) {
+    if (user === null) {
         return <>No items on shoppinglist</>
     }
+
+    const shoppinglist = user.shoppinglist;
 
     const combinedShoppingList = combineIngredients(shoppinglist);
 
