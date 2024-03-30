@@ -188,10 +188,13 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
     const { items, email } = request.body;
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'Gmail',
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
-          user: 'receptifyonline@gmail.com',
-          pass: 'receptifyemail2024'
+          user: EMAIL,
+          pass: EMAIL_PASSWORD
       }
   });
 
