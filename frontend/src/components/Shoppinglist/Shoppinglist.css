@@ -37,13 +37,17 @@
 }
 
 .shoppinglist-form button[type="submit"] {
-    padding: 10px 20px;
+    padding: 7px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-left: auto;
+}
+
+.shoppinglist-form button[type="submit"]:hover {
+    background-color: #0056b3;
 }
 
 .shoppinglist-container button[type="delete"] {
@@ -63,4 +67,26 @@
 .shoppinglist-container li {
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+.shoppinglist-container input[type="text"] {
+    flex: 1;
+    padding: 4px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.shoppinglist-container button[type="submit"] {
+    padding: 7px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.shoppinglist-container button[type="submit"]:hover {
+    background-color: #0056b3;
 }

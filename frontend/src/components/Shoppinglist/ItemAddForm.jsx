@@ -33,11 +33,13 @@ const ItemAddForm = () => {
         <input
             type="text"
             value={ingredient}
+            placeholder='Ingredient'
             onChange={(e) => setIngredient(e.target.value)}
         />
         <input
             type='number'
             value={amount}
+            placeholder='Amount'
             onChange={(e) => setAmount(e.target.value)}
         />
         <select
