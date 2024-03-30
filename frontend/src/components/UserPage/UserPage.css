@@ -7,6 +7,11 @@
     border: 4px solid rgb(121, 147, 196);
 }
 
+.user-page ul {
+    list-style: none;
+    padding: 0;
+}
+
 .recipe-list {
     list-style: none;
     padding: 0;

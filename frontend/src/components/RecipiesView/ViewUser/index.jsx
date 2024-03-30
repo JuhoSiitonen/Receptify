@@ -34,7 +34,7 @@ const ViewUser = () => {
 
     const userSubscribe = () => {
         return (
-            <div>
+            <div className="action-button">
                 <AddSubscriptionButton friendId={userId} user={user} />
             </div>
         )
@@ -49,9 +49,11 @@ const ViewUser = () => {
             <div>
                 {user.id === userId && <h2>Your recipies:</h2>}
                 {user.id !== userId && <h2>Recipies by {userInfo.username}:</h2>}
-                <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true}>
-                    <Recipies recipies={recipies} inViewUser={true}/>
-                </Togglable>
+                <div className="action-button">
+                    <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true}>
+                        <Recipies recipies={recipies} inViewUser={true}/>
+                    </Togglable>
+                </div>
             </div>
         </div>
     )
