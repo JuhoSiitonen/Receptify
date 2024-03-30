@@ -10,7 +10,7 @@ const EditUserinfo = ({ user }) => {
     }
 
     return (
-        <div>
+        <div className="edit-user-actions">
         <Togglable buttonLabel='Edit ebout me info'>
             <EditAboutMe user={user} />
         </Togglable>

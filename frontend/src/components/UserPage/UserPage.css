@@ -21,3 +21,19 @@
     color: #007bff;
     font-weight: bold;
 }
+
+.edit-user-actions button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.edit-user-actions button:hover {
+    background-color: #0056b3;
+}
