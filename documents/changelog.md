@@ -239,4 +239,10 @@
     - Shoppinglist item deletion endpoint, service and reducer function.
     - Function to add together same ingredients in the shoppinglist, also uses a switch case to convert units together.
     - Miscellaneous items can be added via new component, ItemAddForm. Adds the items to the redux state and redis session.
+    - Shoppinglist styles.
+    - Nodemailer added to backend dependencies to send shoppinglist via email to user.
+    - Endpoint /users/shoppinglist/email to send shoppinglist to user.
+    - Reducer and service function to send shoppinglist via email.
+    - Input and submit button with handle function to send shoppinglist email.
+    - Sent email formatted to tell user which recipies are intented to be cooked and also the list of ingredients and amounts (with units).
 

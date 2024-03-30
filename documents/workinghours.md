@@ -68,6 +68,8 @@ Month total: 36h
 - 2h 26.3: RecipiesView sorting and filtering logic fixed. Docker build push pipeline.
 - 2h 27.3: Frontend fixes, pre release with new deployment to GKE.
 - 3h 28.3: Refactoring reducers, user rating updating. Shoppinglist component.
-- 2h 29.3: Shoppinglist item deletion and related methods and endpoint.
+- 5h 29.3: Shoppinglist item deletion and related methods and endpoint. Shoppinglist styles and sending it via email to user, with email info formatting.
 
-Total hours: 138h
+Month total: 35h
+
+Total hours: 141h
