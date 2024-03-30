@@ -65,6 +65,16 @@ spec:
             configMapKeyRef:
               name: receptify-frontend-config
               key: frontend-url
+        - name: EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: email
+        - name: EMAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: email-password
 ---
 apiVersion: v1
 kind: Service
