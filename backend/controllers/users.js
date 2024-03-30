@@ -1,6 +1,8 @@
 const userRouter = require("express").Router();
+const nodemailer = require('nodemailer');
 const { sessionChecker } = require("../utils/middleware");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription, Favorite } = require("../models");
+const { EMAIL, EMAIL_PASSWORD } = require("../utils/config");
 
 userRouter.get("/", sessionChecker, async (request, response) => {
   const users = await User.findAll();
@@ -176,6 +178,41 @@ userRouter.delete("/shoppinglist/:id", sessionChecker, async (request, response)
     const newShoppinglist = shoppinglist.filter(i => Number(i.id) !== Number(id));
     request.session.shoppinglist = JSON.stringify(newShoppinglist);
     return response.status(204).end();
+  } catch (error) {
+    return response.status(400).json({ error: error.message });
+  }
+})
+
+userRouter.post("/shoppinglist/email", sessionChecker, async (request, response) => {
+  try {
+    const { items, email } = request.body;
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: 'receptifyonline@gmail.com',
+          pass: 'receptifyemail2024'
+      }
+  });
+
+  const mailOptions = {
+      from: EMAIL,
+      to: email, 
+      subject: 'Your Shopping List', 
+      text: JSON.stringify(items)
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.error(error);
+          res.status(500).send('Error sending email');
+      } else {
+          console.log('Email sent: ' + info.response);
+          res.send('Email sent successfully');
+      }
+  });
+
+    return response.status(200).end();
   } catch (error) {
     return response.status(400).json({ error: error.message });
   }
