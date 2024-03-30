@@ -26,6 +26,14 @@ User.init({
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+  email: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  disabled: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
 }, {
     sequelize,
     underscored: true,
