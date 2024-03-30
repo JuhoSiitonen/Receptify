@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateAboutMe } from '../../reducers/userReducer'
 
 const EditAboutMe = ({ user }) => {
     const [aboutMe, setAboutMe] = useState(user.about)
+    const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Save', aboutMe)
+        dispatch(updateAboutMe(aboutMe))
     }
 
     return (

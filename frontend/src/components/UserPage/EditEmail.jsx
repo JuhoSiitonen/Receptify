@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { editEmail } from '../../reducers/userReducer'
 
 const EditEmail = ({ user }) => {
     const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Save', email)
+        dispatch(editEmail(email))
     }
 
     return (
