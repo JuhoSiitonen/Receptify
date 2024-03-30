@@ -41,3 +41,18 @@ jobs:
           file: backend/Dockerfile
           push: true
           tags: juhosii/receptify-backend-dev:${{ github.event.release.tag_name }}
+
+      - name: install the gcloud cli
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GKE_PROJECT }}
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
+          install_components: 'gke-gcloud-auth-plugin'
+          export_default_credentials: true
+
+      - name: Deploy to GKE
+        run: |
+          gcloud container clusters get-credentials receptify-cluster --zone europe-north1 --project ${{ secrets.GKE_PROJECT }}
+          kubectl set image deployment/receptify-backend receptify-backend=juhosii/receptify-backend-dev:${{ github.event.release.tag_name }}
+          kubectl set image deployment/receptify-frontend receptify-frontend=juhosii/receptify-frontend-dev:${{ github.event.release.tag_name }}
+
