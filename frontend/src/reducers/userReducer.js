@@ -48,7 +48,7 @@ const userSlice = createSlice({
             state.shoppinglist = state.shoppinglist.filter(i => i.id !== id)
         },
         editAboutMeInfo(state, action) {
-            state.about = action.payload
+            state.about = action.payload.aboutMe
         },
         editEmailAddress(state, action) {
             state.email = true

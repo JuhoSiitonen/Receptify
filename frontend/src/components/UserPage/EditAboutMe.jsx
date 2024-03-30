@@ -8,7 +8,7 @@ const EditAboutMe = ({ user }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(editAboutMe(aboutMe))
+        dispatch(editAboutMe({aboutMe}))
     }
 
     return (
