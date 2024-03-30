@@ -267,4 +267,17 @@ export const deleteFromShoppinglist = (id) => {
     }
 }
 
+export const sendShoppinglistItems = (items) => {
+    return async dispatch => {
+        try {
+            await userService.sendShoppinglist(items)
+            dispatch(addNotification({ message: 'Shoppinglist sent!', error: false }))
+        } catch (error) {
+            dispatch(addNotification({ message: 'Could not send shoppinglist!', error: true }))
+            console.log(error)
+            throw error
+        }
+    }
+}
+
 export default userSlice.reducer
