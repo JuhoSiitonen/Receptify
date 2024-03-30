@@ -54,6 +54,6 @@ jobs:
       - name: Deploy to GKE
         run: |
           gcloud container clusters get-credentials receptify-cluster --zone europe-north1 --project ${{ secrets.GKE_PROJECT }}
-          kubectl set image deployment/receptify-backend receptify-backend=juhosii/receptify-backend-dev:v1.0.1
-          kubectl set image deployment/receptify-frontend receptify-frontend=juhosii/receptify-frontend-dev:v1.0.1
+          kubectl set image deployment/receptify-backend-deployment receptify-backend=juhosii/receptify-backend-dev:v1.0.1
+          kubectl set image deployment/receptify-frontend-deployment receptify-frontend=juhosii/receptify-frontend-dev:v1.0.1
 
