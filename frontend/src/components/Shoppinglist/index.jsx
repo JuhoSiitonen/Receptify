@@ -25,7 +25,7 @@ const Shoppinglist = () => {
         e.preventDefault();
         const info = {
             email: email,
-            shoppinglist: combinedShoppingList
+            items: combinedShoppingList
         }
         dispatch(sendShoppinglistItems(info))
     }
