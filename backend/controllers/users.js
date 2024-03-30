@@ -198,11 +198,16 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
       }
   });
 
+  let recipies = items.map(i => i.recipy).join(', ');
+  recipies = recipies.split(', ').filter((item, index, array) => array.indexOf(item) === index).join(', ');
+  const ingredients = items.map(i => `${i.ingredient} - ${i.amount} ${i.unit}`).join('\n');
+  const emailText = `Your shopping list for the following recipies: ${recipies}\n\n${ingredients}`;
+
   const mailOptions = {
       from: EMAIL,
       to: email, 
       subject: 'Your Shopping List', 
-      text: JSON.stringify(items)
+      text: emailText
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
