@@ -28,6 +28,10 @@
     margin-left: auto;
 }
 
+.recipy-finder-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
 .recipy-finder-list {
     width: 60%;
     list-style-type: none;
