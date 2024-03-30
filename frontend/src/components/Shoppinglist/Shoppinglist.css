@@ -2,12 +2,10 @@
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-}
-
-.recipy-finder-form {
-    display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 25px;
+    border: 1px solid #ccc;
 }
 
 .shoppinglist-form input[type="text"] {
