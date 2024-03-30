@@ -245,4 +245,18 @@
     - Reducer and service function to send shoppinglist via email.
     - Input and submit button with handle function to send shoppinglist email.
     - Sent email formatted to tell user which recipies are intented to be cooked and also the list of ingredients and amounts (with units).
+- 30.3 :
+    - Bcrypt in backend to encode passwords.
+    - Migration to add columns email and about to users table
+    - New components in Userpage to modify user info
+    - Userpage showcases user info
+    - Services and reducers for editing about me and email.
+    - Backend endpoints in users/about and users/email
+    - Shoppinglist can now be sent directly to self with one click, or to other email via input
+    - Re ordering ViewUser page.
+    - useEffect with async fetch to ChosenRecipy and Userpages to have data after refresh.
+    - Axios service (recipes) and backend endppoint (recipies/:id and recipies/user) to get a users recipies and a single recipy.
+    - Frontend env variables to Dockerfile and pipeline action.
+    - Configuring GKE deployment pipeline, added to current docker-pipeline.
 
+    
