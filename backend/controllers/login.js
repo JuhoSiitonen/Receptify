@@ -8,7 +8,7 @@ loginRouter.post('/', async (request, response) => {
         include: [
             { model: User, 
               as: 'subscriptions', 
-              attributes: ["id", "username"],
+              attributes: ["id", "username", "email", "about"],
               through: {
                 attributes: []
               }, },
@@ -27,6 +27,15 @@ loginRouter.post('/', async (request, response) => {
     });
 
     const shoppinglist = [];
+
+    const email = user.email === null 
+    ? '' 
+    : user.email;
+
+    const about = user.about === null
+    ? ''
+    : user.about;
+
     const passwordCorrect = user === null
     ? false
     : await bcrypt.compare(password, user.password)
@@ -48,6 +57,8 @@ loginRouter.post('/', async (request, response) => {
             userFavorites: user.userFavorites,
             rated: rated,
             shoppinglist: shoppinglist,
+            email: email,
+            about: about,
          };
         return response.status(200).json(returnUser);
     }

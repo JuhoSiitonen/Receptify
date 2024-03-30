@@ -133,6 +133,8 @@ userRouter.get("/session", async (request, response) => {
         userFavorites: JSON.parse(sess.userFavorites),
         rated: JSON.parse(sess.rated),
         shoppinglist: JSON.parse(sess.shoppinglist),
+        email: sess.email,
+        about: sess.about,
       }
       console.log('currentUser:', currentUser)      
       return response.status(200).json(currentUser);
