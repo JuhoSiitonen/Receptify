@@ -8,6 +8,8 @@ import './Shoppinglist.css';
 const Shoppinglist = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
+    const [sendToOther, setSendToOther] = useState(false);
+    const user = useSelector(state => state.user);
     const shoppinglist = useSelector(state => state.user.shoppinglist);
 
     const handleDelete = (id) => {
@@ -30,6 +32,29 @@ const Shoppinglist = () => {
         dispatch(sendShoppinglistItems(info))
     }
 
+    const emailInput = () => {
+        return (
+            <div>
+                <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <button type='submit' onClick={handleSendShoppinglist}>Send shoppinglist</button>
+            </div>
+        )
+    }
+
+    const sendToSelf = () => {
+        return (
+            <button type='submit' onClick={handleSendShoppinglist}>Send to self</button>
+        )
+    }
+
+    const sendToOtherEmail = () => {
+        return (
+            <div>
+                <button type='' onClick={() => setSendToOther(!sendToOther)}>Send to other email</button>
+            </div>
+        )
+    }
+
     return (
         <div className='shoppinglist-container'>
             <h1>Shoppinglist</h1>
@@ -42,10 +67,9 @@ const Shoppinglist = () => {
                     </li>
                 ))}
             </ul>
-            <div>
-                <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                <button type='submit' onClick={handleSendShoppinglist}>Send shoppinglist</button>
-            </div>
+            {sendToOther && (emailInput())}
+            {!sendToOther && sendToOtherEmail()}
+            {user.email && sendToSelf()}
         </div>
     )
 }

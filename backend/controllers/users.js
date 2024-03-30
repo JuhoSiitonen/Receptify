@@ -198,6 +198,14 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
   try {
     const { items, email } = request.body;
 
+    let emailAddress = email;
+
+    if (email === '') {
+      const user = await User.findByPk(request.session.userId);
+      emailAddress = user.email;
+    }
+    console.log('email:', email)
+
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       host: "smtp.gmail.com",
@@ -216,7 +224,7 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
 
   const mailOptions = {
       from: EMAIL,
-      to: email, 
+      to: emailAddress, 
       subject: 'Your Shopping List', 
       text: emailText
   };
@@ -256,6 +264,8 @@ userRouter.put("/email", sessionChecker, async (request, response) => {
   try {
     const { email } = request.body;
     request.session.email = true;
+
+    console.log('email:', email)
 
     const user = await User.findByPk(request.session.userId);
     user.email = email;

@@ -8,7 +8,7 @@ const EditEmail = ({ user }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(editEmail(email))
+        dispatch(editEmail({email}))
     }
 
     return (
