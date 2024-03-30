@@ -2,6 +2,8 @@ FROM node:16 as start-stage
 WORKDIR /usr/src/app
 COPY . .
 FROM start-stage as build-stage
+ARG UPLOADCARE_PUBLIC_KEY
+ENV UPLOADCARE_PUBLIC_KEY=$UPLOADCARE_PUBLIC_KEY
 RUN npm ci
 RUN npm run build
 FROM nginx:1.20-alpine

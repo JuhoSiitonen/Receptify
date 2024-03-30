@@ -28,9 +28,11 @@ jobs:
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: frontend
+          build-args: |
+            "UPLOADCARE_PUBLIC_KEY=${{ secrets.UPLOADCARE_PUBLIC_KEY }}"
           file: frontend/Dockerfile
           push: true
-          tags: juhosii/receptify-frontend-dev:latest
+          tags: juhosii/receptify-frontend-dev:${{ github.event.release.tag_name }}
 
       - name: Build and push Docker image for Backend
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -38,4 +40,4 @@ jobs:
           context: backend
           file: backend/Dockerfile
           push: true
-          tags: juhosii/receptify-backend-dev
+          tags: juhosii/receptify-backend-dev:${{ github.event.release.tag_name }}
