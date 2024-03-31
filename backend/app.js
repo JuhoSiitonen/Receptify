@@ -7,14 +7,14 @@ const cors = require('cors')
 const session = require('express-session');
 const { redisConf } = require('./redis')
 
-const recipyRouter = require('./controllers/recipies')
-const ratingRouter = require('./controllers/rating')
-const commentRouter = require('./controllers/comments')
-const userRouter = require('./controllers/users')
-const loginRouter = require('./controllers/login')
-const testingRouter = require('./controllers/testing')
-const healthRouter = require('./controllers/health')
-const ingredientRouter = require('./controllers/ingredients')
+const recipyRouter = require('./routes/recipies')
+const ratingRouter = require('./routes/rating')
+const commentRouter = require('./routes/comments')
+const userRouter = require('./routes/users')
+const loginRouter = require('./routes/login')
+const testingRouter = require('./routes/testing')
+const healthRouter = require('./routes/health')
+const ingredientRouter = require('./routes/ingredients')
 
 const middleware = require('./utils/middleware')
 require('dotenv').config()
@@ -38,7 +38,7 @@ app.use('/api/ingredients', ingredientRouter)
 app.use('/api/health', healthRouter)
 
 if (process.env.NODE_ENV === 'test') {
-  const testingRouter = require('./controllers/testing')
+  const testingRouter = require('./routes/testing')
   app.use('/api/testing', testingRouter)
 }
 
