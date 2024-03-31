@@ -136,7 +136,6 @@ userRouter.get("/session", async (request, response) => {
         email: sess.email,
         about: sess.about,
       }
-      console.log('currentUser:', currentUser)      
       return response.status(200).json(currentUser);
     }
     return response.status(200).json({});
