@@ -70,7 +70,8 @@ Month total: 36h
 - 3h 28.3: Refactoring reducers, user rating updating. Shoppinglist component.
 - 5h 29.3: Shoppinglist item deletion and related methods and endpoint. Shoppinglist styles and sending it via email to user, with email info formatting.
 - 5h 30.3: Bcrypt in backend, Userpage modifications, ViewUser modifications, Chosenrecipy and Userpage useEffect to have data after refresh. GKE deployment pipeline.
+- 1h 31.3: Refactoring and removing unnecessary code.
 
-Month total: 40h
+Month total: 41h
 
-Total hours: 146h
+Total hours: 147h

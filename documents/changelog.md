@@ -258,5 +258,7 @@
     - Axios service (recipes) and backend endppoint (recipies/:id and recipies/user) to get a users recipies and a single recipy.
     - Frontend env variables to Dockerfile and pipeline action.
     - Configuring GKE deployment pipeline, added to current docker-pipeline. Works now and creates new images of frontend and backend according to github release tag.
+- 31.3 :
+    - Removing unnecessary code from backend (sessionChecker and app.js)
 
     
