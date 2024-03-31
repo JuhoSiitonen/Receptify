@@ -1,4 +1,3 @@
-const { sessionChecker } = require("../utils/middleware");
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
 const { Op } = require('sequelize');
 const { sequelize } = require('../utils/db');

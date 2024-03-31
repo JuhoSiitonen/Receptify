@@ -12,22 +12,23 @@ const {
   getSingleRecipy
 } = require('../controllers/recipies')
 
-recipyRouter.get("/", getRecipies);
+recipyRouter
+  .route("/")
+    .get( sessionChecker, getRecipies )
+    .post( sessionChecker, addRecipy);
 
-recipyRouter.get("/favorites", getFavorites);
+recipyRouter.get("/favorites", sessionChecker, getFavorites);
 
 recipyRouter.get("/subscriptions", sessionChecker, getSubscribed);
 
-recipyRouter.post("/", sessionChecker, addRecipy);
+recipyRouter
+  .route("/:id")
+    .get( sessionChecker, getSingleRecipy)
+    .delete( sessionChecker, deleteRecipy)
+    .put( sessionChecker, updateRecipy);
 
-recipyRouter.delete("/:id", sessionChecker, deleteRecipy);
-
-recipyRouter.put("/:id", sessionChecker, updateRecipy);
-
-recipyRouter.post("/search", findRecipy);
+recipyRouter.post("/search", sessionChecker, findRecipy);
 
 recipyRouter.get("/user", sessionChecker, getUsersRecipies);
-
-recipyRouter.get("/:id", getSingleRecipy);
 
 module.exports = recipyRouter
