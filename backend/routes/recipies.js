@@ -21,14 +21,14 @@ recipyRouter.get("/favorites", sessionChecker, getFavorites);
 
 recipyRouter.get("/subscriptions", sessionChecker, getSubscribed);
 
+recipyRouter.post("/search", sessionChecker, findRecipy);
+
+recipyRouter.get("/user", sessionChecker, getUsersRecipies);
+
 recipyRouter
   .route("/:id")
     .get( sessionChecker, getSingleRecipy)
     .delete( sessionChecker, deleteRecipy)
     .put( sessionChecker, updateRecipy);
-
-recipyRouter.post("/search", sessionChecker, findRecipy);
-
-recipyRouter.get("/user", sessionChecker, getUsersRecipies);
 
 module.exports = recipyRouter
