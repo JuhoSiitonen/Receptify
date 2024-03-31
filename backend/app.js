@@ -14,7 +14,6 @@ const userRouter = require('./routes/users')
 const loginRouter = require('./routes/login')
 const testingRouter = require('./routes/testing')
 const healthRouter = require('./routes/health')
-const ingredientRouter = require('./routes/ingredients')
 
 const middleware = require('./utils/middleware')
 require('dotenv').config()
@@ -34,7 +33,6 @@ app.use('/api/rating', ratingRouter)
 app.use('/api/comments', commentRouter)
 app.use('/api/users', userRouter)
 app.use('/api/login', loginRouter)
-app.use('/api/ingredients', ingredientRouter)
 app.use('/api/health', healthRouter)
 
 if (process.env.NODE_ENV === 'test') {
