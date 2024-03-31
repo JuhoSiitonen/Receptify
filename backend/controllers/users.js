@@ -232,10 +232,9 @@ userRouter.post("/shoppinglist/email", sessionChecker, async (request, response)
   transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
           console.error(error);
-          res.status(500).send('Error sending email');
+          response.status(500).send('Error sending email');
       } else {
           console.log('Email sent: ' + info.response);
-          res.send('Email sent successfully');
       }
   });
 
