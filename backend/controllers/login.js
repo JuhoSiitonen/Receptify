@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const { User, Recipy, Rating } = require('../models');
 
 const login = async (req, res) => {
-    const { username, password } = request.body;
+    const { username, password } = req.body;
     const user = await User.findOne({ where: { username }, 
         include: [
             { model: User, 
@@ -40,7 +40,7 @@ const login = async (req, res) => {
     : await bcrypt.compare(password, user.password)
 
     if (user && passwordCorrect) {
-        const sess = request.session;
+        const sess = req.session;
         sess.userId = user.id;
         sess.username = user.username;
         sess.admin = user.admin;
@@ -61,9 +61,9 @@ const login = async (req, res) => {
             email: email,
             about: about,
          };
-        return response.status(200).json(returnUser);
+        return res.status(200).json(returnUser);
     }
-    return response.status(401).json({ error: 'invalid username or password' });
+    return res.status(401).json({ error: 'invalid username or password' });
 }
 
 module.exports = {
