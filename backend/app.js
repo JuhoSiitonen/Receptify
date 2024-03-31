@@ -17,20 +17,16 @@ const healthRouter = require('./controllers/health')
 const ingredientRouter = require('./controllers/ingredients')
 
 const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
 require('dotenv').config()
 
 app.enable('trust proxy');
-
 app.use(cors({
   credentials: true,
   origin: config.FRONTEND_URL,
 }))
 
-app.use(express.static('build'))
 app.use(express.json()) 
 app.use(middleware.requestLogger)
-
 app.use(session(redisConf));
 
 app.use('/api/recipies', recipyRouter)
