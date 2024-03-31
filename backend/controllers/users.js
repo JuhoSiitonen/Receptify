@@ -1,11 +1,25 @@
 const nodemailer = require('nodemailer');
 const bcrypt = require("bcrypt");
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription, Favorite } = require("../models");
 const { EMAIL, EMAIL_PASSWORD } = require("../utils/config");
-
+const { 
+    createNewUser, 
+    findSingleUser, 
+    findAllUsers,
+    updateAboutMeInfo, 
+    updateEmailAddress
+ } = require("../services/userService");
+const { 
+    createSubscription,
+    destroySubscription
+ } = require("../services/subscriptionService");
+const { 
+    findSingleRecipyById,
+    findUsersRecipies,
+ } = require("../services/recipyService");
+const { createNewFavorite, destroyFavorite } = require("../services/favoriteService");
 
 const getUsers = async (req, res) => {
-    const users = await User.findAll();
+    const users = await findAllUsers();
     return res.json(users);
 } 
 
@@ -20,8 +34,7 @@ const createUser = async (req, res) => {
           admin: false,
           visible: true,
         }
-        const newUser = await User.create(user, {
-          returning: ['id', 'username']} );
+        const newUser = await createNewUser(user);
         return res.status(201).json(newUser);
       } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -31,7 +44,7 @@ const createUser = async (req, res) => {
 const getUserInfo = async (req, res) => {
     const { id } = req.params;
     try {
-      const user = await User.findByPk(id);
+      const user = await findSingleUser(id);
       return res.status(200).json(user);
     } catch (error) {
       return res.status(400).json({ error: error.message });
@@ -41,7 +54,7 @@ const getUserInfo = async (req, res) => {
 const subscribeToUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const friend = await User.findByPk(id);
+        const friend = await findSingleUser(id);
         if (!friend) {
           return res.status(404).json({ error: 'User not found' });
         }
@@ -51,10 +64,8 @@ const subscribeToUser = async (req, res) => {
         }
         subscriptions.push({ id: friend.id, username: friend.username })
         req.session.subscriptions = JSON.stringify(subscriptions);
-        await Subscription.create({ 
-          subscriberId: req.session.userId,
-          publisherId: id,
-        });
+        const newSubscription = await createSubscription(req.session.userId, id);
+        
         return res.status(201).json({ id: friend.id, username: friend.username });
       } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -64,7 +75,7 @@ const subscribeToUser = async (req, res) => {
 const unsubscribeFromUser = async (req, res) => {
     try {
         const friendId = req.params.id;
-        const friend = await User.findByPk(friendId);
+        const friend = await findSingleUser(friendId);
         if (!friend) {
           return res.status(404).json({ error: 'User not found' });
         }
@@ -74,7 +85,7 @@ const unsubscribeFromUser = async (req, res) => {
         }
         const newSubscriptions = sunscriptions.filter(s => Number(s.id) !== Number(friendId));
         req.session.subscriptions = JSON.stringify(newSubscriptions);
-        await Subscription.destroy({ where: { subscriberId: req.session.userId, publisherId: friendId } });
+        const destroyedSubscription =  await destroySubscription(req.session.userId, friendId);
         return res.status(204).end();
       } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -85,17 +96,15 @@ const addAsFavorite = async (req, res) => {
     try {
         const { id } = req.params;
         let favorites = JSON.parse(req.session.userFavorites);
-        const recipe = await Recipy.findByPk(id);
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
         if (favorites.some(f => f.id === id)) {
           return res.status(400).json({ error: 'Recipe already in favorites' });
         }
-        await Favorite.create({
-          userId: req.session.userId,
-          recipyId: id,
-        });
+        const favorite = await createNewFavorite(req.session.userId, id);
+        
         favorites.push({ id: recipe.id, title: recipe.title });
         req.session.userFavorites = JSON.stringify(favorites);
         return res.status(201).json({ id: recipe.id, title: recipe.title});
@@ -113,7 +122,7 @@ const removeFromFavorites = async (req, res) => {
         }
         const newFavorites = favorites.filter(f => Number(f.id) !== Number(id));
         req.session.userFavorites = JSON.stringify(newFavorites);
-        await Favorite.destroy({ where: { userId: req.session.userId, recipyId: id } });
+        const destroyedFavorite = await destroyFavorite(req.session.userId, id);
         return res.status(204).end();
       } catch (error) {
         return res.status(400).json({ error: error.message });
@@ -152,15 +161,7 @@ const logoutUser = async (req, res) => {
 
 const viewUser = async (req, res) => {
     const { id } = req.params;
-    const recipes = await Recipy.findAll({ where: { userId: id},
-      include: [
-        { model: User,
-          as: 'owner',
-          attributes: [ "id", "username"] },
-        { model: RecipyIngredient, include: [Ingredient] },
-        { model: RecipyCategory, include: [Category] },
-      ],
-    });
+    const recipes = await findUsersRecipies(id);
     return res.status(200).json(recipes);
 }
 
@@ -198,7 +199,7 @@ const sendEmail = async (req, res) => {
         let emailAddress = email;
     
         if (email === '') {
-          const user = await User.findByPk(req.session.userId);
+          const user = await findSingleUser(req.session.userId);
           emailAddress = user.email;
         }
     
@@ -243,10 +244,8 @@ const setAboutInfo = async (req, res) => {
     try {
         const { aboutMe } = req.body;
         req.session.about = aboutMe
-    
-        const user = await User.findByPk(req.session.userId);
-        user.about = aboutMe
-        await user.save();
+        
+        const user = await updateAboutMeInfo(req.session.userId, aboutMe);
     
         return res.status(201).end();
       } catch (error) {
@@ -259,9 +258,7 @@ const setEmailAddress = async (req, res) => {
         const { email } = req.body;
         req.session.email = true;
         
-        const user = await User.findByPk(req.session.userId);
-        user.email = email;
-        await user.save();
+        const user = await updateEmailAddress(req.session.userId, email);
     
         return res.status(201).end();
       } catch (error) {
