@@ -7,12 +7,11 @@ const {
   deleteRating,
 } = require('../controllers/rating');
 
-ratingRouter.get("/:id", getRatingForRecipy);
-  
-ratingRouter.post("/:id", sessionChecker, sendRating);
-
-ratingRouter.put("/:id", sessionChecker, updateRating);
-
-ratingRouter.delete("/:id", sessionChecker, deleteRating);
+ratingRouter
+  .route("/:id")
+    .get( sessionChecker, getRatingForRecipy )
+    .post( sessionChecker, sendRating )
+    .put( sessionChecker, updateRating)
+    .delete( sessionChecker, deleteRating);
 
 module.exports = ratingRouter;
