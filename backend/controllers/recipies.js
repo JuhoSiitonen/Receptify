@@ -1,78 +1,23 @@
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const { sequelize } = require('../utils/db');
+const { defineWhereClause, findAllRecipies } = require('../services/recipyService');
 
 const getRecipies = async (req, res) => {
     try {
-        let whereClause = {};
+        let whereClause = defineWhereClause(req, res);
         let orderClause = [];
-    
-        if (req.query.title) {
-          whereClause = { 
-            ...whereClause, 
-            title: {
-              [Op.like]: `%${req.query.title}%`
-            }};
-        }
-    
-        if (req.query.ingredients) {
-          whereClause = {
-            ...whereClause,
-            '$recipy_ingredients.ingredient.name$': {
-              [Op.like]: `%${req.query.ingredients}%`
-            }
-          };
-        }
-    
-        if (req.query.username) {
-          whereClause = {
-            ...whereClause,
-            '$owner.username$': {
-              [Op.like]: `%${req.query.username}%`
-            }
-          };
-        }
-    
-        if (req.query.categories) {
-          whereClause = {
-            ...whereClause,
-            '$recipy_categories.category.name$': {
-              [Op.like]: `%${req.query.categories}%`
-            }
-          };
-        }
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
         } else {
           orderClause.push(['created_at', 'DESC']);
         }
-    
-        const foundRecipes = await Recipy.findAll({
-          include: [
-            { model: User,
-              as: 'owner',
-              attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: whereClause,
-          order: orderClause,
-        })
-          
+        
+        const foundRecipes = await findAllRecipies(whereClause, orderClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
-    
-        const recipes = await Recipy.findAll({
-          include: [
-            { model: User,
-              as: 'owner',
-              attributes: [ "id", "username"]},
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: { id: recipeIds },
-          order: orderClause,
-        });
+        whereClause = { id: recipeIds };
+        const recipes = await findAllRecipies(whereClause, orderClause);
         
         return res.status(200).json(recipes);
       } catch (error) {
@@ -84,42 +29,7 @@ const getRecipies = async (req, res) => {
 const getFavorites = async (req, res) => {
     try {
         let orderClause = [];
-        let whereClause = {};
-    
-        if (req.query.title) {
-          whereClause = { 
-            ...whereClause, 
-            title: {
-              [Op.like]: `%${req.query.title}%`
-            }};
-        }
-    
-        if (req.query.ingredients) {
-          whereClause = {
-            ...whereClause,
-            '$recipy_ingredients.ingredient.name$': {
-              [Op.like]: `%${req.query.ingredients}%`
-            }
-          };
-        }
-    
-        if (req.query.username) {
-          whereClause = {
-            ...whereClause,
-            '$owner.username$': {
-              [Op.like]: `%${req.query.username}%`
-            }
-          };
-        }
-    
-        if (req.query.categories) {
-          whereClause = {
-            ...whereClause,
-            '$recipy_categories.category.name$': {
-              [Op.like]: `%${req.query.categories}%`
-            }
-          };
-        }
+        let whereClause = defineWhereClause(req, res);
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
@@ -133,30 +43,11 @@ const getFavorites = async (req, res) => {
           ...whereClause,
           id: favorites
         };
-    
-        const foundRecipes = await Recipy.findAll({
-          where: whereClause,
-          include: [
-            { model: User, as: 'owner', attributes: ['id', 'username'] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] }
-          ],
-          order: orderClause,
-        });
-    
+
+        const foundRecipes = await findAllRecipies(whereClause, orderClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
-    
-        const recipes = await Recipy.findAll({
-          include: [
-            { model: User,
-              as: 'owner',
-              attributes: [ "id", "username"]},
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: { id: recipeIds },
-          order: orderClause,
-        });
+        whereClause = { id: recipeIds };
+        const recipes = await findAllRecipies(whereClause, orderClause);
     
         return res.status(200).json(recipes);
       } catch (error) {
@@ -167,43 +58,8 @@ const getFavorites = async (req, res) => {
 
 const getSubscribed = async (req, res) => {
     try {
-        let whereClause = {};
+        let whereClause = defineWhereClause(req, res);
         let orderClause = [];
-    
-        if (req.query.title) {
-          whereClause = { 
-            ...whereClause, 
-            title: {
-              [Op.like]: `%${req.query.title}%`
-            }};
-        }
-    
-        if (req.query.ingredients) {
-          whereClause = {
-            ...whereClause,
-            '$recipy_ingredients.ingredient.name$': {
-              [Op.like]: `%${req.query.ingredients}%`
-            }
-          };
-        }
-    
-        if (req.query.username) {
-          whereClause = {
-            ...whereClause,
-            '$owner.username$': {
-              [Op.like]: `%${req.query.username}%`
-            }
-          };
-        }
-    
-        if (req.query.categories) {
-          whereClause = {
-            ...whereClause,
-            '$recipy_categories.category.name$': {
-              [Op.like]: `%${req.query.categories}%`
-            }
-          };
-        }
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
@@ -217,30 +73,11 @@ const getSubscribed = async (req, res) => {
           ...whereClause,
           userId: subscribedUserIds
         };
-    
-        const foundRecipes = await Recipy.findAll({
-          where: whereClause,
-          include: [
-            { model: User, as: 'owner', attributes: ['id', 'username'] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] }
-          ],
-          order: orderClause,
-        });
-    
+
+        const foundRecipes = await findAllRecipies(whereClause, orderClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
-    
-        const recipes = await Recipy.findAll({
-          include: [
-            { model: User,
-              as: 'owner',
-              attributes: [ "id", "username"]},
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: { id: recipeIds },
-          order: orderClause,
-        });
+        whereClause = { id: recipeIds };
+        const recipes = await findAllRecipies(whereClause, orderClause);
     
         return res.status(200).json(recipes);
       } catch (error) {
