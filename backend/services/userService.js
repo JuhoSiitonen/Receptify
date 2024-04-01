@@ -1,4 +1,4 @@
-const {  User } = require("../models");
+const { User, Recipy } = require("../models");
 
 const createNewUser = async (user) => {
     const newUser = await User.create(user, {
