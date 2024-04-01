@@ -259,6 +259,15 @@
     - Frontend env variables to Dockerfile and pipeline action.
     - Configuring GKE deployment pipeline, added to current docker-pipeline. Works now and creates new images of frontend and backend according to github release tag.
 - 31.3 :
-    - Removing unnecessary code from backend (sessionChecker and app.js)
+    - Removing unnecessary code from backend (sessionChecker and app.js).
+    - Refactoring controllers (all of them) code to separate the routes to /routes folder and the logic to controllers.
+    - Removed ingredients router.
+    - Started refactoring controllers to remove database methods to services. 
+
+## April 2024
+- 1.4 :
+    - Refactoring continues, recipies controller db methods extracted, only business logic remains.
+    - Refactored all controllers and removed db methods to respective services.
+    - Backend tests updated.
 
     

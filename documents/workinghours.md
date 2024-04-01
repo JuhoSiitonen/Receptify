@@ -70,8 +70,11 @@ Month total: 36h
 - 3h 28.3: Refactoring reducers, user rating updating. Shoppinglist component.
 - 5h 29.3: Shoppinglist item deletion and related methods and endpoint. Shoppinglist styles and sending it via email to user, with email info formatting.
 - 5h 30.3: Bcrypt in backend, Userpage modifications, ViewUser modifications, Chosenrecipy and Userpage useEffect to have data after refresh. GKE deployment pipeline.
-- 1h 31.3: Refactoring and removing unnecessary code.
+- 3h 31.3: Refactoring and removing unnecessary code. Started refactoring controllers, new architecture is to have a routes folder with routers, a services folder with services for database methods and controllers only manage business logic between them. 
 
-Month total: 41h
+Month total: 43h
 
-Total hours: 147h
+## April 2024
+- 2h 1.4: Refactoring continues.
+
+Total hours: 151h
