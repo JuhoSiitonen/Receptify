@@ -24,7 +24,7 @@ const updateAboutMeInfo = async (id, aboutMe) => {
 }
 
 const updateEmailAddress = async (id, email) => {
-    const user = await User.findByPk(req.session.userId);
+    const user = await User.findByPk(id);
     user.email = email;
     await user.save();
     return user;
