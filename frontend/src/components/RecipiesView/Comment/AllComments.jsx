@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteComment, getAllComments } from '../../../reducers/commentReducer'
 import { useEffect, useState } from 'react'
+import './comment.css'
 
 const AllComments = ({ user, recipy }) => {
     const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const AllComments = ({ user, recipy }) => {
     }
 
     return (
-        <div>
+        <div className='comments'>
             <h3>Comments</h3>
             {comments.map(comment => (
                 <div key={comment.id}>
