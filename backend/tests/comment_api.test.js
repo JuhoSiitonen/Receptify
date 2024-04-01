@@ -4,11 +4,16 @@ const api = supertest(app)
 const { User } = require('../models')
 const { newUsers } = require('../utils/test_helpers')
 const { postableRecipies } = require('../utils/test_helpers')
+const bcrypt = require('bcrypt')
 
 let sessionCookie;
 
 beforeEach(async () => {
     await api.post('/api/testing/reset')
+    const password = await bcrypt.hash('password123', 10)
+    newUsers[0].password = password
+    newUsers[1].password = password
+    newUsers[2].password = password
     await User.bulkCreate(newUsers)
     const loginResponse = await api.post('/api/login').send({ username: 'john_doe', password: 'password123' });
     const rawCookies = loginResponse.headers['set-cookie'];
