@@ -1,17 +1,18 @@
-const { Rating, User, Recipy } = require("../models");
-const { sequelize } = require('../utils/db');
+const { 
+    createNewRating, 
+    getAverageRating, 
+    updateAverageRating,
+    findUserRating,
+    updateSingleRating,
+    destroyRating
+} = require('../services/ratingService');
+const { findSingleRecipyById } = require('../services/recipyService')
 
 const getRatingForRecipy = async (req, res) => {
     try {
         const { id } = req.params;
-    
-        const ratings = await Rating.findAll({
-          where: { recipyId: id },
-          attributes: [
-            [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating']
-          ],
-        });
-    
+
+        const ratings = await getAverageRating(id);
         const averageRating = ratings.length > 0 ? ratings[0].dataValues.averageRating : null;
     
         res.status(200).json({ averageRating });
@@ -25,33 +26,19 @@ const sendRating = async (req, res) => {
     try {
         const { id } = req.params;
         const { rating }  = req.body;
-    
-        const recipe = await Recipy.findByPk(id);
+
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
-    
-        const newRating = await Rating.create({
-          rating,
-          visible: true,
-          userId: req.session.userId, 
-          recipyId: recipe.id, 
-        });
-    
+
+        const newRating = await createNewRating(rating, req.session.userId, recipe.id);
         let userRatings = JSON.parse(req.session.rated);
         userRatings.push({ recipyId: recipe.id, rating: rating });
-    
-        const ratings = await Rating.findAll({
-          where: { recipyId: id },
-          attributes: [
-            [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating']
-          ],
-        });
-    
+
+        const ratings = await getAverageRating(id);
         const averageRating = ratings.length > 0 ? ratings[0].dataValues.averageRating : 0;
-    
-        recipe.averageRating = averageRating;
-        await recipe.save();
+        const updatedRecipy = await updateAverageRating(recipe.id, averageRating);
       
         return res.status(201).json(averageRating);
       } catch (error) {
@@ -64,40 +51,28 @@ const updateRating = async (req, res) => {
     try {
         const { id } = req.params;
         const { rating } = req.body;
-    
-        const recipe = await Recipy.findByPk(id);
+
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
-    
-        const existingRating = await Rating.findOne({
-          where: { userId: req.session.userId, recipyId: recipe.id },
-        });
-    
-        if (!existingRating) {
+
+        const userRating = await findUserRating(req.session.userId, recipe.id);
+        if (!userRating) {
           return res.status(404).json({ error: 'Rating not found' });
         }
-    
-        existingRating.rating = rating;
-        await existingRating.save();
+
+        const existingRating = await updateSingleRating(req.session.userId, recipe.id, rating);
   
         let userRatings = JSON.parse(req.session.rated);
         const newRatings = userRatings.filter(r => r.recipyId !== recipe.id);
         req.session.rated = JSON.stringify(newRatings);
   
         newRatings.push({ recipyId: recipe.id, rating: rating });
-  
-        const ratings = await Rating.findAll({
-          where: { recipyId: id },
-          attributes: [
-            [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating']
-          ],
-        });
-  
+
+        const ratings = await getAverageRating(id);
         const averageRating = ratings.length > 0 ? ratings[0].dataValues.averageRating : 0;
-  
-        recipe.averageRating = averageRating;
-        await recipe.save();
+        const updatedRecipy = await updateAverageRating(recipe.id, averageRating);
       
         return res.status(200).json(averageRating);
       } catch (error) {
@@ -109,13 +84,7 @@ const updateRating = async (req, res) => {
 const deleteRating = async (req, res) => {
     try {
         const { id } = req.params;
-    
-        const rating = await Rating.findByPk(id);
-        if (!rating) {
-          return res.status(404).json({ error: 'Rating not found' });
-        }
-    
-        await rating.destroy();
+        const rating = await destroyRating(id);
     
         return res.status(204).end();
       } catch (error) {
