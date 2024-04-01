@@ -15,7 +15,7 @@ const EditUserinfo = ({ user }) => {
                 <EditAboutMe user={user} />
             </Togglable>
             <Togglable buttonLabel={placeholder}>
-                <EditEmail user={user} />
+                <EditEmail />
             </Togglable>
         </div>
     )

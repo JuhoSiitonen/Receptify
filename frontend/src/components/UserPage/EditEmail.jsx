@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { editEmail } from '../../reducers/userReducer'
 
-const EditEmail = ({ user }) => {
+const EditEmail = () => {
     const [email, setEmail] = useState('');
     const dispatch = useDispatch();
 
