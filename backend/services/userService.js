@@ -30,10 +30,32 @@ const updateEmailAddress = async (id, email) => {
     return user;
 }
 
+const loginInfo = async (username) => {
+    const user = await User.findOne({ where: { username }, 
+        include: [
+            { model: User, 
+              as: 'subscriptions', 
+              attributes: ["id", "username", "email", "about"],
+              through: {
+                attributes: []
+              }, },
+            { model: Recipy, 
+              as: 'userFavorites', 
+              attributes: ["id", "title"],
+              through: {
+                attributes: []
+              }, },
+          ],
+        }
+      );
+    return user;
+}
+
 module.exports = {
     createNewUser,
     findSingleUser,
     findAllUsers,
     updateAboutMeInfo,
     updateEmailAddress,
+    loginInfo
 }
