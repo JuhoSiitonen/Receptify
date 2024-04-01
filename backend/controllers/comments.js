@@ -1,13 +1,16 @@
-const { Comment, User, Recipy } = require('../models');
+const { findSingleRecipyById } = require('../services/recipyService')
+const { 
+    createNewComment,
+    findSingleCommentById,
+    findAllComments,
+    updateSingleComment,
+    destroyComment
+} = require('../services/commentService')
 
 const getCommentsForRecipy = async (req, res) => {
     try {
         const { id } = req.params;
-    
-        const comments = await Comment.findAll({
-          where: { recipyId: id },
-          include: [
-            { model: User },],});
+        const comments = await findAllComments(id);
         return res.status(200).json(comments);
     
       } catch (error) {
@@ -20,23 +23,14 @@ const createComment = async (req, res) => {
     try {
         const { id } = req.params;
         const { userId, content } = req.body;
-    
-        const recipe = await Recipy.findByPk(id);
+
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
-    
-        const comment = await Comment.create({
-          comment: content,
-          date: new Date(),
-          visible: true,
-          userId: req.session.userId, 
-          recipyId: recipe.id, 
-        });
-    
-        const returnComment = await Comment.findByPk(comment.id, {
-          include: [
-            { model: User },],});
+
+        const comment = await createNewComment(content, req.session.userId, recipe.id);
+        const returnComment = await findSingleCommentById(comment.id);
     
         return res.status(201).json(returnComment);
       } catch (error) {
@@ -50,25 +44,13 @@ const updateComment = async (req, res) => {
         const { id } = req.params;
         const { userId, content } = req.body;
     
-        const recipe = await Recipy.findByPk(id);
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
-    
-        const existingComment = await Comment.findOne({
-          where: { userId: req.session.userId, recipyId: recipe.id },
-        });
-    
-        if (!existingComment) {
-          return res.status(404).json({ error: 'Comment not found' });
-        }
-    
-        existingComment.comment = content;
-        await existingComment.save();
-    
-        const returnComment = await Comment.findByPk(existingComment.id, {
-          include: [
-            { model: User },],});
+
+        const existingComment = await updateSingleComment(req.session.userId, recipe.id, content);
+        const returnComment = await findSingleCommentById(existingComment.id);
     
         return res.status(200).json(returnComment);
       } catch (error) {
@@ -80,13 +62,13 @@ const updateComment = async (req, res) => {
 const deleteComment = async (req, res) => {
     try {
         const { id } = req.params;
-    
-        const comment = await Comment.findByPk(id);
+
+        const comment = await findSingleCommentById(id);
         if (!comment) {
           return res.status(404).json({ error: 'Comment not found' });
         }
-    
-        await comment.destroy();
+
+        await destroyComment(id);
     
         return res.status(204).end();
       } catch (error) {
