@@ -1,7 +1,28 @@
 const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
 const { Op, where } = require('sequelize');
 const { sequelize } = require('../utils/db');
-const { defineWhereClause, findAllRecipies } = require('../services/recipyService');
+const { 
+    defineWhereClause, 
+    findAllRecipies, 
+    createNewRecipy,
+    checkAndCreateIngredients,
+    createRecipyIngredient,
+    findAllIngredients,
+    findRecipiesAccordingToIngredients,
+    checkAndCreateCategories,
+    createRecipyCategory,
+    findRecipyCategories,
+    findSingleRecipyCategory,
+    destroyRecipyCategories,
+    findFullSingleRecipyById,
+    findSingleRecipyById,
+    deleteSingleRecipy,
+    updateExistingRecipy,
+    findRecipyIngredients,
+    findSingleRecipyIngredient,
+    updateRecipyIngredient,
+    destroySingleIngredient
+} = require('../services/recipyService');
 
 const getRecipies = async (req, res) => {
     try {
@@ -88,58 +109,23 @@ const getSubscribed = async (req, res) => {
 
 const addRecipy = async (req, res) => {
     try {
-        const { title, description, instructions, visible, ingredients, categories, pictureUuid, cookingTime } = req.body;
-    
-        const recipe = await Recipy.create({
-          title,
-          description,
-          instructions,
-          visible,
-          userId: req.session.userId, 
-          averageRating: 0,
-          cookingTime,
-          pictureUuid
-        });
+        const { ingredients, categories } = req.body;
+
+        const recipe = await createNewRecipy(req, res);
     
         for (const ingredientData of ingredients) {
           const { name, amount, unit } = ingredientData;
-    
-          let ingredient = await Ingredient.findOne({ where: { name } });
-          if (!ingredient) {
-            ingredient = await Ingredient.create({ name });
-          }
-    
-          await RecipyIngredient.create({
-            amount,
-            unit,
-            visible: true,
-            recipyId: recipe.id, 
-            ingredientId: ingredient.id, 
-          });
+          let ingredient = await checkAndCreateIngredients(name);
+          let recipeIngredient = await createRecipyIngredient(ingredient.id, recipe.id, amount, unit);  
         }
     
         for (const categoryData of categories) {
           const { name } = categoryData;
-    
-          let category = await Category.findOne({ where: { name } });
-          if (!category) {
-            category = await Category.create({ name });
-          }
-    
-          await RecipyCategory.create({
-            visible: true,
-            recipyId: recipe.id, 
-            categoryId: category.id, 
-          });
+          let category = await checkAndCreateCategories(name);
+          let recipeCategory = await createRecipyCategory(recipe.id, category.id);
         }
-    
-        const returnRecipy = await Recipy.findByPk(recipe.id,{
-          include: [
-            { model: User, as: 'owner', attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-        });
+
+        const returnRecipy = await findFullSingleRecipyById(recipe.id);
     
         return res.status(201).json(returnRecipy);
       } catch (error) {
@@ -151,18 +137,13 @@ const addRecipy = async (req, res) => {
 const deleteRecipy = async (req, res) => {
     try {
         const { id } = req.params;
-    
-        const recipe = await Recipy.findByPk(id);
+
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
-    
-        await RecipyIngredient.destroy({ where: { recipyId: recipe.id } });
-        await RecipyCategory.destroy({ where: { recipyId: recipe.id } });
-        await Rating.destroy({ where: { recipyId: recipe.id } });
-        await Comment.destroy({ where: { recipyId: recipe.id } });
-        await Favorite.destroy({ where: { recipyId: recipe.id } });
-        await recipe.destroy();
+
+        const deletion = await deleteSingleRecipy(id);
     
         return res.status(204).end();
       } catch (error) {
@@ -176,86 +157,47 @@ const updateRecipy = async (req, res) => {
         const { id } = req.params;
         const { title, description, instructions, date, visible, ingredients, categories, pictureUuid, cookingTime } = req.body;
     
-        const recipe = await Recipy.findByPk(id);
+        const recipe = await findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
+        
+        const update = await updateExistingRecipy(req, res);
+        let recipeIngredients = await findRecipyIngredients(id);
     
-        await recipe.update({
-          title,
-          description,
-          instructions,
-          date,
-          visible,
-          cookingTime,
-          pictureUuid
-        });
-    
-        let recipeIngredients = await RecipyIngredient.findAll({ where: { recipyId: recipe.id } });
         for (const singleIngredient of recipeIngredients) {
-          await singleIngredient.destroy();
+          const success = await destroySingleIngredient(singleIngredient.recipyId, singleIngredient.ingredientId);
         }
     
         for (const ingredientData of ingredients) {
           const { name, amount, unit } = ingredientData;
+
+          let ingredient = await checkAndCreateIngredients(name);
+          let recipeIngredient = await findSingleRecipyIngredient(recipe.id, ingredient.id);
     
-          let ingredient = await Ingredient.findOne({ where: { name } });
-          if (!ingredient) {
-            ingredient = await Ingredient.create({ name });
-          }
-    
-          let recipeIngredient = await RecipyIngredient.findOne({ where: { recipyId: recipe.id, ingredientId: ingredient.id } });
           if (!recipeIngredient) {
-            recipeIngredient = await RecipyIngredient.create({
-              amount,
-              unit,
-              visible: true,
-              recipyId: recipe.id, 
-              ingredientId: ingredient.id, 
-            });
+            recipeIngredient = await createRecipyIngredient(ingredient.id, recipe.id, amount, unit);
+            
           } else {
-            await recipeIngredient.update({
-              amount,
-              unit,
-              visible: true,
-              recipyId: recipe.id, 
-              ingredientId: ingredient.id, 
-            });
+            recipeIngredient = await updateRecipyIngredient(ingredient.id, recipe.id, amount, unit);
           }
         }
     
-        let recipeCategories = await RecipyCategory.findAll({ where: { recipyId: recipe.id } });
-        for (const singleCategory of recipeCategories) {
-          await singleCategory.destroy();
-        }
+        const success = destroyRecipyCategories(recipe.id);       
     
         for (const categoryData of categories) {
           const { name } = categoryData;
+
+          let category = await checkAndCreateCategories(name);
+          let recipeCategory = await findSingleRecipyCategory(recipe.id, category.id);
     
-          let category = await Category.findOne({ where: { name } });
-          if (!category) {
-            category = await Category.create({ name });
-          }
-    
-          let recipeCategory = await RecipyCategory.findOne({ where: { recipyId: recipe.id, categoryId: category.id } });
           if (!recipeCategory) {
-            recipeCategory = await RecipyCategory.create({
-              visible: true,
-              recipyId: recipe.id, 
-              categoryId: category.id, 
-            });
-          } else {
-            await recipeCategory.update({ visible: true, recipyId: recipe.id, categoryId: category.id });
+            recipeCategory = await createRecipyCategory(recipe.id, category.id);
           }
         }
+
+        const returnRecipy = await findFullSingleRecipyById(recipe.id);
     
-        const returnRecipy = await Recipy.findByPk(recipe.id,{
-          include: [
-            { model: User, as: 'owner', attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include : [Category] },
-          ],
-        });
         return res.status(200).json(returnRecipy);
         
       } catch (error) {
@@ -267,43 +209,14 @@ const updateRecipy = async (req, res) => {
 const findRecipy = async (req, res) => {
     try {
         const { ingredients } = req.body;
-    
-        const foundIngredients = await Ingredient.findAll({
-          where: {
-            name: {
-              [Op.in]: ingredients
-            }
-          }
-        });
-    
+
+        const foundIngredients = await findAllIngredients(req, res);
         const ingredientIds = foundIngredients.map(ingredient => ingredient.id);
-    
-        const recipeIds = await RecipyIngredient.findAll({
-          where: {
-            ingredientId: {
-              [Op.in]: ingredientIds
-            }
-          },
-          attributes: ['recipyId'],
-          raw: true
-        });
-    
+        const recipeIds = await findRecipiesAccordingToIngredients(ingredientIds);
         const foundRecipeIds = recipeIds.map(recipe => recipe.recipyId);
-    
-        const recipes = await Recipy.findAll({
-          include: [
-            { model: User,
-              as: 'owner',
-              attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: {
-            id: {
-              [Op.in]: foundRecipeIds
-            }
-          }
-        })
+        const whereClause = { id: foundRecipeIds };
+        let orderClause = [];
+        const recipes = await findAllRecipies(whereClause, orderClause);
     
         recipes.sort((a, b) => {
           const aMatchCount = a.recipy_ingredients.filter(
@@ -324,14 +237,9 @@ const findRecipy = async (req, res) => {
 
 const getUsersRecipies = async (req, res) => {
     try {
-        const recipes = await Recipy.findAll({
-          include: [
-            { model: User, as: 'owner', attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-          ],
-          where: { userId: req.session.userId }
-        });
+        const whereClause = { userId: req.session.userId };
+        let orderClause = [];
+        const recipes = await findAllRecipies(whereClause, orderClause);
     
         return res.status(200).json(recipes);
       } catch (error) {
@@ -343,16 +251,7 @@ const getUsersRecipies = async (req, res) => {
 const getSingleRecipy = async (req, res) => {
     try {
         const { id } = req.params;
-    
-        const recipe = await Recipy.findByPk(id, {
-          include: [
-            { model: User, as: 'owner', attributes: [ "id", "username"] },
-            { model: RecipyIngredient, include: [Ingredient] },
-            { model: RecipyCategory, include: [Category] },
-            { model: Rating, attributes: ['rating'] },
-            { model: Comment, include: [User] },
-          ]
-        });
+        const recipe = await findFullSingleRecipyById(id);
     
         return res.status(200).json(recipe);
       } catch (error) {
