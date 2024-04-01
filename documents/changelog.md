@@ -269,5 +269,8 @@
     - Refactoring continues, recipies controller db methods extracted, only business logic remains.
     - Refactored all controllers and removed db methods to respective services.
     - Backend tests updated.
+    - Filtering and sorting in recipiesview bug fixed, after filtering once the previous filter was not removed, same with sorting.
+    - Comment list styles
+    
 
     

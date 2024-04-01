@@ -75,6 +75,6 @@ Month total: 36h
 Month total: 43h
 
 ## April 2024
-- 2h 1.4: Refactoring continues.
+- 3h 1.4: Refactoring continues. Comment list styles, filter/sort bug in recipiesview fixed.
 
-Total hours: 151h
+Total hours: 152h
