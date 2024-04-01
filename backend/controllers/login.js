@@ -1,30 +1,12 @@
 const bcrypt = require('bcrypt')
-const { User, Recipy, Rating } = require('../models');
+const { findAllUsersRatings } = require('../services/ratingService');
+const { loginInfo } = require('../services/userService');
 
 const login = async (req, res) => {
     const { username, password } = req.body;
-    const user = await User.findOne({ where: { username }, 
-        include: [
-            { model: User, 
-              as: 'subscriptions', 
-              attributes: ["id", "username", "email", "about"],
-              through: {
-                attributes: []
-              }, },
-            { model: Recipy, 
-              as: 'userFavorites', 
-              attributes: ["id", "title"],
-              through: {
-                attributes: []
-              }, },
-          ],
-        }
-      );
-    const rated = await Rating.findAll({ 
-      where: { userId: user.id },
-      attributes: ["recipyId", "rating"],
-    });
+    const user = await loginInfo(username);
 
+    const rated = await findAllUsersRatings(user.id);
     const shoppinglist = [];
 
     const email = user.email === null 
