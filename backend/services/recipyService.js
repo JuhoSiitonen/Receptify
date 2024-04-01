@@ -114,6 +114,19 @@ const checkAndCreateIngredients = async (name) => {
     return ingredient;
 }
 
+const findAllIngredients = async (req, res) => {
+    const { ingredients } = req.body;
+    
+    const foundIngredients = await Ingredient.findAll({
+        where: {
+            name: {
+              [Op.in]: ingredients
+            }
+        }
+    });
+    return foundIngredients;
+}
+
 const createRecipyIngredient = async (ingredientId, recipyId, amount, unit) => {
     let recipyIngredient = await RecipyIngredient.create({
         amount,
@@ -137,6 +150,19 @@ const updateRecipyIngredient = async (ingredientId, recipyId, amount, unit) => {
 const findRecipyIngredients = async (recipyId) => {
     let recipeIngredients = await RecipyIngredient.findAll({ where: { recipyId } });
     return recipeIngredients;
+}
+
+const findRecipiesAccordingToIngredients = async (ingredientIds) => {
+    const recipeIds = await RecipyIngredient.findAll({
+        where: {
+          ingredientId: {
+            [Op.in]: ingredientIds
+          }
+        },
+        attributes: ['recipyId'],
+        raw: true
+    });
+    return recipeIds;
 }
 
 const findSingleRecipyIngredient = async (recipyId, ingredientId) => {
@@ -218,8 +244,10 @@ module.exports = {
     createNewRecipy,
     updateExistingRecipy,
     checkAndCreateIngredients,
+    findAllIngredients,
     createRecipyIngredient,
     findSingleRecipyIngredient,
+    findRecipiesAccordingToIngredients,
     updateRecipyIngredient,
     checkAndCreateCategories,
     createRecipyCategory,
