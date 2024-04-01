@@ -1,27 +1,27 @@
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Rating, Comment, Favorite } = require('../models');
-const { Op, where } = require('sequelize');
-const { sequelize } = require('../utils/db');
-const { 
-    defineWhereClause, 
-    findAllRecipies, 
-    createNewRecipy,
+const {
+    checkAndCreateCategories,
+    createRecipyCategory,
+    findSingleRecipyCategory,
+    destroyRecipyCategories,
+} = require('../services/categoryService')
+const {
     checkAndCreateIngredients,
     createRecipyIngredient,
     findAllIngredients,
     findRecipiesAccordingToIngredients,
-    checkAndCreateCategories,
-    createRecipyCategory,
-    findRecipyCategories,
-    findSingleRecipyCategory,
-    destroyRecipyCategories,
-    findFullSingleRecipyById,
-    findSingleRecipyById,
-    deleteSingleRecipy,
-    updateExistingRecipy,
     findRecipyIngredients,
     findSingleRecipyIngredient,
     updateRecipyIngredient,
     destroySingleIngredient
+} = require('../services/ingredientService')
+const { 
+    defineWhereClause, 
+    findAllRecipies, 
+    createNewRecipy,
+    findFullSingleRecipyById,
+    findSingleRecipyById,
+    deleteSingleRecipy,
+    updateExistingRecipy,
 } = require('../services/recipyService');
 
 const getRecipies = async (req, res) => {
