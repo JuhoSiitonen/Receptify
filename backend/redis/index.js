@@ -26,10 +26,8 @@ const redisConf = {
     saveUninitialized: true,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
-      //sameSite: 'lax',
       secure: false,
       httpOnly: false,
-      //path: '/',
     },
 }
 
