@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { deleteFromShoppinglist, sendShoppinglistItems } from '../../reducers/userReducer';
 import { combineIngredients } from '../../util/shoppingListFunctions';
 import ItemAddForm from './ItemAddForm';
+import LoadingSpinner from '../LoadingSpinner';
 import './Shoppinglist.css';
 
 const Shoppinglist = () => {
@@ -11,18 +12,17 @@ const Shoppinglist = () => {
     const [sendToOther, setSendToOther] = useState(false);
     const user = useSelector(state => state.user);
 
+    if (user === null) {
+        return <LoadingSpinner/>
+    }
+
+    const shoppinglist = user.shoppinglist;
+    const combinedShoppingList = combineIngredients(shoppinglist);
+
     const handleDelete = (id) => {
         dispatch(deleteFromShoppinglist(id))
         shoppinglist.filter(item => item.id !== id)
     }
-
-    if (user === null) {
-        return <>No items on shoppinglist</>
-    }
-
-    const shoppinglist = user.shoppinglist;
-
-    const combinedShoppingList = combineIngredients(shoppinglist);
 
     const handleSendShoppinglist = (e) => {
         e.preventDefault();

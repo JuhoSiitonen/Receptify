@@ -12,6 +12,8 @@ import ShowSubscribedButton from './ShowSubscribedButton';
 const RecipiesView = () => {
     const dispatch = useDispatch()
     const recipies = useSelector(state => state.recipies)
+    const [filtering, setFiltering] = useState('')
+    const [sorting, setSorting] = useState('')
     const [query, setQuery] = useState('');
     const [favorites, setFavorites] = useState(false);
     const [subscribed, setSubscribed] = useState(false);
@@ -27,10 +29,18 @@ const RecipiesView = () => {
     const handleFilter = ({ option, value }) => {
         if (query === '') {
             let queryParams = `${option}=${value}`
+            setFiltering(queryParams)
             setQuery(queryParams)
-        } else {
+        } else if (filtering === '' && query !== '') {
             let queryParams = `&${option}=${value}`
             let newQuery = query + queryParams
+            setFiltering(queryParams)
+            setQuery(newQuery)
+        } 
+        else {
+            let queryParams = `${option}=${value}&`
+            setFiltering(queryParams)
+            let newQuery = queryParams + sorting 
             setQuery(newQuery)
         }
         
@@ -39,10 +49,18 @@ const RecipiesView = () => {
     const handleSort = ({ option, value }) => {
         if (query === '') {
             let queryParams = `sort=${option}&order=${value}`
+            setSorting(queryParams)
             setQuery(queryParams)
-        } else {
-            let queryParams = `&sort=${option}&order=${value}`
-            let newQuery = query + queryParams
+        } else if (sorting === '' && query !== '') {
+            let queryParams = `sort=${option}&order=${value}`
+            let newQuery = query + '&' + queryParams
+            setSorting(queryParams)
+            setQuery(newQuery)
+        }
+        else {
+            let queryParams = `sort=${option}&order=${value}&`
+            setSorting(queryParams)
+            let newQuery = queryParams + filtering
             setQuery(newQuery)
         }
     }
