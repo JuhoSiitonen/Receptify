@@ -1,30 +1,30 @@
 import axios from '../util/apiClient'
 const baseUrl = '/api/recipies'
 
-const getAll = async (query) => {
+const getAll = async (query, length) => {
   if (query !== '') {
-    const response = await axios.get(`${baseUrl}/?${query}`)
+    const response = await axios.get(`${baseUrl}/?${query}&length=${length}`)
     return response.data
   }
-  const response = await axios.get(baseUrl)
+  const response = await axios.get(`${baseUrl}/?length=${length}`)
   return response.data
 }
 
-const getFavorites = async (query) => {
+const getFavorites = async (query, length) => {
   if (query !== '') {
-    const response = await axios.get(`${baseUrl}/favorites?${query}`)
+    const response = await axios.get(`${baseUrl}/favorites?${query}&length=${length}`)
     return response.data
   }
-  const response = await axios.get(`${baseUrl}/favorites`)
+  const response = await axios.get(`${baseUrl}/favorites&length=${length}`)
   return response.data
 }
 
-const getSubscribed = async (query) => {
+const getSubscribed = async (query, length) => {
   if (query !== '') {
-    const response = await axios.get(`${baseUrl}/subscriptions?${query}`)
+    const response = await axios.get(`${baseUrl}/subscriptions?${query}&length=${length}`)
     return response.data
   }
-  const response = await axios.get(`${baseUrl}/subscriptions`)
+  const response = await axios.get(`${baseUrl}/subscriptions&length=${length}`)
   return response.data
 }
 

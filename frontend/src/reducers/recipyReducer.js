@@ -13,6 +13,9 @@ const recipySlice = createSlice({
         setRecipies(state, action) {
             return action.payload
         },
+        fetchMoreRecipies(state, action) {
+            return state.concat(action.payload)
+        },
         updateExistingRecipy(state, action) {
             const recipy = action.payload
             return state.map(r => r.id !== recipy.id ? r : recipy)
@@ -29,7 +32,7 @@ const recipySlice = createSlice({
     },
 })
 
-export const { addNewRecipy, setRecipies, updateExistingRecipy, removeRecipy, updateRecipyRating  } = recipySlice.actions
+export const { addNewRecipy, setRecipies, updateExistingRecipy, removeRecipy, updateRecipyRating, fetchMoreRecipies } = recipySlice.actions
 
 export const createRecipy = (recipy) => {
     return async dispatch => {
@@ -45,19 +48,23 @@ export const createRecipy = (recipy) => {
     }
 }
 
-export const getAllRecipies = (query, favorites, subscribed) => {
+export const getAllRecipies = (query, favorites, subscribed, length) => {
     return async dispatch => {
+        let recipies
+        length = length || 0
         try {
             if (favorites) {
-                const recipies = await recipyService.getFavorites(query)
-                dispatch(setRecipies(recipies))
+                recipies = await recipyService.getFavorites(query, length)
                 return
             } else if (subscribed) {
-                const recipies = await recipyService.getSubscribed(query)
-                dispatch(setRecipies(recipies))
+                recipies = await recipyService.getSubscribed(query, length)
                 return
             } else{
-                const recipies = await recipyService.getAll(query)
+                recipies = await recipyService.getAll(query, length)
+            }
+            if (length) {
+                dispatch(fetchMoreRecipies(recipies))
+            } else {
                 dispatch(setRecipies(recipies))
             }
         } catch (error) {

@@ -8,6 +8,7 @@ import LoadingSpinner from '../LoadingSpinner';
 import SortBy from '../SortBy';
 import ShowFavoritesButton from './ShowFavoritesButton';
 import ShowSubscribedButton from './ShowSubscribedButton';
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
@@ -17,10 +18,20 @@ const RecipiesView = () => {
     const [query, setQuery] = useState('');
     const [favorites, setFavorites] = useState(false);
     const [subscribed, setSubscribed] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         dispatch(getAllRecipies(query, favorites, subscribed));
       }, [query, favorites, subscribed]);
+
+    const fetchMoreData = async () => {
+        await dispatch(getAllRecipies(query, favorites, subscribed, recipies.length))
+        if (recipies.length % 5 === 0) {
+            setHasMore(true)
+        } else {
+            setHasMore(false)
+        }
+    }
     
     if (!recipies) {
         return <LoadingSpinner />
@@ -99,7 +110,19 @@ const RecipiesView = () => {
                 />
             </div>
           </div>
-            <Recipies recipies={recipies} />
+            <InfiniteScroll
+                dataLength={recipies.length}
+                next={fetchMoreData}
+                hasMore={hasMore}
+                loader={<LoadingSpinner />}
+                endMessage={
+                    <p style={{ textAlign: "center" }}>
+                        <b>Yay! You have seen it all</b>
+                    </p>
+                }
+            >
+              <Recipies recipies={recipies} />
+            </InfiniteScroll>
         </div>
     )
 }
