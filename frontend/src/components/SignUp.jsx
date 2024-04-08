@@ -14,6 +14,13 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (username.length < 3) {
+            dispatch(addNotification({
+                message: 'Username must be at least 3 characters long', 
+                error: true}));
+            setUsername('');
+            return;
+        }
         if (password !== password2 || password.length < 3) {
             dispatch(addNotification({
                 message: 'Passwords do not match or are too short!', 
