@@ -28,6 +28,7 @@ const getRecipies = async (req, res) => {
     try {
         let whereClause = defineWhereClause(req, res);
         let orderClause = [];
+        let length = req.query.length || 0;
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
@@ -35,7 +36,7 @@ const getRecipies = async (req, res) => {
           orderClause.push(['created_at', 'DESC']);
         }
         
-        const foundRecipes = await findAllRecipies(whereClause, orderClause);
+        const foundRecipes = await findAllRecipies(whereClause, orderClause, length);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);
@@ -51,6 +52,7 @@ const getFavorites = async (req, res) => {
     try {
         let orderClause = [];
         let whereClause = defineWhereClause(req, res);
+        let length = req.query.length || 0;
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
@@ -65,7 +67,7 @@ const getFavorites = async (req, res) => {
           id: favorites
         };
 
-        const foundRecipes = await findAllRecipies(whereClause, orderClause);
+        const foundRecipes = await findAllRecipies(whereClause, orderClause, length);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);
@@ -81,6 +83,7 @@ const getSubscribed = async (req, res) => {
     try {
         let whereClause = defineWhereClause(req, res);
         let orderClause = [];
+        let length = req.query.length || 0;
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
@@ -95,7 +98,7 @@ const getSubscribed = async (req, res) => {
           userId: subscribedUserIds
         };
 
-        const foundRecipes = await findAllRecipies(whereClause, orderClause);
+        const foundRecipes = await findAllRecipies(whereClause, orderClause, length);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);

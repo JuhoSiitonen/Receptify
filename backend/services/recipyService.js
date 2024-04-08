@@ -60,7 +60,8 @@ const defineWhereClause = ( req, res) => {
     return whereClause;
 }
 
-const findAllRecipies = async ( whereClause, orderClause) => {
+const findAllRecipies = async ( whereClause, orderClause, length) => {
+    length = length || 0;
     const foundRecipes = await Recipy.findAll({
         include: [
           { model: User,
@@ -71,6 +72,8 @@ const findAllRecipies = async ( whereClause, orderClause) => {
         ],
         where: whereClause,
         order: orderClause,
+        limit: 5,
+        offset: length,
       })
     return foundRecipes;
 }
