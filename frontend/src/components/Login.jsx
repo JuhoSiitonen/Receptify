@@ -14,6 +14,10 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (username.length < 3 || password.length < 3) {
+            alert('Username and password must be at least 3 characters long')
+            return
+        }
         try {
             await dispatch(login({username, password}))
             navigate('/')
