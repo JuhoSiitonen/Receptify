@@ -271,6 +271,12 @@
     - Backend tests updated.
     - Filtering and sorting in recipiesview bug fixed, after filtering once the previous filter was not removed, same with sorting.
     - Comment list styles
+- 8.4 :
+    - User input validation in Login and Signup
+    - Infinit scroll component added to dependencies.
+    - Infinite scroll implemented in recipiesview, as preliminary setup.
+    - Infinite scroll requirements such as backend db queries with variable length, which if modulo with 5 is zero will mean there is more to fetch.
+    - If length is not specified it is zero. 
     
 
     
