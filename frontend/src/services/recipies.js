@@ -15,7 +15,7 @@ const getFavorites = async (query, length) => {
     const response = await axios.get(`${baseUrl}/favorites?${query}&length=${length}`)
     return response.data
   }
-  const response = await axios.get(`${baseUrl}/favorites&length=${length}`)
+  const response = await axios.get(`${baseUrl}/favorites?length=${length}`)
   return response.data
 }
 
@@ -24,7 +24,7 @@ const getSubscribed = async (query, length) => {
     const response = await axios.get(`${baseUrl}/subscriptions?${query}&length=${length}`)
     return response.data
   }
-  const response = await axios.get(`${baseUrl}/subscriptions&length=${length}`)
+  const response = await axios.get(`${baseUrl}/subscriptions?length=${length}`)
   return response.data
 }
 
