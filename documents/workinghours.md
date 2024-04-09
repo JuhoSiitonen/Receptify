@@ -77,5 +77,6 @@ Month total: 43h
 ## April 2024
 - 3h 1.4: Refactoring continues. Comment list styles, filter/sort bug in recipiesview fixed.
 - 1h 8.4: User input validation, infinite scroll.
+- 2h 9.4: Infinite scroll bug fixes and implementation to viewing one users recipies.
 
-Total hours: 153h
+Total hours: 155h

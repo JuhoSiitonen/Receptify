@@ -277,6 +277,8 @@
     - Infinite scroll implemented in recipiesview, as preliminary setup.
     - Infinite scroll requirements such as backend db queries with variable length, which if modulo with 5 is zero will mean there is more to fetch.
     - If length is not specified it is zero. 
-    
-
-    
+- 9.4 :
+    - Infinite scroll bug fixes.
+    - State variable previousLength to determine when to stop fetching more in infinite scroll.
+    - Infinite scroll implemented in viewing a single users recipies.
+    - Infinite scroll works on normal recipiesview with all sorts and filters.
