@@ -55,14 +55,12 @@ export const getAllRecipies = (query, favorites, subscribed, length) => {
         try {
             if (favorites) {
                 recipies = await recipyService.getFavorites(query, length)
-                return
             } else if (subscribed) {
                 recipies = await recipyService.getSubscribed(query, length)
-                return
             } else{
                 recipies = await recipyService.getAll(query, length)
             }
-            if (length) {
+            if (length !== 0) {
                 dispatch(fetchMoreRecipies(recipies))
             } else {
                 dispatch(setRecipies(recipies))
@@ -112,11 +110,17 @@ export const updateRating = (id, newRating) => {
     }
 }
 
-export const userRecipies = (id) => {
+export const userRecipies = (id, length) => {
     return async dispatch => {
+        let recipies
+        length = length || 0
         try {
-            const recipies = await userService.getUserRecipies(id)
-            dispatch(setRecipies(recipies))
+            recipies = await userService.getUserRecipies(id, length)
+            if (length !== 0) {
+                dispatch(fetchMoreRecipies(recipies))
+            } else {
+                dispatch(setRecipies(recipies))
+            }
         } catch (error) {
             throw error
         }
