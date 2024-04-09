@@ -8,9 +8,9 @@
     - [x] User can update said pictures
 - [x] User sees clear error and success notifications upon actions
 - [x] User can update and delete their own recipies
-- [ ] Users can view recipies in a scrollable list
+- [x] Users can view recipies in a scrollable list
     - [x] Recipy view
-    - [ ] Paginated scrolling
+    - [x] Paginated scrolling
     - [x] User can view own recipies in a list
 - [x] User can filter recipies view
     - [x] Filtering recipies by user
@@ -22,9 +22,9 @@
     - [x] Recipy sorting newest -> oldest and vice versa
     - [x] Average rating best -> worst and vice versa
 - [x] User can type in specific incredients and find recipies which match those (even partially)
-- [ ] User can compose a shopping list out of selected recipies
+- [x] User can compose a shopping list out of selected recipies
     - [x] Same items on shopping list will be combined, and units converted to match
-    - [ ] Shopping list can be printed or sent to email
+    - [x] Shopping list can be printed or sent to email
     - [x] User can add miscellaneous items to list
 - [ ] The app has privileged users, e.g maintenance which can delete posts, comments and users
 - [x] Users can comment on recipies
@@ -34,8 +34,7 @@
     - [x] Rating average is shown to all users
     - [x] Rating only for logged in users
 - [x] User can add recipies as favorites
-- [ ] User can subscribe to other users recipy posts
-    - [ ] While using the app user can get notifications on new recipies from subscribed users
+- [x] User can subscribe to other users recipy posts
     - [x] User can see a list of newest recipies from subscribed users
 
 ## Technical requirements
