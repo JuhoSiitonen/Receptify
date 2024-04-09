@@ -19,14 +19,17 @@ const RecipiesView = () => {
     const [favorites, setFavorites] = useState(false);
     const [subscribed, setSubscribed] = useState(false);
     const [hasMore, setHasMore] = useState(true);
+    const [previousLength, setPreviousLength] = useState(0);
 
     useEffect(() => {
         dispatch(getAllRecipies(query, favorites, subscribed));
+        setHasMore(true)
       }, [query, favorites, subscribed]);
 
     const fetchMoreData = async () => {
         await dispatch(getAllRecipies(query, favorites, subscribed, recipies.length))
-        if (recipies.length % 5 === 0) {
+        if (recipies.length % 5 === 0 && recipies.length === previousLength) {
+            setPreviousLength(recipies.length)
             setHasMore(true)
         } else {
             setHasMore(false)
