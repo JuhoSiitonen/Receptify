@@ -60,3 +60,16 @@
 - React frontend
 - Redux state management
 - Kubernetes cluster 
+
+## Further development
+- Direct messaging between users
+- Password change possibility
+- CSS styles
+- Pub/Sub
+- HTTPS/TLS
+- Kubernetes load balancing
+- Cloudflare email workers to send email from @receptifyonline.com
+- Own structure to storing recipy pictures
+- Redis cache
+- Google artifact registry instead of Docker hub for images
+- Better unit testing for frontend
