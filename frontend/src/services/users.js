@@ -25,8 +25,8 @@ const signup = async newObject => {
     return response.data
   }
 
-  const getUserRecipies = (id) => {
-    const request = axios.get(`${baseUrl}/${id}/view`)
+  const getUserRecipies = (id, length) => {
+    const request = axios.get(`${baseUrl}/${id}/view?length=${length}`)
     return request.then(response => response.data)
   }
  
