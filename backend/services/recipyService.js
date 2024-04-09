@@ -6,7 +6,7 @@ const findSingleRecipyById = async (id) => {
     return recipy;
 }
 
-const findUsersRecipies = async (id) => {
+const findUsersRecipies = async (id, length) => {
     const recipes = await Recipy.findAll({ where: { userId: id},
         include: [
           { model: User,
@@ -15,6 +15,8 @@ const findUsersRecipies = async (id) => {
           { model: RecipyIngredient, include: [Ingredient] },
           { model: RecipyCategory, include: [Category] },
         ],
+        limit: 5,
+        offset: length,
     });
     return recipes;
 }

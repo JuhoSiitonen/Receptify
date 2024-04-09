@@ -161,7 +161,8 @@ const logoutUser = async (req, res) => {
 
 const viewUser = async (req, res) => {
     const { id } = req.params;
-    const recipes = await findUsersRecipies(id);
+    let length = req.query.length || 0;
+    const recipes = await findUsersRecipies(id, length);
     return res.status(200).json(recipes);
 }
 
