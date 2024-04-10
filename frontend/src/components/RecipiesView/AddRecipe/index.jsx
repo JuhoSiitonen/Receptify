@@ -2,11 +2,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createRecipy } from '../../../reducers/recipyReducer'
-import UploaderWidget from '../../Uploader/UploaderWidget'
 import './AddRecipe.css'
 import AddRecipeForm from './AddRecipeForm'
 
-const AddRecipe = ({ recipy }) => {
+const AddRecipe = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [ingredients, setIngredients] = useState([])
