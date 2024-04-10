@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import DeleteButton from './DeleteButton'
+import DeleteButton from './Buttons/DeleteButton'
 import AllComments from './Comment/AllComments'
 import Togglable from '../Togglable'
 

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteRecipy } from '../../reducers/recipyReducer'
+import { deleteRecipy } from '../../../reducers/recipyReducer'
 
 const DeleteButton = ({ recipy }) => {
     const dispatch = useDispatch()
