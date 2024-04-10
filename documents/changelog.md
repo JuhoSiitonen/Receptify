@@ -282,3 +282,11 @@
     - State variable previousLength to determine when to stop fetching more in infinite scroll.
     - Infinite scroll implemented in viewing a single users recipies.
     - Infinite scroll works on normal recipiesview with all sorts and filters.
+- 10.4 :
+    - Infinite scroll bug fixes.
+    - Refactored Addrecipy and Updaterecipy to use same form component.
+    - Moved button components to same folder.
+    - Added a function to RecipyFinder to tell user how many ingredient matches each found recipy has.
+    - Notifications component fixed under Receptify header so it can be seen even when scrolling down.
+    - fixed bug in combinedShoppinglist to correctly show combined items amounts and units.
+    
