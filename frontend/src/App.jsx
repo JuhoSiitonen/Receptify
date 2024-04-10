@@ -27,8 +27,8 @@ function App() {
     <div>
       <NavigationBar />
       <h1 className='receptify-header'>Receptify!</h1>
+      <Notifications />
       <div className="content-wrapper">
-        <Notifications />
         <Routes>
           <Route path="/" element={<Mainpage />} />
           <Route path="/recipes" element={<RecipiesView />} />

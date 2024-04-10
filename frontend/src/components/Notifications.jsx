@@ -5,13 +5,14 @@ const Notifications = () => {
   const message = useSelector(({ notification }) => notification)
 
   const messageStyle = {
+    position: 'fixed',
     color: 'green',
     background: 'lightgrey',
     fontSize: 20,
     borderStyle: 'solid',
     borderRadius: 5,
     padding: 10,
-    marginBottom: 10,
+    width: '100%',
   }
 
   const errorStyle = {
