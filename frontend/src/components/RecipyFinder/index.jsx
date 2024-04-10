@@ -38,6 +38,13 @@ const RecipyFinder = () => {
         console.log(ingredients)
     }
 
+    const matches = (recipy) => {
+        const matchCount = recipy.recipy_ingredients.filter(
+            (ingredient) => ingredient.ingredient && ingredients.includes(ingredient.ingredient.name)
+        ).length
+        return matchCount
+    }
+
     return (
         <div>
           <div className="recipy-finder-container">
@@ -62,6 +69,7 @@ const RecipyFinder = () => {
               <h2>Recipies</h2>
                 {recipies.map(recipy => (
                   <div className="single-recipe">
+                    {matches(recipy) > 0 && <p><b> Ingredient matches: {matches(recipy)}</b></p>}
                     <SingleRecipy recipy={recipy} user={user} />
                   </div>
               ))}
