@@ -3,8 +3,24 @@
     list.forEach(item => {
         const existingItemIndex = combinedList.findIndex(elem => elem.ingredient === item.ingredient);
         if (existingItemIndex !== -1) {
-            combinedList[existingItemIndex].amount = Number(combinedList[existingItemIndex].amount) + Number(convertToBaseUnit(item.amount, item.unit))
-            combinedList[existingItemIndex].unit = convertUnit(combinedList[existingItemIndex].unit)
+            if (combinedList[existingItemIndex].unit === item.unit) {
+                combinedList[existingItemIndex].amount = Number(combinedList[existingItemIndex].amount) + Number(item.amount);
+            } else {
+                combinedList[existingItemIndex].amount = Number(convertToBaseUnit(combinedList[existingItemIndex].amount, combinedList[existingItemIndex].unit)) + Number(convertToBaseUnit(item.amount, item.unit))
+                combinedList[existingItemIndex].unit = convertUnit(combinedList[existingItemIndex].unit);
+            }
+            if (combinedList[existingItemIndex].unit === 'g' && combinedList[existingItemIndex].amount >= 1000) {
+                combinedList[existingItemIndex].unit = 'kg';
+                combinedList[existingItemIndex].amount = combinedList[existingItemIndex].amount / 1000;
+            }
+            if (combinedList[existingItemIndex].unit === 'ml' && combinedList[existingItemIndex].amount >= 1000) {
+                combinedList[existingItemIndex].unit = 'l';
+                combinedList[existingItemIndex].amount = combinedList[existingItemIndex].amount / 1000;
+            }
+            if (combinedList[existingItemIndex].unit === 'dl' && combinedList[existingItemIndex].amount >= 10) {
+                combinedList[existingItemIndex].unit = 'l';
+                combinedList[existingItemIndex].amount = combinedList[existingItemIndex].amount / 10;
+            }
         } else {
             combinedList.push({...item});
         }
