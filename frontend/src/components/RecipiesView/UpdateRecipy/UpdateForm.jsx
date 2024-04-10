@@ -101,7 +101,7 @@ const UpdateForm = ({ recipy }) => {
                 </div>
                 <div>
                     Cooking time:
-                    <input value={cookingTime} onChange={handleCookingTimeChange} required />
+                    <input id='cooking-time' value={cookingTime} onChange={handleCookingTimeChange} required />
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
                 <div>
@@ -115,7 +115,7 @@ const UpdateForm = ({ recipy }) => {
                         value={ingredient.unit}
                         onChange={({ target }) => setIngredient({ ...ingredient, unit: target.value })}
                     >
-                        <option value="">Select unit</option>
+                        <option value="">Unit</option>
                         {units.map((unit) => (
                             <option key={unit} value={unit}>
                                 {unit}
@@ -129,7 +129,7 @@ const UpdateForm = ({ recipy }) => {
                 {ingredients.map(ingredient => (
                     <li key={`${ingredient.name}-${ingredient.amount}`}>
                         {ingredient.amount} {ingredient.unit} of {ingredient.name}
-                        <button onClick={() => deleteIngredient(ingredient)} type="button">delete</button>
+                        <button onClick={() => deleteIngredient(ingredient)} type="delete">delete</button>
                     </li>
                 ))}
                 </div>
@@ -156,7 +156,7 @@ const UpdateForm = ({ recipy }) => {
                     {categories.map(category => (
                         <li key={category}>
                             {category} 
-                            <button onClick={() => deleteCategory(category)} type="button">delete</button>
+                            <button onClick={() => deleteCategory(category)} type="delete">delete</button>
                         </li>
                     ))}
                 </div>
