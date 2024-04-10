@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { updateRecipy } from '../../../reducers/recipyReducer'
 import UploaderWidget from '../../Uploader/UploaderWidget'
-import '../AddRecipe.css'
+import '../AddRecipe/AddRecipe.css'
 
 const UpdateForm = ({ recipy }) => {
     const [title, setTitle] = useState('')

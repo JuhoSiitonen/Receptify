@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { createRecipy } from '../../reducers/recipyReducer'
-import UploaderWidget from '../Uploader/UploaderWidget'
+import { createRecipy } from '../../../reducers/recipyReducer'
+import UploaderWidget from '../../Uploader/UploaderWidget'
 import './AddRecipe.css'
 
 const AddRecipe = () => {
