@@ -14,7 +14,6 @@ import './ViewUser.css'
 const ViewUser = () => {
     const [userInfo, setUserInfo] = useState(null)
     const [hasMore, setHasMore] = useState(true)
-    const [previousLength, setPreviousLength] = useState(0)
     const dispatch = useDispatch()
     const match = useMatch('/users/:id/view');
     const userId = Number(match?.params.id);
@@ -31,8 +30,7 @@ const ViewUser = () => {
 
     const fetchMoreData = async () => {
         await dispatch(userRecipies(userId, recipies.length))
-        if (recipies.length % 5 === 0 && recipies.length === previousLength) {
-            setPreviousLength(recipies.length)
+        if (recipies.length % 5 === 0) {
             setHasMore(true)
         } else {
             setHasMore(false)

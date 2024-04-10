@@ -6,8 +6,8 @@ import Filter from '../Filter';
 import Togglable from '../Togglable';
 import LoadingSpinner from '../LoadingSpinner';
 import SortBy from '../SortBy';
-import ShowFavoritesButton from './ShowFavoritesButton';
-import ShowSubscribedButton from './ShowSubscribedButton';
+import ShowFavoritesButton from './Buttons/ShowFavoritesButton';
+import ShowSubscribedButton from './Buttons/ShowSubscribedButton';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const RecipiesView = () => {
@@ -19,7 +19,6 @@ const RecipiesView = () => {
     const [favorites, setFavorites] = useState(false);
     const [subscribed, setSubscribed] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const [previousLength, setPreviousLength] = useState(0);
 
     useEffect(() => {
         dispatch(getAllRecipies(query, favorites, subscribed));
@@ -28,8 +27,7 @@ const RecipiesView = () => {
 
     const fetchMoreData = async () => {
         await dispatch(getAllRecipies(query, favorites, subscribed, recipies.length))
-        if (recipies.length % 5 === 0 && recipies.length === previousLength) {
-            setPreviousLength(recipies.length)
+        if (recipies.length % 5 === 0) {
             setHasMore(true)
         } else {
             setHasMore(false)
