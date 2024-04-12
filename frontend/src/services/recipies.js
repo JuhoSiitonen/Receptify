@@ -58,6 +58,11 @@ const getSingleRecipy = async (id) => {
   return response.data
 }
 
+const getAllIngredients = async () => {
+  const response = await axios.get(`${baseUrl}/ingredients`)
+  return response.data
+}
+
 
 export default { 
   getAll, 
@@ -68,5 +73,6 @@ export default {
   deleteRecipy, 
   search, 
   getUserRecipies,
-  getSingleRecipy
+  getSingleRecipy,
+  getAllIngredients
  }

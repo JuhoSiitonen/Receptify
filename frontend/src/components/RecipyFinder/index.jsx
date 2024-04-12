@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { recipySearch } from '../../reducers/recipyReducer'
+import recipyService from '../../services/recipies'
 import SingleRecipy from '../RecipiesView/SingleRecipy'
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import './RecipyFinder.css'
 
 const RecipyFinder = () => {
@@ -10,6 +12,15 @@ const RecipyFinder = () => {
     const [ingredient, setIngredient] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [recipies, setRecipies] = useState([])
+    const [allIngredients, setAllIngredients] = useState([])
+
+    useEffect(() => {
+        const fetchAllIngredients = async () => {
+            let results = await recipyService.getAllIngredients()
+            setAllIngredients(results)
+        }
+        fetchAllIngredients()
+    } , [])
 
     useEffect(() => {
         const fetchIngredients = async () => {
@@ -19,23 +30,17 @@ const RecipyFinder = () => {
         fetchIngredients()
     }, [ingredients])
 
-    const handleIngredientChange = (event) => {
-        setIngredient(event.target.value)
+    const handleIngredientChange = (query) => {
+        setIngredient(query)
     }
 
-    const addIngredient = (event) => {
-        event.preventDefault()
-        setIngredients(ingredients.concat(ingredient))
+    const addIngredient = (ingredient) => {
+        setIngredients(ingredients.concat(ingredient.name))
         setIngredient('')
     }
 
     const removeIngredient = (ingredient) => {
         setIngredients(ingredients.filter(i => i !== ingredient))
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(ingredients)
     }
 
     const matches = (recipy) => {
@@ -49,10 +54,12 @@ const RecipyFinder = () => {
         <div>
           <div className="recipy-finder-container">
             <h2>Find recipies based on ingredients</h2>
-            <form className="recipy-finder-form" onSubmit={handleSubmit}>
-                <input type="text" value={ingredient} onChange={handleIngredientChange} />
-                <button type="submit" onClick={addIngredient}>Add ingredient</button>
-            </form>
+            <ReactSearchAutocomplete
+            items={allIngredients}
+            onSearch={handleIngredientChange}
+            onSelect={addIngredient}
+            autoFocus
+          />
             <ul className="recipy-finder-list">
                 {ingredients.map(ingredient => (
                     <li key={ingredient}>
