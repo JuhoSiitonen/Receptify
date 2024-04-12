@@ -22,6 +22,11 @@ const findAllIngredients = async (req, res) => {
     return foundIngredients;
 }
 
+const getAllIngredients = async () => {
+    const ingredients = await Ingredient.findAll();
+    return ingredients;
+}
+
 const createRecipyIngredient = async (ingredientId, recipyId, amount, unit) => {
     let recipyIngredient = await RecipyIngredient.create({
         amount,
@@ -78,6 +83,7 @@ const destroySingleIngredient = async (recipyId, ingredientId) => {
 module.exports = {
     checkAndCreateIngredients,
     findAllIngredients,
+    getAllIngredients,
     createRecipyIngredient,
     updateRecipyIngredient,
     findRecipyIngredients,

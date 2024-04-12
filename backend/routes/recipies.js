@@ -9,7 +9,8 @@ const {
   updateRecipy,
   findRecipy,
   getUsersRecipies,
-  getSingleRecipy
+  getSingleRecipy,
+  getIngredients
 } = require('../controllers/recipies')
 
 recipyRouter
@@ -24,6 +25,8 @@ recipyRouter.get("/subscriptions", sessionChecker, getSubscribed);
 recipyRouter.post("/search", sessionChecker, findRecipy);
 
 recipyRouter.get("/user", sessionChecker, getUsersRecipies);
+
+recipyRouter.get("/ingredients", sessionChecker, getIngredients);
 
 recipyRouter
   .route("/:id")

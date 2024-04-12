@@ -8,6 +8,7 @@ const {
     checkAndCreateIngredients,
     createRecipyIngredient,
     findAllIngredients,
+    getAllIngredients,
     findRecipiesAccordingToIngredients,
     findRecipyIngredients,
     findSingleRecipyIngredient,
@@ -263,6 +264,17 @@ const getSingleRecipy = async (req, res) => {
       }
 }
 
+const getIngredients = async (req, res) => {
+    try {
+        const ingredients = await getAllIngredients(req, res);
+    
+        return res.status(200).json(ingredients);
+      } catch (error) {
+        console.error('Error fetching ingredients:', error);
+        return res.status(500).end();
+      }
+}
+
 module.exports = {
     getRecipies,
     getFavorites,
@@ -272,5 +284,6 @@ module.exports = {
     updateRecipy,
     findRecipy,
     getUsersRecipies,
-    getSingleRecipy
+    getSingleRecipy,
+    getIngredients
 }
