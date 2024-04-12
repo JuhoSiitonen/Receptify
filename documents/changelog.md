@@ -289,4 +289,5 @@
     - Added a function to RecipyFinder to tell user how many ingredient matches each found recipy has.
     - Notifications component fixed under Receptify header so it can be seen even when scrolling down.
     - fixed bug in combinedShoppinglist to correctly show combined items amounts and units.
-    
+- 12.4 :
+    - Added ReactSearchAutocomplete to dependecies and implemented to RecipyFinder component. 
