@@ -80,5 +80,6 @@ Month total: 43h
 - 2h 9.4: Infinite scroll bug fixes and implementation to viewing one users recipies.
 - 2h 10.4: Refactoring, RecipyFinder function to show user ingredient matches, combinedShoppinglist correct units and amounts.
 - 1h 12.4: Autocomplete search implemented in RecipyFinder.
+- 1h 13.4: New migration for new columns about favorite amount and subscriber amount data. Implemented in backend and frontend. 
 
-Total hours: 158h
+Total hours: 159h
