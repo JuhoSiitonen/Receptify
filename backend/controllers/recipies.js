@@ -147,6 +147,10 @@ const deleteRecipy = async (req, res) => {
           return res.status(404).json({ error: 'Recipe not found' });
         }
 
+        if (recipe.userId !== req.session.userId) {
+          return res.status(403).json({ error: 'Unauthorized' });
+        }
+        
         const deletion = await deleteSingleRecipy(id);
     
         return res.status(204).end();
