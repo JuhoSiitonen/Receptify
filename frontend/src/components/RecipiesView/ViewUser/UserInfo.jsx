@@ -13,6 +13,8 @@ const UserInfo = ({ userInfo }) => {
         <div>
             <h2>{userInfo.username}</h2>
             <p>{userInfo.about}</p>
+            <p>{userInfo.subscribers} subscribers</p>
+            <p>{userInfo.numberOfRecipes} recipies posted</p>
         </div>
     )
 }
