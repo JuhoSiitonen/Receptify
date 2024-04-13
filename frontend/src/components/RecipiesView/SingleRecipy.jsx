@@ -19,6 +19,9 @@ const SingleRecipy = ({ recipy, user }) => {
     }
 
     const calculateStars = (rating) => {
+      if (rating === 'No ratings yet') {
+        return [<span key={i} role="img" aria-label="star">✰</span>];
+      }
       const stars = [];
       for (let i = 0; i < Math.floor(rating); i++) {
           stars.push(<span key={i} role="img" aria-label="star">⭐</span>);
@@ -43,7 +46,7 @@ const SingleRecipy = ({ recipy, user }) => {
             <></> 
             }
             <h2>{recipy.title}</h2>
-            <h3>Cooking time {formattedTime}</h3>
+            <h3>Cooking time {formattedTime} ⏳</h3>
             {showDetails && (
             <div className='single-recipe-container'>
               <div className='single-recipe-left'>
@@ -72,10 +75,10 @@ const SingleRecipy = ({ recipy, user }) => {
               </div>
             </div>
             )}
-              <h3>Created by: {recipy.owner.username}</h3>
+              <h3>Created by: <b>{recipy.owner.username}</b></h3>
             </div>
             <h3>
-              Rating: {calculateStars(averageRating)}
+              Rating: {calculateStars(averageRating)}  ({recipy.favorites}) times favorited 💖
             </h3>
             {showDetails && (
             <div >

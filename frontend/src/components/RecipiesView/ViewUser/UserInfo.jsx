@@ -11,10 +11,10 @@ const UserInfo = ({ userInfo }) => {
 
     return (
         <div>
-            <h2>{userInfo.username}</h2>
+            <h2><b>{userInfo.username}</b></h2>
             <p>{userInfo.about}</p>
             <p>{userInfo.subscribers} subscribers</p>
-            <p>{userInfo.numberOfRecipes} recipies posted</p>
+            <p>{userInfo.numberOfRecipes} recipies posted 😊</p>
         </div>
     )
 }
