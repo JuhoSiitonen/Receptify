@@ -1,7 +1,4 @@
-const nodemailer = require('nodemailer');
-const bcrypt = require("bcrypt");
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription, Favorite } = require("../models");
-const { EMAIL, EMAIL_PASSWORD } = require("../utils/config");
+const { User, Subscription, } = require("../models");
 
 
 const createSubscription = async (subscriberId, publisherId) => {
@@ -9,6 +6,7 @@ const createSubscription = async (subscriberId, publisherId) => {
       subscriberId,
       publisherId,
     });
+    await User.increment('subscribers', { where: { id: publisherId } });
     return success;
 }
 
@@ -16,6 +14,7 @@ const destroySubscription = async (subscriberId, publisherId) => {
     const success = await Subscription.destroy({ 
       where: { subscriberId, publisherId },
     });
+    await User.decrement('subscribers', { where: { id: publisherId } });
     return success;
 }
 

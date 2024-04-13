@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Subscription, Favorite, Rating, Comment } = require("../models");
+const { Recipy, User, Ingredient, RecipyIngredient, Category, RecipyCategory, Favorite, Rating, Comment } = require("../models");
 
 const findSingleRecipyById = async (id) => {
     const recipy = await Recipy.findByPk(id);
@@ -92,6 +92,7 @@ const createNewRecipy = async (req, res) => {
         cookingTime,
         pictureUuid
     });
+    await User.increment('number_of_recipes', { where: { id: req.session.userId } });
     return recipe;
 }
 
@@ -129,6 +130,7 @@ const deleteSingleRecipy = async (id) => {
     await Comment.destroy({ where: { recipyId: id } });
     await Favorite.destroy({ where: { recipyId: id } });
     const success = await Recipy.destroy({ where: { id } });
+    await User.decrement('number_of_recipes', { where: { id: req.session.userId } });
     return success;
 }
 
