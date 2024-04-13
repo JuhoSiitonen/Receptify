@@ -150,7 +150,7 @@ const deleteRecipy = async (req, res) => {
         if (recipe.userId !== req.session.userId) {
           return res.status(403).json({ error: 'Unauthorized' });
         }
-        
+
         const deletion = await deleteSingleRecipy(id);
     
         return res.status(204).end();
@@ -163,7 +163,7 @@ const deleteRecipy = async (req, res) => {
 const updateRecipy = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, instructions, date, visible, ingredients, categories, pictureUuid, cookingTime } = req.body;
+        const { ingredients, categories } = req.body;
     
         const recipe = await findSingleRecipyById(id);
         if (!recipe) {
