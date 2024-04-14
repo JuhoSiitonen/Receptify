@@ -27,6 +27,7 @@ const UploaderWidget = ({ files, onChange}) => {
         imagesOnly
         previewStep='true'
         onFileSelect={handleChange}
+        tabs='file url facebook gdrive instagram dropbox'
         />
     <div className='preview'>
         {uploadedFiles.map((file) => (
