@@ -28,11 +28,30 @@ const recipySlice = createSlice({
             const { id, newRating } = action.payload
             const recipy = state.find(r => r.id === id)
             recipy.averageRating = newRating
-        }
+        },
+        incrementFavorites(state, action) {
+            const { id } = action.payload
+            const recipy = state.find(r => r.id === id)
+            recipy.favorites += 1
+        },
+        decrementFavorites(state, action) {
+            const { id } = action.payload
+            const recipy = state.find(r => r.id === id)
+            recipy.favorites -= 1
+        },
     },
 })
 
-export const { addNewRecipy, setRecipies, updateExistingRecipy, removeRecipy, updateRecipyRating, fetchMoreRecipies } = recipySlice.actions
+export const { 
+    addNewRecipy, 
+    setRecipies, 
+    updateExistingRecipy, 
+    removeRecipy, 
+    updateRecipyRating, 
+    fetchMoreRecipies,
+    incrementFavorites,
+    decrementFavorites
+ } = recipySlice.actions
 
 export const createRecipy = (recipy) => {
     return async dispatch => {

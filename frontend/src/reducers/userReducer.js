@@ -3,7 +3,7 @@ import userService from '../services/users'
 import loginService from '../services/login'
 import ratingService from '../services/rating'
 import { addNotification } from './notificationReducer'
-import { updateRating } from './recipyReducer'
+import { updateRating, incrementFavorites, decrementFavorites } from './recipyReducer'
 
 const userSlice = createSlice({
     name: 'user',
@@ -184,6 +184,7 @@ export const addFavorite = (id) => {
             const newFavorite = await userService.addFavorite(id)
             console.log('newFavorite:', newFavorite)
             dispatch(addNewFavorite(newFavorite))
+            dispatch(incrementFavorites(id))
             dispatch(addNotification({
                 message: 'Favorite added', 
                 error: false}));
@@ -202,6 +203,7 @@ export const deleteFavorite = (id) => {
         try {
             await userService.deleteFavorite(id)
             dispatch(deleteFavorites(id))
+            dispatch(decrementFavorites(id))
             dispatch(addNotification({
                 message: 'Favorite deleted', 
                 error: false}));
