@@ -39,6 +39,14 @@ const UserPage = () => {
                     <Link to={`/recipes/${recipy.id}`}>{recipy.title}</Link>  
                 </li>)}
             </ul>
+            <h2>Users subscribed to:</h2>
+            <ul>
+                {user.subscriptions.map(subscription =>
+                <li key={subscription.id}>
+                    <Link to={`/users/${subscription.id}`}>{subscription.username}</Link>
+                </li>
+                )}
+            </ul>
         </div>
     )}
 
