@@ -143,6 +143,8 @@ const getSession = async (req, res) => {
             shoppinglist: JSON.parse(sess.shoppinglist),
             email: sess.email,
             about: sess.about,
+            subscribers: sess.subscribers,
+            numberOfRecipes: sess.numberOfRecipes,
           }
           return res.status(200).json(currentUser);
         }

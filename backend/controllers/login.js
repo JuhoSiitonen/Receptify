@@ -32,6 +32,8 @@ const login = async (req, res) => {
         sess.shoppinglist = JSON.stringify(shoppinglist);
         sess.email = email;
         sess.about = about;
+        sess.subscribers = user.subscribers;
+        sess.numberOfRecipes = user.numberOfRecipes;
         const returnUser = { 
             id: user.id, 
             username: user.username, 
@@ -42,6 +44,8 @@ const login = async (req, res) => {
             shoppinglist: shoppinglist,
             email: email,
             about: about,
+            subscribers: user.subscribers,
+            numberOfRecipes: user.numberOfRecipes,
          };
         return res.status(200).json(returnUser);
     }
