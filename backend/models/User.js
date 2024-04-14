@@ -34,6 +34,16 @@ User.init({
     type: DataTypes.TEXT,
     allowNull: true,
   },
+  subscribers: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
+  numberOfRecipes: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
 }, {
     sequelize,
     underscored: true,
