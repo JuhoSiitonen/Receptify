@@ -28,6 +28,8 @@ const UserPage = () => {
                 <div>
                     <h2>About me:</h2>
                     <p>{user.about}</p>
+                    <p>{user.subscribers} subscribers</p>
+                    <p>{user.numberOfRecipes} recipies posted 😊</p>
                     <EditUserinfo user={user} />
                 </div>
             <h2>Your recipies:</h2>
