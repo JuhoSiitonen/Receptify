@@ -81,5 +81,6 @@ Month total: 43h
 - 2h 10.4: Refactoring, RecipyFinder function to show user ingredient matches, combinedShoppinglist correct units and amounts.
 - 1h 12.4: Autocomplete search implemented in RecipyFinder.
 - 1h 13.4: New migration for new columns about favorite amount and subscriber amount data. Implemented in backend and frontend. 
+- 1h 14.4: Uploadcare widget fix, new user db column info in state, session and frontend. 
 
-Total hours: 159h
+Total hours: 160h

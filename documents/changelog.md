@@ -296,3 +296,10 @@
     - Recipies table column for number favorited by
     - Implemented these columns with backend service methods to increment and decrement them.
     - Used these column infos in ViewUser component and in SingleRecipy component. 
+- 14.4 :
+    - Fixed Uploadcare widget image sources.
+    - Session and state hold users subscriber and added recipy numbers.
+    - Mypage shows user subscriber and added recipy numbers.
+    - Reducer functions to increment and decrement favorite amounts for a recipe.
+    - List of subscribed to users in Mypage with links to users page.
+
