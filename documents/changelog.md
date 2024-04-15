@@ -302,4 +302,7 @@
     - Mypage shows user subscriber and added recipy numbers.
     - Reducer functions to increment and decrement favorite amounts for a recipe.
     - List of subscribed to users in Mypage with links to users page.
+- 15.4 :
+    - Moved SingleRecipy and its css to own folder
+    - Modified SingleRecipy clickarea
 
