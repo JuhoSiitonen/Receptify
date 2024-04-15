@@ -29,9 +29,9 @@ const UploaderWidget = ({ files, onChange}) => {
         onFileSelect={handleChange}
         tabs='file url facebook gdrive instagram dropbox'
         />
-    <div className='preview'>
+    <div>
         {uploadedFiles.map((file) => (
-          <div key={file.uuid} >
+          <div key={file.uuid}>
             <img
               key={file.uuid}
               src={`${baseUrl}/${file.uuid}/-/preview/-/resize/x200/`}
