@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import SingleRecipy from "./SingleRecipy"
-import './SingleRecipy.css'
+import SingleRecipy from "./SingleRecipy/SingleRecipy"
+import './SingleRecipy/SingleRecipy.css'
 
 const Recipies = (props) => {
     const recipies = props.recipies

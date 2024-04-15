@@ -3,9 +3,9 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import recipyService from "../../services/recipies"
 import LoadingSpinner from "../LoadingSpinner"
-import SingleRecipy from "./SingleRecipy"
+import SingleRecipy from "./SingleRecipy/SingleRecipy"
 import UpdateRecipy from "./UpdateRecipy"
-import './SingleRecipy.css'
+import './SingleRecipy/SingleRecipy.css'
 
 const ChosenRecipy = () => {
     const [recipy, setRecipy] = useState(null)
