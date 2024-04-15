@@ -43,10 +43,10 @@
     align-items: center; 
     justify-content: space-between;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-width: 0.1em;
-    border-radius: 5px;
+    border: 1px solid #e1dfdf;
+    padding: 5px;
+    border-width: 0.01em;
+    border-radius: 10px;
 }
 
 .recipy-finder-list li button {
