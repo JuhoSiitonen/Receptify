@@ -5,8 +5,8 @@ const createNewFavorite = async (userId, recipyId) => {
         userId,
         recipyId,
       });
-      await Recipy.increment('favorites', { where: { id: recipyId } });
-      return success;
+    await Recipy.increment('favorites', { where: { id: recipyId } });
+    return success;
 }
 
 const destroyFavorite = async (userId, recipyId) => {
@@ -16,8 +16,8 @@ const destroyFavorite = async (userId, recipyId) => {
           recipyId,
         }
       });
-      await Recipy.decrement('favorites', { where: { id: recipyId } });
-      return success;
+    await Recipy.decrement('favorites', { where: { id: recipyId } });
+    return success;
 }
 
 module.exports = {

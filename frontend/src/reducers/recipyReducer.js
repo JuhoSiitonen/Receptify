@@ -32,12 +32,16 @@ const recipySlice = createSlice({
         incrementFavorites(state, action) {
             const { id } = action.payload
             const recipy = state.find(r => r.id === id)
-            recipy.favorites += 1
+            console.log(id)
+            let oldFavorites = recipy.favorites
+            recipy.favorites = oldFavorites + 1
         },
         decrementFavorites(state, action) {
             const { id } = action.payload
+            console.log(id)
             const recipy = state.find(r => r.id === id)
-            recipy.favorites -= 1
+            let oldFavorites = recipy.favorites
+            recipy.favorites = oldFavorites - 1
         },
     },
 })
@@ -152,6 +156,26 @@ export const recipySearch = (ingredients) => {
             const recipies = await recipyService.search(ingredients)
             dispatch(setRecipies(recipies))
             return recipies
+        } catch (error) {
+            throw error
+        }
+    }
+}
+
+export const addAFavorite = (id) => {
+    return async dispatch => {
+        try {
+            dispatch(incrementFavorites({id}))
+        } catch (error) {
+            throw error
+        }
+    }
+}
+
+export const removeAFavorite = (id) => {
+    return async dispatch => {
+        try {
+            dispatch(decrementFavorites({id}))
         } catch (error) {
             throw error
         }
