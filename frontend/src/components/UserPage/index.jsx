@@ -47,6 +47,14 @@ const UserPage = () => {
                 </li>
                 )}
             </ul>
+            <h2>Favorited recipies</h2>
+            <ul>
+                {user.userFavorites.map(favorite =>
+                <li key={favorite.id}>
+                    <Link to={`/recipes/${favorite.id}`}>{favorite.title}</Link>
+                </li>
+                )}
+            </ul>
         </div>
     )}
 
