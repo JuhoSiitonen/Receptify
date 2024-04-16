@@ -41,8 +41,8 @@ const UserPage = () => {
                     <h2>Your recipies:</h2>
                     <ul>
                     {recipies.map(recipy => 
-                        <li key={recipy.id}>
-                            <Link to={`/recipes/${recipy.id}`}>{recipy.title}</Link>  
+                        <li key={recipy.id} onClick={()=>{navigate(`/recipes/${recipy.id}`)}}>
+                            {recipy.title} 
                         </li>
                     )}
                     </ul>  
@@ -54,7 +54,7 @@ const UserPage = () => {
                     <ul>
                     {user.subscriptions.map(subscription =>
                         <li key={subscription.id} onClick={()=>{navigate(`/users/${subscription.id}/view`)}}>
-                        <Link to={`/users/${subscription.id}/view`}>{subscription.username}</Link>
+                        {subscription.username}
                         </li>
                     )}
                     </ul>
@@ -65,8 +65,8 @@ const UserPage = () => {
                     <h2>Favorited recipies:</h2>
                     <ul>
                         {user.userFavorites.map(favorite =>
-                        <li key={favorite.id}>
-                            <Link to={`/recipes/${favorite.id}`}>{favorite.title}</Link>
+                        <li key={favorite.id} onClick={()=>{navigate(`/recipes/${favorite.id}`)}}>
+                            {favorite.title}
                         </li>
                         )}
                     </ul>
