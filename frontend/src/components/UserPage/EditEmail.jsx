@@ -8,6 +8,10 @@ const EditEmail = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if (!email) {
+            alert('Please fill in email field')
+            return
+        }
         dispatch(editEmail({email}))
     }
 
