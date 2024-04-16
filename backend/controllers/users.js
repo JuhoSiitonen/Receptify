@@ -183,6 +183,10 @@ const addToShoppinglist = async (req, res) => {
 const removeFromShoppinglist = async (req, res) => {
     try {
         const { id } = req.params;
+        if (id === 'all') {
+          req.session.shoppinglist = JSON.stringify([]);
+          return res.status(204).end();
+        }
         let shoppinglist = JSON.parse(req.session.shoppinglist);
         if (!shoppinglist.filter(i => i.id === id)) {
           return res.status(404).json({ error: 'Item not found in shoppinglist' });
