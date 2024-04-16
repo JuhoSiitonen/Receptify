@@ -64,7 +64,7 @@ const RecipyFinder = () => {
                 {ingredients.map(ingredient => (
                     <li key={ingredient}>
                         {ingredient}
-                        <button onClick={() => removeIngredient(ingredient)}>Remove</button>
+                        <button onClick={() => removeIngredient(ingredient)}> ❌ </button>
                     </li>
                 ))}
             </ul>

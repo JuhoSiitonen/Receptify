@@ -54,10 +54,10 @@
 
 .recipy-finder-list li button {
     padding: 5px 10px;
-    background-color: #dc3545;
-    color: #fff;
     border: none;
-    border-radius: 16px;
+    background-color: white;   
+}
+
+.recipy-finder-list li button:hover {
     cursor: pointer;
-    margin-left: 10px;
 }
