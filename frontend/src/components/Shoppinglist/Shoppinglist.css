@@ -58,6 +58,15 @@
     cursor: pointer;
 }
 
+.shoppinglist-container button[type="remove"] {
+    padding: 4px 10px;
+    margin-left: 5px;
+    color: none;
+    background-color: #f9f9f9;
+    border: none;
+    cursor: pointer;
+}
+
 .shoppinglist-container button[type="delete"]:hover {
     background-color: #b02936;
 }

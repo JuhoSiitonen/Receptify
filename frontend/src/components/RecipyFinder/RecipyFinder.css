@@ -35,6 +35,7 @@
 .recipy-finder-list {
     display: flex;
     width: fit-content;
+    flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
 }

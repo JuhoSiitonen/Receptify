@@ -72,7 +72,7 @@ const Shoppinglist = () => {
                 {combinedShoppingList.map(item => (    
                     <li key={item.id}>
                         {item.amount} {item.unit} of {item.ingredient} {item.recipy}
-                        <button type='delete' onClick={() => handleDelete(item.id)}>Delete</button>
+                        <button type='remove' onClick={() => handleDelete(item.id)}>❌</button>
                     </li>
                 ))}
             </ul>
