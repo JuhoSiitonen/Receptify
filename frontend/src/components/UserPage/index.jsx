@@ -29,7 +29,9 @@ const UserPage = () => {
                     <h2>About me:</h2>
                     {user.about === '' ? <p>No information provided</p> : <p>{user.about}</p>}
                     <p>{user.subscribers} subscribers</p>
-                    <p>{user.numberOfRecipes} recipies posted 😊</p>
+                    {user.numberOfRecipes === 0 ? 
+                    <p>No recipies posted ☹</p> : 
+                    <p>{user.numberOfRecipes} recipies posted 😊</p> }
                     <EditUserinfo user={user} />
                 </div>
             {user.numberOfRecipes === 0 ? <></> : (

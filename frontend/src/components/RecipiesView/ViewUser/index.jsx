@@ -57,11 +57,8 @@ const ViewUser = () => {
                 <UserInfo userInfo={userInfo}/>
                 {user.id !== userId && (userSubscribe())}
             </div>
-            <div>
-                {user.id === userId && <h2>Your recipies:</h2>}
-                {user.id !== userId && <h2>Recipies by {userInfo.username}:</h2>}
-                <div className="action-button">
-                    <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true}>
+            <div className="action-button">
+                <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true} center={true}>
                     <InfiniteScroll
                       dataLength={recipies.length}
                       next={fetchMoreData}
@@ -75,8 +72,7 @@ const ViewUser = () => {
                     >
                         <Recipies recipies={recipies} inViewUser={true}/>
                     </InfiniteScroll>
-                    </Togglable>
-                </div>
+                </Togglable>
             </div>
         </div>
     )
