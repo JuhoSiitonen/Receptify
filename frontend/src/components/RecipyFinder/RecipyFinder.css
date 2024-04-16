@@ -33,7 +33,7 @@
 }
 
 .recipy-finder-list {
-    width: 60%;
+    width: 40%;
     list-style-type: none;
     padding: 0;
 }
@@ -43,12 +43,13 @@
     align-items: center; 
     justify-content: space-between;
     margin-bottom: 10px;
-    border: 1px solid #e1dfdf;
+    border: 1px solid #dfe1e5;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     border-width: 0.01em;
     border-radius: 18px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
 }
 
 .recipy-finder-list li button {
@@ -56,7 +57,7 @@
     background-color: #dc3545;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 16px;
     cursor: pointer;
     margin-left: 10px;
 }
