@@ -305,4 +305,10 @@
 - 15.4 :
     - Moved SingleRecipy and its css to own folder
     - Modified SingleRecipy clickarea
+    - List of users favorited recipies in UserPage.
+- 16.4 :
+    - More coherent styles in UserView, ViewUser, SingleRecipy, Shoppinglist
+    - Added sorting option "most favorited" to recipiesview.
+    - Backend method update, reducer update and a button to remove all items from shoppinglist.
+
 
