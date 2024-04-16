@@ -27,7 +27,6 @@ const AddRecipeForm = ({
     handleSubmit
 }) => {
 
-
     return (
         <form onSubmit={handleSubmit}>
                 <div>

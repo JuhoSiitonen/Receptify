@@ -33,6 +33,10 @@ const AddRecipe = () => {
       };
 
     const addIncredient = () => {
+        if (!ingredient.name || !ingredient.amount) {
+            alert('Please fill in ingredient name and amount fields');
+            return;
+        }
         setIngredients([...ingredients, ingredient]);
         setIngredient({ name: '', amount: '', unit: ''});
     };
@@ -57,6 +61,11 @@ const AddRecipe = () => {
             setError('Invalid time format');
             return;
           }
+
+        if (title === '' || description === '' || instructions === '' || ingredients.length === 0 || categories.length === 0) {
+            alert('Please fill in all fields');
+            return;
+        }
         
         try {
             const response = await dispatch(createRecipy({
