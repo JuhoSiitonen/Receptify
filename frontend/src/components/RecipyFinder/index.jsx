@@ -73,7 +73,6 @@ const RecipyFinder = () => {
             {!recipies && <></>}
             {recipies.length > 0 && (
             <div>
-              <h2>Recipies</h2>
                 {recipies.map(recipy => (
                   <div className="single-recipe">
                     {matches(recipy) > 0 && <p><b> Ingredient matches: {matches(recipy)}</b></p>}

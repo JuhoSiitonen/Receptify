@@ -1,5 +1,5 @@
 .recipy-finder-container {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     padding: 20px;
 }
@@ -45,8 +45,10 @@
     margin-bottom: 10px;
     border: 1px solid #e1dfdf;
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-width: 0.01em;
-    border-radius: 10px;
+    border-radius: 18px;
 }
 
 .recipy-finder-list li button {
