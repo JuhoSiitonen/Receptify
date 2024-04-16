@@ -247,7 +247,9 @@ const getUsersRecipies = async (req, res) => {
     try {
         const whereClause = { userId: req.session.userId };
         let orderClause = [];
-        const recipes = await findAllRecipies(whereClause, orderClause);
+        let length = 0
+        let limit = 999
+        const recipes = await findAllRecipies(whereClause, orderClause, length, limit);
     
         return res.status(200).json(recipes);
       } catch (error) {
