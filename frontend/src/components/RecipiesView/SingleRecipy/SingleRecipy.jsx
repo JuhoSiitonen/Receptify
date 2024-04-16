@@ -46,7 +46,7 @@ const SingleRecipy = ({ recipy, user }) => {
             <></> 
             }
             <h2>{recipy.title}</h2>
-            <h3>Cooking time {formattedTime} ⏳</h3>
+            <h3>Cooking time {formattedTime} 🕒</h3>
             {showDetails && (
             <div className='single-recipe-container'>
               <div className='single-recipe-left'>
