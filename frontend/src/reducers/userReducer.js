@@ -47,6 +47,9 @@ const userSlice = createSlice({
             const id = action.payload
             state.shoppinglist = state.shoppinglist.filter(i => i.id !== id)
         },
+        removeAllShoppinglistItems(state, action) {
+            state.shoppinglist = []
+        },
         editAboutMeInfo(state, action) {
             state.about = action.payload.aboutMe
         },
@@ -68,7 +71,8 @@ export const {
     addToShoppinglistItem,
     removeShoppinglistItem,
     editAboutMeInfo,
-    editEmailAddress
+    editEmailAddress,
+    removeAllShoppinglistItems
  } = userSlice.actions
 
 export const login = (credentials) => {
@@ -185,7 +189,6 @@ export const addFavorite = (id) => {
             console.log('newFavorite:', newFavorite)
             dispatch(addNewFavorite(newFavorite))
             dispatch(addAFavorite(id))
-            //dispatch(incrementFavorites(id))
             dispatch(addNotification({
                 message: 'Favorite added', 
                 error: false}));
@@ -205,7 +208,6 @@ export const deleteFavorite = (id) => {
             await userService.deleteFavorite(id)
             dispatch(deleteFavorites(id))
             dispatch(removeAFavorite(id))
-            //dispatch(decrementFavorites(id))
             dispatch(addNotification({
                 message: 'Favorite deleted', 
                 error: false}));
@@ -269,7 +271,11 @@ export const deleteFromShoppinglist = (id) => {
     return async dispatch => {
         try {
             await userService.deleteShoppinglistItem(id)
-            dispatch(removeShoppinglistItem(id))
+            if (id === 'all') {
+                dispatch(removeAllShoppinglistItems())
+            }else {
+                dispatch(removeShoppinglistItem(id))
+            }
             dispatch(addNotification({ message: 'Removed from shoppinglist!', error: false }))
         } catch (error) {
             dispatch(addNotification({ message: 'Could not remove from shoppinglist!', error: true }))

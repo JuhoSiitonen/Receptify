@@ -56,6 +56,10 @@ const Shoppinglist = () => {
         )
     }
 
+    const handleDeleteAll = () => {
+        dispatch(deleteFromShoppinglist('all'))
+    }
+
     return (
         <div className='shoppinglist-container'>
             <h1>Shoppinglist</h1>
@@ -69,6 +73,7 @@ const Shoppinglist = () => {
                 ))}
             </ul>
             <div>
+                <button type='delete' onClick={handleDeleteAll}>Delete all</button>
                 {sendToOther && (emailInput())}
                 {!sendToOther && sendToOtherEmail()}
                 {user.email && sendToSelf()}
