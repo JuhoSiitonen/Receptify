@@ -26,6 +26,10 @@ const Shoppinglist = () => {
 
     const handleSendShoppinglist = (e) => {
         e.preventDefault();
+        if (email === '' && !user.email) {
+            alert('Please enter an email')
+            return
+        }
         const info = {
             email: email,
             items: combinedShoppingList

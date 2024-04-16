@@ -12,6 +12,11 @@ const ItemAddForm = () => {
     const handleAddItem = (e) => {
         e.preventDefault();
 
+        if ( !ingredient || !amount ) {
+            alert('Please fill in all fields');
+            return;
+        }
+
         const item = {
             id: Math.floor(Math.random() * 10000000),
             ingredient,
