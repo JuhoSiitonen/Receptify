@@ -17,6 +17,7 @@ const SortBy = ({ onSort }) => {
         <option value="cookingTime">Cooking time</option>
         <option value="averageRating">Rating</option>
         <option value="createdAt">Created at</option>
+        <option value="favorites">Most Favorited</option>
       </select>
       <select
         value={sortValue}
