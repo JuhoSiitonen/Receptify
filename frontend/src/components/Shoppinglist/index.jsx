@@ -73,7 +73,8 @@ const Shoppinglist = () => {
                 ))}
             </ul>
             <div>
-                <button type='delete' onClick={handleDeleteAll}>Delete all</button>
+                {combinedShoppingList.length !== 0 && 
+                <button type='delete' onClick={handleDeleteAll}>Delete all</button>}
                 {sendToOther && (emailInput())}
                 {!sendToOther && sendToOtherEmail()}
                 {user.email && sendToSelf()}
