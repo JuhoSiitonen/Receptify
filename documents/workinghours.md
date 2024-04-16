@@ -82,6 +82,6 @@ Month total: 43h
 - 1h 12.4: Autocomplete search implemented in RecipyFinder.
 - 1h 13.4: New migration for new columns about favorite amount and subscriber amount data. Implemented in backend and frontend. 
 - 1h 14.4: Uploadcare widget fix, new user db column info in state, session and frontend. 
-- 2h 16.4: More coherent styles.
+- 3h 16.4: More coherent styles, user input validation. 
 
-Total hours: 162h
+Total hours: 163h

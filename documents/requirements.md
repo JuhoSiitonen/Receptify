@@ -73,3 +73,4 @@
 - Redis cache
 - Google artifact registry instead of Docker hub for images
 - Better unit testing for frontend
+- Shoppinglist via SMS or WhatsApp

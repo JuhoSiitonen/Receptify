@@ -307,8 +307,10 @@
     - Modified SingleRecipy clickarea
     - List of users favorited recipies in UserPage.
 - 16.4 :
-    - More coherent styles in UserView, ViewUser, SingleRecipy, Shoppinglist
+    - More coherent styles in UserView, ViewUser, SingleRecipy, Shoppinglist, RecipyFinder. 
     - Added sorting option "most favorited" to recipiesview.
     - Backend method update, reducer update and a button to remove all items from shoppinglist.
-
+    - User input validation in all pages.
+    - Changing delete buttons to crosses.
+    - UserPage lists styles.
 
