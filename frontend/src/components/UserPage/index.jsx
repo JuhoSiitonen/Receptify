@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import recipyService from '../../services/recipies'
 import LoadingSpinner from '../LoadingSpinner'
@@ -8,6 +9,7 @@ import './UserPage.css'
 
 const UserPage = () => {
     const [recipies, setRecipies] = useState([])
+    const navigate = useNavigate()
     const user = useSelector(state => state.user)
 
     useEffect(() => {
@@ -51,7 +53,7 @@ const UserPage = () => {
                     <h2>Users subscribed to:</h2>
                     <ul>
                     {user.subscriptions.map(subscription =>
-                        <li key={subscription.id}>
+                        <li key={subscription.id} onClick={()=>{navigate(`/users/${subscription.id}/view`)}}>
                         <Link to={`/users/${subscription.id}/view`}>{subscription.username}</Link>
                         </li>
                     )}
