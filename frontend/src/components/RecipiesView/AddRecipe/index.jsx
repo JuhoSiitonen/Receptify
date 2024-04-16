@@ -42,6 +42,10 @@ const AddRecipe = () => {
     };
 
     const addCategory = () => {
+        if (!category) {
+            alert('Please fill in category field');
+            return;
+        }
         setCategories(categories.concat(category))
         setCategory('')
     }

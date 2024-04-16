@@ -46,11 +46,19 @@ const UpdateForm = ({ recipy }) => {
       };
 
     const addIncredient = () => {
+        if (!ingredient.name || !ingredient.amount) {
+            alert('Please fill in ingredient name and amount fields');
+            return;
+        }
         setIngredients([...ingredients, ingredient]);
         setIngredient({ name: '', amount: '', unit: ''});
     };
 
     const addCategory = () => {
+        if (!category) {
+            alert('Please fill in category field');
+            return;
+        }
         setCategories([...categories, category])
         setCategory('')
     }
@@ -68,6 +76,11 @@ const UpdateForm = ({ recipy }) => {
 
         if (!isValidTimeFormat(cookingTime)) {
             setError('Invalid time format');
+            return;
+        }
+
+        if (title === '' || description === '' || instructions === '' || ingredients.length === 0 || categories.length === 0) {
+            alert('Please fill in all fields');
             return;
         }
 
