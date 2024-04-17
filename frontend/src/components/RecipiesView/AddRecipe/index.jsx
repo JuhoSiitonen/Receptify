@@ -15,7 +15,7 @@ const AddRecipe = () => {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
     const [photos, setPhotos] = useState("");
-    const [cookingTime, setCookingTime] = useState('00:00')
+    const [cookingTime, setCookingTime] = useState('')
     const [error, setError] = useState('')
 
     const user = useSelector(state => state.user)

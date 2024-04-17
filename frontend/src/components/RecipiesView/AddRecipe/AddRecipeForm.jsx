@@ -31,20 +31,21 @@ const AddRecipeForm = ({
         <form onSubmit={handleSubmit}>
                 <div>
                     <p>Recipy name:</p>
-                    <input value={title} onChange={({ target }) => setTitle(target.value)} />
+                    <input name="title" value={title} onChange={({ target }) => setTitle(target.value)} />
                 </div>
                 <div>
                     Cooking time: 
-                    <input id='cooking-time' value={cookingTime} onChange={handleCookingTimeChange} required />
+                    <input name="cookingTime" id='cooking-time' value={cookingTime} onChange={handleCookingTimeChange} required placeholder="00:00" />
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </div>
                 <p>Ingredients:</p>
                 <div className="ingredient-inputs">
-                    <input value={ingredient.name} onChange={({ target }) => setIngredient({ ...ingredient, name: target.value })}
+                    <input name="ingredient" value={ingredient.name} onChange={({ target }) => setIngredient({ ...ingredient, name: target.value })}
                      placeholder="Ingredient name" />
-                    <input value={ingredient.amount} onChange={({ target }) => setIngredient({ ...ingredient, amount: target.value })}
+                    <input name="amount" value={ingredient.amount} onChange={({ target }) => setIngredient({ ...ingredient, amount: target.value })}
                      placeholder="Amount" />
                      <select
+                        name="unit"
                         value={ingredient.unit}
                         onChange={({ target }) => setIngredient({ ...ingredient, unit: target.value })}
                     >
@@ -61,13 +62,14 @@ const AddRecipeForm = ({
                 {ingredients.map(ingredient => (
                     <li key={`${ingredient.name}-${ingredient.amount}`}>
                         {ingredient.amount} {ingredient.unit} of {ingredient.name}
-                        <button onClick={() => deleteIngredient(ingredient)} type="delete">delete</button>
+                        <button name="addIngredient" onClick={() => deleteIngredient(ingredient)} type="delete">delete</button>
                     </li>
                 ))}
                 </div>
                 <div>
                     Description:
                     <textarea 
+                      name="description"
                       value={description}
                       rows="3" cols="50" maxLength="1000"
                       onChange={({ target }) => setDescription(target.value)} />
@@ -75,14 +77,15 @@ const AddRecipeForm = ({
                 <div>
                     Instructions:
                     <textarea 
+                      name="instructions"
                       value={instructions}
                       rows="3" cols="50" maxLength="1000"
                       onChange={({ target }) => setInstructions(target.value)} />
                 </div>
                 <div>
                     <p>Category:</p>
-                    <input value={category} onChange={({ target }) => setCategory(target.value)} />
-                    <button onClick={addCategory} type="button">add</button>
+                    <input name="category" value={category} onChange={({ target }) => setCategory(target.value)} />
+                    <button name="addCategory" onClick={addCategory} type="button">add</button>
                 </div>
                 <div>
                     {categories.map(category => (

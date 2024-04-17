@@ -16,7 +16,7 @@ const DeleteButton = ({ recipy }) => {
 
     return (
         <div>
-            <button onClick={handleDelete}>Delete</button>
+            <button name='deleteRecipy' onClick={handleDelete}>Delete</button>
         </div>
     )
 }
