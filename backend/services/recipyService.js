@@ -124,7 +124,8 @@ const findFullSingleRecipyById = async (id) => {
     return returnRecipy;
 }
 
-const deleteSingleRecipy = async (id) => {
+const deleteSingleRecipy = async (req, res) => {
+    const { id } = req.params;
     await RecipyIngredient.destroy({ where: { recipyId: id } });
     await RecipyCategory.destroy({ where: { recipyId: id } });
     await Rating.destroy({ where: { recipyId: id } });

@@ -151,7 +151,7 @@ const deleteRecipy = async (req, res) => {
           return res.status(403).json({ error: 'Unauthorized' });
         }
 
-        const deletion = await deleteSingleRecipy(id);
+        const deletion = await deleteSingleRecipy(req, res);
     
         return res.status(204).end();
       } catch (error) {
