@@ -85,4 +85,4 @@ Month total: 43h
 - 3h 16.4: More coherent styles, user input validation. 
 - 2h 17.4: Cypress E2E pipeline testing.
 
-Total hours: 163h
+Total hours: 165h
