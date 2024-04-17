@@ -9,8 +9,9 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest --config jest.config.cjs",
-    "cypress:open": "cypress open"
-  },
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run"
+    },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@uploadcare/blocks": "0.32.0",
