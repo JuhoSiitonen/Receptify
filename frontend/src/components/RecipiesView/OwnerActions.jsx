@@ -9,7 +9,7 @@ const OwnerActions = ({ recipe, user }) => {
     return (
         <div className='user-actions'>
           <div className='action-button'>
-            <button onClick={() => navigate(`/recipes/${recipe.id}`)}>Edit</button>
+            <button name='edit' onClick={() => navigate(`/recipes/${recipe.id}`)}>Edit</button>
           </div>
           <div className='action-button'>
             <DeleteButton recipy={recipe} />
