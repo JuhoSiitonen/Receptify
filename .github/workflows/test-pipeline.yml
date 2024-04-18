@@ -60,4 +60,6 @@ jobs:
           command: npm run test:e2e
           start: npm run dev, npm run start:testserver
           wait-on: http://localhost:5173, http://localhost:3001/api/health
+        env:
+          REACT_APP_BACKEND_URL: http://localhost:3001
           
