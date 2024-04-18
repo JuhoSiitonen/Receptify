@@ -84,5 +84,6 @@ Month total: 43h
 - 1h 14.4: Uploadcare widget fix, new user db column info in state, session and frontend. 
 - 3h 16.4: More coherent styles, user input validation. 
 - 2h 17.4: Cypress E2E pipeline testing.
+- 1h 18.4: Cypress testing in pipeline. 
 
-Total hours: 165h
+Total hours: 166h

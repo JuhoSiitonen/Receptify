@@ -317,4 +317,7 @@
     - Updated testing pipeline to have Cypress E2E in it.
     - Updating Cypress E2E tests.
     - Adding names to certain html elements to better test in Cypress.
+- 18.4 :
+    - Cypress testing working in pipeline.
+    - More Cypress tests.
 
