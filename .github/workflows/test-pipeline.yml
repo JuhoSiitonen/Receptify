@@ -60,3 +60,4 @@ jobs:
           command: npm run test:e2e
           start: cd ../backend/ && npm run start:test
           wait-on: http://localhost:5173
+          working-directory: frontend
