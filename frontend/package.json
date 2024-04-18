@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "jest --config jest.config.cjs",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "start:testserver": "cd ../backend && npm run start:test"
     },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
