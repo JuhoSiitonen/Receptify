@@ -46,9 +46,7 @@ jobs:
         working-directory: backend  
 
       - name: Install Frontend Dependencies
-        run: |
-         npm install 
-         npm run dev &
+        run: npm install 
         working-directory: frontend
 
       - name: Run Backend Tests
@@ -58,8 +56,8 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
-          project: frontend
-          command: npm run test:e2e
-          start: npm run start:testserver
-          wait-on: http://localhost:5173
           working-directory: frontend
+          command: npm run test:e2e
+          start: npm run dev, npm run start:testserver
+          wait-on: http://localhost:5173, http://localhost:3001
+          
