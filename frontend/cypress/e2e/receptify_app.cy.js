@@ -24,6 +24,7 @@ describe('Signin and logout', () => {
     cy.get('input[name="password"]').type('password');
     cy.get('input[name="password2"]').type('password');
     cy.get('button[type="submit"]').click();
+    cy.wait(500)
     cy.contains('Welcome to Receptify!')
     cy.get('a[href="/logout"]').click();
     cy.contains('Login')
