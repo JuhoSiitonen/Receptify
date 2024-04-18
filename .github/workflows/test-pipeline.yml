@@ -50,7 +50,7 @@ jobs:
         working-directory: backend
 
       - name: Install Frontend Dependencies
-        run: npm install 
+        run: npm install && npm run dev &
         working-directory: frontend
 
       - name: e2e tests
