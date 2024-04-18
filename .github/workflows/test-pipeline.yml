@@ -45,15 +45,15 @@ jobs:
         run: npm install
         working-directory: backend  
 
-      - name: Run Backend Tests
-        run: npm run test
-        working-directory: backend
-
       - name: Install Frontend Dependencies
         run: |
          npm install 
          npm run dev &
         working-directory: frontend
+
+      - name: Run Backend Tests
+        run: npm run test
+        working-directory: backend
 
       - name: e2e tests
         uses: cypress-io/github-action@v5

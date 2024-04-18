@@ -11,7 +11,7 @@
     "test": "jest --config jest.config.cjs",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run",
-    "start:testserver": "cd ../backend && npm run start:test && cd ../frontend && npm run dev"
+    "start:testserver": "cd ../backend && npm run start:testserver"
     },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
