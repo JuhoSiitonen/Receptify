@@ -26,49 +26,64 @@
 
 Cypress.Commands.add('createUserAndLogin', function(username, password) {
     cy.visit('http://localhost:5173')
-    cy.get('a[href="/signup"]').click();
-    cy.get('input[name="username"]').type(username);
-    cy.get('input[name="password"]').type(password);
-    cy.get('input[name="password2"]').type(password);
+    let user = {
+        username,
+        password
+      }
+    cy.request('POST', 'http://localhost:3001/api/users', user)
+    cy.get('a[href="/login"]').click();
+    cy.get('#username').type(username);
+    cy.get('#password').type(password);
     cy.get('button[type="submit"]').click();
 })
 
-Cypress.Commands.add('createRecipy', function() {
-    cy.get('a[href="/recipes/new"]').click();
-    cy.get('input[name="title"]').type('test-title');
-    cy.get('input[name="cookingTime"]').type('01:00');
-    cy.get('input[name="ingredient"]').type('test-ingredient');
-    cy.get('input[name="amount"]').type('1');
-    cy.get('select[name="unit"]').select('g');
-    cy.get('.ingredient-inputs>button').click();
-    cy.get('textarea[name="description"]').type('test-description');
-    cy.get('textarea[name="instructions"]').type('test-instructions');
-    cy.get('input[name="category"]').type('test-category');
-    cy.get('button[name="addCategory"]').click();
-    cy.get('button[type="submit"]').click();
-})
 
-Cypress.Commands.add('createAnotherUserWithRecipy', function() {
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    cy.visit('http://localhost:5173')
-    cy.get('a[href="/signup"]').click();
-    cy.get('input[name="username"]').type('test-user2');
-    cy.get('input[name="password"]').type('password');
-    cy.get('input[name="password2"]').type('password');
-    cy.get('button[type="submit"]').click();
-    cy.get('a[href="/recipes/new"]').click();
-    cy.get('input[name="title"]').type('test-2');
-    cy.get('input[name="cookingTime"]').type('01:00');
-    cy.get('input[name="ingredient"]').type('test-ingredient');
-    cy.get('input[name="amount"]').type('1');
-    cy.get('select[name="unit"]').select('g');
-    cy.get('.ingredient-inputs>button').click();
-    cy.get('textarea[name="description"]').type('test-description');
-    cy.get('textarea[name="instructions"]').type('test-instructions');
-    cy.get('input[name="category"]').type('test-category');
-    cy.get('button[name="addCategory"]').click();
-    cy.get('button[type="submit"]').click();
-    cy.contains('test-2')
-    cy.get('a[href="/logout"]').click();
+Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, password, recipyTitle }) {
+    let sessionCookie;
+    let userId;
+    let user = {
+      username,
+      password
+    }
+    cy.request('POST', 'http://localhost:3001/api/users', user)
+      
+    cy.request('POST', 'http://localhost:3001/api/login', user)
+      .then( res => {
+        const rawCookies = res.headers['set-cookie'];
+        sessionCookie = rawCookies.map(cookie => cookie.split(';')[0]).join(';');
+        userId = res.body.id;
+      })
+
+    let recipy = {
+      title: recipyTitle,
+      cookingTime: '01:00',
+      ingredients: [{name: 'test-ingredient', amount: 1, unit: 'g'}],
+      description: 'test-description',
+      instructions: 'test-instructions',
+      categories: [{name: 'test-category'}],
+      visible: true,
+      userId: userId,
+      pictureUuid: '',
+      averageRating: 0
+    }
+
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:3001/api/recipies',
+      body: recipy,
+      headers: {
+        Cookie: sessionCookie
+      }
     })
-  
+
+    cy.request('POST', 'http://localhost:3001/api/users/logout')
+})
+
+
+Cypress.Commands.add('login', function(username, password) {
+    cy.visit('http://localhost:5173')
+    cy.get('a[href="/login"]').click();
+    cy.get('#username').type(username);
+    cy.get('#password').type(password);
+    cy.get('button[type="submit"]').click();
+})

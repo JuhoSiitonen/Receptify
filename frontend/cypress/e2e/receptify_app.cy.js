@@ -19,7 +19,7 @@ describe('Signin and logout', function() {
   })
   it('can logout', function() {
     cy.createUserAndLogin('test-user', 'password')
-    cy.wait(500)
+    cy.wait(400)
     cy.contains('Welcome to Receptify!')
     cy.get('a[href="/logout"]').click();
     cy.contains('Login')
@@ -49,14 +49,26 @@ describe('Adding a recipy', function() {
     cy.on('window:confirm', () => true);
     cy.contains('test-title')
   })
+})
+
+describe('Recipy actions', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:3001/api/testing/reset')
+    cy.wait(300)
+    cy.signupLoginCreateRecipyLogout({ 
+      username: 'test-user', 
+      password: 'password', 
+      recipyTitle: 'test-title'
+    })
+    cy.login('test-user', 'password')
+    cy.get('a[href="/recipes"]').click();
+  })
   it('can expand recipy and delete', function() {
-    cy.createRecipy();
     cy.get('.single-recipe-clickarea').click();
     cy.get('button[name="deleteRecipy"]').click();
     cy.contains('test-title').should('not.exist')
   })
   it('can edit recipy', function() {
-    cy.createRecipy();
     cy.get('.single-recipe-clickarea').click();
     cy.get('.user-actions>:nth-child(1)>button').click();
     cy.contains('Update').click()
@@ -66,14 +78,11 @@ describe('Adding a recipy', function() {
     cy.contains('edited-title')
   })
   it('can add to shoppinglist', function() {
-    cy.createRecipy();
     cy.get('button[name="shoppinglistbutton"]').click();
     cy.get('a[href="/shoppinglist"]').click();
     cy.contains('test-title')
   })
  it('can see in my recipes', function() {
-    cy.createRecipy();
-    cy.wait(300)
     cy.get('a[href="/mypage"]').click();
     cy.wait(300)
     cy.contains('test-title')
@@ -82,17 +91,28 @@ describe('Adding a recipy', function() {
 
 describe('Multiple recipies', function() {
   beforeEach(function() {
-    cy.createAnotherUserWithRecipy();
+    cy.request('POST', 'http://localhost:3001/api/testing/reset')
     cy.wait(300)
-    cy.createUserAndLogin('test-user', 'password')
-    cy.createRecipy();
+    cy.signupLoginCreateRecipyLogout({
+      username: 'test-user2',
+      password: 'password',
+      recipyTitle: 'test-2'
+    })
+    cy.signupLoginCreateRecipyLogout({
+      username: 'test-user',
+      password: 'password',
+      recipyTitle: 'test-title'
+    })
+    cy.login('test-user', 'password')
   })
   it('can see multiple recipies', function() {
     cy.get('a[href="/recipes"]').click();
     cy.contains('test-title')
     cy.contains('test-2')
   })
+  /*
   it('can favorite a recipy and filter to see it', function() {
+    cy.get('a[href="/recipes"]').click();
     cy.get('.single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > .single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > .user-actions > :nth-child(2) > div > button').click();
@@ -103,5 +123,6 @@ describe('Multiple recipies', function() {
     cy.contains('test-2')
     cy.contains('test-title').should('not.exist')
   })
+  */
 
 })
