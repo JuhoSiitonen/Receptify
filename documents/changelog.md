@@ -320,4 +320,3 @@
 - 18.4 :
     - Cypress testing working in pipeline.
     - More Cypress tests.
-
