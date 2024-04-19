@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('createUserAndLogin', (username, password) => {
+Cypress.Commands.add('createUserAndLogin', function(username, password) {
     cy.visit('http://localhost:5173')
     cy.get('a[href="/signup"]').click();
     cy.get('input[name="username"]').type(username);
@@ -33,7 +33,7 @@ Cypress.Commands.add('createUserAndLogin', (username, password) => {
     cy.get('button[type="submit"]').click();
 })
 
-Cypress.Commands.add('createRecipy', () => {
+Cypress.Commands.add('createRecipy', function() {
     cy.get('a[href="/recipes/new"]').click();
     cy.get('input[name="title"]').type('test-title');
     cy.get('input[name="cookingTime"]').type('01:00');
@@ -48,7 +48,7 @@ Cypress.Commands.add('createRecipy', () => {
     cy.get('button[type="submit"]').click();
 })
 
-Cypress.Commands.add('createAnotherUserWithRecipy', () => {
+Cypress.Commands.add('createAnotherUserWithRecipy', function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
     cy.visit('http://localhost:5173')
     cy.get('a[href="/signup"]').click();

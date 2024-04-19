@@ -1,13 +1,13 @@
 
-describe('Signin and logout', () => {
+describe('Signin and logout', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
   })
-  it('frontpage opens', () => {
+  it('frontpage opens', function() {
     cy.visit('http://localhost:5173')
     cy.contains('Receptify')
     })
-  it('sign up form opens', () => {
+  it('sign up form opens', function() {
     cy.visit('http://localhost:5173')
     cy.get('a[href="/signup"]').click();
     cy.contains('Sign up')
@@ -17,7 +17,7 @@ describe('Signin and logout', () => {
     cy.get('button[type="submit"]').click();
     cy.contains('Welcome to Receptify!')
   })
-  it('can logout', ()=> {
+  it('can logout', function() {
     cy.createUserAndLogin('test-user', 'password')
     cy.wait(500)
     cy.contains('Welcome to Receptify!')
@@ -27,13 +27,13 @@ describe('Signin and logout', () => {
 })
 
 
-describe('Adding a recipy', () => {
+describe('Adding a recipy', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
     cy.wait(300)
     cy.createUserAndLogin('test-user', 'password')
   })
-  it('can add recipe', () => {
+  it('can add recipe', function() {
     cy.get('a[href="/recipes/new"]').click();
     cy.get('input[name="title"]').type('test-title');
     cy.get('input[name="cookingTime"]').type('01:00');
@@ -49,13 +49,13 @@ describe('Adding a recipy', () => {
     cy.on('window:confirm', () => true);
     cy.contains('test-title')
   })
-  it('can expand recipy and delete', () => {
+  it('can expand recipy and delete', function() {
     cy.createRecipy();
     cy.get('.single-recipe-clickarea').click();
     cy.get('button[name="deleteRecipy"]').click();
     cy.contains('test-title').should('not.exist')
   })
-  it('can edit recipy', () => {
+  it('can edit recipy', function() {
     cy.createRecipy();
     cy.get('.single-recipe-clickarea').click();
     cy.get('.user-actions>:nth-child(1)>button').click();
@@ -65,32 +65,32 @@ describe('Adding a recipy', () => {
     cy.get('[href="/recipes"]').click()
     cy.contains('edited-title')
   })
-  it('can add to shoppinglist', () => {
+  it('can add to shoppinglist', function() {
     cy.createRecipy();
     cy.get('button[name="shoppinglistbutton"]').click();
     cy.get('a[href="/shoppinglist"]').click();
     cy.contains('test-title')
   })
- it('can see in my recipes', () => {
+ it('can see in my recipes', function() {
     cy.createRecipy();
     cy.get('a[href="/mypage"]').click();
     cy.contains('test-title')
   })
 })
 
-describe('Multiple recipies', () => {
+describe('Multiple recipies', function() {
   beforeEach(function() {
     cy.createAnotherUserWithRecipy();
     cy.wait(300)
     cy.createUserAndLogin('test-user', 'password')
     cy.createRecipy();
   })
-  it('can see multiple recipies', () => {
+  it('can see multiple recipies', function() {
     cy.get('a[href="/recipes"]').click();
     cy.contains('test-title')
     cy.contains('test-2')
   })
-  it('can favorite a recipy and filter to see it', () => {
+  it('can favorite a recipy and filter to see it', function() {
     cy.get('.single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > .single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > .user-actions > :nth-child(2) > div > button').click();
