@@ -73,7 +73,9 @@ describe('Adding a recipy', function() {
   })
  it('can see in my recipes', function() {
     cy.createRecipy();
+    cy.wait(300)
     cy.get('a[href="/mypage"]').click();
+    cy.wait(300)
     cy.contains('test-title')
   })
 })
