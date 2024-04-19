@@ -85,5 +85,6 @@ Month total: 43h
 - 3h 16.4: More coherent styles, user input validation. 
 - 2h 17.4: Cypress E2E pipeline testing.
 - 1h 18.4: Cypress testing in pipeline. 
+- 1h 19.4: Cypress tests and admin functions.
 
-Total hours: 166h
+Total hours: 167h

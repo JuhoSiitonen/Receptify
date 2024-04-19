@@ -320,3 +320,6 @@
 - 18.4 :
     - Cypress testing working in pipeline.
     - More Cypress tests.
+- 19.4 :
+    - Starting to set up admin actions.
+    - Cypress pipeline debuggin. Changed tests to use commands (with requests to api directly) after first testing any given action in browsermode. 
