@@ -28,7 +28,9 @@ Cypress.Commands.add('createUserAndLogin', function(username, password) {
     cy.visit('http://localhost:5173')
     let user = {
         username,
-        password
+        password,
+        admin: false,
+        visible: true
       }
     cy.request('POST', 'http://localhost:3001/api/users', user)
     cy.get('a[href="/login"]').click();
@@ -43,7 +45,9 @@ Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, passw
     let userId;
     let user = {
       username,
-      password
+      password,
+      admin: false,
+      visible: true
     }
     cy.request('POST', 'http://localhost:3001/api/users', user)
 
