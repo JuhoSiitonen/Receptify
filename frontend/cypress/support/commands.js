@@ -46,6 +46,8 @@ Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, passw
       password
     }
     cy.request('POST', 'http://localhost:3001/api/users', user)
+
+    cy.wait(400)
       
     cy.request('POST', 'http://localhost:3001/api/login', user)
       .then( res => {
@@ -53,6 +55,8 @@ Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, passw
         sessionCookie = rawCookies.map(cookie => cookie.split(';')[0]).join(';');
         userId = res.body.id;
       })
+
+    cy.wait(400)
 
     let recipy = {
       title: recipyTitle,
@@ -76,7 +80,11 @@ Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, passw
       }
     })
 
+    cy.wait(400)
+
     cy.request('POST', 'http://localhost:3001/api/users/logout')
+
+    cy.wait(400)
 })
 
 
@@ -86,4 +94,5 @@ Cypress.Commands.add('login', function(username, password) {
     cy.get('#username').type(username);
     cy.get('#password').type(password);
     cy.get('button[type="submit"]').click();
+    cy.wait(300)
 })
