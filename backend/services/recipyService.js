@@ -131,7 +131,7 @@ const deleteSingleRecipy = async (req, res) => {
     await Rating.destroy({ where: { recipyId: id } });
     await Comment.destroy({ where: { recipyId: id } });
     await Favorite.destroy({ where: { recipyId: id } });
-    if (!req.sessions.admin) {
+    if (!req.session.admin) {
       await User.decrement('number_of_recipes', { where: { id: req.session.userId } });
     }
     const success = await Recipy.destroy({ where: { id } });
