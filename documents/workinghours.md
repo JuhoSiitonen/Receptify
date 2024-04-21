@@ -86,5 +86,6 @@ Month total: 43h
 - 2h 17.4: Cypress E2E pipeline testing.
 - 1h 18.4: Cypress testing in pipeline. 
 - 1h 19.4: Cypress tests and admin functions.
+- 1h 21.4: Cypress flakyness debugging.
 
-Total hours: 167h
+Total hours: 168h

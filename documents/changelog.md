@@ -323,3 +323,8 @@
 - 19.4 :
     - Starting to set up admin actions.
     - Cypress pipeline debuggin. Changed tests to use commands (with requests to api directly) after first testing any given action in browsermode. 
+- 21.4 :
+    - Cypress test flakyness debugging. 
+    - Cypress commands and bypassing UI with requests. 
+    - Removing unnecessary code from backend index.js
+    
