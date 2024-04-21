@@ -125,19 +125,27 @@ describe('Multiple recipies', function() {
     cy.contains('test-title')
     cy.contains('test-2')
   })
-  /*
   it('can favorite a recipy and filter to see it', function() {
     cy.get('a[href="/recipes"]').click();
-    cy.get('.single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > .single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > .user-actions > :nth-child(2) > div > button').click();
     cy.wait(300)
     cy.contains('1 times favorited')
+    cy.scrollTo('top')
+    cy.wait(1000)
     cy.get('.show-favorites-button').click();
     cy.wait(150)
     cy.contains('test-2')
     cy.contains('test-title').should('not.exist')
   })
-  */
-
+  it.only('can subscribe to a user and filter to see it', function() {
+    cy.get('a[href="/recipes"]').click();
+    cy.get(':nth-child(2) > :nth-child(1) > .single-recipe-clickarea').click();
+    cy.get('.user-actions > :nth-child(1) > button').click();
+    cy.get('.action-button > div > button').click();
+    cy.get('a[href="/recipes"]').click();
+    cy.wait(1000)
+    cy.get('.show-subscribed-button').click();
+    cy.contains('test-2')
+  })
 })
