@@ -3,25 +3,30 @@ const { findAllUsersRatings } = require('../services/ratingService');
 const { loginInfo } = require('../services/userService');
 
 const login = async (req, res) => {
-    const { username, password } = req.body;
-    const user = await loginInfo(username);
+    try {
+      const { username, password } = req.body;
+    
+      const user = await loginInfo(username);
+      if (user === null) {
+        return res.status(401).json({ error: 'invalid username or password' });
+      }
 
-    const rated = await findAllUsersRatings(user.id);
-    const shoppinglist = [];
+      const rated = await findAllUsersRatings(user.id);
+      const shoppinglist = [];
 
-    const email = user.email === null 
-    ? false 
-    : true;
+      const email = user.email === null 
+      ? false 
+      : true;
 
-    const about = user.about === null
-    ? ''
-    : user.about;
+      const about = user.about === null
+      ? ''
+      : user.about;
 
-    const passwordCorrect = user === null
-    ? false
-    : await bcrypt.compare(password, user.password)
+      const passwordCorrect = user === null
+      ? false
+      : await bcrypt.compare(password, user.password)
 
-    if (user && passwordCorrect) {
+      if (user && passwordCorrect) {
         const sess = req.session;
         sess.userId = user.id;
         sess.username = user.username;
@@ -48,6 +53,10 @@ const login = async (req, res) => {
             numberOfRecipes: user.numberOfRecipes,
          };
         return res.status(200).json(returnUser);
+    }
+    } catch (error) {
+        console.log('error', error)
+        return res.status(401).json({ error: 'invalid username or password' });
     }
     return res.status(401).json({ error: 'invalid username or password' });
 }

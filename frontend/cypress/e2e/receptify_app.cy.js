@@ -24,6 +24,21 @@ describe('Signin and logout', function() {
     cy.get('a[href="/logout"]').click();
     cy.contains('Login')
   })
+  it('can not login with false credentials', function() {
+    let user = {
+      username: 'test-user',
+      password: 'password',
+      admin: false,
+      visible: true
+    }
+    cy.request('POST', 'http://localhost:3001/api/users', user)
+    cy.visit('http://localhost:5173')
+    cy.get('a[href="/login"]').click();
+    cy.get('#username').type('test-user');
+    cy.get('#password').type('wrongpassword');
+    cy.get('button[type="submit"]').click();
+    cy.contains('Wrong credentials!')
+  })
 })
 
 
