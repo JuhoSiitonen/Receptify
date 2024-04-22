@@ -15,7 +15,8 @@ const {
   removeFromShoppinglist,
   sendEmail,
   setAboutInfo,
-  setEmailAddress
+  setEmailAddress,
+  deleteUser
 } = require('../controllers/users');
 
 userRouter
@@ -50,5 +51,7 @@ userRouter.post("/shoppinglist/email", sessionChecker, sendEmail)
 userRouter.put("/about", sessionChecker, setAboutInfo)
 
 userRouter.put("/email", sessionChecker, setEmailAddress)
+
+userRouter.delete("/:id", sessionChecker, deleteUser)
 
 module.exports = userRouter;

@@ -1,4 +1,4 @@
-const { User, Recipy } = require("../models");
+const { User, Recipy, RecipyCategory, RecipyIngredient, Favorite, Subscription, Rating } = require("../models");
 
 const createNewUser = async (user) => {
     const newUser = await User.create(user, {
@@ -51,11 +51,30 @@ const loginInfo = async (username) => {
     return user;
 }
 
+const destroyUser = async (id) => {
+    const user = await User.findByPk(id);
+    let recipes = await Recipy.findAll({ where: { userId: id }});
+    recipes.forEach(async recipe => {
+      await RecipyIngredient.destroy({ where: { recipyId: recipe.id } });
+      await RecipyCategory.destroy({ where: { recipyId: recipe.id } });
+      await Rating.destroy({ where: { recipyId: recipe.id } });
+      await Comment.destroy({ where: { recipyId: recipe.id } });
+      await Favorite.destroy({ where: { recipyId: recipe.id } });
+      await recipe.destroy();
+    });
+    await Subscription.destroy({ where: { publisherId: id } });
+    await Subscription.destroy({ where: { subscriberId: id } });
+
+    await user.destroy();
+    return user;
+}
+
 module.exports = {
     createNewUser,
     findSingleUser,
     findAllUsers,
     updateAboutMeInfo,
     updateEmailAddress,
-    loginInfo
+    loginInfo,
+    destroyUser
 }

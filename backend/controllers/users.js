@@ -6,7 +6,8 @@ const {
     findSingleUser, 
     findAllUsers,
     updateAboutMeInfo, 
-    updateEmailAddress
+    updateEmailAddress,
+    destroyUser
  } = require("../services/userService");
 const { 
     createSubscription,
@@ -273,6 +274,23 @@ const setEmailAddress = async (req, res) => {
       }
 }
 
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!req.session.admin) {
+          return res.status(401).json({ error: 'Unauthorized' });
+        }
+        const user = await findSingleUser(id);
+        if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+        }
+        const destroyedUser = await destroyUser(id);
+        return res.status(204).end();
+      } catch (error) {
+        return res.status(400).json({ error: error.message });
+      }
+}
+
 module.exports = {
     getUsers,
     createUser,
@@ -288,5 +306,6 @@ module.exports = {
     removeFromShoppinglist,
     sendEmail,
     setAboutInfo,
-    setEmailAddress
+    setEmailAddress,
+    deleteUser
 }
