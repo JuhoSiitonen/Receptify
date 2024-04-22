@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: postgres-config
 data:
-  postgres-url: postgres-statefulset.default.svc.cluster.local:5432
+  postgres-url: postgres-statefulset-0.default.svc.cluster.local:5432
