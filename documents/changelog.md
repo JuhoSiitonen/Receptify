@@ -329,4 +329,7 @@
     - Removing unnecessary code from backend index.js
 - 22.4 : 
     - Removing Jest testing from frontend, completely impossible to do unit testing. MSW (Mock service worker) is setup but problem after problem comes from Jest and JSDOM environment. 5 different config files and still not working. Will try unit testing with Vitest and MSW. 
+    - Cypress tests for userpage content.
+    - Admin delete button in all recipies and backend check in deletion for admin rights.
+    - Admin can now delete users from user view page, added backend methods and services also.
     
