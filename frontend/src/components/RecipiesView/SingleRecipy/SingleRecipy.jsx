@@ -2,6 +2,7 @@ import { useState } from 'react'
 import UserActions from '../UserActions'
 import OwnerActions from '../OwnerActions'
 import ShoppinglistButton from '../../Shoppinglist/ShoppinglistButton'
+import DeleteButton from '../Buttons/DeleteButton'
 
 import './SingleRecipy.css'
 
@@ -87,6 +88,11 @@ const SingleRecipy = ({ recipy, user }) => {
             <div >
               {user && user.id !== recipy.owner.id && <UserActions recipe={recipy} user={user}/>}
               {user && user.id === recipy.owner.id && <OwnerActions recipe={recipy} user={user}/>}
+              {user.admin && (
+                <div className='action-button'>
+                  <DeleteButton recipy={recipy} />
+                </div>
+              )}
             </div>
             )}
             <ShoppinglistButton recipy={recipy} />
