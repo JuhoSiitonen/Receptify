@@ -332,4 +332,6 @@
     - Cypress tests for userpage content.
     - Admin delete button in all recipies and backend check in deletion for admin rights.
     - Admin can now delete users from user view page, added backend methods and services also.
+    - Changed PostgreSQL kubernetes files to stateful set to get a persisten volume for the DB.
+    - Added resource limits to kubernetes deployments.
     
