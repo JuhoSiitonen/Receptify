@@ -20,6 +20,13 @@ spec:
         command: ["redis-server", "--appendonly", "yes"] 
         ports:
         - containerPort: 6379
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "200m"
+          limits:
+            memory: "1Gi"
+            cpu: "400m"
         
 ---
 apiVersion: v1
