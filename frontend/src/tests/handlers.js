@@ -1,20 +1,27 @@
-import { http, HttpResponse, delay } from 'msw'
+import { http, HttpResponse } from 'msw'
 
 const baseURL = process.env.REACT_APP_BACKEND_URL
 
 export const handlers = [
-    http.post(`/api/login`, async ({ request }) => {
-      if (request.body.username !== 'John Doe' || request.body.password !== 'password') {
+    http.post(`${baseURL}/api/login`, async ({ request }) => {
+      /*
+      const newLogin = request.json()
+      if (newLogin.username !== 'John Doe' || newLogin.password !== 'password') {
         return HttpResponse.status(401)
       }
+      */
       return HttpResponse.json({
-        "id": 1,
-        "username": "John Doe",
-        "password": "password",
-        "admin": false,
-        "visible": true,
-        "createdAt": "2024-02-01T14:12:04.268Z",
-        "updatedAt": "2024-02-01T14:12:04.268Z"
-      })
+          "id": 462,
+          "username": "John Doe",
+          "admin": false,
+          "subscriptions": [],
+          "userFavorites": [],
+          "rated": [],
+          "shoppinglist": [],
+          "email": false,
+          "about": "",
+          "subscribers": 0,
+          "numberOfRecipes": 0
+      }, { status: 201 })
     })
   ]
