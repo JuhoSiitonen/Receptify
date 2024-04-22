@@ -1,4 +1,4 @@
-const { User, Recipy, RecipyCategory, RecipyIngredient, Favorite, Subscription, Rating } = require("../models");
+const { User, Recipy, RecipyCategory, RecipyIngredient, Favorite, Subscription, Rating, Comment } = require("../models");
 
 const createNewUser = async (user) => {
     const newUser = await User.create(user, {
@@ -62,8 +62,6 @@ const destroyUser = async (id) => {
       await Favorite.destroy({ where: { recipyId: recipe.id } });
       await recipe.destroy();
     });
-    await Subscription.destroy({ where: { publisherId: id } });
-    await Subscription.destroy({ where: { subscriberId: id } });
 
     await user.destroy();
     return user;
