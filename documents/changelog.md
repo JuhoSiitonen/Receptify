@@ -327,4 +327,6 @@
     - Cypress test flakyness debugging. 
     - Cypress commands and bypassing UI with requests. 
     - Removing unnecessary code from backend index.js
+- 22.4 : 
+    - Removing Jest testing from frontend, completely impossible to do unit testing. MSW (Mock service worker) is setup but problem after problem comes from Jest and JSDOM environment. 5 different config files and still not working. Will try unit testing with Vitest and MSW. 
     

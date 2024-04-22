@@ -87,5 +87,6 @@ Month total: 43h
 - 1h 18.4: Cypress testing in pipeline. 
 - 1h 19.4: Cypress tests and admin functions.
 - 1h 21.4: Cypress flakyness debugging.
+- 2h 22.4: Configuring Jest unit tests with MSW api mocking. Can't configure Jest with MSW so deleted all Jest conf files, tests, scripts and npm packets. 
 
-Total hours: 168h
+Total hours: 170h
