@@ -98,7 +98,6 @@ const AddRecipe = () => {
 
     return (
         <div className='add-recipe-container'>
-            <h1>Add Recipe</h1>
             <AddRecipeForm 
                 title={title}
                 setTitle={setTitle}
