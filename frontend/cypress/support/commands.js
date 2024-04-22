@@ -50,8 +50,6 @@ Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, passw
       visible: true
     }
     cy.request('POST', 'http://localhost:3001/api/users', user)
-
-    cy.wait(300)
       
     cy.request('POST', 'http://localhost:3001/api/login', user)
       .then( res => {
@@ -59,8 +57,6 @@ Cypress.Commands.add('signupLoginCreateRecipyLogout', function({ username, passw
         sessionCookie = rawCookies.map(cookie => cookie.split(';')[0]).join(';');
         userId = res.body.id;
       })
-
-    cy.wait(300)
 
     let recipy = {
       title: recipyTitle,

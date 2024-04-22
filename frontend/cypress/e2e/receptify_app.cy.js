@@ -107,7 +107,6 @@ describe('Recipy actions', function() {
 describe('Multiple recipies', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
-    cy.wait(300)
     cy.signupLoginCreateRecipyLogout({
       username: 'test-user2',
       password: 'password',
@@ -125,7 +124,7 @@ describe('Multiple recipies', function() {
     cy.contains('test-title')
     cy.contains('test-2')
   })
-  it('can favorite a recipy and filter to see it', function() {
+  it('can favorite a recipy, filter to see it and is added to userpage', function() {
     cy.get('a[href="/recipes"]').click();
     cy.get(':nth-child(2) > :nth-child(1) > .single-recipe-clickarea').click();
     cy.get(':nth-child(2) > :nth-child(1) > :nth-child(2) > .user-actions > :nth-child(2) > div > button').click();
@@ -137,8 +136,10 @@ describe('Multiple recipies', function() {
     cy.wait(150)
     cy.contains('test-2')
     cy.contains('test-title').should('not.exist')
+    cy.get('[href="/mypage"]').click();
+    cy.contains('test-2')
   })
-  it.only('can subscribe to a user and filter to see it', function() {
+  it('can subscribe to a user, filter to see it and is added to userpage', function() {
     cy.get('a[href="/recipes"]').click();
     cy.get(':nth-child(2) > :nth-child(1) > .single-recipe-clickarea').click();
     cy.get('.user-actions > :nth-child(1) > button').click();
@@ -147,5 +148,8 @@ describe('Multiple recipies', function() {
     cy.wait(1000)
     cy.get('.show-subscribed-button').click();
     cy.contains('test-2')
+    cy.contains('test-title').should('not.exist')
+    cy.get('[href="/mypage"]').click();
+    cy.contains('test-user2')
   })
 })
