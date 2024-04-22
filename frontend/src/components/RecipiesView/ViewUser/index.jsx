@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useMatch } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 import { userRecipies } from "../../../reducers/recipyReducer";
 import { useEffect, useState } from "react";
 import userService from "../../../services/users";
@@ -15,6 +15,7 @@ const ViewUser = () => {
     const [userInfo, setUserInfo] = useState(null)
     const [hasMore, setHasMore] = useState(true)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const match = useMatch('/users/:id/view');
     const userId = Number(match?.params.id);
     const user = useSelector(state => state.user)
@@ -51,11 +52,23 @@ const ViewUser = () => {
         )
     }
 
+    const handleUserDeletion = async () => {
+        if (window.confirm(`Are you sure you want to delete user ${userInfo.username}?`)) {
+            await userService.deleteUser(userId)
+            navigate('/')
+        }
+    }
+
     return (
         <div>
             <div className="view-user">
                 <UserInfo userInfo={userInfo}/>
                 {user.id !== userId && (userSubscribe())}
+                {user.admin && (
+                    <div className="action-button">
+                        <button onClick={handleUserDeletion}>Delete user</button>
+                    </div>
+                )}
             </div>
             <div className="action-button">
                 <Togglable buttonLabel="Show recipies" cancelLabel="Hide recipies" topCancel={true} center={true}>
