@@ -41,8 +41,7 @@ const SingleRecipy = ({ recipy, user }) => {
           <div onClick={toggleDetails} className='single-recipe-clickarea'>
             {recipy.pictureUuid !== "" ? 
             <img
-            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/x600/`}
-            width="500"
+            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/500x/`}
             /> :
             <></> 
             }
@@ -75,9 +74,7 @@ const SingleRecipy = ({ recipy, user }) => {
                 <p>{recipy.instructions}</p>
               </div>
             </div>
-            )}
-              
-            
+            )} 
             <div className='single-recipe-info'>
               <h3>Created by: <b>{recipy.owner.username}</b></h3>
               <h3>Rating: {calculateStars(averageRating)} </h3>
