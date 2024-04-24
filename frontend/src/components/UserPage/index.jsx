@@ -1,11 +1,10 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import recipyService from '../../services/recipies'
 import LoadingSpinner from '../LoadingSpinner'
 import EditUserinfo from './EditUserinfo'
-import './UserPage.css'
+import '../../styles/UserPage.css'
 
 const UserPage = () => {
     const [recipies, setRecipies] = useState([])

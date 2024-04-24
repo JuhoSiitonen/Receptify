@@ -3,8 +3,7 @@ import UserActions from '../UserActions'
 import OwnerActions from '../OwnerActions'
 import ShoppinglistButton from '../../Shoppinglist/ShoppinglistButton'
 import DeleteButton from '../Buttons/DeleteButton'
-
-import './SingleRecipy.css'
+import '../../../styles/SingleRecipy.css'
 
 const baseUrl = 'https://ucarecdn.com/'
 

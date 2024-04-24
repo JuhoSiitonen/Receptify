@@ -4,7 +4,7 @@ import { deleteFromShoppinglist, sendShoppinglistItems } from '../../reducers/us
 import { combineIngredients } from '../../util/shoppingListFunctions';
 import ItemAddForm from './ItemAddForm';
 import LoadingSpinner from '../LoadingSpinner';
-import './Shoppinglist.css';
+import '../../styles/Shoppinglist.css';
 
 const Shoppinglist = () => {
     const dispatch = useDispatch();

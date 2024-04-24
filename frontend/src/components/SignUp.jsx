@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { signup } from '../reducers/userReducer';
 import { useDispatch } from 'react-redux';
 import { addNotification } from '../reducers/notificationReducer';
-import './SignUp.css';
+import '../styles/SignUp.css';
 
 const SignUp = () => {
     const dispatch = useDispatch();

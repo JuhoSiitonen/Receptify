@@ -1,4 +1,4 @@
-import * as st from './spinner.css';
+import * as st from '../../styles/spinner.css';
 
 const LoadingSpinner = () => {
   return (

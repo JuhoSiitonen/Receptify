@@ -9,7 +9,7 @@ import LoadingSpinner from "../../LoadingSpinner";
 import AddSubscriptionButton from "./AddSubscriptionButton";
 import Togglable from "../../Togglable";
 import InfiniteScroll from "react-infinite-scroll-component";
-import './ViewUser.css'
+import '../../../styles/ViewUser.css'
 
 const ViewUser = () => {
     const [userInfo, setUserInfo] = useState(null)

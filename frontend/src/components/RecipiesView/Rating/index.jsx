@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { createRating, updateExistingRating } from '../../../reducers/userReducer'
-import './rating.css'
+import '../../../styles/rating.css'
 
 const Rating = ({ recipyId, user }) => {
     const dispatch = useDispatch()

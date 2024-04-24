@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { addFavorite, deleteFavorite } from '../../../reducers/userReducer'
-import '../../ButtonStyle.css'
+import '../../../styles/ButtonStyle.css'
 
 const FavoriteButton = ({ recipyId, user }) => {
     const [buttonText, setButtonText] = useState('')

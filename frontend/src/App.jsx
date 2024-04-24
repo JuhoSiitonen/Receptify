@@ -14,7 +14,7 @@ import ChosenRecipy from './components/RecipiesView/ChosenRecipy'
 import RecipyFinder from './components/RecipyFinder'
 import ViewUser from './components/RecipiesView/ViewUser'
 import Shoppinglist from './components/Shoppinglist'
-import './App.css'
+import './styles/App.css'
 
 function App() {
   const dispatch = useDispatch()

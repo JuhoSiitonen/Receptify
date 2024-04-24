@@ -5,7 +5,7 @@ import recipyService from "../../services/recipies"
 import LoadingSpinner from "../LoadingSpinner"
 import SingleRecipy from "./SingleRecipy/SingleRecipy"
 import UpdateRecipy from "./UpdateRecipy"
-import './SingleRecipy/SingleRecipy.css'
+import '../../styles/SingleRecipy.css'
 
 const ChosenRecipy = () => {
     const [recipy, setRecipy] = useState(null)

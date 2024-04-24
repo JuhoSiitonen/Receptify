@@ -1,4 +1,4 @@
-import './Mainpage.css'
+import '../styles/Mainpage.css'
 
 const Mainpage = () => {
 

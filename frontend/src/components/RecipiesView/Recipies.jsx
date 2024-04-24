@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import SingleRecipy from "./SingleRecipy/SingleRecipy"
-import './SingleRecipy/SingleRecipy.css'
+import '../../styles/SingleRecipy.css'
 
 const Recipies = (props) => {
     const recipies = props.recipies

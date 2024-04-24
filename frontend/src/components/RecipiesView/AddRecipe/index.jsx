@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { createRecipy } from '../../../reducers/recipyReducer'
-import './AddRecipe.css'
+import '../../../styles/AddRecipe.css'
 import AddRecipeForm from './AddRecipeForm'
 
 const AddRecipe = () => {

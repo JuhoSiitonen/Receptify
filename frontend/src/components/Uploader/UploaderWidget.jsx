@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Widget } from "@uploadcare/react-widget";
-import './Uploader.css';
+import '../../styles/Uploader.css';
 
 const baseUrl = 'https://ucarecdn.com/'
 

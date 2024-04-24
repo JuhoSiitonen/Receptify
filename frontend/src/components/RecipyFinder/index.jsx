@@ -4,7 +4,7 @@ import { recipySearch } from '../../reducers/recipyReducer'
 import recipyService from '../../services/recipies'
 import SingleRecipy from '../RecipiesView/SingleRecipy/SingleRecipy'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import './RecipyFinder.css'
+import '../../styles/RecipyFinder.css'
 
 const RecipyFinder = () => {
     const dispatch = useDispatch()

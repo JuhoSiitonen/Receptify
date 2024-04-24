@@ -4,7 +4,7 @@ import Togglable from "../Togglable"
 import Comment from "./Comment"
 import Rating from "./Rating"
 import AllComments from "./Comment/AllComments"
-import '../ButtonStyle.css'
+import '../../styles/ButtonStyle.css'
 
 const UserActions = ({ recipe, user }) => {
     const navigate = useNavigate()

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../reducers/userReducer'
-import './Navigationbar.css'
+import '../../styles/Navigationbar.css'
 
 const NavigationBar = () => {
     const dispatch = useDispatch()

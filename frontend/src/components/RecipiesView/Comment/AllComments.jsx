@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteComment, getAllComments } from '../../../reducers/commentReducer'
 import { useEffect, useState } from 'react'
-import './comment.css'
+import '../../../styles/comment.css'
 
 const AllComments = ({ user, recipy }) => {
     const dispatch = useDispatch()

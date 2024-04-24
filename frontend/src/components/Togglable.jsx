@@ -1,5 +1,5 @@
 import { useState, forwardRef } from 'react'
-import './ButtonStyle.css'
+import '../styles/ButtonStyle.css'
 
 const Togglable = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false)

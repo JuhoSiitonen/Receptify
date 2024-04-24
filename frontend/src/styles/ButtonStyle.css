@@ -20,6 +20,18 @@
     margin-bottom: 0px;
 }
 
+.sorting-actions {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    position: fixed;
+    margin-bottom: 0px;
+    background-color: white;
+    width: 100%;
+    padding-top: 5px;
+    top: 4.3em
+}
+
 .action-button button{
     margin-right: 3px;
     margin-bottom: 10px;
