@@ -11,10 +11,9 @@ const ShowSubscribedButton = ({
 
     return (
         <button
-          className="show-subscribed-button"
           onClick={handleShowSubscribed}
         >
-          {subscribed ? "Show All" : "Show subscribed users"}
+          {subscribed ? "Show All" : "Subscribed"}
         </button>
       );
     }

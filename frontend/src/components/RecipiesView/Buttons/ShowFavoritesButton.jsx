@@ -9,10 +9,9 @@ const ShowFavoritesButton = ({
   }
   return (
     <button
-      className="show-favorites-button"
       onClick={handleShowFavorites}
     >
-      {favorites ? "Show All" : "Show Favorites"}
+      {favorites ? "Show All" : "Favorites"}
     </button>
   );
 }
