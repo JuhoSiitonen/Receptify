@@ -83,7 +83,7 @@ const RecipiesView = () => {
 
     return (
         <div>
-          <div className='user-actions'>
+          <div className='sorting-actions'>
             <div className='action-button'>
               <Togglable buttonLabel="Filter" onCancel={handleCancel}>
                 <Filter onFilter={handleFilter} />
