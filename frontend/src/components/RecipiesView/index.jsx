@@ -9,6 +9,7 @@ import SortBy from '../SortBy';
 import ShowFavoritesButton from './Buttons/ShowFavoritesButton';
 import ShowSubscribedButton from './Buttons/ShowSubscribedButton';
 import InfiniteScroll from "react-infinite-scroll-component";
+import '../../styles/InfiniteScroll.css'
 
 const RecipiesView = () => {
     const dispatch = useDispatch()
@@ -111,6 +112,7 @@ const RecipiesView = () => {
                 />
             </div>
           </div>
+          <div className='infinitescroll'>
             <InfiniteScroll
                 dataLength={recipies.length}
                 next={fetchMoreData}
@@ -124,6 +126,7 @@ const RecipiesView = () => {
             >
               <Recipies recipies={recipies} />
             </InfiniteScroll>
+          </div>
         </div>
     )
 }
