@@ -34,7 +34,7 @@ const UploaderWidget = ({ files, onChange}) => {
           <div key={file.uuid}>
             <img
               key={file.uuid}
-              src={`${baseUrl}/${file.uuid}/-/preview/-/resize/x200/`}
+              src={`${baseUrl}/${file.uuid}/-/preview/-/resize/x200/-/border_radius/20px/`}
               width="100"
               alt={file.originalFilename || ''}
               title={file.originalFilename || ''}
