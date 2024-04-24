@@ -45,7 +45,7 @@
 }
 
 .single-recipe img {
-    height: auto;
+    max-height: 500px;
     margin-bottom: 10px;
     border-radius: 25px;
     width: 100%;
