@@ -27,7 +27,7 @@ export const addNotification = ({message, error}) => {
       message, error}))
     setTimeout(() => {
       dispatch(removeNotification())
-    }, 5000)
+    }, 4000)
   }
 }
 
