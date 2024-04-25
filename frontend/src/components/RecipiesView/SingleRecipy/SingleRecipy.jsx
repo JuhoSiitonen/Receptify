@@ -18,13 +18,14 @@ const SingleRecipy = ({ recipy, user }) => {
         return null
     }
 
-    const calculateStars = (rating) => {
+    const calculateStars = (rating, recipyId) => {
       if (rating === 'No ratings yet') {
-        return [<span role="img" aria-label="star">✰</span>];
+        return [<span key={recipyId} role="img" aria-label="star">✰</span>];
       }
       const stars = [];
       for (let i = 0; i < Math.floor(rating); i++) {
-          stars.push(<span key={i} role="img" aria-label="star">⭐</span>);
+          let key = recipyId + i
+          stars.push(<span key={key} role="img" aria-label="star">⭐</span>);
       }
       return stars;
     };
@@ -40,7 +41,7 @@ const SingleRecipy = ({ recipy, user }) => {
           <div onClick={toggleDetails} className='single-recipe-clickarea'>
             {recipy.pictureUuid !== "" ? 
             <img
-            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/500x/`}
+            src={`${baseUrl}/${recipy.pictureUuid}/-/preview/-/resize/600x/`}
             /> :
             <></> 
             }
@@ -52,7 +53,7 @@ const SingleRecipy = ({ recipy, user }) => {
                 <h3>Ingredients:</h3>
                 <ul>
                   {recipy.recipy_ingredients.map(ingredient => (
-                    <li key={ingredient.id + ingredient.amount}>
+                    <li key={ingredient.ingredient.id + ingredient.amount}>
                       {ingredient.amount} {ingredient.unit} of {ingredient.ingredient.name}
                     </li>
                   ))}
@@ -76,7 +77,7 @@ const SingleRecipy = ({ recipy, user }) => {
             )} 
             <div className='single-recipe-info'>
               <h3>Created by: <b>{recipy.owner.username}</b></h3>
-              <h3>Rating: {calculateStars(averageRating)} </h3>
+              <h3>Rating: {calculateStars(averageRating, recipy.id)} </h3>
               <h3> {recipy.favorites} times favorited 💖</h3>
             </div>
             </div>
