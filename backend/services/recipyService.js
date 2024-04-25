@@ -31,47 +31,70 @@ const defineWhereClause = ( req, res) => {
             [Op.like]: `%${req.query.title}%`
           }};
       }
-  
-    if (req.query.ingredients) {
-        whereClause = {
-          ...whereClause,
-          '$recipy_ingredients.ingredient.name$': {
-            [Op.like]: `%${req.query.ingredients}%`
-          }
-        };
-      }
-  
-    if (req.query.username) {
-        whereClause = {
-          ...whereClause,
-          '$owner.username$': {
-            [Op.like]: `%${req.query.username}%`
-          }
-        };
-      }
-  
-    if (req.query.categories) {
-        whereClause = {
-          ...whereClause,
-          '$recipy_categories.category.name$': {
-            [Op.like]: `%${req.query.categories}%`
-          }
-        };
-      }
 
     return whereClause;
 }
 
-const findAllRecipies = async ( whereClause, orderClause, length, limit) => {
+const defineIngredientClause = (req, res) => {
+  let ingredientClause = {}
+
+  if (req.query.ingredients) {
+    ingredientClause = {
+      name: {
+        [Op.like]: `%${req.query.ingredients}%`
+      }
+    };
+  }
+
+  return ingredientClause
+}
+
+const defineCategoryClause = (req, res) => {
+  let categoryClause = {}
+
+  if (req.query.categories) {
+    categoryClause = {
+      name: {
+        [Op.like]: `%${req.query.categories}%`
+      }
+    };
+  }
+
+  return categoryClause
+}
+
+const defineUserClause = (req, res) => {
+  let userClause = {}
+
+  if (req.query.username) {
+    userClause = {
+      username: {
+        [Op.like]: `%${req.query.username}%`
+      }
+    };
+  }
+
+  return userClause
+}
+
+const findAllRecipies = async ( 
+  whereClause, orderClause, length, limit, ingredientClause, categoryClause, userClause) => {
     length = length || 0;
     limit = limit || 5;
     const foundRecipes = await Recipy.findAll({
         include: [
           { model: User,
             as: 'owner',
-            attributes: [ "id", "username"] },
-          { model: RecipyIngredient, include: [Ingredient] },
-          { model: RecipyCategory, include: [Category] },
+            attributes: [ "id", "username"], 
+            where: userClause },
+          { model: RecipyIngredient, include: [
+            { model: Ingredient,
+            where: ingredientClause }
+          ]},
+          { model: RecipyCategory, include: [
+            { model: Category,
+              where: categoryClause }
+          ]},
         ],
         where: whereClause,
         order: orderClause,
@@ -143,6 +166,9 @@ module.exports = {
     findFullSingleRecipyById,
     findUsersRecipies,
     defineWhereClause,
+    defineIngredientClause,
+    defineCategoryClause,
+    defineUserClause,
     findAllRecipies,
     createNewRecipy,
     updateExistingRecipy,

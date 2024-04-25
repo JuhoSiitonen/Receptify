@@ -23,12 +23,18 @@ const {
     findSingleRecipyById,
     deleteSingleRecipy,
     updateExistingRecipy,
+    defineIngredientClause,
+    defineCategoryClause,
+    defineUserClause
 } = require('../services/recipyService');
 
 const getRecipies = async (req, res) => {
     try {
         let whereClause = defineWhereClause(req, res);
         let orderClause = [];
+        let ingredientClause = defineIngredientClause(req, res)
+        let categoryClause = defineCategoryClause(req, res)
+        let userClause = defineUserClause(req, res)
         let length = req.query.length || 0;
     
         if (req.query.sort) {
@@ -37,7 +43,7 @@ const getRecipies = async (req, res) => {
           orderClause.push(['created_at', 'DESC']);
         }
         
-        const foundRecipes = await findAllRecipies(whereClause, orderClause, length);
+        const foundRecipes = await findAllRecipies(whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);
@@ -53,10 +59,15 @@ const getFavorites = async (req, res) => {
     try {
         let orderClause = [];
         let whereClause = defineWhereClause(req, res);
+        let ingredientClause = defineIngredientClause(req, res)
+        let categoryClause = defineCategoryClause(req, res)
+        let userClause = defineUserClause(req, res)
         let length = req.query.length || 0;
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
+        } else {
+          orderClause.push(['created_at', 'DESC']);
         }
     
         const favorites = 
@@ -68,7 +79,7 @@ const getFavorites = async (req, res) => {
           id: favorites
         };
 
-        const foundRecipes = await findAllRecipies(whereClause, orderClause, length);
+        const foundRecipes = await findAllRecipies(whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);
@@ -84,10 +95,15 @@ const getSubscribed = async (req, res) => {
     try {
         let whereClause = defineWhereClause(req, res);
         let orderClause = [];
+        let ingredientClause = defineIngredientClause(req, res)
+        let categoryClause = defineCategoryClause(req, res)
+        let userClause = defineUserClause(req, res)
         let length = req.query.length || 0;
     
         if (req.query.sort) {
           orderClause.push([req.query.sort, req.query.order || 'DESC']);
+        } else {
+          orderClause.push(['created_at', 'DESC']);
         }
     
         const subscribedUserIds = 
@@ -99,7 +115,7 @@ const getSubscribed = async (req, res) => {
           userId: subscribedUserIds
         };
 
-        const foundRecipes = await findAllRecipies(whereClause, orderClause, length);
+        const foundRecipes = await findAllRecipies(whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);
