@@ -339,4 +339,6 @@
     - Made sorting and filtering buttons fixed to top of screen.
     - Updated button names.
     - Fixed react warnings about non unique key values.
+- 25.4 :
+    - Refactoring and bug fixing sorting and filtering options in recipiesview. Now all sorting and filtering options work even used together. 
     

@@ -89,5 +89,6 @@ Month total: 43h
 - 1h 21.4: Cypress flakyness debugging.
 - 4h 22.4: Configuring Jest unit tests with MSW api mocking. Can't configure Jest with MSW so deleted all Jest conf files, tests, scripts and npm packets. Admin methods and services.
 - 1h 24.4: Moved CSS styles to own folder, style fixes, known issues documentation.
+- 1h 25.4: Fixed bug in filtering and sorting in recipiesview.
 
-Total hours: 173h
+Total hours: 174h
