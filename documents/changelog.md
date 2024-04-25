@@ -334,4 +334,9 @@
     - Admin can now delete users from user view page, added backend methods and services also.
     - Changed PostgreSQL kubernetes files to stateful set to get a persisten volume for the DB.
     - Added resource limits to kubernetes deployments.
+- 24.4 :
+    - Moved css styles to own folder and updated imports.
+    - Made sorting and filtering buttons fixed to top of screen.
+    - Updated button names.
+    - Fixed react warnings about non unique key values.
     
