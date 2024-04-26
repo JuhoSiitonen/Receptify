@@ -1,40 +1,14 @@
-const {
-    checkAndCreateCategories,
-    createRecipyCategory,
-    findSingleRecipyCategory,
-    destroyRecipyCategories,
-} = require('../services/categoryService')
-const {
-    checkAndCreateIngredients,
-    createRecipyIngredient,
-    findAllIngredients,
-    getAllIngredients,
-    findRecipiesAccordingToIngredients,
-    findRecipyIngredients,
-    findSingleRecipyIngredient,
-    updateRecipyIngredient,
-    destroySingleIngredient
-} = require('../services/ingredientService')
-const { 
-    defineWhereClause, 
-    findAllRecipies, 
-    createNewRecipy,
-    findFullSingleRecipyById,
-    findSingleRecipyById,
-    deleteSingleRecipy,
-    updateExistingRecipy,
-    defineIngredientClause,
-    defineCategoryClause,
-    defineUserClause
-} = require('../services/recipyService');
+const categoryService = require('../services/categoryService')
+const ingredientService = require('../services/ingredientService')
+const recipyService = require('../services/recipyService');
 
 const getRecipies = async (req, res) => {
     try {
-        let whereClause = defineWhereClause(req, res);
+        let whereClause = recipyService.defineWhereClause(req, res);
         let orderClause = [];
-        let ingredientClause = defineIngredientClause(req, res)
-        let categoryClause = defineCategoryClause(req, res)
-        let userClause = defineUserClause(req, res)
+        let ingredientClause = recipyService.defineIngredientClause(req, res)
+        let categoryClause = recipyService.defineCategoryClause(req, res)
+        let userClause = recipyService.defineUserClause(req, res)
         let length = req.query.length || 0;
     
         if (req.query.sort) {
@@ -43,11 +17,11 @@ const getRecipies = async (req, res) => {
           orderClause.push(['created_at', 'DESC']);
         }
         
-        const foundRecipes = await findAllRecipies(
+        const foundRecipes = await recipyService.findAllRecipies(
           whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
-        const recipes = await findAllRecipies(whereClause, orderClause);
+        const recipes = await recipyService.findAllRecipies(whereClause, orderClause);
         
         return res.status(200).json(recipes);
       } catch (error) {
@@ -60,21 +34,21 @@ const addRecipy = async (req, res) => {
     try {
         const { ingredients, categories } = req.body;
 
-        const recipe = await createNewRecipy(req, res);
+        const recipe = await recipyService.createNewRecipy(req, res);
     
         for (const ingredientData of ingredients) {
           const { name, amount, unit } = ingredientData;
-          let ingredient = await checkAndCreateIngredients(name);
-          let recipeIngredient = await createRecipyIngredient(ingredient.id, recipe.id, amount, unit);  
+          let ingredient = await ingredientService.checkAndCreateIngredients(name);
+          let recipeIngredient = await ingredientService.createRecipyIngredient(ingredient.id, recipe.id, amount, unit);  
         }
     
         for (const categoryData of categories) {
           const { name } = categoryData;
           let category = await checkAndCreateCategories(name);
-          let recipeCategory = await createRecipyCategory(recipe.id, category.id);
+          let recipeCategory = await categoryService.createRecipyCategory(recipe.id, category.id);
         }
 
-        const returnRecipy = await findFullSingleRecipyById(recipe.id);
+        const returnRecipy = await recipyService.findFullSingleRecipyById(recipe.id);
     
         return res.status(201).json(returnRecipy);
       } catch (error) {
@@ -87,7 +61,7 @@ const deleteRecipy = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const recipe = await findSingleRecipyById(id);
+        const recipe = await recipyService.findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
@@ -96,7 +70,7 @@ const deleteRecipy = async (req, res) => {
           return res.status(403).json({ error: 'Unauthorized' });
         }
 
-        const deletion = await deleteSingleRecipy(req, res);
+        const deletion = await recipyService.deleteSingleRecipy(req, res);
     
         return res.status(204).end();
       } catch (error) {
@@ -110,46 +84,46 @@ const updateRecipy = async (req, res) => {
         const { id } = req.params;
         const { ingredients, categories } = req.body;
     
-        const recipe = await findSingleRecipyById(id);
+        const recipe = await recipyService.findSingleRecipyById(id);
         if (!recipe) {
           return res.status(404).json({ error: 'Recipe not found' });
         }
         
-        const update = await updateExistingRecipy(req, res);
-        let recipeIngredients = await findRecipyIngredients(id);
+        const update = await recipyService.updateExistingRecipy(req, res);
+        let recipeIngredients = await ingredientService.findRecipyIngredients(id);
     
         for (const singleIngredient of recipeIngredients) {
-          const success = await destroySingleIngredient(singleIngredient.recipyId, singleIngredient.ingredientId);
+          const success = await ingredientService.destroySingleIngredient(singleIngredient.recipyId, singleIngredient.ingredientId);
         }
     
         for (const ingredientData of ingredients) {
           const { name, amount, unit } = ingredientData;
 
-          let ingredient = await checkAndCreateIngredients(name);
-          let recipeIngredient = await findSingleRecipyIngredient(recipe.id, ingredient.id);
+          let ingredient = await ingredientService.checkAndCreateIngredients(name);
+          let recipeIngredient = await ingredientService.findSingleRecipyIngredient(recipe.id, ingredient.id);
     
           if (!recipeIngredient) {
-            recipeIngredient = await createRecipyIngredient(ingredient.id, recipe.id, amount, unit);
+            recipeIngredient = await ingredientService.createRecipyIngredient(ingredient.id, recipe.id, amount, unit);
             
           } else {
-            recipeIngredient = await updateRecipyIngredient(ingredient.id, recipe.id, amount, unit);
+            recipeIngredient = await ingredientService.updateRecipyIngredient(ingredient.id, recipe.id, amount, unit);
           }
         }
     
-        const success = destroyRecipyCategories(recipe.id);       
+        const success = categoryService.destroyRecipyCategories(recipe.id);       
     
         for (const categoryData of categories) {
           const { name } = categoryData;
 
-          let category = await checkAndCreateCategories(name);
-          let recipeCategory = await findSingleRecipyCategory(recipe.id, category.id);
+          let category = await categoryService.checkAndCreateCategories(name);
+          let recipeCategory = await categoryService.findSingleRecipyCategory(recipe.id, category.id);
     
           if (!recipeCategory) {
-            recipeCategory = await createRecipyCategory(recipe.id, category.id);
+            recipeCategory = await categoryService.createRecipyCategory(recipe.id, category.id);
           }
         }
 
-        const returnRecipy = await findFullSingleRecipyById(recipe.id);
+        const returnRecipy = await recipyService.findFullSingleRecipyById(recipe.id);
     
         return res.status(200).json(returnRecipy);
         
@@ -163,13 +137,13 @@ const findRecipy = async (req, res) => {
     try {
         const { ingredients } = req.body;
 
-        const foundIngredients = await findAllIngredients(req, res);
+        const foundIngredients = await ingredientService.findAllIngredients(req, res);
         const ingredientIds = foundIngredients.map(ingredient => ingredient.id);
-        const recipeIds = await findRecipiesAccordingToIngredients(ingredientIds);
+        const recipeIds = await ingredientService.findRecipiesAccordingToIngredients(ingredientIds);
         const foundRecipeIds = recipeIds.map(recipe => recipe.recipyId);
         const whereClause = { id: foundRecipeIds };
         let orderClause = [];
-        const recipes = await findAllRecipies(whereClause, orderClause);
+        const recipes = await recipyService.findAllRecipies(whereClause, orderClause);
     
         recipes.sort((a, b) => {
           const aMatchCount = a.recipy_ingredients.filter(
@@ -194,7 +168,7 @@ const getUsersRecipies = async (req, res) => {
         let orderClause = [];
         let length = 0
         let limit = 999
-        const recipes = await findAllRecipies(whereClause, orderClause, length, limit);
+        const recipes = await recipyService.findAllRecipies(whereClause, orderClause, length, limit);
     
         return res.status(200).json(recipes);
       } catch (error) {
@@ -206,7 +180,7 @@ const getUsersRecipies = async (req, res) => {
 const getSingleRecipy = async (req, res) => {
     try {
         const { id } = req.params;
-        const recipe = await findFullSingleRecipyById(id);
+        const recipe = await recipyService.findFullSingleRecipyById(id);
     
         return res.status(200).json(recipe);
       } catch (error) {
@@ -217,7 +191,7 @@ const getSingleRecipy = async (req, res) => {
 
 const getIngredients = async (req, res) => {
     try {
-        const ingredients = await getAllIngredients(req, res);
+        const ingredients = await ingredientService.getAllIngredients(req, res);
     
         return res.status(200).json(ingredients);
       } catch (error) {
