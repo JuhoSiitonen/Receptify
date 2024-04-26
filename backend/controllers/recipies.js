@@ -42,30 +42,9 @@ const getRecipies = async (req, res) => {
         } else {
           orderClause.push(['created_at', 'DESC']);
         }
-
-        if (req.query.favorites) {
-          const favorites = 
-          JSON.parse(req.session.userFavorites)
-          .map(favorite => favorite.id);
-    
-          whereClause = {
-            ...whereClause,
-            id: favorites
-          };
-        }
-
-        if (req.query.subscribed) {
-          const subscribedUserIds = 
-            JSON.parse(req.session.subscriptions)
-            .map(user => user.id);
         
-          whereClause = {
-            ...whereClause,
-            userId: subscribedUserIds
-          };
-        }
-        
-        const foundRecipes = await findAllRecipies(whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
+        const foundRecipes = await findAllRecipies(
+          whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
         const recipeIds = foundRecipes.map(recipe => recipe.id);
         whereClause = { id: recipeIds };
         const recipes = await findAllRecipies(whereClause, orderClause);
@@ -73,78 +52,6 @@ const getRecipies = async (req, res) => {
         return res.status(200).json(recipes);
       } catch (error) {
         console.error('Error fetching recipes:', error);
-        return res.status(500).end();
-      }
-}
-
-const getFavorites = async (req, res) => {
-    try {
-        let orderClause = [];
-        let whereClause = defineWhereClause(req, res);
-        let ingredientClause = defineIngredientClause(req, res)
-        let categoryClause = defineCategoryClause(req, res)
-        let userClause = defineUserClause(req, res)
-        let length = req.query.length || 0;
-    
-        if (req.query.sort) {
-          orderClause.push([req.query.sort, req.query.order || 'DESC']);
-        } else {
-          orderClause.push(['created_at', 'DESC']);
-        }
-    
-        const favorites = 
-          JSON.parse(req.session.userFavorites)
-          .map(favorite => favorite.id);
-    
-        whereClause = {
-          ...whereClause,
-          id: favorites
-        };
-
-        const foundRecipes = await findAllRecipies(whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
-        const recipeIds = foundRecipes.map(recipe => recipe.id);
-        whereClause = { id: recipeIds };
-        const recipes = await findAllRecipies(whereClause, orderClause);
-    
-        return res.status(200).json(recipes);
-      } catch (error) {
-        console.error('Error fetching user favorites:', error);
-        return res.status(500).end();
-      }
-}
-
-const getSubscribed = async (req, res) => {
-    try {
-        let whereClause = defineWhereClause(req, res);
-        let orderClause = [];
-        let ingredientClause = defineIngredientClause(req, res)
-        let categoryClause = defineCategoryClause(req, res)
-        let userClause = defineUserClause(req, res)
-        let length = req.query.length || 0;
-    
-        if (req.query.sort) {
-          orderClause.push([req.query.sort, req.query.order || 'DESC']);
-        } else {
-          orderClause.push(['created_at', 'DESC']);
-        }
-    
-        const subscribedUserIds = 
-            JSON.parse(req.session.subscriptions)
-            .map(user => user.id);
-        
-        whereClause = {
-          ...whereClause,
-          userId: subscribedUserIds
-        };
-
-        const foundRecipes = await findAllRecipies(whereClause, orderClause, length, 5, ingredientClause, categoryClause, userClause);
-        const recipeIds = foundRecipes.map(recipe => recipe.id);
-        whereClause = { id: recipeIds };
-        const recipes = await findAllRecipies(whereClause, orderClause);
-    
-        return res.status(200).json(recipes);
-      } catch (error) {
-        console.error('Error fetching subscribed users recipes:', error);
         return res.status(500).end();
       }
 }
@@ -321,8 +228,6 @@ const getIngredients = async (req, res) => {
 
 module.exports = {
     getRecipies,
-    getFavorites,
-    getSubscribed,
     addRecipy,
     deleteRecipy,
     updateRecipy,

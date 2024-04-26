@@ -32,6 +32,28 @@ const defineWhereClause = ( req, res) => {
           }};
       }
 
+      if (req.query.favorites) {
+        const favorites = 
+        JSON.parse(req.session.userFavorites)
+        .map(favorite => favorite.id);
+  
+        whereClause = {
+          ...whereClause,
+          id: favorites
+        };
+      }
+
+      if (req.query.subscribed) {
+        const subscribedUserIds = 
+          JSON.parse(req.session.subscriptions)
+          .map(user => user.id);
+      
+        whereClause = {
+          ...whereClause,
+          userId: subscribedUserIds
+        };
+      }
+
     return whereClause;
 }
 

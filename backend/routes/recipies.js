@@ -2,8 +2,6 @@ const recipyRouter = require("express").Router();
 const { sessionChecker } = require("../utils/middleware");
 const {
   getRecipies,
-  getFavorites,
-  getSubscribed,
   addRecipy,
   deleteRecipy,
   updateRecipy,
@@ -17,10 +15,6 @@ recipyRouter
   .route("/")
     .get( sessionChecker, getRecipies )
     .post( sessionChecker, addRecipy);
-
-recipyRouter.get("/favorites", sessionChecker, getFavorites);
-
-recipyRouter.get("/subscriptions", sessionChecker, getSubscribed);
 
 recipyRouter.post("/search", sessionChecker, findRecipy);
 
