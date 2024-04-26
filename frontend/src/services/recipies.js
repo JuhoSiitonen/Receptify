@@ -1,30 +1,17 @@
 import axios from '../util/apiClient'
 const baseUrl = '/api/recipies'
 
-const getAll = async (query, length) => {
+const getAll = async (query, length, favorites, subscribed) => {
+  let filterQuery
+  if (favorites) filterQuery = 'favorites=true'
+  if (subscribed) filterQuery = 'subscribed=true'
   if (query !== '') {
-    const response = await axios.get(`${baseUrl}/?${query}&length=${length}`)
+    const response = await axios
+      .get(`${baseUrl}/?${query}&length=${length}&${filterQuery}`)
     return response.data
   }
-  const response = await axios.get(`${baseUrl}/?length=${length}`)
-  return response.data
-}
-
-const getFavorites = async (query, length) => {
-  if (query !== '') {
-    const response = await axios.get(`${baseUrl}/favorites?${query}&length=${length}`)
-    return response.data
-  }
-  const response = await axios.get(`${baseUrl}/favorites?length=${length}`)
-  return response.data
-}
-
-const getSubscribed = async (query, length) => {
-  if (query !== '') {
-    const response = await axios.get(`${baseUrl}/subscriptions?${query}&length=${length}`)
-    return response.data
-  }
-  const response = await axios.get(`${baseUrl}/subscriptions?length=${length}`)
+  const response = await axios
+    .get(`${baseUrl}/?length=${length}&${filterQuery}`)
   return response.data
 }
 
@@ -63,11 +50,8 @@ const getAllIngredients = async () => {
   return response.data
 }
 
-
 export default { 
-  getAll, 
-  getFavorites, 
-  getSubscribed, 
+  getAll,  
   create, 
   update, 
   deleteRecipy, 

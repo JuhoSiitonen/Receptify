@@ -55,8 +55,7 @@ const RecipiesView = () => {
             setFiltering(queryParams)
             let newQuery = queryParams + sorting 
             setQuery(newQuery)
-        }
-        
+        } 
     };
 
     const handleSort = ({ option, value }) => {
@@ -78,20 +77,26 @@ const RecipiesView = () => {
         }
     }
 
-    const handleCancel = () => {
+    const handleCancelSort = () => {
         setQuery('')
+        setSorting('')
     }
+
+    const handleCancelFilter = () => {
+      setQuery('')
+      setFiltering('')
+  }
 
     return (
         <div>
           <div className='sorting-actions'>
             <div className='action-button'>
-              <Togglable buttonLabel="Filter" onCancel={handleCancel}>
+              <Togglable buttonLabel="Filter" onCancel={handleCancelFilter}>
                 <Filter onFilter={handleFilter} />
               </Togglable>
             </div>
             <div className='action-button'>
-              <Togglable buttonLabel="Sort" onCancel={handleCancel}>
+              <Togglable buttonLabel="Sort" onCancel={handleCancelSort}>
                 <SortBy onSort={handleSort} />
               </Togglable>
             </div>
