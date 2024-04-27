@@ -1,4 +1,4 @@
-const app = require('./app') 
+const app = require('./app')
 const config = require('./utils/config')
 const { connectToDatabase } = require('./utils/db')
 

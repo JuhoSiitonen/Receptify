@@ -1,25 +1,25 @@
-const { Model, DataTypes } = require('sequelize');
-const { sequelize } = require('../utils/db');
+const { Model, DataTypes } = require('sequelize')
+const { sequelize } = require('../utils/db')
 
 class RecipyIngredient extends Model {}
 
 RecipyIngredient.init({
   amount: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   unit: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT
   },
   visible: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
+    allowNull: false
+  }
 }, {
-    sequelize,
-    underscored: true,
-    timestamps: false,
-    modelName: 'recipy_ingredient'
-});
+  sequelize,
+  underscored: true,
+  timestamps: false,
+  modelName: 'recipy_ingredient'
+})
 
-module.exports = RecipyIngredient;
+module.exports = RecipyIngredient

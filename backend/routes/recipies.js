@@ -1,5 +1,5 @@
-const recipyRouter = require("express").Router();
-const { sessionChecker } = require("../utils/middleware");
+const recipyRouter = require('express').Router()
+const { sessionChecker } = require('../utils/middleware')
 const {
   getRecipies,
   addRecipy,
@@ -12,20 +12,20 @@ const {
 } = require('../controllers/recipies')
 
 recipyRouter
-  .route("/")
-    .get( sessionChecker, getRecipies )
-    .post( sessionChecker, addRecipy);
+  .route('/')
+  .get(sessionChecker, getRecipies)
+  .post(sessionChecker, addRecipy)
 
-recipyRouter.post("/search", sessionChecker, findRecipy);
+recipyRouter.post('/search', sessionChecker, findRecipy)
 
-recipyRouter.get("/user", sessionChecker, getUsersRecipies);
+recipyRouter.get('/user', sessionChecker, getUsersRecipies)
 
-recipyRouter.get("/ingredients", sessionChecker, getIngredients);
+recipyRouter.get('/ingredients', sessionChecker, getIngredients)
 
 recipyRouter
-  .route("/:id")
-    .get( sessionChecker, getSingleRecipy)
-    .delete( sessionChecker, deleteRecipy)
-    .put( sessionChecker, updateRecipy);
+  .route('/:id')
+  .get(sessionChecker, getSingleRecipy)
+  .delete(sessionChecker, deleteRecipy)
+  .put(sessionChecker, updateRecipy)
 
 module.exports = recipyRouter

@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const { sequelize } = require('../utils/db');
+const { Model, DataTypes } = require('sequelize')
+const { sequelize } = require('../utils/db')
 
 class User extends Model {}
 
@@ -12,42 +12,42 @@ User.init({
   username: {
     type: DataTypes.TEXT,
     unique: true,
-    allowNull: false,
+    allowNull: false
   },
   password: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   admin: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: false
   },
   visible: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: false
   },
   email: {
     type: DataTypes.TEXT,
-    allowNull: true,
+    allowNull: true
   },
   about: {
     type: DataTypes.TEXT,
-    allowNull: true,
+    allowNull: true
   },
   subscribers: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0,
+    defaultValue: 0
   },
   numberOfRecipes: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0,
-  },
+    defaultValue: 0
+  }
 }, {
-    sequelize,
-    underscored: true,
-    modelName: 'user'
-});
+  sequelize,
+  underscored: true,
+  modelName: 'user'
+})
 
-module.exports = User;
+module.exports = User

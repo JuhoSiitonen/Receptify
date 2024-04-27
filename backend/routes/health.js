@@ -1,7 +1,7 @@
-const healthRouter = require('express').Router();
+const healthRouter = require('express').Router()
 
 healthRouter.get('/', (_request, response) => {
-  response.send('ok');
-});
+  response.send('ok')
+})
 
-module.exports = healthRouter;
+module.exports = healthRouter

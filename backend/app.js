@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-const session = require('express-session');
+const session = require('express-session')
 const { redisConf } = require('./redis')
 
 const recipyRouter = require('./routes/recipies')
@@ -18,15 +18,15 @@ const healthRouter = require('./routes/health')
 const middleware = require('./utils/middleware')
 require('dotenv').config()
 
-app.enable('trust proxy');
+app.enable('trust proxy')
 app.use(cors({
   credentials: true,
-  origin: config.FRONTEND_URL,
+  origin: config.FRONTEND_URL
 }))
 
-app.use(express.json()) 
+app.use(express.json())
 app.use(middleware.requestLogger)
-app.use(session(redisConf));
+app.use(session(redisConf))
 
 app.use('/api/recipies', recipyRouter)
 app.use('/api/rating', ratingRouter)

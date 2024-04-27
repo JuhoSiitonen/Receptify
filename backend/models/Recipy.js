@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const { sequelize } = require('../utils/db');
+const { Model, DataTypes } = require('sequelize')
+const { sequelize } = require('../utils/db')
 
 class Recipy extends Model {}
 
@@ -11,40 +11,40 @@ Recipy.init({
   },
   title: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   description: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   instructions: {
     type: DataTypes.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   visible: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
+    allowNull: false
   },
   averageRating: {
     type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: false
   },
   cookingTime: {
     type: DataTypes.TIME,
-    allowNull: false,
+    allowNull: false
   },
   pictureUuid: {
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT
   },
   favorites: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0,
-  },
+    defaultValue: 0
+  }
 }, {
-    sequelize,
-    underscored: true,
-    modelName: 'recipy'
-});
+  sequelize,
+  underscored: true,
+  modelName: 'recipy'
+})
 
-module.exports = Recipy;
+module.exports = Recipy

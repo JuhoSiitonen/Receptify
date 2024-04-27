@@ -1,8 +1,8 @@
-const userRouter = require("express").Router();
-const { sessionChecker } = require("../utils/middleware");
-const { 
-  getUsers, 
-  createUser, 
+const userRouter = require('express').Router()
+const { sessionChecker } = require('../utils/middleware')
+const {
+  getUsers,
+  createUser,
   subscribeToUser,
   unsubscribeFromUser,
   getUserInfo,
@@ -17,41 +17,41 @@ const {
   setAboutInfo,
   setEmailAddress,
   deleteUser
-} = require('../controllers/users');
+} = require('../controllers/users')
 
 userRouter
-  .route("/")
-    .get( sessionChecker, getUsers )
-    .post( createUser )
+  .route('/')
+  .get(sessionChecker, getUsers)
+  .post(createUser)
 
-userRouter.get("/userinfo/:id", sessionChecker, getUserInfo)
-
-userRouter
-  .route("/subscriptions/:id")
-    .post( sessionChecker, subscribeToUser)
-    .delete( sessionChecker, unsubscribeFromUser)
+userRouter.get('/userinfo/:id', sessionChecker, getUserInfo)
 
 userRouter
-  .route("/favorites/:id")
-    .post( sessionChecker, addAsFavorite)
-    .delete( sessionChecker, removeFromFavorites)
+  .route('/subscriptions/:id')
+  .post(sessionChecker, subscribeToUser)
+  .delete(sessionChecker, unsubscribeFromUser)
 
-userRouter.get("/session", getSession)
+userRouter
+  .route('/favorites/:id')
+  .post(sessionChecker, addAsFavorite)
+  .delete(sessionChecker, removeFromFavorites)
 
-userRouter.post("/logout", sessionChecker, logoutUser)
+userRouter.get('/session', getSession)
 
-userRouter.get("/:id/view", sessionChecker, viewUser)
+userRouter.post('/logout', sessionChecker, logoutUser)
 
-userRouter.post("/shoppinglist", sessionChecker, addToShoppinglist)
+userRouter.get('/:id/view', sessionChecker, viewUser)
 
-userRouter.delete("/shoppinglist/:id", sessionChecker, removeFromShoppinglist)
+userRouter.post('/shoppinglist', sessionChecker, addToShoppinglist)
 
-userRouter.post("/shoppinglist/email", sessionChecker, sendEmail)
+userRouter.delete('/shoppinglist/:id', sessionChecker, removeFromShoppinglist)
 
-userRouter.put("/about", sessionChecker, setAboutInfo)
+userRouter.post('/shoppinglist/email', sessionChecker, sendEmail)
 
-userRouter.put("/email", sessionChecker, setEmailAddress)
+userRouter.put('/about', sessionChecker, setAboutInfo)
 
-userRouter.delete("/:id", sessionChecker, deleteUser)
+userRouter.put('/email', sessionChecker, setEmailAddress)
 
-module.exports = userRouter;
+userRouter.delete('/:id', sessionChecker, deleteUser)
+
+module.exports = userRouter

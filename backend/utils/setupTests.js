@@ -2,8 +2,8 @@ const { connectToDatabase } = require('./db');
 
 (async () => {
   try {
-    await connectToDatabase();
+    await connectToDatabase()
   } catch (error) {
-    process.exit(1);
+    process.exit(1)
   }
-})();
+})()

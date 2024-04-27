@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 module.exports = {
   POSTGRES_USER: process.env.POSTGRES_USER,
   POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
@@ -11,5 +10,5 @@ module.exports = {
   REDIS_SESSION_KEY: process.env.REDIS_SESSION_KEY,
   FRONTEND_URL: process.env.FRONTEND_URL,
   EMAIL: process.env.EMAIL,
-  EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
-  }
+  EMAIL_PASSWORD: process.env.EMAIL_PASSWORD
+}
