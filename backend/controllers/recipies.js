@@ -44,7 +44,7 @@ const addRecipy = async (req, res) => {
 
     for (const categoryData of categories) {
       const { name } = categoryData
-      const category = await checkAndCreateCategories(name)
+      const category = await categoryService.checkAndCreateCategories(name)
       const recipeCategory = await categoryService.createRecipyCategory(recipe.id, category.id)
     }
 
