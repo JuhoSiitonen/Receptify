@@ -132,7 +132,8 @@ describe('Multiple recipies', function() {
     cy.contains('1 times favorited')
     cy.scrollTo('top')
     cy.wait(1000)
-    cy.get('.show-favorites-button').click();
+    cy.get('.sorting-actions > :nth-child(3) > button').click();
+    //cy.get('.show-favorites-button').click();
     cy.wait(150)
     cy.contains('test-2')
     cy.contains('test-title').should('not.exist')
@@ -146,7 +147,8 @@ describe('Multiple recipies', function() {
     cy.get('.action-button > div > button').click();
     cy.get('a[href="/recipes"]').click();
     cy.wait(1000)
-    cy.get('.show-subscribed-button').click();
+    cy.get(':nth-child(4) > button').click()
+    //cy.get('.show-subscribed-button').click();
     cy.contains('test-2')
     cy.contains('test-title').should('not.exist')
     cy.get('[href="/mypage"]').click();
