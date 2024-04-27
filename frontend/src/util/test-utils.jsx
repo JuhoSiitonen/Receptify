@@ -1,7 +1,6 @@
-import React from 'react'
 import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { StaticRouter, BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import reduxStore from '../reducers/store'
 
 export function renderWithProviders(

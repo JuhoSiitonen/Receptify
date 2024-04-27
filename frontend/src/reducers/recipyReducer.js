@@ -115,12 +115,8 @@ export const deleteRecipy = (id) => {
 
 export const updateRating = (id, newRating) => {
     return async dispatch => {
-        try {
-            const updatedRating = { id, newRating }
-            dispatch(updateRecipyRating(updatedRating))
-        } catch (error) {
-            throw error
-        }
+        const updatedRating = { id, newRating }
+        dispatch(updateRecipyRating(updatedRating))
     }
 }
 
@@ -136,6 +132,7 @@ export const userRecipies = (id, length) => {
                 dispatch(setRecipies(recipies))
             }
         } catch (error) {
+            console.log(error)
             throw error
         }
     }
@@ -148,6 +145,7 @@ export const recipySearch = (ingredients) => {
             dispatch(setRecipies(recipies))
             return recipies
         } catch (error) {
+            console.log(error)
             throw error
         }
     }
@@ -158,6 +156,7 @@ export const addAFavorite = (id) => {
         try {
             dispatch(incrementFavorites({id}))
         } catch (error) {
+            console.log(error)
             throw error
         }
     }
@@ -168,6 +167,7 @@ export const removeAFavorite = (id) => {
         try {
             dispatch(decrementFavorites({id}))
         } catch (error) {
+            console.log(error)
             throw error
         }
     }
