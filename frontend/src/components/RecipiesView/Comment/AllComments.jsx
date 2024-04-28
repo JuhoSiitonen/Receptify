@@ -24,12 +24,19 @@ const AllComments = ({ user, recipy }) => {
         return <p>No comments</p>
     }
 
+    const formatTime = (dateToFormat) => {
+        const date = new Date(dateToFormat);
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        const timeString = date.toLocaleTimeString([], timeOptions);
+        return `${date.toISOString().split('T')[0]} ${timeString}`;
+    }
+
     return (
         <div className='comments'>
             <h3>Comments</h3>
             {comments.map(comment => (
                 <div key={comment.id}>
-                <p>{comment.comment} - {comment.user.username}  {comment.date}</p>
+                <p>{comment.comment} <br></br><b>{comment.user.username}</b> - {formatTime(comment.date)}</p>
                 { user.id === comment.user.id && (
                     <button onClick={() => handleDelete(comment)}>Delete</button>
                 )}
