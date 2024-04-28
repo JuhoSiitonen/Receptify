@@ -13,7 +13,7 @@ const Notifications = () => {
     borderRadius: 5,
     padding: 10,
     width: '100%',
-    top: '5.45em'
+    zIndex: '999'
   }
 
   const errorStyle = {
