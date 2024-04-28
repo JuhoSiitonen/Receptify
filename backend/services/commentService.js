@@ -23,8 +23,9 @@ const findAllComments = async (recipyId) => {
   const comments = await Comment.findAll({
     where: { recipyId },
     include: [
-      { model: User }]
-  })
+      { model: User,
+        attributes: ['id', 'username']}]
+    })
   return comments
 }
 
