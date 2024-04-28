@@ -6,7 +6,8 @@ const createNewUser = async (user) => {
 }
 
 const findSingleUser = async (id) => {
-  const user = await User.findByPk(id)
+  const user = await User.findByPk(id, {
+    attributes: ['id', 'username', 'about', 'subscribers', 'numberOfRecipes', 'createdAt']})
   return user
 }
 
