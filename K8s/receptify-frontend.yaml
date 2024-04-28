@@ -16,17 +16,10 @@ spec:
     spec:
       containers:
       - name: receptify-frontend
-        image: juhosii/receptify-frontend-dev:v.1.0.2
+        image: juhosii/receptify-frontend-dev:v1.0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "1Gi"
-            cpu: "500m"
         env:
         - name: REACT_APP_BACKEND_URL
           value: "/api"

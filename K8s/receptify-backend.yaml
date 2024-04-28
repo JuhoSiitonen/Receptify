@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: receptify-backend
-        image: juhosii/receptify-backend-dev:v.1.0.2
+        image: juhosii/receptify-backend-dev:v1.0.3
         imagePullPolicy: Always
         ports:
         - containerPort: 3001
