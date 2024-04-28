@@ -38,6 +38,9 @@ const RecipyFinder = () => {
 
     const removeIngredient = (ingredient) => {
         setIngredients(ingredients.filter(i => i !== ingredient))
+        if (ingredients.length === 0) {
+            setRecipies([])
+        }
     }
 
     const matches = (recipy) => {
