@@ -54,6 +54,7 @@ kind: Service
 metadata:
   name: postgres-service
 spec:
+  type: LoadBalancer
   selector:
     app: postgres
   ports:

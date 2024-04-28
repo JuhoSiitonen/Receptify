@@ -47,9 +47,9 @@ spec:
           value: "3001"
         - name: DATABASE_URL
           valueFrom:
-            configMapKeyRef:
-              name: postgres-config
-              key: postgres-url
+            secretKeyRef:
+              name: app-secret
+              key: postgres-ip
         - name: REDIS_URL
           valueFrom:
             configMapKeyRef:

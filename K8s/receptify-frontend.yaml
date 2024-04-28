@@ -30,11 +30,6 @@ spec:
         env:
         - name: REACT_APP_BACKEND_URL
           value: "/api"
-        - name: UPLOADCARE_PUBLIC_KEY
-          valueFrom:
-            secretKeyRef:
-              name: app-secret
-              key: uploadcare-public-key
 ---
 apiVersion: v1
 kind: Service
