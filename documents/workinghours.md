@@ -90,5 +90,6 @@ Month total: 43h
 - 4h 22.4: Configuring Jest unit tests with MSW api mocking. Can't configure Jest with MSW so deleted all Jest conf files, tests, scripts and npm packets. Admin methods and services.
 - 1h 24.4: Moved CSS styles to own folder, style fixes, known issues documentation.
 - 2h 26.4: Fixed bug in filtering and sorting in recipiesview.
+- 1h 28.4: Removing unnecessary props, comments time and username formatted.
 
-Total hours: 175h
+Total hours: 176h

@@ -343,4 +343,8 @@
     - Bug fixing sorting and filtering options in recipiesview. Now all sorting and filtering options work even used together. 
     - Refactored the filtering and sorting methods to only use one reducer, one Axios service and one endpoint in backend with one more complex db call.
     - Long overdue linting for backend and frontend. 
+- 28.4 :
+    - Removing unnecessary props, functions and variables from frontend components.
+    - Formatting time and username presantation on comments.
+    - Notifications always on top with z-index.
     
