@@ -32,7 +32,7 @@ const ChosenRecipy = () => {
     return (
         <div>
             <div className="single-recipe">
-              <SingleRecipy recipy={recipy} />
+              <SingleRecipy recipy={recipy} user={user} />
             </div>
             {user && user.id === recipy.owner.id && (
             <div>
