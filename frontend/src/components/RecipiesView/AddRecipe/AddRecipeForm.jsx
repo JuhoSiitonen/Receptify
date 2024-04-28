@@ -21,7 +21,6 @@ const AddRecipeForm = ({
     addCategory,
     deleteCategory,
     units,
-    photos,
     setPhotos,
     handleSubmit
 }) => {
@@ -95,7 +94,7 @@ const AddRecipeForm = ({
                     ))}
                 </div>
                 <h3>Upload image</h3>
-                <UploaderWidget files={photos} onChange={setPhotos} />
+                <UploaderWidget onChange={setPhotos} />
                 <br></br>
                 <button type="submit">Submit</button>
             </form>

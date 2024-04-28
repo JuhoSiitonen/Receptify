@@ -120,7 +120,6 @@ const AddRecipe = () => {
                 addCategory={addCategory}
                 deleteCategory={deleteCategory}
                 units={units}
-                photos={photos}
                 setPhotos={setPhotos}
                 handleSubmit={handleSubmit}
             />

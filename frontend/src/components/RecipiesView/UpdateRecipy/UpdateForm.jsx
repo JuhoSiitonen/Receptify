@@ -129,7 +129,6 @@ const UpdateForm = ({ recipy }) => {
                 addCategory={addCategory}
                 deleteCategory={deleteCategory}
                 units={units}
-                photos={photos}
                 setPhotos={setPhotos}
                 handleSubmit={handleSubmit}
             />
