@@ -30,6 +30,9 @@ const RecipyFinder = () => {
     }, [ingredients])
 
     const addIngredient = (ingredient) => {
+        if (ingredients.some( i => i === ingredient.name)) {
+            return 
+        }
         setIngredients(ingredients.concat(ingredient.name))
     }
 
