@@ -84,6 +84,7 @@ export const login = (credentials) => {
         } catch (error) {
             dispatch(addNotification({ message: 'Wrong credentials!', error: true }))
             console.log(error)
+            throw error
         }
     }
 }
