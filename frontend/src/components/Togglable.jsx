@@ -1,7 +1,7 @@
-import { useState, forwardRef } from 'react'
+import { useState } from 'react'
 import '../styles/ButtonStyle.css'
 
-const Togglable = forwardRef((props, ref) => {
+const Togglable = (( props ) => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }

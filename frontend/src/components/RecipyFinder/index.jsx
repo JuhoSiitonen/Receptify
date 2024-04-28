@@ -9,7 +9,6 @@ import '../../styles/RecipyFinder.css'
 const RecipyFinder = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
-    const [ingredient, setIngredient] = useState('')
     const [ingredients, setIngredients] = useState([])
     const [recipies, setRecipies] = useState([])
     const [allIngredients, setAllIngredients] = useState([])
@@ -30,13 +29,8 @@ const RecipyFinder = () => {
         fetchIngredients()
     }, [ingredients])
 
-    const handleIngredientChange = (query) => {
-        setIngredient(query)
-    }
-
     const addIngredient = (ingredient) => {
         setIngredients(ingredients.concat(ingredient.name))
-        setIngredient('')
     }
 
     const removeIngredient = (ingredient) => {
@@ -56,7 +50,6 @@ const RecipyFinder = () => {
             <h2>Find recipies based on ingredients</h2>
             <ReactSearchAutocomplete
             items={allIngredients}
-            onSearch={handleIngredientChange}
             onSelect={addIngredient}
             autoFocus
           />
@@ -74,7 +67,7 @@ const RecipyFinder = () => {
             {recipies.length > 0 && (
             <div>
                 {recipies.map(recipy => (
-                  <div className="single-recipe">
+                  <div className="single-recipe" key={recipy.id}>
                     {matches(recipy) > 0 && <p><b> Ingredient matches: {matches(recipy)}</b></p>}
                     <SingleRecipy recipy={recipy} user={user} />
                   </div>

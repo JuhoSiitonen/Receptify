@@ -21,7 +21,7 @@ export const { setComment, removeComment } = commentSlice.actions
 export const createComment = (id, newObject) => {
     return async dispatch => {
         try {
-            const comment = await commentService.create(id, newObject)
+            await commentService.create(id, newObject)
             dispatch(addNotification({
                 message: 'Comment added successfully!', 
                 error: false}))
@@ -40,7 +40,6 @@ export const getAllComments = (id) => {
         try {
             const comments = await commentService.getAllComments(id)
             dispatch(setComment(comments))
-            console.log(comments)
             return comments
         } catch (error) {
             console.log(error)
@@ -52,7 +51,7 @@ export const getAllComments = (id) => {
 export const deleteComment = (id) => {
     return async dispatch => {
         try {
-            const comment = await commentService.deleteComment(id)
+            await commentService.deleteComment(id)
             dispatch(removeComment(id))
             dispatch(addNotification({
                 message: 'Comment deleted successfully!', 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Filter = ({ onFilter }) => {
   const [filterOption, setFilterOption] = useState('title');

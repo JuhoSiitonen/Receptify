@@ -7,7 +7,6 @@ const AddRecipeForm = ({
     handleCookingTimeChange,
     error,
     ingredients,
-    setIngredients,
     ingredient,
     setIngredient,
     addIncredient,

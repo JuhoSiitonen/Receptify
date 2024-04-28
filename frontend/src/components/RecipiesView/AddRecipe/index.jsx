@@ -72,7 +72,7 @@ const AddRecipe = () => {
         }
         
         try {
-            const response = await dispatch(createRecipy({
+            await dispatch(createRecipy({
                 title, 
                 description, 
                 instructions,

@@ -12,7 +12,7 @@ const userSlice = createSlice({
         setUser(state, action) {
             return action.payload
         },
-        removeUser(state, action) {
+        removeUser() {
             return null
         },
         addNewSubscription(state, action) {
@@ -47,13 +47,13 @@ const userSlice = createSlice({
             const id = action.payload
             state.shoppinglist = state.shoppinglist.filter(i => i.id !== id)
         },
-        removeAllShoppinglistItems(state, action) {
+        removeAllShoppinglistItems(state) {
             state.shoppinglist = []
         },
         editAboutMeInfo(state, action) {
             state.about = action.payload.aboutMe
         },
-        editEmailAddress(state, action) {
+        editEmailAddress(state) {
             state.email = true
         }
     },
@@ -97,7 +97,9 @@ export const isUserLogged = () => {
               }
             const user = loggedUserJSON
             dispatch(setUser(user))
-        } catch (error) {}
+        } catch (error) {
+            console.log(error)
+        }
     }
   }
 

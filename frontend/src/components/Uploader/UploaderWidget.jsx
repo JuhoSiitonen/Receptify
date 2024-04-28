@@ -4,7 +4,7 @@ import '../../styles/Uploader.css';
 
 const baseUrl = 'https://ucarecdn.com/'
 
-const UploaderWidget = ({ files, onChange}) => {
+const UploaderWidget = ({ onChange }) => {
     const [uploadedFiles, setUploadedFiles] = useState([]);
 
     const handleChange = file => {
